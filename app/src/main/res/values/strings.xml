@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">The Cocktail App</string>
+    <string name="app_name">Marvel Compose</string>
+
+    // ERRORES
+    <string name="error_generic">Se ha producido un error</string>
+    <string name="error_no_connectivity">No hay conexión a Internet</string>
+    <string name="error_no_results">No se han encontrado resultados</string>
+    <string name="error_server">Se ha producido un error en el servidor</string>
+
 </resources>
