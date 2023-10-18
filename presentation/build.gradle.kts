@@ -40,6 +40,9 @@ android {
 
 dependencies {
 
+    //----- AAR ----------/
+    implementation(files("libs/mzs-presentation-release.aar"))
+
     //----- SUBMODULES ----------/
     implementation(project(":mzs-presentation"))
 
