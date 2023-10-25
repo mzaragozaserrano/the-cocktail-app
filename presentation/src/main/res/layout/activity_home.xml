@@ -8,14 +8,14 @@
     android:padding="16dp">
 
     <com.mzaragozaserrano.presentation.view.components.buttons.MinimalButtonView
-        android:id="@+id/ic_compose"
+        android:id="@+id/button_compose"
         style="@style/Theme.TheCocktailApp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
     <com.mzaragozaserrano.presentation.view.components.buttons.MinimalButtonView
-        android:id="@+id/ic_kotlin"
+        android:id="@+id/button_kotlin"
         style="@style/Theme.TheCocktailApp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
