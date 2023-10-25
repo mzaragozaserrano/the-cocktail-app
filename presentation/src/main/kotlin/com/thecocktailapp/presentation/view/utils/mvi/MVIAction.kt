@@ -7,6 +7,7 @@ sealed class CommonAction : HomeAction, KotlinAction {
 
 sealed interface HomeAction {
     sealed class TaskForNavigate: HomeAction {
+        object ToComposeModule: TaskForNavigate()
         object ToKotlinModule: TaskForNavigate()
     }
 }

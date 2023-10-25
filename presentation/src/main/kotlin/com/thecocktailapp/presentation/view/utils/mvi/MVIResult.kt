@@ -14,6 +14,7 @@ sealed interface HomeResult {
 
     sealed class Task: HomeResult {
         sealed class Success: Task() {
+            object GoToComposeModule : Success()
             object GoToKotlinModule : Success()
         }
     }

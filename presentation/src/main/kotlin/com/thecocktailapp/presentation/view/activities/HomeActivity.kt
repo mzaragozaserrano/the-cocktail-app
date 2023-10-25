@@ -44,7 +44,9 @@ class HomeActivity : TheCocktailAppBaseActivity<HomeViewState, HomeIntent, Activ
         with(binding) {
             buttonCompose.apply {
                 initComponent(data.buttonCompose)
-                setOnButtonClicked { }
+                setOnButtonClicked {
+                    emitAction(HomeIntent.NavigateToComposeModule)
+                }
             }
             buttonKotlin.apply {
                 initComponent(data.buttonKotlin)
@@ -57,6 +59,9 @@ class HomeActivity : TheCocktailAppBaseActivity<HomeViewState, HomeIntent, Activ
 
     private fun navigateTo(state: HomeViewState.Navigate) {
         when (state) {
+            is HomeViewState.Navigate.ToComposeModule -> {
+                navigateToComposeModule()
+            }
             is HomeViewState.Navigate.ToKotlinModule -> {
                 navigateToKotlinModule()
             }

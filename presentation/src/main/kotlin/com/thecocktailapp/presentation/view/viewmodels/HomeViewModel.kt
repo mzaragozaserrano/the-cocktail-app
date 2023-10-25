@@ -80,6 +80,9 @@ class HomeViewModel @Inject constructor() : BaseViewModel<HomeViewState, HomeInt
     private fun onIdle() = CommonResult.Idle.toFlowResult()
 
     private fun onNavigate(action: HomeAction.TaskForNavigate) = when (action) {
+        is HomeAction.TaskForNavigate.ToComposeModule -> {
+            HomeResult.Task.Success.GoToComposeModule.toFlowResult()
+        }
         is HomeAction.TaskForNavigate.ToKotlinModule -> {
             HomeResult.Task.Success.GoToKotlinModule.toFlowResult()
         }

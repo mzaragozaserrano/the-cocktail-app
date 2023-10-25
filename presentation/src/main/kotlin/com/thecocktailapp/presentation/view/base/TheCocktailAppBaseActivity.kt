@@ -4,10 +4,17 @@ import android.content.Intent
 import androidx.viewbinding.ViewBinding
 import com.mzaragozaserrano.presentation.view.base.BaseActivity
 import com.mzaragozaserrano.presentation.view.base.BaseViewModel
+import com.thecocktailapp.presentation.view.activities.ComposeActivity
 import com.thecocktailapp.presentation.view.activities.KotlinActivity
 
 abstract class TheCocktailAppBaseActivity<S, I, VB : ViewBinding, VM : BaseViewModel<S, I>> :
     BaseActivity<S, I, VB, VM>() {
+
+    fun navigateToComposeModule() {
+        val intent = Intent(this, ComposeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
 
     fun navigateToKotlinModule() {
         val intent = Intent(this, KotlinActivity::class.java)

@@ -27,6 +27,11 @@
             android:exported="true"
             android:screenOrientation="fullSensor"
             android:theme="@style/Theme.TheCocktailApp.ActionBar" />
+        <activity
+            android:name="com.thecocktailapp.presentation.view.activities.ComposeActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.TheCocktailApp" />
     </application>
 
 </manifest>

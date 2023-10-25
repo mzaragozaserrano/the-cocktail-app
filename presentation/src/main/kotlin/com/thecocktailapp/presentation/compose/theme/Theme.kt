@@ -81,7 +81,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 @Composable
-fun PresentationAppTheme(
+fun TheCocktailAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit,

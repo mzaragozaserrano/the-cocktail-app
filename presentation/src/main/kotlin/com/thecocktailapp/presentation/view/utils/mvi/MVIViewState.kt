@@ -7,6 +7,7 @@ sealed class CommonViewState : HomeViewState, KotlinViewState {
 
 sealed interface HomeViewState {
     sealed class Navigate: HomeViewState {
+        object ToComposeModule: Navigate()
         object ToKotlinModule: Navigate()
     }
 }

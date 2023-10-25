@@ -6,6 +6,7 @@ sealed class CommonIntent : HomeIntent, KotlinIntent {
 }
 
 sealed interface HomeIntent {
+    object NavigateToComposeModule: HomeIntent
     object NavigateToKotlinModule: HomeIntent
 }
 
