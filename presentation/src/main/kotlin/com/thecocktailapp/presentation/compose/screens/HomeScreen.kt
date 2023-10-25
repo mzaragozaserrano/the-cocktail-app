@@ -1,4 +1,4 @@
-package com.mzaragozaserrano.presentation.screens
+package com.mzaragozaserrano.presentation.compose.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,10 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mzaragozaserrano.compose.buttons.ButtonImage
-//import com.mzaragozaserrano.compose.buttons.ButtonImage
-import com.mzaragozaserrano.presentation.utils.navigation.AppNavigation
+import com.mzaragozaserrano.presentation.compose.components.buttons.MinimalButton
 import com.mzaragozaserrano.ui.R
+import com.thecocktailapp.presentation.compose.utils.navigation.AppNavigation
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, onButtonClicked: (AppNavigation) -> Unit) {
@@ -27,18 +26,18 @@ fun HomeScreen(modifier: Modifier = Modifier, onButtonClicked: (AppNavigation) -
             .background(Color.Gray)
             .padding(all = 16.dp)
     ) {
-        ButtonImage(
+        MinimalButton(
             textId = R.string.button_hello_compose,
-            imageId = R.drawable.ic_compose,
+            iconId = R.drawable.ic_compose,
             modifier = Modifier
                 .weight(1f)
                 .aspectRatio(1f)
         ) {
             onButtonClicked(AppNavigation.Compose)
         }
-        ButtonImage(
+        MinimalButton(
             textId = R.string.button_hello_kotlin,
-            imageId = R.drawable.ic_kotlin,
+            iconId = R.drawable.ic_kotlin,
             modifier = Modifier
                 .weight(1f)
                 .aspectRatio(1f)

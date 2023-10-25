@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_primary">@color/green_pastel</color>
+    <color name="color_on_primary">@color/dark_gray_green</color>
+    <color name="color_primary_container">@color/green_pastel</color>
+    <color name="color_on_primary_container">@color/gray_medium</color>
+    <color name="color_secondary">@color/beige_pastel</color>
+    <color name="color_on_secondary">@color/light_gray</color>
+    <color name="color_secondary_container">@color/beige_pastel_light</color>
+    <color name="color_on_secondary_container">@color/gray_medium</color>
+    <color name="color_tertiary">@color/blue_pastel</color>
+    <color name="color_on_tertiary">@color/dark_gray_green</color>
+    <color name="color_tertiary_container">@color/blue_pastel_light</color>
+    <color name="color_on_tertiary_container">@color/dark_gray</color>
+    <color name="color_error">@color/red_pastel</color>
+    <color name="color_error_container">@color/red_pastel_dark</color>
+    <color name="color_on_error">@color/light_gray</color>
+    <color name="color_on_error_container">@color/red_pastel_light</color>
+    <color name="color_background">@color/white</color>
+    <color name="color_on_background">@color/dark_gray</color>
+    <color name="color_surface">@color/white</color>
+    <color name="color_on_surface">@color/dark_gray</color>
+    <color name="color_surface_variant">@color/gray_light</color>
+    <color name="color_on_surface_variant">@color/dark_gray</color>
+    <color name="color_outline">@color/gray_light</color>
+    <color name="color_inverse_on_surface">@color/gray_light</color>
+    <color name="color_inverse_surface">@color/dark_gray</color>
+    <color name="color_inverse_primary">@color/green_pastel</color>
+    <color name="color_outline_variant">@color/gray_medium</color>
+
+    <color name="green_pastel">#D1F0E2</color>
+    <color name="dark_gray_green">#8FA3A1</color>
+    <color name="light_gray">#333333</color>
+    <color name="beige_pastel">#EADBCF</color>
+    <color name="beige_pastel_light">#FAF0E8</color>
+    <color name="blue_pastel">#B2DCEC</color>
+    <color name="blue_pastel_light">#ECEFF9</color>
+    <color name="red_pastel">#EFA2A2</color>
+    <color name="red_pastel_dark">#A3352B</color>
+    <color name="red_pastel_light">#FECCCC</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray_light">#F5F5F5</color>
+    <color name="gray_medium">#D5D5D5</color>
+    <color name="dark_gray">#333333</color>
+    <color name="black">#000000</color>
+
+</resources>

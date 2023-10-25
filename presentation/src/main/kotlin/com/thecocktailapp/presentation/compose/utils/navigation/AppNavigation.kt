@@ -1,4 +1,4 @@
-package com.mzaragozaserrano.presentation.utils.navigation
+package com.thecocktailapp.presentation.compose.utils.navigation
 
 sealed class AppNavigation {
     object Compose : AppNavigation()

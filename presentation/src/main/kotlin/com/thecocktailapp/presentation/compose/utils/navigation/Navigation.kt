@@ -1,4 +1,4 @@
-package com.mzaragozaserrano.presentation.utils.navigation
+package com.thecocktailapp.presentation.compose.utils.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -8,9 +8,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.mzaragozaserrano.presentation.screens.ComposeScreen
-import com.mzaragozaserrano.presentation.screens.HomeScreen
-import com.mzaragozaserrano.presentation.screens.KotlinScreen
+import com.thecocktailapp.presentation.compose.screens.ComposeScreen
+import com.mzaragozaserrano.presentation.compose.screens.HomeScreen
+import com.thecocktailapp.presentation.compose.screens.KotlinScreen
 
 @Composable
 fun Navigation(
