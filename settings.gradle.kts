@@ -16,5 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "The Cocktail App"
 include(":app")
 include(":presentation")
-include(":mzs-presentation")
-project(":mzs-presentation").projectDir = File("presentation/mzs-presentation")
+include(":domain")
