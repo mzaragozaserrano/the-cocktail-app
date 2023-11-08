@@ -10,6 +10,7 @@ import com.thecocktailapp.presentation.view.utils.mvi.CommonViewState
 import com.thecocktailapp.presentation.view.utils.mvi.HomeAction
 import com.thecocktailapp.presentation.view.utils.mvi.HomeIntent
 import com.thecocktailapp.presentation.view.utils.mvi.HomeResult
+import com.thecocktailapp.presentation.view.utils.mvi.HomeTask
 import com.thecocktailapp.presentation.view.utils.mvi.HomeViewState
 import com.thecocktailapp.presentation.view.utils.mvi.mapToAction
 import com.thecocktailapp.presentation.view.utils.mvi.mapToState
@@ -29,15 +30,15 @@ class HomeViewModel @Inject constructor() : BaseViewModel<HomeViewState, HomeInt
         handleIntent()
     }
 
-    override fun createInitialState(): HomeViewState = CommonViewState.SetUpView(
+    override fun createInitialState(): HomeViewState = CommonViewState.Initialized(
         HomeVO(
             buttonCompose = MinimalButtonVO(
                 iconId = R.drawable.ic_compose,
-                textId = R.string.button_hello_compose
+                textId = R.string.hello_compose_button
             ),
             buttonKotlin = MinimalButtonVO(
                 iconId = R.drawable.ic_kotlin,
-                textId = R.string.button_hello_kotlin
+                textId = R.string.hello_kotlin_button
             )
         )
     )
@@ -69,11 +70,11 @@ class HomeViewModel @Inject constructor() : BaseViewModel<HomeViewState, HomeInt
     private fun onInit() = HomeResult.Init(
         buttonCompose = MinimalButtonVO(
             iconId = R.drawable.ic_compose,
-            textId = R.string.button_hello_compose
+            textId = R.string.hello_compose_button
         ),
         buttonKotlin = MinimalButtonVO(
             iconId = R.drawable.ic_kotlin,
-            textId = R.string.button_hello_kotlin
+            textId = R.string.hello_kotlin_button
         )
     ).toFlowResult()
 
@@ -81,10 +82,11 @@ class HomeViewModel @Inject constructor() : BaseViewModel<HomeViewState, HomeInt
 
     private fun onNavigate(action: HomeAction.TaskForNavigate) = when (action) {
         is HomeAction.TaskForNavigate.ToComposeModule -> {
-            HomeResult.Task.Success.GoToComposeModule.toFlowResult()
+            HomeResult.Task.Success(HomeTask.NavigateToComposeModule).toFlowResult()
         }
+
         is HomeAction.TaskForNavigate.ToKotlinModule -> {
-            HomeResult.Task.Success.GoToKotlinModule.toFlowResult()
+            HomeResult.Task.Success(HomeTask.NavigateToKotlinModule).toFlowResult()
         }
     }
 

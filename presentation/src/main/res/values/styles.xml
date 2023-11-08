@@ -30,7 +30,10 @@
         <item name="color_inverse_surface">@color/color_inverse_surface</item>
         <item name="color_inverse_primary">@color/color_inverse_primary</item>
         <item name="color_outline_variant">@color/color_outline_variant</item>
+        <item name="color_transparent">@color/color_transparent</item>
 
+        <item name="color_text_highlight">@color/color_text_highlight</item>
+        <item name="color_secondary_text_highlight">@color/color_secondary_text_highlight</item>
         <item name="android:statusBarColor">@color/color_primary</item>
 
     </style>

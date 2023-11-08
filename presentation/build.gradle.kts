@@ -69,6 +69,10 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Versions.hiltVersion}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}")
 
+    //----- GLIDE ----------/
+    implementation("com.github.bumptech.glide:glide:${Versions.glideVersion}")
+    kapt("com.github.bumptech.glide:compiler:${Versions.glideVersion}")
+
     //-----  LOTTIE ----------/
     implementation("com.airbnb.android:lottie:${Versions.lottieVersion}")
 

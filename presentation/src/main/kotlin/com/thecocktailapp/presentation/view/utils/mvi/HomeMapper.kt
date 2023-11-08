@@ -6,15 +6,15 @@ fun HomeIntent.mapToAction(): HomeAction =
     when (this) {
         is CommonIntent.Idle -> CommonAction.Idle
         is CommonIntent.Init -> CommonAction.Init(refresh)
-        is HomeIntent.NavigateToComposeModule -> HomeAction.TaskForNavigate.ToComposeModule
-        is HomeIntent.NavigateToKotlinModule -> HomeAction.TaskForNavigate.ToKotlinModule
+        is HomeIntent.GoToComposeModule -> HomeAction.TaskForNavigate.ToComposeModule
+        is HomeIntent.GoToKotlinModule -> HomeAction.TaskForNavigate.ToKotlinModule
     }
 
 fun HomeResult.mapToState(): HomeViewState =
     when (this) {
         is CommonResult.Idle -> CommonViewState.Idle
         is HomeResult.Init -> {
-            CommonViewState.SetUpView(
+            CommonViewState.Initialized(
                 HomeVO(
                     buttonCompose = buttonCompose,
                     buttonKotlin = buttonKotlin
@@ -22,11 +22,12 @@ fun HomeResult.mapToState(): HomeViewState =
             )
         }
 
-        is HomeResult.Task.Success.GoToComposeModule -> {
-            HomeViewState.Navigate.ToComposeModule
+        is HomeResult.Task.Success -> {
+            when (task) {
+                HomeTask.NavigateToComposeModule -> HomeViewState.Navigate.ToComposeModule
+                HomeTask.NavigateToKotlinModule -> HomeViewState.Navigate.ToKotlinModule
+            }
+
         }
 
-        is HomeResult.Task.Success.GoToKotlinModule -> {
-            HomeViewState.Navigate.ToKotlinModule
-        }
     }

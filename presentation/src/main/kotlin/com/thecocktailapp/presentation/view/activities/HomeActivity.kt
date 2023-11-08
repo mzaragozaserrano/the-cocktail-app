@@ -30,12 +30,15 @@ class HomeActivity : BaseActivity<HomeViewState, HomeIntent, ActivityHomeBinding
     override fun renderView(state: HomeViewState) {
         when (state) {
             is CommonViewState.Idle -> {}
-            is CommonViewState.SetUpView -> {
+            is CommonViewState.Initialized -> {
                 initComponents(homeVO = state.data as HomeVO)
             }
 
-            is HomeViewState.Navigate -> {
-                navigateTo(state = state)
+            is HomeViewState.Navigate.ToComposeModule -> {
+                clearAndNavigateToNewActivity(ComposeActivity::class.java)
+            }
+            is  HomeViewState.Navigate.ToKotlinModule -> {
+                clearAndNavigateToNewActivity(KotlinActivity::class.java)
             }
         }
     }
@@ -45,26 +48,14 @@ class HomeActivity : BaseActivity<HomeViewState, HomeIntent, ActivityHomeBinding
             buttonCompose.apply {
                 initComponent(homeVO.buttonCompose)
                 setOnButtonClicked {
-                    emitAction(HomeIntent.NavigateToComposeModule)
+                    emitAction(HomeIntent.GoToComposeModule)
                 }
             }
             buttonKotlin.apply {
                 initComponent(homeVO.buttonKotlin)
                 setOnButtonClicked {
-                    emitAction(HomeIntent.NavigateToKotlinModule)
+                    emitAction(HomeIntent.GoToKotlinModule)
                 }
-            }
-        }
-    }
-
-    private fun navigateTo(state: HomeViewState.Navigate) {
-        when (state) {
-            is HomeViewState.Navigate.ToComposeModule -> {
-                clearAndNavigateToNewActivity(ComposeActivity::class.java)
-            }
-
-            is HomeViewState.Navigate.ToKotlinModule -> {
-                clearAndNavigateToNewActivity(KotlinActivity::class.java)
             }
         }
     }

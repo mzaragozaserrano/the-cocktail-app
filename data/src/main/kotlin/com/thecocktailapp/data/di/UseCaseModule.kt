@@ -1,7 +1,7 @@
 package com.thecocktailapp.data.di
 
-import com.thecocktailapp.domain.usecases.GetRandomCocktail
-import com.thecocktailapp.domain.usecases.GetRandomCocktailUseCaseImpl
+import com.thecocktailapp.domain.usecases.GetRandomDrink
+import com.thecocktailapp.domain.usecases.GetRandomDrinkUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +12,6 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 interface UseCaseModule {
 
     @Binds
-    fun bindGetRandomCocktail(useCaseImpl: GetRandomCocktailUseCaseImpl): GetRandomCocktail
+    fun bindGetRandomDrink(useCaseImpl: GetRandomDrinkUseCaseImpl): GetRandomDrink
 
 }

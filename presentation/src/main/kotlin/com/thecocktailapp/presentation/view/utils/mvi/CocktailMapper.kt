@@ -4,13 +4,23 @@ fun CocktailIntent.mapToAction(): CocktailAction =
     when (this) {
         is CommonIntent.Idle -> CommonAction.Idle
         is CommonIntent.Init -> CommonAction.Init(refresh)
-        is CocktailIntent.GetRandomCocktail -> CocktailAction.Task.GetRandomCocktail
     }
 
-fun KotlinResult.mapToState(): KotlinViewState =
+fun CocktailResult.mapToState(): CocktailViewState =
     when (this) {
-        is CommonResult.Idle -> CommonViewState.Idle
-        is KotlinResult.Init -> {
-            CommonViewState.SetUpView()
+        is CommonResult.Idle -> {
+            CommonViewState.Idle
+        }
+
+        is CocktailResult.Task.Error -> {
+            CocktailViewState.ShowError(idMessage = error.idMessage)
+        }
+
+        is CocktailResult.Init -> {
+            CommonViewState.Initialized()
+        }
+
+        is CocktailResult.Task.Loading -> {
+            CocktailViewState.ShowProgressDialog
         }
     }

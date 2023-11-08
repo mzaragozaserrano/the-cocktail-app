@@ -10,15 +10,15 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapMerge
 import javax.inject.Inject
 
-typealias GetRandomCocktail = FlowUseCaseNoParams<@JvmSuppressWildcards Result<DrinkBO>>
+typealias GetRandomDrink = FlowUseCaseNoParams<@JvmSuppressWildcards Result<DrinkBO>>
 
-class GetRandomCocktailUseCaseImpl @Inject constructor(
+class GetRandomDrinkUseCaseImpl @Inject constructor(
     private val cocktailRepository: CocktailRepository,
     networkRepository: NetworkRepository,
-) : GetRandomCocktail(networkRepository) {
+) : GetRandomDrink(networkRepository) {
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun run(): Flow<Result<DrinkBO>> =
-        cocktailRepository.getRandomCocktail().flatMapMerge { result ->
+        cocktailRepository.getRandomDrink().flatMapMerge { result ->
             when (result) {
                 is Result.Loading -> {
                     Result.Loading.toFlowResult()

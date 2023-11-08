@@ -2,7 +2,6 @@ package com.thecocktailapp.presentation.view.fragments
 
 import androidx.fragment.app.viewModels
 import com.mzaragozaserrano.presentation.databinding.CoreToolbarMenuBinding
-import com.mzaragozaserrano.presentation.view.utils.extensions.hideProgressDialog
 import com.mzaragozaserrano.presentation.view.utils.extensions.setUpMenuToolbar
 import com.mzaragozaserrano.presentation.view.utils.extensions.showProgressDialog
 import com.mzaragozaserrano.presentation.view.utils.viewBinding.viewBinding
@@ -39,7 +38,7 @@ class CocktailFragment :
     override fun renderView(state: CocktailViewState) {
         when (state) {
             is CommonViewState.Idle -> {}
-            is CommonViewState.SetUpView -> {
+            is CommonViewState.Initialized -> {
                 initView()
             }
 
@@ -50,10 +49,6 @@ class CocktailFragment :
             is CocktailViewState.ShowProgressDialog -> {
                 showProgressDialog()
             }
-
-            is CocktailViewState.SetDailyCocktail -> {
-                setUpDailyCocktail(state)
-            }
         }
     }
 
@@ -61,7 +56,6 @@ class CocktailFragment :
 
     private fun initView() {
         setUpToolbar()
-        getRandomCocktail()
     }
 
     private fun setUpToolbar() {
@@ -77,16 +71,6 @@ class CocktailFragment :
                 toolbarTitle = toolbarTitle
             )
         }
-    }
-
-    private fun getRandomCocktail() {
-        emitAction(CocktailIntent.GetRandomCocktail)
-    }
-
-    private fun setUpDailyCocktail(state: CocktailViewState.SetDailyCocktail) {
-        hideProgressDialog()
-        binding.prueba.text = state.drink.urlImage
-        emitAction(CommonIntent.Idle)
     }
 
 }

@@ -1,5 +1,7 @@
 package com.thecocktailapp.domain.bo
 
+import com.thecocktailapp.domain.utils.extensions.safeLet
+
 data class DrinkBO(
     val dateModified: String?,
     val idDrink: String,
@@ -29,6 +31,10 @@ data class DrinkBO(
     val strIngredient14: String?,
     val strIngredient15: String?,
     val strInstructions: String,
+    val strInstructionsDE: String?,
+    val strInstructionsES: String?,
+    val strInstructionsFR: String?,
+    val strInstructionsIT: String,
     val strMeasure1: String?,
     val strMeasure2: String?,
     val strMeasure3: String?,
@@ -44,4 +50,99 @@ data class DrinkBO(
     val strMeasure13: String?,
     val strMeasure14: String?,
     val strMeasure15: String?,
-)
+) {
+    operator fun get(index: Int): Pair<String, String>? {
+        return when (index) {
+            1 -> {
+                safeLet(strIngredient1, strMeasure1) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            2 -> {
+                safeLet(strIngredient2, strMeasure2) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            3 -> {
+                safeLet(strIngredient3, strMeasure3) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            4 -> {
+                safeLet(strIngredient4, strMeasure4) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            5 -> {
+                safeLet(strIngredient5, strMeasure5) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            6 -> {
+                safeLet(strIngredient6, strMeasure6) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            7 -> {
+                safeLet(strIngredient7, strMeasure7) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            8 -> {
+                safeLet(strIngredient8, strMeasure8) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            9 -> {
+                safeLet(strIngredient9, strMeasure9) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            10 -> {
+                safeLet(strIngredient10, strMeasure10) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            11 -> {
+                safeLet(strIngredient11, strMeasure11) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            12 -> {
+                safeLet(strIngredient12, strMeasure12) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            13 -> {
+                safeLet(strIngredient13, strMeasure13) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            14 -> {
+                safeLet(strIngredient14, strMeasure14) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+
+            15 -> {
+                safeLet(strIngredient15, strMeasure15) { ingredient, measure ->
+                    Pair(ingredient, measure)
+                }
+            }
+            else -> null
+        }
+    }
+}

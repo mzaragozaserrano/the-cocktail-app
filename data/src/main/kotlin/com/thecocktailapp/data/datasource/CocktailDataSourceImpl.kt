@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class CocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
 
-    override suspend fun getRandomCocktail(): ResultData<CocktailDTO> =
+    override suspend fun getRandomDrink(): ResultData<CocktailDTO> =
         suspendCancellableCoroutine { continuation ->
             val client = OkHttpClient()
             val request = Request.Builder()

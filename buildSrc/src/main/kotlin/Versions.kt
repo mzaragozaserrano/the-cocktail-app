@@ -6,6 +6,7 @@ object Versions {
     const val appCompatVersion = "1.6.1"
     const val composeVersion = "2023.10.00"
     const val coroutinesVersion = "1.7.3"
+    const val glideVersion = "4.11.0"
     const val hiltVersion = "2.48.1"
     const val lottieVersion = "6.1.0"
     const val materialVersion = "1.10.0"

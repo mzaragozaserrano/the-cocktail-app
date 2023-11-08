@@ -58,7 +58,7 @@ class KotlinActivity :
     override fun renderView(state: KotlinViewState) {
         when (state) {
             is CommonViewState.Idle -> {}
-            is CommonViewState.SetUpView -> {}
+            is CommonViewState.Initialized -> {}
         }
     }
 

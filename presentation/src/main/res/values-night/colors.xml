@@ -29,5 +29,9 @@
     <color name="color_inverse_primary">@color/green_pastel</color>
     <color name="color_outline_variant">@color/gray_medium</color>
     <color name="color_scrim">@color/dark_gray_80</color>
+    <color name="color_transparent">@android:color/transparent</color>
+
+    <color name="color_text_highlight">@color/dark_beige_pastel</color>
+    <color name="color_secondary_text_highlight">@color/gray_medium</color>
 
 </resources>

@@ -27,4 +27,7 @@
     <attr name="color_inverse_surface" format="reference" />
     <attr name="color_inverse_primary" format="reference" />
     <attr name="color_outline_variant" format="reference" />
+    <attr name="color_transparent" format="reference" />
+    <attr name="color_text_highlight" format="reference" />
+    <attr name="color_secondary_text_highlight" format="reference" />
 </resources>

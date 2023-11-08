@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">The Cocktail App</string>
-    <string name="button_hello_compose">Hola, Compose!</string>
-    <string name="button_hello_kotlin">Hola, Kotlin!</string>
+
+    //----- BUTTONS ----------/
+    <string name="cancel_button">Cancelar</string>
+    <string name="hello_compose_button">Hola, Compose!</string>
+    <string name="hello_kotlin_button">Hola, Kotlin!</string>
+    <string name="see_button">Ver</string>
+
+    //----- ERRORS ----------/
     <string name="error_generic">Error: %s</string>
     <string name="error_connectivity">Compruebe su conexión a internet</string>
     <string name="error_data_not_found">Información no encontrada</string>
     <string name="error_deserializing_json">Error deserializando el fichero JSON</string>
     <string name="error_loading_data">Error cargando la información</string>
     <string name="error_loading_url">Error cargando la URL</string>
+
+    //----- MENU ----------/
     <string name="menu_item_close_session">Cerrar sesión</string>
+
+    //----- SPLASH FRAGMENT ----------/
+    <string name="first_title_splash_fragment">Nuestra</string>
+    <string name="second_title_splash_fragment">Recomendación</string>
+    <string name="third_title_splash_fragment">Diaria</string>
+
 </resources>

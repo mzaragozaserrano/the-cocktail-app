@@ -26,7 +26,7 @@ class KotlinViewModel @Inject constructor() : BaseViewModel<KotlinViewState, Kot
         handleIntent()
     }
 
-    override fun createInitialState(): KotlinViewState = CommonViewState.SetUpView()
+    override fun createInitialState(): KotlinViewState = CommonViewState.Initialized()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun handleIntent() {

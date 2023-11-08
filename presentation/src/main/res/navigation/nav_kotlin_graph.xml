@@ -11,14 +11,14 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/action_SplashFragment_to_KotlinFragment"
-            app:destination="@id/KotlinFragment" />
+            android:id="@+id/action_SplashFragment_to_CocktailFragment"
+            app:destination="@id/CocktailFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/KotlinFragment"
+        android:id="@+id/CocktailFragment"
         android:name="com.thecocktailapp.presentation.view.fragments.CocktailFragment"
-        android:label="fragment_kotlin"
+        android:label="fragment_cocktail"
         tools:layout="@layout/fragment_cocktail" />
 
 </navigation>

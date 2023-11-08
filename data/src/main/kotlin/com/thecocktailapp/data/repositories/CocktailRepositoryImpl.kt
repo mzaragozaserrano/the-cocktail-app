@@ -13,11 +13,11 @@ import javax.inject.Inject
 class CocktailRepositoryImpl @Inject constructor(
     private val cocktailDataSource: CocktailDataSource,
 ) : CocktailRepository {
-    override suspend fun getRandomCocktail(): Flow<Result<CocktailBO>> =
+    override suspend fun getRandomDrink(): Flow<Result<CocktailBO>> =
         flow {
             emit(Result.Loading)
             emit(
-                when (val result = cocktailDataSource.getRandomCocktail()) {
+                when (val result = cocktailDataSource.getRandomDrink()) {
                     is ResultData.Response -> {
                         Result.Response.Success(result.data.transform())
                     }
