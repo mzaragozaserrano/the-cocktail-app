@@ -1,18 +1,18 @@
 package com.thecocktailapp.presentation.view.activities
 
 import androidx.activity.viewModels
-import com.mzaragozaserrano.ui.databinding.ActivityHomeBinding
-import com.thecocktailapp.presentation.view.base.TheCocktailAppBaseActivity
+import com.mzaragozaserrano.presentation.view.base.BaseActivity
 import com.thecocktailapp.presentation.view.utils.mvi.CommonIntent
 import com.thecocktailapp.presentation.view.utils.mvi.CommonViewState
 import com.thecocktailapp.presentation.view.utils.mvi.HomeIntent
 import com.thecocktailapp.presentation.view.utils.mvi.HomeViewState
 import com.thecocktailapp.presentation.view.viewmodels.HomeViewModel
 import com.thecocktailapp.presentation.view.vo.HomeVO
+import com.thecocktailapp.ui.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeActivity : TheCocktailAppBaseActivity<HomeViewState, HomeIntent, ActivityHomeBinding, HomeViewModel>() {
+class HomeActivity : BaseActivity<HomeViewState, HomeIntent, ActivityHomeBinding, HomeViewModel>() {
 
     override val viewModel: HomeViewModel by viewModels()
     override val binding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
@@ -30,8 +30,8 @@ class HomeActivity : TheCocktailAppBaseActivity<HomeViewState, HomeIntent, Activ
     override fun renderView(state: HomeViewState) {
         when (state) {
             is CommonViewState.Idle -> {}
-            is CommonViewState.Initialized -> {
-                initComponents(data = state.data as HomeVO)
+            is CommonViewState.SetUpView -> {
+                initComponents(homeVO = state.data as HomeVO)
             }
 
             is HomeViewState.Navigate -> {
@@ -40,16 +40,16 @@ class HomeActivity : TheCocktailAppBaseActivity<HomeViewState, HomeIntent, Activ
         }
     }
 
-    private fun initComponents(data: HomeVO) {
+    private fun initComponents(homeVO: HomeVO) {
         with(binding) {
             buttonCompose.apply {
-                initComponent(data.buttonCompose)
+                initComponent(homeVO.buttonCompose)
                 setOnButtonClicked {
                     emitAction(HomeIntent.NavigateToComposeModule)
                 }
             }
             buttonKotlin.apply {
-                initComponent(data.buttonKotlin)
+                initComponent(homeVO.buttonKotlin)
                 setOnButtonClicked {
                     emitAction(HomeIntent.NavigateToKotlinModule)
                 }
@@ -60,10 +60,11 @@ class HomeActivity : TheCocktailAppBaseActivity<HomeViewState, HomeIntent, Activ
     private fun navigateTo(state: HomeViewState.Navigate) {
         when (state) {
             is HomeViewState.Navigate.ToComposeModule -> {
-                navigateToComposeModule()
+                clearAndNavigateToNewActivity(ComposeActivity::class.java)
             }
+
             is HomeViewState.Navigate.ToKotlinModule -> {
-                navigateToKotlinModule()
+                clearAndNavigateToNewActivity(KotlinActivity::class.java)
             }
         }
     }

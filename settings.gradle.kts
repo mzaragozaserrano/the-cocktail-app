@@ -17,3 +17,5 @@ rootProject.name = "The Cocktail App"
 include(":app")
 include(":presentation")
 include(":domain")
+include(":data")
+include(":data")

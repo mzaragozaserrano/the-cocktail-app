@@ -14,7 +14,7 @@ fun HomeResult.mapToState(): HomeViewState =
     when (this) {
         is CommonResult.Idle -> CommonViewState.Idle
         is HomeResult.Init -> {
-            CommonViewState.Initialized(
+            CommonViewState.SetUpView(
                 HomeVO(
                     buttonCompose = buttonCompose,
                     buttonKotlin = buttonKotlin

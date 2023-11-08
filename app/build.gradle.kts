@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.mzaragozaserrano.thecocktailapp"
+    namespace = "com.thecocktailapp.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.mzaragozaserrano.thecocktailapp"
+        applicationId = "com.thecocktailapp.app"
         minSdk = 24
         versionCode = 1
         versionName = "1.0"
@@ -55,6 +55,8 @@ android {
 dependencies {
 
     //----- MODULES ----------/
+    implementation(project(":data"))
+    implementation(project(":domain"))
     implementation(project(":presentation"))
 
     //----- COMPOSE ----------/
@@ -67,12 +69,8 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:${Versions.composeVersion}"))
     debugImplementation("androidx.compose.ui:ui-tooling")
 
-    //----- GOOGLE ----------/
+    //----- DAGGER ----------/
     implementation("com.google.dagger:hilt-android:${Versions.hiltVersion}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}")
 
-}
-
-kapt {
-    correctErrorTypes = true
 }

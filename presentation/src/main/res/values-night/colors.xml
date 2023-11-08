@@ -28,5 +28,6 @@
     <color name="color_inverse_surface">@color/white</color>
     <color name="color_inverse_primary">@color/green_pastel</color>
     <color name="color_outline_variant">@color/gray_medium</color>
+    <color name="color_scrim">@color/dark_gray_80</color>
 
 </resources>

@@ -1,10 +1,9 @@
 package com.thecocktailapp.presentation.view.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.mzaragozaserrano.domain.utils.toFlowResult
 import com.mzaragozaserrano.presentation.view.base.BaseViewModel
 import com.mzaragozaserrano.presentation.view.vo.MinimalButtonVO
-import com.mzaragozaserrano.ui.R
+import com.thecocktailapp.domain.utils.toFlowResult
 import com.thecocktailapp.presentation.view.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.view.utils.mvi.CommonResult
 import com.thecocktailapp.presentation.view.utils.mvi.CommonViewState
@@ -15,6 +14,7 @@ import com.thecocktailapp.presentation.view.utils.mvi.HomeViewState
 import com.thecocktailapp.presentation.view.utils.mvi.mapToAction
 import com.thecocktailapp.presentation.view.utils.mvi.mapToState
 import com.thecocktailapp.presentation.view.vo.HomeVO
+import com.thecocktailapp.ui.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel<HomeViewState, HomeInt
         handleIntent()
     }
 
-    override fun createInitialState(): HomeViewState = CommonViewState.Initialized(
+    override fun createInitialState(): HomeViewState = CommonViewState.SetUpView(
         HomeVO(
             buttonCompose = MinimalButtonVO(
                 iconId = R.drawable.ic_compose,

@@ -28,6 +28,7 @@
     <color name="color_inverse_surface">@color/dark_gray</color>
     <color name="color_inverse_primary">@color/green_pastel</color>
     <color name="color_outline_variant">@color/gray_medium</color>
+    <color name="color_scrim">@color/white_80</color>
 
     <color name="green_pastel">#D1F0E2</color>
     <color name="dark_gray_green">#8FA3A1</color>
@@ -37,12 +38,14 @@
     <color name="blue_pastel">#B2DCEC</color>
     <color name="blue_pastel_light">#ECEFF9</color>
     <color name="red_pastel">#EFA2A2</color>
-    <color name="red_pastel_dark">#A3352B</color>
     <color name="red_pastel_light">#FECCCC</color>
     <color name="white">#FFFFFF</color>
+    <color name="white_80">#80FFFFFF</color>
     <color name="gray_light">#F5F5F5</color>
     <color name="gray_medium">#D5D5D5</color>
     <color name="dark_gray">#333333</color>
+    <color name="red_pastel_dark">#A3352B</color>
+    <color name="dark_gray_80">#80333333</color>
     <color name="black">#000000</color>
 
 </resources>

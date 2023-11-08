@@ -1,8 +1,8 @@
 package com.thecocktailapp.presentation.view.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.mzaragozaserrano.domain.utils.toFlowResult
 import com.mzaragozaserrano.presentation.view.base.BaseViewModel
+import com.thecocktailapp.domain.utils.toFlowResult
 import com.thecocktailapp.presentation.view.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.view.utils.mvi.CommonResult
 import com.thecocktailapp.presentation.view.utils.mvi.CommonViewState
@@ -26,7 +26,7 @@ class KotlinViewModel @Inject constructor() : BaseViewModel<KotlinViewState, Kot
         handleIntent()
     }
 
-    override fun createInitialState(): KotlinViewState = CommonViewState.Initialized()
+    override fun createInitialState(): KotlinViewState = CommonViewState.SetUpView()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun handleIntent() {

@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?color_background"
     android:gravity="center"
-    android:orientation="horizontal"
-    android:padding="16dp">
+    android:orientation="horizontal">
 
-</LinearLayout>
+    <include
+        android:id="@+id/drawer_layout"
+        layout="@layout/core_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

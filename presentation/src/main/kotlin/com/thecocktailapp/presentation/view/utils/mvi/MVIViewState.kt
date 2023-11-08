@@ -1,8 +1,10 @@
 package com.thecocktailapp.presentation.view.utils.mvi
 
-sealed class CommonViewState : HomeViewState, KotlinViewState {
+import com.thecocktailapp.presentation.view.vo.DrinkVO
+
+sealed class CommonViewState : HomeViewState, CocktailViewState, KotlinViewState {
     object Idle : CommonViewState()
-    data class Initialized(val data: Any? = null) : CommonViewState()
+    data class SetUpView(val data: Any? = null) : CommonViewState()
 }
 
 sealed interface HomeViewState {
@@ -13,3 +15,9 @@ sealed interface HomeViewState {
 }
 
 sealed interface KotlinViewState
+
+sealed interface CocktailViewState {
+    data class ShowError(val idMessage: Int): CocktailViewState
+    object ShowProgressDialog: CocktailViewState
+    data class SetDailyCocktail(val drink: DrinkVO): CocktailViewState
+}

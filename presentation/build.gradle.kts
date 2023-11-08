@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mzaragozaserrano.ui"
+    namespace = "com.thecocktailapp.ui"
     compileSdk = 34
 
     defaultConfig {
@@ -44,15 +44,17 @@ android {
 dependencies {
 
     //----- AAR ----------/
-    implementation(files(project.rootDir.resolve("libs/mzs-domain.aar")))
     implementation(files(project.rootDir.resolve("libs/mzs-presentation.aar")))
 
     //----- MODULES ----------/
     implementation(project(":domain"))
 
     //----- ANDROIDX ----------/
+
+    implementation("androidx.core:core-ktx:${Versions.androidxCoreVersion}")
     implementation("androidx.appcompat:appcompat:${Versions.appCompatVersion}")
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.navigation:navigation-ui-ktx:${Versions.navigationVersion}")
+    implementation("androidx.navigation:navigation-fragment-ktx:${Versions.navigationVersion}")
 
     //----- COMPOSE ----------/
     implementation("androidx.compose.ui:ui")
@@ -63,13 +65,14 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:${Versions.composeVersion}"))
     debugImplementation("androidx.compose.ui:ui-tooling")
 
-    //----- GOOGLE ----------/
-    implementation("com.google.android.material:material:${Versions.materialVersion}")
+    //----- DAGGER ----------/
     implementation("com.google.dagger:hilt-android:${Versions.hiltVersion}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}")
 
-}
+    //-----  LOTTIE ----------/
+    implementation("com.airbnb.android:lottie:${Versions.lottieVersion}")
 
-kapt {
-    correctErrorTypes = true
+    //----- MATERIAL ----------/
+    implementation("com.google.android.material:material:${Versions.materialVersion}")
+
 }
