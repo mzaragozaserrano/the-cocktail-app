@@ -1,14 +1,14 @@
-package com.thecocktailapp.data.datasource
+package com.thecocktailapp.data.datasources
 
+import com.mzaragozaserrano.data.utils.ResultData
+import com.mzaragozaserrano.data.utils.onError
+import com.mzaragozaserrano.data.utils.onSuccess
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.ErrorDTO
-import com.thecocktailapp.data.dto.ResultData
 import com.thecocktailapp.data.utils.UrlConstants.URL_RANDOM_COCKTAIL
-import kotlinx.coroutines.CancellableContinuation
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -41,8 +41,8 @@ class CocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
                         ResultData.Error(ErrorDTO.LoadingData)
                     }
                     when (jsonResult) {
-                        is ResultData.Error -> {
-                            onError(continuation, jsonResult.code)
+                        is ResultData.Error<*> -> {
+                            onError(continuation, jsonResult.code as ErrorDTO)
                         }
 
                         is ResultData.Response -> {
@@ -57,20 +57,4 @@ class CocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
             }
         }
 
-}
-
-@OptIn(ExperimentalCoroutinesApi::class)
-private fun <T : Any> onError(
-    continuation: CancellableContinuation<ResultData<T>>,
-    error: ErrorDTO,
-) {
-    continuation.resume(ResultData.Error(error), null)
-}
-
-@OptIn(ExperimentalCoroutinesApi::class)
-private fun <T : Any> onSuccess(
-    continuation: CancellableContinuation<ResultData<T>>,
-    data: T,
-) {
-    continuation.resume(ResultData.Response(data), null)
 }

@@ -1,11 +1,9 @@
-package com.thecocktailapp.data.datasource
+package com.thecocktailapp.data.datasources
 
+import com.mzaragozaserrano.data.utils.ResultData
 import com.thecocktailapp.data.dto.CocktailDTO
-import com.thecocktailapp.data.dto.ResultData
 
 
 interface CocktailDataSource {
-
     suspend fun getRandomDrink(): ResultData<CocktailDTO>
-
 }

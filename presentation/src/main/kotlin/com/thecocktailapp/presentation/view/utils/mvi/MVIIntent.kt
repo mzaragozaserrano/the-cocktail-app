@@ -10,7 +10,9 @@ sealed interface HomeIntent {
     object GoToKotlinModule: HomeIntent
 }
 
-sealed interface KotlinIntent
+sealed interface KotlinIntent {
+    object ShowRandomDrink: KotlinIntent
+}
 
 sealed interface SplashIntent  {
     object GetRandomDrink: SplashIntent

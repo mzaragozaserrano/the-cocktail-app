@@ -14,7 +14,13 @@ sealed interface HomeViewState {
     }
 }
 
-sealed interface KotlinViewState
+sealed interface KotlinViewState {
+    sealed class Navigate: KotlinViewState {
+        object ToCocktailFragment: Navigate()
+        object ToSplashFragment: Navigate()
+
+    }
+}
 
 sealed interface CocktailViewState {
     data class ShowError(val idMessage: Int): CocktailViewState
@@ -24,7 +30,7 @@ sealed interface CocktailViewState {
 sealed interface SplashViewState {
     sealed class Navigate: SplashViewState {
         object ToDrinkDetail: Navigate()
-        object ToMain: Navigate()
+        object ToCocktailFragment: Navigate()
     }
     data class SetDailyDrink(val drink: DrinkVO): SplashViewState
     data class ShowError(val idMessage: Int): SplashViewState

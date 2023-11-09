@@ -3,6 +3,7 @@ package com.thecocktailapp.presentation.view.activities
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.mzaragozaserrano.presentation.databinding.CoreDrawerLayoutBinding
 import com.mzaragozaserrano.presentation.view.adapters.NavMenuAdapter
@@ -16,6 +17,7 @@ import com.thecocktailapp.presentation.view.viewmodels.KotlinViewModel
 import com.thecocktailapp.ui.R
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class KotlinActivity :
     TheCocktailAppBaseActivity<KotlinViewState, KotlinIntent, CoreDrawerLayoutBinding, KotlinViewModel>() {
@@ -24,6 +26,8 @@ class KotlinActivity :
     override val viewModel: KotlinViewModel by viewModels()
 
     val drawerLayout: DrawerLayout by lazy { binding.drawerLayout }
+
+    private lateinit var navController: NavController
 
     private val adapter: NavMenuAdapter<MenuItem> by lazy {
         NavMenuAdapter(
@@ -55,13 +59,6 @@ class KotlinActivity :
         )
     }
 
-    override fun renderView(state: KotlinViewState) {
-        when (state) {
-            is CommonViewState.Idle -> {}
-            is CommonViewState.Initialized -> {}
-        }
-    }
-
     override fun CoreDrawerLayoutBinding.setUpView() {
         setUpNavHostFragment()
         setUpAdapter()
@@ -71,13 +68,40 @@ class KotlinActivity :
         navView.setBackgroundResource(R.drawable.background_nav_view)
         val navHostFragment =
             supportFragmentManager.findFragmentById(navHostContainer.id) as NavHostFragment
-        val navController = navHostFragment.navController
-        navController.setGraph(R.navigation.nav_kotlin_graph)
+        navController = navHostFragment.navController
     }
 
     private fun CoreDrawerLayoutBinding.setUpAdapter() {
         listMenu.adapter = adapter
         adapter.list = getMenuOptions()
+    }
+
+    override fun renderView(state: KotlinViewState) {
+        when (state) {
+            is CommonViewState.Idle -> {}
+            is CommonViewState.Initialized -> {
+                showRandomDrink()
+            }
+
+            is KotlinViewState.Navigate.ToCocktailFragment -> {
+                startNavigationFrom(R.id.CocktailFragment)
+            }
+
+            is KotlinViewState.Navigate.ToSplashFragment -> {
+                startNavigationFrom(R.id.SplashFragment)
+            }
+        }
+    }
+
+    private fun showRandomDrink() {
+        emitAction(KotlinIntent.ShowRandomDrink)
+    }
+
+    private fun startNavigationFrom(destination: Int) {
+        navController.graph =
+            navController.navInflater.inflate(R.navigation.nav_kotlin_graph).apply {
+                setStartDestination(destination)
+            }
     }
 
 }

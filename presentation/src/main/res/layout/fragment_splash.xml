@@ -104,8 +104,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/cocktail_name"
-                        tools:visibility="visible" />
+                        app:layout_constraintTop_toBottomOf="@id/cocktail_name" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/second_title"
@@ -121,8 +120,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/first_title"
-                        tools:visibility="visible" />
+                        app:layout_constraintTop_toBottomOf="@id/first_title" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/third_title"
@@ -139,13 +137,15 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/second_title"
-                        tools:visibility="visible" />
+                        tools:text="@string/third_title_splash_fragment" />
 
                     <androidx.constraintlayout.widget.Group
                         android:id="@+id/group_texts"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        app:constraint_referenced_ids="first_title,second_title, third_title" />
+                        android:visibility="gone"
+                        app:constraint_referenced_ids="first_title,second_title, third_title"
+                        tools:visibility="visible" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,6 +173,7 @@
             android:backgroundTint="?color_primary"
             android:fontFamily="@font/nunito_medium"
             android:text="@string/see_button"
+            android:padding="12dp"
             android:textAllCaps="true"
             android:textColor="?color_on_primary"
             android:textSize="16sp"
@@ -182,7 +183,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+            tools:text="@string/see_button" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/cancel_button"
@@ -198,13 +199,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/see_button"
-            tools:visibility="visible" />
+            tools:text="@string/cancel_button" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group_buttons"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:constraint_referenced_ids="cancel_button,see_button" />
+            android:visibility="gone"
+            app:constraint_referenced_ids="cancel_button,see_button"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

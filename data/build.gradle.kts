@@ -38,6 +38,10 @@ android {
 
 dependencies {
 
+    //----- AAR ----------/
+    implementation(files(project.rootDir.resolve("libs/mzs-data.aar")))
+    implementation(files(project.rootDir.resolve("libs/mzs-domain.aar")))
+
     //----- MODULES ----------/
     implementation(project(":domain"))
 

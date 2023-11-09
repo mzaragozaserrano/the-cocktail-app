@@ -1,9 +1,9 @@
 package com.thecocktailapp.presentation.view.viewmodels
 
 import androidx.lifecycle.viewModelScope
+import com.mzaragozaserrano.domain.utils.extension.toFlowResult
 import com.mzaragozaserrano.presentation.view.base.BaseViewModel
 import com.mzaragozaserrano.presentation.view.vo.MinimalButtonVO
-import com.thecocktailapp.domain.utils.toFlowResult
 import com.thecocktailapp.presentation.view.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.view.utils.mvi.CommonResult
 import com.thecocktailapp.presentation.view.utils.mvi.CommonViewState

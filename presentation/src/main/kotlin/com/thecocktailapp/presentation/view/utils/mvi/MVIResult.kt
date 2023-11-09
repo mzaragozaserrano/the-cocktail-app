@@ -27,6 +27,14 @@ sealed class HomeTask  {
 
 sealed interface KotlinResult {
     object Init : KotlinResult
+    sealed class Task : KotlinResult {
+        data class Success(val task: KotlinTask) : Task()
+    }
+}
+
+sealed class KotlinTask  {
+    object NavigateToCocktailFragment: KotlinTask()
+    object NavigateToSplashFragment: KotlinTask()
 }
 
 sealed interface SplashResult {
@@ -38,16 +46,16 @@ sealed interface SplashResult {
     }
 }
 
+sealed class SplashTask  {
+    object NavigateToDrinkDetail: SplashTask()
+    object NavigateToCocktailFragment: SplashTask()
+    data class RandomCocktailGotten(val drink: DrinkBO): SplashTask()
+}
+
 sealed interface CocktailResult {
     object Init : CocktailResult
     sealed class Task : CocktailResult {
         object Loading : Task()
         data class Error(val error: ErrorVO) : Task()
     }
-}
-
-sealed class SplashTask  {
-    object NavigateToDrinkDetail: SplashTask()
-    object NavigateToMain: SplashTask()
-    data class RandomCocktailGotten(val drink: DrinkBO) : SplashTask ()
 }

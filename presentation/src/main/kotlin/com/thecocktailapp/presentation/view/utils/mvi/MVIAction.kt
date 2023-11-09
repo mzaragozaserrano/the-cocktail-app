@@ -12,7 +12,11 @@ sealed interface HomeAction {
     }
 }
 
-sealed interface KotlinAction
+sealed interface KotlinAction {
+    sealed class Task : KotlinAction {
+        object CheckPreferencesToShowRandomDrink : Task()
+    }
+}
 
 sealed interface SplashAction {
     sealed class Task : SplashAction {

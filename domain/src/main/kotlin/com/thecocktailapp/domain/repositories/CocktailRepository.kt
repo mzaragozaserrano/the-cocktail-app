@@ -1,7 +1,7 @@
 package com.thecocktailapp.domain.repositories
 
+import com.mzaragozaserrano.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
-import com.thecocktailapp.domain.bo.Result
 import kotlinx.coroutines.flow.Flow
 
 interface CocktailRepository {

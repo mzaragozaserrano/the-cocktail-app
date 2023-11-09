@@ -17,16 +17,16 @@ fun SplashResult.mapToState(): SplashViewState =
             CommonViewState.Idle
         }
 
-        is SplashResult.Task.Error -> {
-            SplashViewState.ShowError(idMessage = error.idMessage)
-        }
-
         is SplashResult.Init -> {
-            if(drink != null) {
+            if (drink != null) {
                 CommonViewState.Idle
             } else {
                 CommonViewState.Initialized()
             }
+        }
+
+        is SplashResult.Task.Error -> {
+            SplashViewState.ShowError(idMessage = error.idMessage)
         }
 
         is SplashResult.Task.Loading -> {
@@ -35,15 +35,16 @@ fun SplashResult.mapToState(): SplashViewState =
 
         is SplashResult.Task.Success -> {
             when (task) {
-                is SplashTask.RandomCocktailGotten -> {
-                    SplashViewState.SetDailyDrink(drink = task.drink.transform())
-                }
-
                 is SplashTask.NavigateToDrinkDetail -> {
                     SplashViewState.Navigate.ToDrinkDetail
                 }
-                is SplashTask.NavigateToMain -> {
-                    SplashViewState.Navigate.ToMain
+
+                is SplashTask.NavigateToCocktailFragment -> {
+                    SplashViewState.Navigate.ToCocktailFragment
+                }
+
+                is SplashTask.RandomCocktailGotten -> {
+                    SplashViewState.SetDailyDrink(drink = task.drink.transform())
                 }
             }
         }

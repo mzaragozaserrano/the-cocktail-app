@@ -44,6 +44,7 @@ android {
 dependencies {
 
     //----- AAR ----------/
+    implementation(files(project.rootDir.resolve("libs/mzs-domain.aar")))
     implementation(files(project.rootDir.resolve("libs/mzs-presentation.aar")))
 
     //----- MODULES ----------/
@@ -71,7 +72,6 @@ dependencies {
 
     //----- GLIDE ----------/
     implementation("com.github.bumptech.glide:glide:${Versions.glideVersion}")
-    kapt("com.github.bumptech.glide:compiler:${Versions.glideVersion}")
 
     //-----  LOTTIE ----------/
     implementation("com.airbnb.android:lottie:${Versions.lottieVersion}")

@@ -1,11 +1,12 @@
 package com.thecocktailapp.presentation.view.viewmodels
 
 import androidx.lifecycle.viewModelScope
+import com.mzaragozaserrano.domain.utils.Result
+import com.mzaragozaserrano.domain.utils.extension.toFlowResult
 import com.mzaragozaserrano.presentation.view.base.BaseViewModel
 import com.thecocktailapp.domain.bo.DrinkBO
-import com.thecocktailapp.domain.bo.Result
+import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.GetRandomDrink
-import com.thecocktailapp.domain.utils.toFlowResult
 import com.thecocktailapp.presentation.common.utils.transform
 import com.thecocktailapp.presentation.view.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.view.utils.mvi.CommonResult
@@ -14,8 +15,8 @@ import com.thecocktailapp.presentation.view.utils.mvi.SplashAction
 import com.thecocktailapp.presentation.view.utils.mvi.SplashIntent
 import com.thecocktailapp.presentation.view.utils.mvi.SplashResult
 import com.thecocktailapp.presentation.view.utils.mvi.SplashTask
+import com.thecocktailapp.presentation.view.utils.mvi.SplashTask.NavigateToCocktailFragment
 import com.thecocktailapp.presentation.view.utils.mvi.SplashTask.NavigateToDrinkDetail
-import com.thecocktailapp.presentation.view.utils.mvi.SplashTask.NavigateToMain
 import com.thecocktailapp.presentation.view.utils.mvi.SplashViewState
 import com.thecocktailapp.presentation.view.utils.mvi.mapToAction
 import com.thecocktailapp.presentation.view.utils.mvi.mapToState
@@ -85,8 +86,8 @@ class SplashViewModel @Inject constructor(
                     SplashResult.Task.Loading
                 }
 
-                is Result.Response.Error -> {
-                    SplashResult.Task.Error(result.code.transform())
+                is Result.Response.Error<*> -> {
+                    SplashResult.Task.Error((result.code as ErrorBO).transform())
                 }
 
                 is Result.Response.Success -> {
@@ -102,7 +103,7 @@ class SplashViewModel @Inject constructor(
         }
 
         is SplashAction.TaskForNavigate.ToMain -> {
-            SplashResult.Task.Success(NavigateToMain).toFlowResult()
+            SplashResult.Task.Success(NavigateToCocktailFragment).toFlowResult()
         }
     }
 

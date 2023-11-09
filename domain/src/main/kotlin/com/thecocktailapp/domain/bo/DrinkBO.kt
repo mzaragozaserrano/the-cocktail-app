@@ -1,6 +1,6 @@
 package com.thecocktailapp.domain.bo
 
-import com.thecocktailapp.domain.utils.extensions.safeLet
+import com.mzaragozaserrano.domain.utils.extension.safeLet
 
 data class DrinkBO(
     val dateModified: String?,
@@ -142,6 +142,7 @@ data class DrinkBO(
                     Pair(ingredient, measure)
                 }
             }
+
             else -> null
         }
     }

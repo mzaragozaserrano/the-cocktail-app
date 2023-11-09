@@ -1,5 +1,7 @@
 package com.thecocktailapp.presentation.view.vo
 
+import java.io.Serializable
+
 data class DrinkVO(
     val category: String,
     val dateModified: String?,
@@ -10,4 +12,4 @@ data class DrinkVO(
     val ingredients: List<String>,
     val instructions: String,
     val urlImage: String,
-)
+) : Serializable

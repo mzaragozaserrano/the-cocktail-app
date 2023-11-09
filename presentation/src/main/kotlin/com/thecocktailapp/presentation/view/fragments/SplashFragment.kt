@@ -4,10 +4,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mzaragozaserrano.presentation.view.utils.extensions.hideProgressDialog
+import com.mzaragozaserrano.presentation.view.utils.extensions.loadImageFromUrl
 import com.mzaragozaserrano.presentation.view.utils.extensions.showProgressDialog
 import com.mzaragozaserrano.presentation.view.utils.viewBinding.viewBinding
 import com.thecocktailapp.presentation.view.base.TheCocktailAppBaseFragment
-import com.thecocktailapp.presentation.view.utils.extensions.loadImageFromUrl
 import com.thecocktailapp.presentation.view.utils.mvi.CommonIntent
 import com.thecocktailapp.presentation.view.utils.mvi.CommonViewState
 import com.thecocktailapp.presentation.view.utils.mvi.SplashIntent
@@ -53,8 +53,12 @@ class SplashFragment :
 
             }
 
-            is SplashViewState.Navigate.ToMain -> {
-                findNavController().navigate(R.id.action_SplashFragment_to_CocktailFragment)
+            is SplashViewState.Navigate.ToCocktailFragment -> {
+                navigateToCocktailFragment()
+            }
+
+            is SplashViewState.SetDailyDrink -> {
+                setUpDailyDrink(state)
             }
 
             is SplashViewState.ShowError -> {
@@ -64,11 +68,12 @@ class SplashFragment :
             is SplashViewState.ShowProgressDialog -> {
                 showProgressDialog()
             }
-
-            is SplashViewState.SetDailyDrink -> {
-                setUpDailyDrink(state)
-            }
         }
+    }
+
+    private fun navigateToCocktailFragment() {
+        hideProgressDialog()
+        findNavController().navigate(R.id.action_SplashFragment_to_CocktailFragment)
     }
 
     private fun getRandomDrink() {
@@ -84,13 +89,12 @@ class SplashFragment :
     private fun FragmentSplashBinding.bindDailyDrink(drink: DrinkVO) {
         apply {
             cocktailImage.loadImageFromUrl(
-                url = drink.urlImage,
-                onSuccess = {
-                    cocktailName.text = drink.name
-                    groupTexts.visibility = View.VISIBLE
-                    groupButtons.visibility = View.VISIBLE
-                }
+                placeHolderId = R.drawable.loading_img,
+                url = drink.urlImage
             )
+            cocktailName.text = drink.name
+            groupTexts.visibility = View.VISIBLE
+            groupButtons.visibility = View.VISIBLE
         }
     }
 

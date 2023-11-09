@@ -1,21 +1,26 @@
 package com.thecocktailapp.domain.usecases
 
+import com.mzaragozaserrano.domain.repositories.NetworkRepository
+import com.mzaragozaserrano.domain.usecases.FlowUseCaseNoParams
+import com.mzaragozaserrano.domain.utils.Result
+import com.mzaragozaserrano.domain.utils.extension.toFlowResult
 import com.thecocktailapp.domain.bo.DrinkBO
-import com.thecocktailapp.domain.bo.Result
+import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.repositories.CocktailRepository
-import com.thecocktailapp.domain.repositories.NetworkRepository
-import com.thecocktailapp.domain.utils.toFlowResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapMerge
 import javax.inject.Inject
 
-typealias GetRandomDrink = FlowUseCaseNoParams<@JvmSuppressWildcards Result<DrinkBO>>
+typealias GetRandomDrink = FlowUseCaseNoParams<@JvmSuppressWildcards Result<DrinkBO>, ErrorBO>
 
 class GetRandomDrinkUseCaseImpl @Inject constructor(
     private val cocktailRepository: CocktailRepository,
     networkRepository: NetworkRepository,
-) : GetRandomDrink(networkRepository) {
+) : GetRandomDrink(
+    networkRepository = networkRepository,
+    networkError = ErrorBO.Connectivity
+) {
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun run(): Flow<Result<DrinkBO>> =
         cocktailRepository.getRandomDrink().flatMapMerge { result ->
@@ -24,13 +29,12 @@ class GetRandomDrinkUseCaseImpl @Inject constructor(
                     Result.Loading.toFlowResult()
                 }
 
-                is Result.Response.Error -> {
+                is Result.Response.Error<*> -> {
                     Result.Response.Error(result.code).toFlowResult()
                 }
 
                 is Result.Response.Success -> {
-                    Result.Response.Success(result.data.drinks.first())
-                        .toFlowResult()
+                    Result.Response.Success(result.data.drinks.first()).toFlowResult()
                 }
             }
         }

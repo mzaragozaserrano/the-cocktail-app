@@ -38,6 +38,9 @@ android {
 
 dependencies {
 
+    //----- AAR ----------/
+    implementation(files(project.rootDir.resolve("libs/mzs-domain.aar")))
+
     //----- COROUTINES ----------/
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesVersion}")
 
