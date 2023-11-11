@@ -3,7 +3,7 @@ package com.thecocktailapp.presentation.view.viewmodels
 import androidx.lifecycle.viewModelScope
 import com.mzaragozaserrano.domain.utils.extension.toFlowResult
 import com.mzaragozaserrano.presentation.view.base.BaseViewModel
-import com.thecocktailapp.domain.usecases.CheckPreferencesToShowRandomDrink
+import com.thecocktailapp.domain.usecases.ShowRandomDrink
 import com.thecocktailapp.presentation.view.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.view.utils.mvi.CommonResult
 import com.thecocktailapp.presentation.view.utils.mvi.CommonViewState
@@ -24,7 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class KotlinViewModel @Inject constructor(
-    private val checkPreferencesToShowRandomDrink: @JvmSuppressWildcards CheckPreferencesToShowRandomDrink,
+    private val showRandomDrink: @JvmSuppressWildcards ShowRandomDrink,
 ) : BaseViewModel<KotlinViewState, KotlinIntent>() {
 
     init {
@@ -64,13 +64,13 @@ class KotlinViewModel @Inject constructor(
 
     private fun onExecuteTask(task: KotlinAction.Task) = when (task) {
         is KotlinAction.Task.CheckPreferencesToShowRandomDrink -> {
-            onCheckPreferencesToShowRandomDrink()
+            onExecuteShowRandomDrink()
         }
     }
 
-    private fun onCheckPreferencesToShowRandomDrink(): Flow<KotlinResult> =
+    private fun onExecuteShowRandomDrink(): Flow<KotlinResult> =
         KotlinResult.Task.Success(
-            if (checkPreferencesToShowRandomDrink()) {
+            if (showRandomDrink()) {
                 KotlinTask.NavigateToSplashFragment
             } else {
                 KotlinTask.NavigateToCocktailFragment

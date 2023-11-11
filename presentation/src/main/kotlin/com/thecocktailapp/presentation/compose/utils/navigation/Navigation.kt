@@ -1,5 +1,6 @@
 package com.thecocktailapp.presentation.compose.utils.navigation
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
@@ -8,19 +9,20 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.thecocktailapp.presentation.compose.screens.ComposeScreen
+import com.thecocktailapp.presentation.compose.screens.SplashScreen
 
 @Composable
 fun Navigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
+    startDestination: String,
 ) {
     NavHost(
         navController = navController,
-        startDestination = Feature.App.route
+        startDestination = startDestination
     ) {
         theCocktailAppNav(modifier = modifier, navController = navController)
-        composeNav(modifier = modifier)
+        splashNav(modifier = modifier)
     }
 }
 
@@ -33,18 +35,18 @@ private fun NavGraphBuilder.theCocktailAppNav(
         route = Feature.App.route
     ) {
         composable(navItem = NavCommand.ContentType(Feature.App)) {
-
+            Text(text = "Esto es el main")
         }
     }
 }
 
-private fun NavGraphBuilder.composeNav(modifier: Modifier = Modifier) {
+private fun NavGraphBuilder.splashNav(modifier: Modifier = Modifier) {
     navigation(
-        startDestination = NavCommand.ContentType(Feature.Compose).route,
-        route = Feature.Compose.route
+        startDestination = NavCommand.ContentType(Feature.Splash).route,
+        route = Feature.Splash.route
     ) {
-        composable(navItem = NavCommand.ContentType(Feature.Compose)) {
-            ComposeScreen(modifier = modifier)
+        composable(navItem = NavCommand.ContentType(Feature.Splash)) {
+            SplashScreen(modifier = modifier)
         }
     }
 }

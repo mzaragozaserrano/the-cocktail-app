@@ -91,8 +91,8 @@ class SplashViewModel @Inject constructor(
                 }
 
                 is Result.Response.Success -> {
-                    drink = result.data
-                    SplashResult.Task.Success(SplashTask.RandomCocktailGotten(result.data))
+                    drink = result.data.drinks.first()
+                    SplashResult.Task.Success(SplashTask.RandomCocktailGotten(result.data.drinks.first()))
                 }
             }
         }

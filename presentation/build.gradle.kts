@@ -51,7 +51,6 @@ dependencies {
     implementation(project(":domain"))
 
     //----- ANDROIDX ----------/
-
     implementation("androidx.core:core-ktx:${Versions.androidxCoreVersion}")
     implementation("androidx.appcompat:appcompat:${Versions.appCompatVersion}")
     implementation("androidx.navigation:navigation-ui-ktx:${Versions.navigationVersion}")
@@ -62,7 +61,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.hilt:hilt-navigation-compose:${Versions.hiltComposeVersion}")
     implementation("androidx.navigation:navigation-compose:${Versions.navigationComposeVersion}")
+    implementation("androidx.compose.runtime:runtime-livedata:${Versions.liveDataComposeVersion}")
     implementation(platform("androidx.compose:compose-bom:${Versions.composeVersion}"))
     debugImplementation("androidx.compose.ui:ui-tooling")
 
