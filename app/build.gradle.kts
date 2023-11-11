@@ -54,6 +54,11 @@ android {
 
 dependencies {
 
+    //----- AAR ----------/
+    implementation(files(project.rootDir.resolve("libs/mzs-data.aar")))
+    implementation(files(project.rootDir.resolve("libs/mzs-domain.aar")))
+    implementation(files(project.rootDir.resolve("libs/mzs-presentation.aar")))
+
     //----- MODULES ----------/
     implementation(project(":data"))
     implementation(project(":domain"))
@@ -72,5 +77,12 @@ dependencies {
     //----- DAGGER ----------/
     implementation("com.google.dagger:hilt-android:${Versions.hiltVersion}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}")
+
+    //----- TESTING ----------/
+    testImplementation("app.cash.turbine:turbine:${Versions.testingTurbine}")
+    testImplementation("org.mockito:mockito-core:${Versions.testingMockitoVersion}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.testingCoroutinesVersion}")
+    testImplementation("com.google.dagger:hilt-android-testing:${Versions.testingHiltVersion}")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:${Versions.testingHiltVersion}")
 
 }
