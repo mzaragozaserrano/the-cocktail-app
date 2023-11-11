@@ -4,11 +4,10 @@ import com.mzaragozaserrano.domain.usecases.SyncUseCaseNoParams
 import com.thecocktailapp.domain.repositories.KotlinRepository
 import javax.inject.Inject
 
-typealias CheckPreferencesToShowRandomDrink = SyncUseCaseNoParams<@JvmSuppressWildcards Boolean>
+typealias ShowRandomDrink = SyncUseCaseNoParams<@JvmSuppressWildcards Boolean>
 
-class CheckPreferencesToShowRandomDrinkImpl @Inject constructor(
+class ShowRandomDrinkImpl @Inject constructor(
     private val kotlinRepository: KotlinRepository,
-) : CheckPreferencesToShowRandomDrink() {
+) : ShowRandomDrink() {
     override fun invoke(): Boolean = kotlinRepository.showRandomCocktail()
-
 }
