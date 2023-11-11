@@ -28,7 +28,7 @@ class NetworkRepositoryImplTest {
     }
 
     @Test
-    fun `Check connectivity returns true`() {
+    fun `check connectivity returns true`() {
         `when`(context.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
             connectivityManager
         )
