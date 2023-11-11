@@ -1,9 +1,9 @@
 package com.thecocktailapp.data.di
 
-import com.thecocktailapp.domain.usecases.CheckPreferencesToShowRandomDrink
-import com.thecocktailapp.domain.usecases.CheckPreferencesToShowRandomDrinkImpl
 import com.thecocktailapp.domain.usecases.GetRandomDrink
 import com.thecocktailapp.domain.usecases.GetRandomDrinkUseCaseImpl
+import com.thecocktailapp.domain.usecases.ShowRandomDrink
+import com.thecocktailapp.domain.usecases.ShowRandomDrinkImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,6 +17,6 @@ interface UseCaseModule {
     fun bindGetRandomDrink(useCaseImpl: GetRandomDrinkUseCaseImpl): GetRandomDrink
 
     @Binds
-    fun bindCheckPreferencesToShowRandomDrink(useCaseImpl: CheckPreferencesToShowRandomDrinkImpl): CheckPreferencesToShowRandomDrink
+    fun bindShowRandomDrink(useCaseImpl: ShowRandomDrinkImpl): ShowRandomDrink
 
 }
