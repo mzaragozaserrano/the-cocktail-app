@@ -18,6 +18,21 @@ class CocktailRepositoryImpl @Inject constructor(
     private val cocktailDataSource: CocktailDataSource,
     private val preferencesDataSource: PreferencesDataSource,
 ) : CocktailRepository {
+    override suspend fun getDrinkById(id: Int): Flow<Result<CocktailBO>> = flow {
+        emit(Result.Loading)
+        emit(
+            when (val result = cocktailDataSource.getDrinkById(id)) {
+                is ResultData.Response -> {
+                    Result.Response.Success(result.data.transform())
+                }
+
+                is ResultData.Error<*> -> {
+                    Result.Response.Error((result.code as ErrorDTO).transform())
+                }
+            }
+        )
+    }
+
     override suspend fun getRandomDrink(): Flow<Result<CocktailBO>> =
         flow {
             emit(Result.Loading)

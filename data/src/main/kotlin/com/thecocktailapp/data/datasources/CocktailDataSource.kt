@@ -5,5 +5,6 @@ import com.thecocktailapp.data.dto.CocktailDTO
 
 
 interface CocktailDataSource {
+    suspend fun getDrinkById(id: Int): ResultData<CocktailDTO>
     suspend fun getRandomDrink(): ResultData<CocktailDTO>
 }

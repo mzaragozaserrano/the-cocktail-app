@@ -1,5 +1,9 @@
 package com.thecocktailapp.data.utils
 
-object UrlConstants {
-    const val URL_RANDOM_COCKTAIL = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+sealed class UrlConstants(val url: String) {
+    object GetRandomDrink :
+        UrlConstants(url = "https://www.thecocktaildb.com/api/json/v1/1/random.php")
+
+    data class GetDrinkById(val id: Int) :
+        UrlConstants(url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}")
 }
