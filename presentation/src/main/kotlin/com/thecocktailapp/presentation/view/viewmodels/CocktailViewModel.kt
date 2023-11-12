@@ -2,7 +2,7 @@ package com.thecocktailapp.presentation.view.viewmodels
 
 import androidx.lifecycle.viewModelScope
 import com.mzaragozaserrano.domain.utils.extension.toFlowResult
-import com.mzaragozaserrano.presentation.view.base.BaseViewModel
+import com.mzaragozaserrano.presentation.view.base.MVIViewModel
 import com.thecocktailapp.presentation.view.utils.mvi.CocktailAction
 import com.thecocktailapp.presentation.view.utils.mvi.CocktailIntent
 import com.thecocktailapp.presentation.view.utils.mvi.CocktailResult
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CocktailViewModel @Inject constructor() : BaseViewModel<CocktailViewState, CocktailIntent>() {
+class CocktailViewModel @Inject constructor() : MVIViewModel<CocktailViewState, CocktailIntent>() {
 
     init {
         handleIntent()

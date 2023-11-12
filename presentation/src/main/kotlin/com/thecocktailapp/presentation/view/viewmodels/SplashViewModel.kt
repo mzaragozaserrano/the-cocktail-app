@@ -3,7 +3,7 @@ package com.thecocktailapp.presentation.view.viewmodels
 import androidx.lifecycle.viewModelScope
 import com.mzaragozaserrano.domain.utils.Result
 import com.mzaragozaserrano.domain.utils.extension.toFlowResult
-import com.mzaragozaserrano.presentation.view.base.BaseViewModel
+import com.mzaragozaserrano.presentation.view.base.MVIViewModel
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.GetRandomDrink
@@ -31,7 +31,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val getRandomDrink: @JvmSuppressWildcards GetRandomDrink,
-) : BaseViewModel<SplashViewState, SplashIntent>() {
+) : MVIViewModel<SplashViewState, SplashIntent>() {
 
     private var drink: DrinkBO? = null
 

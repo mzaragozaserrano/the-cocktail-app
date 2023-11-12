@@ -61,6 +61,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("io.coil-kt:coil-compose:${Versions.coilCompose}")
+    implementation("com.airbnb.android:lottie-compose:${Versions.lottieComposeVersion}")
     implementation("androidx.hilt:hilt-navigation-compose:${Versions.hiltComposeVersion}")
     implementation("androidx.navigation:navigation-compose:${Versions.navigationComposeVersion}")
     implementation("androidx.compose.runtime:runtime-livedata:${Versions.liveDataComposeVersion}")

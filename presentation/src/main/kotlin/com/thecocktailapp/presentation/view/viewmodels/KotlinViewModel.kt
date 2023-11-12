@@ -2,7 +2,7 @@ package com.thecocktailapp.presentation.view.viewmodels
 
 import androidx.lifecycle.viewModelScope
 import com.mzaragozaserrano.domain.utils.extension.toFlowResult
-import com.mzaragozaserrano.presentation.view.base.BaseViewModel
+import com.mzaragozaserrano.presentation.view.base.MVIViewModel
 import com.thecocktailapp.domain.usecases.ShowRandomDrink
 import com.thecocktailapp.presentation.view.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.view.utils.mvi.CommonResult
@@ -25,7 +25,7 @@ import javax.inject.Inject
 @HiltViewModel
 class KotlinViewModel @Inject constructor(
     private val showRandomDrink: @JvmSuppressWildcards ShowRandomDrink,
-) : BaseViewModel<KotlinViewState, KotlinIntent>() {
+) : MVIViewModel<KotlinViewState, KotlinIntent>() {
 
     init {
         handleIntent()

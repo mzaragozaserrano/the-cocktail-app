@@ -2,7 +2,7 @@ package com.thecocktailapp.presentation.view.viewmodels
 
 import androidx.lifecycle.viewModelScope
 import com.mzaragozaserrano.domain.utils.extension.toFlowResult
-import com.mzaragozaserrano.presentation.view.base.BaseViewModel
+import com.mzaragozaserrano.presentation.view.base.MVIViewModel
 import com.mzaragozaserrano.presentation.view.vo.MinimalButtonVO
 import com.thecocktailapp.presentation.view.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.view.utils.mvi.CommonResult
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : BaseViewModel<HomeViewState, HomeIntent>() {
+class HomeViewModel @Inject constructor() : MVIViewModel<HomeViewState, HomeIntent>() {
 
     init {
         handleIntent()
