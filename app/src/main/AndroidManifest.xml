@@ -18,6 +18,7 @@
         <activity
             android:name="com.thecocktailapp.presentation.view.activities.HomeActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.TheCocktailApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,12 +29,12 @@
         <activity
             android:name="com.thecocktailapp.presentation.view.activities.KotlinActivity"
             android:exported="true"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.TheCocktailApp" />
         <activity
             android:name="com.thecocktailapp.presentation.view.activities.ComposeActivity"
             android:exported="true"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.TheCocktailApp" />
     </application>
 
