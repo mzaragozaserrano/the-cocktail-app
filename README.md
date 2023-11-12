@@ -9,23 +9,6 @@ Welcome to The Cocktail App, a versatile beverage and cocktail application that 
 - **MVVM and Jetpack Compose**
   - Experience the MVVM architecture with Jetpack Compose for a modern and reactive UI in the other version.
 
-## Third-Party Integrations
-
-- **Coil**
-  - Utilizes Coil for efficient image loading and display within Jetpack Compose.
-- **Glide**
-  - Employs Glide for seamless image loading and handling in the XML-based version.
-- **Turbine**
-  - Incorporates Turbine for testing MutableStateFlow, following best practices outlined in the [Android Developer documentation](https://developer.android.com/kotlin/flow/test?hl=es-419).
-- **Coroutines**
-  - Implements coroutines for asynchronous programming, enhancing the app's responsiveness.
-- **Lottie**
-  - Integrates Lottie for high-quality animations, adding flair to The Cocktail App.
-- **Moshi**
-  - Uses Moshi for transforming JSON into DTOs for seamless data handling.
-- **OkHTTP3**
-  - Utilizes OkHTTP3 for creating efficient network operations and handling URL requests.
-
 ## Architecture and Design Principles
 
 - **SOLID Principles**
@@ -59,17 +42,34 @@ Welcome to The Cocktail App, a versatile beverage and cocktail application that 
   - **Access:**
     - Has access to the **domain Module** to retrieve and display data based on business logic.
     - Maintains independence from the **data Module** to avoid coupling with data-related operations.
-
-## Dependency Injection
-
-- **Dagger/Hilt**
-  - Utilizes Dagger/Hilt across all modules for comprehensive dependency injection. This includes the creation of ViewModels, Activities/Fragments, UseCases, Repositories, DataSources, and even extends to the Tests. This approach promotes modularity and ensures the codebase remains testable and maintainable by efficiently managing dependencies throughout the project.
-
+   
 ## Core Framework
 
 - **Custom Core Framework**
   - Developed by the owner, this framework includes essential modules: `mzs-data`, `mzs-domain`, and `mzs-presentation`. These modules serve as the foundation for various applications, providing base files, utilities, and Jetpack Compose components for efficient app development.
   - The core framework is integrated into The Cocktail App through the inclusion of `.aar` files (e.g., `mzs-data.aar`, `mzs-domain.aar`, `mzs-presentation.aar`). These files are placed in the `libs` folder at the project's root, ensuring accessibility across multiple modules within the application. This approach streamlines the sharing of common functionalities and Jetpack Compose components, contributing to consistent and efficient development across different parts of the application.
+
+## Dependency Injection
+
+- **Dagger/Hilt**
+  - Utilizes Dagger/Hilt across all modules for comprehensive dependency injection. This includes the creation of ViewModels, Activities/Fragments, UseCases, Repositories, DataSources, and even extends to the Tests. This approach promotes modularity and ensures the codebase remains testable and maintainable by efficiently managing dependencies throughout the project.
+ 
+## Third-Party Integrations
+
+- **Coil**
+  - Utilizes Coil for efficient image loading and display within Jetpack Compose.
+- **Glide**
+  - Employs Glide for seamless image loading and handling in the XML-based version.
+- **Turbine**
+  - Incorporates Turbine for testing MutableStateFlow, following best practices outlined in the [Android Developer documentation](https://developer.android.com/kotlin/flow/test?hl=es-419).
+- **Coroutines**
+  - Implements coroutines for asynchronous programming, enhancing the app's responsiveness.
+- **Lottie**
+  - Integrates Lottie for high-quality animations, adding flair to The Cocktail App.
+- **Moshi**
+  - Uses Moshi for transforming JSON into DTOs for seamless data handling.
+- **OkHTTP3**
+  - Utilizes OkHTTP3 for creating efficient network operations and handling URL requests.
 
 ## Getting Started
 
