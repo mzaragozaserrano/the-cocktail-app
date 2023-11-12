@@ -10,8 +10,8 @@ sealed class NavCommand(
 ) {
 
     class ContentType(feature: Feature) : NavCommand(feature)
-    class ContentDetail(feature: Feature) : NavCommand(feature, "detail", listOf(NavArg.ItemId)) {
-        fun createRoute(typeName: String) = "${feature.route}/$subRoute/$typeName"
+    class ContentDetail(feature: Feature) : NavCommand(feature, "detail", listOf(NavArg.DrinkId)) {
+        fun createRoute(drinkId: Int) = "${feature.route}/$subRoute/$drinkId"
     }
 
     val route = run {
@@ -27,5 +27,5 @@ sealed class NavCommand(
 }
 
 sealed class NavArg(val key: String, val navType: NavType<*>) {
-    object ItemId : NavArg("itemId", NavType.IntType)
+    object DrinkId : NavArg("drinkId", NavType.IntType)
 }

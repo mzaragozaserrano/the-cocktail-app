@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.thecocktailapp.presentation.compose.screens.DetailDrinkScreen
 import com.thecocktailapp.presentation.compose.screens.SplashScreen
 
 @Composable
@@ -21,8 +22,9 @@ fun Navigation(
         navController = navController,
         startDestination = startDestination
     ) {
+        splashNav(modifier = modifier, navController = navController)
         theCocktailAppNav(modifier = modifier, navController = navController)
-        splashNav(modifier = modifier)
+        cocktailDetailNav(modifier = modifier, navController = navController)
     }
 }
 
@@ -40,13 +42,47 @@ private fun NavGraphBuilder.theCocktailAppNav(
     }
 }
 
-private fun NavGraphBuilder.splashNav(modifier: Modifier = Modifier) {
+private fun NavGraphBuilder.splashNav(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+) {
     navigation(
-        startDestination = NavCommand.ContentType(Feature.Splash).route,
+        startDestination = NavCommand.ContentType(feature = Feature.Splash).route,
         route = Feature.Splash.route
     ) {
-        composable(navItem = NavCommand.ContentType(Feature.Splash)) {
-            SplashScreen(modifier = modifier)
+        composable(navItem = NavCommand.ContentType(feature = Feature.Splash)) {
+            SplashScreen(
+                modifier = modifier,
+                onSeeClicked = { id ->
+                    navController.navigate(
+                        route = NavCommand.ContentDetail(Feature.Detail).createRoute(drinkId = id.toInt())
+                    )
+                },
+                onCancelClicked = {
+                    navController.navigate(
+                        route = NavCommand.ContentType(feature = Feature.App).route,
+                        builder = {
+                            popUpTo(Feature.Splash.route) {
+                                inclusive = false
+                            }
+                        }
+                    )
+                }
+            )
+        }
+    }
+}
+
+private fun NavGraphBuilder.cocktailDetailNav(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+) {
+    navigation(
+        startDestination = NavCommand.ContentDetail(feature = Feature.Detail).route,
+        route = Feature.Detail.route
+    ) {
+        composable(navItem = NavCommand.ContentDetail(feature = Feature.Detail)) {
+            DetailDrinkScreen()
         }
     }
 }
