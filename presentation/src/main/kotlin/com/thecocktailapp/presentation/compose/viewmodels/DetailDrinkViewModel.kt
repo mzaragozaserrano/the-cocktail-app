@@ -11,10 +11,6 @@ import com.thecocktailapp.domain.usecases.GetDrinkByIdUseCaseImpl
 import com.thecocktailapp.presentation.common.utils.transform
 import com.thecocktailapp.presentation.common.vo.ErrorVO
 import com.thecocktailapp.presentation.compose.utils.navigation.NavArg
-import com.thecocktailapp.presentation.compose.viewmodels.DetailDrinkViewModel.DetailDrinkUiState.Error
-import com.thecocktailapp.presentation.compose.viewmodels.DetailDrinkViewModel.DetailDrinkUiState.Idle
-import com.thecocktailapp.presentation.compose.viewmodels.DetailDrinkViewModel.DetailDrinkUiState.Loading
-import com.thecocktailapp.presentation.compose.viewmodels.DetailDrinkViewModel.DetailDrinkUiState.Success
 import com.thecocktailapp.presentation.view.utils.transform
 import com.thecocktailapp.presentation.view.vo.DrinkVO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,7 +29,7 @@ class DetailDrinkViewModel @Inject constructor(
 
     private val id = savedStateHandle.get<Int>(NavArg.DrinkId.key) ?: 0
 
-    private val _state = MutableStateFlow<DetailDrinkUiState>(Idle)
+    private val _state = MutableStateFlow<DetailDrinkUiState>(DetailDrinkUiState.Idle)
     val state = _state.asStateFlow()
 
     init {
@@ -54,15 +50,15 @@ class DetailDrinkViewModel @Inject constructor(
         withContext(Dispatchers.Main) {
             when (result) {
                 is Result.Loading -> {
-                    _state.value = Loading
+                    _state.value = DetailDrinkUiState.Loading
                 }
 
                 is Result.Response.Error<*> -> {
-                    _state.value = Error((result.code as ErrorBO).transform())
+                    _state.value = DetailDrinkUiState.Error((result.code as ErrorBO).transform())
                 }
 
                 is Result.Response.Success -> {
-                    _state.value = Success(result.data.drinks.first().transform())
+                    _state.value = DetailDrinkUiState.Success(result.data.drinks.first().transform())
                 }
             }
         }

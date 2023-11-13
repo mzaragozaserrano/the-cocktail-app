@@ -1,4 +1,4 @@
-package com.thecocktailapp.tests
+package com.thecocktailapp.tests.common
 
 import android.content.Context
 import android.net.ConnectivityManager
