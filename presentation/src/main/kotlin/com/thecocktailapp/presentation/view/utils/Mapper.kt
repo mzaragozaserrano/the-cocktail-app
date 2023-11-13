@@ -11,7 +11,7 @@ fun DrinkBO.transform(): DrinkVO = DrinkVO(
     id = idDrink,
     ingredients = (1..15).mapNotNull { i ->
         if (!this[i]?.first.isNullOrBlank()) {
-            "${this[1]?.second} ${this[1]?.first}"
+            "${this[i]?.first} - ${this[i]?.second}"
         } else {
             null
         }
