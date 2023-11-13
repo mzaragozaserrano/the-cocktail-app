@@ -11,17 +11,17 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mzaragozaserrano.presentation.compose.components.buttons.PushedButton
 import com.mzaragozaserrano.presentation.compose.components.texts.LargeBoldText
 import com.mzaragozaserrano.presentation.compose.components.texts.NormalMediumText
 import com.thecocktailapp.presentation.common.vo.ErrorVO
-import com.thecocktailapp.presentation.compose.buttons.AnimatedPushedButton
 import com.thecocktailapp.ui.R
 
 @Composable
 fun ErrorAlert(@StringRes idMessage: Int, onRetryButtonClicked: () -> Unit) {
     AlertDialog(
         confirmButton = {
-            AnimatedPushedButton(
+            PushedButton(
                 buttonBackgroundColor = MaterialTheme.colorScheme.errorContainer,
                 textColor = MaterialTheme.colorScheme.background,
                 textId = R.string.retry_button

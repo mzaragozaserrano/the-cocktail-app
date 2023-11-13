@@ -27,11 +27,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mzaragozaserrano.presentation.compose.components.buttons.PushedButton
 import com.mzaragozaserrano.presentation.compose.components.texts.ExtraLargeBoldText
 import com.mzaragozaserrano.presentation.compose.components.texts.ExtraSmallMediumText
 import com.thecocktailapp.presentation.compose.alerts.ErrorAlert
 import com.thecocktailapp.presentation.compose.alerts.LottieProgressDialog
-import com.thecocktailapp.presentation.compose.buttons.AnimatedPushedButton
 import com.thecocktailapp.presentation.compose.images.UrlImage
 import com.thecocktailapp.presentation.compose.texts.BlinkingText
 import com.thecocktailapp.presentation.compose.viewmodels.SplashViewModel
@@ -170,7 +170,7 @@ private fun ButtonsContent(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(space = 8.dp)
     ) {
-        AnimatedPushedButton(
+        PushedButton(
             modifier = Modifier.fillMaxWidth(),
             buttonBackgroundColor = MaterialTheme.colorScheme.primary,
             textColor = MaterialTheme.colorScheme.onPrimary,
