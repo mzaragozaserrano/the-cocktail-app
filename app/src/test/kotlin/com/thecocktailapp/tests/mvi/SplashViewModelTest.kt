@@ -99,7 +99,7 @@ class SplashViewModelTest {
                 viewModel.intentFlow.emit(SplashIntent.GetRandomDrink)
                 assertEquals(SplashViewState.ShowProgressDialog, awaitItem())
                 assertEquals(
-                    SplashViewState.SetDailyDrink(
+                    SplashViewState.SetDrink(
                         DrinkVO(
                             category = "Coffee / Tea",
                             dateModified = "2015-09-03 03:09:44",
