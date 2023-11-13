@@ -8,6 +8,7 @@ import com.mzaragozaserrano.presentation.view.utils.extensions.loadImageFromUrl
 import com.mzaragozaserrano.presentation.view.utils.extensions.showProgressDialog
 import com.mzaragozaserrano.presentation.view.utils.viewBinding.viewBinding
 import com.thecocktailapp.presentation.common.utils.extensions.serializable
+import com.thecocktailapp.presentation.common.utils.extensions.showErrorAlert
 import com.thecocktailapp.presentation.view.utils.mvi.CommonIntent
 import com.thecocktailapp.presentation.view.utils.mvi.CommonViewState
 import com.thecocktailapp.presentation.view.utils.mvi.DetailDrinkIntent
@@ -54,7 +55,10 @@ class DetailDrinkFragment :
             }
 
             is DetailDrinkViewState.ShowError -> {
-
+                emitAction(CommonIntent.Idle)
+                showErrorAlert(state.idMessage) {
+                    getDrinkById()
+                }
             }
 
             is DetailDrinkViewState.SetDrink -> {

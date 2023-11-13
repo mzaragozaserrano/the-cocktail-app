@@ -73,7 +73,7 @@ fun SplashScreen(
         when (state) {
             is SplashViewModel.SplashUiState.Error -> {
                 val error = (state as SplashViewModel.SplashUiState.Error).error
-                ErrorAlert(error) {
+                ErrorAlert(idMessage = error.idMessage) {
                     viewModel.onExecuteGetRandomDrink()
                 }
             }

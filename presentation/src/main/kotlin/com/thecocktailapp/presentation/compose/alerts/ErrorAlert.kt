@@ -1,5 +1,6 @@
 package com.thecocktailapp.presentation.compose.alerts
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
@@ -17,7 +18,7 @@ import com.thecocktailapp.presentation.compose.buttons.AnimatedPushedButton
 import com.thecocktailapp.ui.R
 
 @Composable
-fun ErrorAlert(error: ErrorVO, onRetryClicked: () -> Unit) {
+fun ErrorAlert(@StringRes idMessage: Int, onRetryButtonClicked: () -> Unit) {
     AlertDialog(
         confirmButton = {
             AnimatedPushedButton(
@@ -25,7 +26,7 @@ fun ErrorAlert(error: ErrorVO, onRetryClicked: () -> Unit) {
                 textColor = MaterialTheme.colorScheme.background,
                 textId = R.string.retry_button
             ) {
-                onRetryClicked()
+                onRetryButtonClicked()
             }
         },
         containerColor = MaterialTheme.colorScheme.background,
@@ -45,7 +46,7 @@ fun ErrorAlert(error: ErrorVO, onRetryClicked: () -> Unit) {
                     .padding(horizontal = 24.dp),
                 color = colorResource(id = R.color.color_on_background),
                 maxLines = 5,
-                text = stringResource(error.idMessage),
+                text = stringResource(idMessage),
             )
         },
         onDismissRequest = { /*TODO*/ }
@@ -55,7 +56,7 @@ fun ErrorAlert(error: ErrorVO, onRetryClicked: () -> Unit) {
 @Preview
 @Composable
 private fun ErrorAlertPrev() {
-    ErrorAlert(error = ErrorVO.Connectivity) {
+    ErrorAlert(idMessage = ErrorVO.Connectivity.idMessage) {
         //Here will go the action when clicking on the button
     }
 }

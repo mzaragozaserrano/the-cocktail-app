@@ -9,6 +9,7 @@ import com.mzaragozaserrano.presentation.view.utils.extensions.hideProgressDialo
 import com.mzaragozaserrano.presentation.view.utils.extensions.loadImageFromUrl
 import com.mzaragozaserrano.presentation.view.utils.extensions.showProgressDialog
 import com.mzaragozaserrano.presentation.view.utils.viewBinding.viewBinding
+import com.thecocktailapp.presentation.common.utils.extensions.showErrorAlert
 import com.thecocktailapp.presentation.view.activities.HomeActivity
 import com.thecocktailapp.presentation.view.base.TheCocktailAppBaseActivity
 import com.thecocktailapp.presentation.view.utils.mvi.CommonIntent
@@ -70,7 +71,10 @@ class SplashFragment :
             }
 
             is SplashViewState.ShowError -> {
-
+                emitAction(CommonIntent.Idle)
+                showErrorAlert(state.idMessage) {
+                    getRandomDrink()
+                }
             }
 
             is SplashViewState.ShowProgressDialog -> {

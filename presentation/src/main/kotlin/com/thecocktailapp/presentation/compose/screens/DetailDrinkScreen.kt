@@ -78,7 +78,7 @@ fun DetailDrinkScreen(
         when (state) {
             is DetailDrinkViewModel.DetailDrinkUiState.Error -> {
                 val error = (state as DetailDrinkViewModel.DetailDrinkUiState.Error).error
-                ErrorAlert(error) {
+                ErrorAlert(idMessage = error.idMessage) {
                     viewModel.onExecuteGetDrinkById()
                 }
             }
