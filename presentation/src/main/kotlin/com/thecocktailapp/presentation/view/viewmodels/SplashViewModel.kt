@@ -8,6 +8,7 @@ import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.GetRandomDrink
 import com.thecocktailapp.presentation.common.utils.transform
+import com.thecocktailapp.presentation.common.vo.ErrorVO
 import com.thecocktailapp.presentation.view.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.view.utils.mvi.CommonResult
 import com.thecocktailapp.presentation.view.utils.mvi.CommonViewState
@@ -92,14 +93,19 @@ class SplashViewModel @Inject constructor(
 
                 is Result.Response.Success -> {
                     drink = result.data.drinks.first()
-                    SplashResult.Task.Success(SplashTask.RandomCocktailGotten(result.data.drinks.first()))
+                    SplashResult.Task.Success(SplashTask.DrinkGotten(result.data.drinks.first()))
                 }
             }
         }
 
     private fun onNavigate(action: SplashAction.TaskForNavigate) = when (action) {
         is SplashAction.TaskForNavigate.ToDrinkDetail -> {
-            SplashResult.Task.Success(NavigateToDrinkDetail).toFlowResult()
+            val id = drink?.idDrink
+            if (id != null) {
+                SplashResult.Task.Success(NavigateToDrinkDetail(id.toInt())).toFlowResult()
+            } else {
+                SplashResult.Task.Error(ErrorVO.DataNotFound).toFlowResult()
+            }
         }
 
         is SplashAction.TaskForNavigate.ToMain -> {

@@ -12,6 +12,19 @@
         <action
             android:id="@+id/action_SplashFragment_to_CocktailFragment"
             app:destination="@id/CocktailFragment" />
+        <action
+            android:id="@+id/action_SplashFragment_to_DetailDrinkFragment"
+            app:destination="@id/DetailDrinkFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DetailDrinkFragment"
+        android:name="com.thecocktailapp.presentation.view.fragments.DetailDrinkFragment"
+        android:label="fragment_detail_drink"
+        tools:layout="@layout/fragment_detail_drink" >
+        <action
+            android:id="@+id/action_DetailDrinkFragment_to_CocktailFragment"
+            app:destination="@id/CocktailFragment" />
     </fragment>
 
     <fragment

@@ -2,11 +2,11 @@ package com.thecocktailapp.presentation.view.fragments
 
 import androidx.fragment.app.viewModels
 import com.mzaragozaserrano.presentation.databinding.CoreToolbarMenuBinding
+import com.mzaragozaserrano.presentation.view.base.BaseFragment
 import com.mzaragozaserrano.presentation.view.utils.extensions.setUpMenuToolbar
 import com.mzaragozaserrano.presentation.view.utils.extensions.showProgressDialog
 import com.mzaragozaserrano.presentation.view.utils.viewBinding.viewBinding
 import com.thecocktailapp.presentation.view.activities.KotlinActivity
-import com.thecocktailapp.presentation.view.base.TheCocktailAppBaseFragment
 import com.thecocktailapp.presentation.view.utils.mvi.CocktailIntent
 import com.thecocktailapp.presentation.view.utils.mvi.CocktailViewState
 import com.thecocktailapp.presentation.view.utils.mvi.CommonIntent
@@ -18,8 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CocktailFragment :
-    TheCocktailAppBaseFragment<CocktailViewState, CocktailIntent, FragmentCocktailBinding, CocktailViewModel>(
-        layout = R.layout.fragment_cocktail, allowGoBack = true
+    BaseFragment<CocktailViewState, CocktailIntent, FragmentCocktailBinding, CocktailViewModel>(
+        layout = R.layout.fragment_cocktail
     ) {
 
     override val viewModel: CocktailViewModel by viewModels()
@@ -51,8 +51,6 @@ class CocktailFragment :
             }
         }
     }
-
-    //TODO(El icono de la navegacion lo quiero en otro color, ver como se puede controlar los tamaños de las cosas)
 
     private fun initView() {
         setUpToolbar()

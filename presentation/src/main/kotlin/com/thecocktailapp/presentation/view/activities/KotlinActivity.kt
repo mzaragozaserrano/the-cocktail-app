@@ -84,7 +84,7 @@ class KotlinActivity :
             }
 
             is KotlinViewState.Navigate.ToCocktailFragment -> {
-                startNavigationFrom(R.id.SplashFragment)
+                startNavigationFrom(R.id.CocktailFragment)
             }
 
             is KotlinViewState.Navigate.ToSplashFragment -> {

@@ -1,6 +1,6 @@
 package com.thecocktailapp.presentation.view.utils.mvi
 
-sealed class CommonIntent : HomeIntent, KotlinIntent, SplashIntent, CocktailIntent {
+sealed class CommonIntent : HomeIntent, KotlinIntent, SplashIntent, CocktailIntent, DetailDrinkIntent {
     object Idle : CommonIntent()
     data class Init(val refresh: Boolean = false) : CommonIntent()
 }
@@ -21,3 +21,7 @@ sealed interface SplashIntent  {
 }
 
 sealed interface CocktailIntent
+
+sealed interface DetailDrinkIntent {
+    data class GetDrinkById(val id: Int): DetailDrinkIntent
+}

@@ -1,0 +1,96 @@
+package com.thecocktailapp.presentation.view.viewmodels
+
+import androidx.lifecycle.viewModelScope
+import com.mzaragozaserrano.domain.utils.Result
+import com.mzaragozaserrano.domain.utils.extension.toFlowResult
+import com.mzaragozaserrano.presentation.view.base.MVIViewModel
+import com.thecocktailapp.domain.bo.DrinkBO
+import com.thecocktailapp.domain.bo.ErrorBO
+import com.thecocktailapp.domain.usecases.GetDrinkById
+import com.thecocktailapp.domain.usecases.GetDrinkByIdUseCaseImpl
+import com.thecocktailapp.presentation.common.utils.transform
+import com.thecocktailapp.presentation.view.utils.mvi.CommonAction
+import com.thecocktailapp.presentation.view.utils.mvi.CommonResult
+import com.thecocktailapp.presentation.view.utils.mvi.CommonViewState
+import com.thecocktailapp.presentation.view.utils.mvi.DetailDrinkAction
+import com.thecocktailapp.presentation.view.utils.mvi.DetailDrinkIntent
+import com.thecocktailapp.presentation.view.utils.mvi.DetailDrinkResult
+import com.thecocktailapp.presentation.view.utils.mvi.DetailDrinkTask
+import com.thecocktailapp.presentation.view.utils.mvi.DetailDrinkViewState
+import com.thecocktailapp.presentation.view.utils.mvi.mapToAction
+import com.thecocktailapp.presentation.view.utils.mvi.mapToState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class DetailDrinkViewModel @Inject constructor(
+    private val getDrinkById: @JvmSuppressWildcards GetDrinkById,
+) : MVIViewModel<DetailDrinkViewState, DetailDrinkIntent>() {
+
+    private var drink: DrinkBO? = null
+
+    init {
+        handleIntent()
+    }
+
+    override fun createInitialState(): DetailDrinkViewState = CommonViewState.Initialized()
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun handleIntent() {
+        viewModelScope.launch {
+            intentFlow
+                .map { it.mapToAction() }
+                .flatMapLatest { processAction(it) }
+                .collect { collectState(it.mapToState()) }
+        }
+    }
+
+    private suspend fun processAction(action: DetailDrinkAction) = when (action) {
+        is CommonAction.Init -> {
+            onInit()
+        }
+
+        is CommonAction.Idle -> {
+            onIdle()
+        }
+
+        is DetailDrinkAction.Task -> {
+            onExecuteTask(action)
+        }
+
+    }
+
+    private fun onInit() = DetailDrinkResult.Init(drink).toFlowResult()
+
+    private fun onIdle() = CommonResult.Idle.toFlowResult()
+
+    private suspend fun onExecuteTask(task: DetailDrinkAction.Task) = when (task) {
+        is DetailDrinkAction.Task.GetDrinkById -> {
+            onExecuteGetRandomDrink(id = task.id)
+        }
+    }
+
+    private suspend fun onExecuteGetRandomDrink(id: Int): Flow<DetailDrinkResult> =
+        getDrinkById(GetDrinkByIdUseCaseImpl.Params(id = id)).map { result ->
+            when (result) {
+                is Result.Loading -> {
+                    DetailDrinkResult.Task.Loading
+                }
+
+                is Result.Response.Error<*> -> {
+                    DetailDrinkResult.Task.Error((result.code as ErrorBO).transform())
+                }
+
+                is Result.Response.Success -> {
+                    drink = result.data.drinks.first()
+                    DetailDrinkResult.Task.Success(DetailDrinkTask.DrinkGotten(result.data.drinks.first()))
+                }
+            }
+        }
+
+}

@@ -152,7 +152,7 @@ private fun IngredientsContent(
                 text = stringResource(R.string.title_ingredients)
             )
         }
-        ingredients.forEachIndexed { index, value ->
+        ingredients.forEachIndexed { index, ingredient ->
             AnimatedVisibility(
                 visible = showInstructions,
                 enter =
@@ -166,7 +166,7 @@ private fun IngredientsContent(
                         .fillMaxWidth()
                         .padding(horizontal = 24.dp),
                     color = MaterialTheme.colorScheme.onBackground,
-                    text = value
+                    text = ingredient
                 )
             }
         }

@@ -1,6 +1,6 @@
 package com.thecocktailapp.presentation.view.utils.mvi
 
-sealed class CommonAction : HomeAction, KotlinAction, SplashAction, CocktailAction {
+sealed class CommonAction : HomeAction, KotlinAction, SplashAction, CocktailAction, DetailDrinkAction {
     object Idle : CommonAction()
     data class Init(val refresh: Boolean) : CommonAction()
 }
@@ -29,3 +29,10 @@ sealed interface SplashAction {
 }
 
 sealed interface CocktailAction
+
+sealed interface DetailDrinkAction {
+    sealed class Task : DetailDrinkAction {
+        data class GetDrinkById(val id: Int) : Task()
+    }
+
+}

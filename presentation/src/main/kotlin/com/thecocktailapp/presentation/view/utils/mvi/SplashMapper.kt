@@ -36,15 +36,15 @@ fun SplashResult.mapToState(): SplashViewState =
         is SplashResult.Task.Success -> {
             when (task) {
                 is SplashTask.NavigateToDrinkDetail -> {
-                    SplashViewState.Navigate.ToDrinkDetail
+                    SplashViewState.Navigate.ToDrinkDetail(id = task.id)
                 }
 
                 is SplashTask.NavigateToCocktailFragment -> {
                     SplashViewState.Navigate.ToCocktailFragment
                 }
 
-                is SplashTask.RandomCocktailGotten -> {
-                    SplashViewState.SetDailyDrink(drink = task.drink.transform())
+                is SplashTask.DrinkGotten -> {
+                    SplashViewState.SetDrink(drink = task.drink.transform())
                 }
             }
         }

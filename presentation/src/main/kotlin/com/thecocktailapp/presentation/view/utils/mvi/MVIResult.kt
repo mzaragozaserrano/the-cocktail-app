@@ -4,7 +4,8 @@ import com.mzaragozaserrano.presentation.view.vo.MinimalButtonVO
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.presentation.common.vo.ErrorVO
 
-sealed class CommonResult : HomeResult, KotlinResult, SplashResult, CocktailResult {
+sealed class CommonResult : HomeResult, KotlinResult, SplashResult, CocktailResult,
+    DetailDrinkResult {
     object Idle : CommonResult()
 }
 
@@ -15,12 +16,12 @@ sealed interface HomeResult {
     ) : HomeResult
 
     sealed class Task : HomeResult {
-        data class Success (val task: HomeTask): Task()
+        data class Success(val task: HomeTask) : Task()
     }
 
 }
 
-sealed class HomeTask  {
+sealed class HomeTask {
     object NavigateToComposeModule : HomeTask()
     object NavigateToKotlinModule : HomeTask()
 }
@@ -32,9 +33,9 @@ sealed interface KotlinResult {
     }
 }
 
-sealed class KotlinTask  {
-    object NavigateToCocktailFragment: KotlinTask()
-    object NavigateToSplashFragment: KotlinTask()
+sealed class KotlinTask {
+    object NavigateToCocktailFragment : KotlinTask()
+    object NavigateToSplashFragment : KotlinTask()
 }
 
 sealed interface SplashResult {
@@ -46,10 +47,10 @@ sealed interface SplashResult {
     }
 }
 
-sealed class SplashTask  {
-    object NavigateToDrinkDetail: SplashTask()
-    object NavigateToCocktailFragment: SplashTask()
-    data class RandomCocktailGotten(val drink: DrinkBO): SplashTask()
+sealed class SplashTask {
+    data class NavigateToDrinkDetail(val id: Int) : SplashTask()
+    object NavigateToCocktailFragment : SplashTask()
+    data class DrinkGotten(val drink: DrinkBO) : SplashTask()
 }
 
 sealed interface CocktailResult {
@@ -58,4 +59,17 @@ sealed interface CocktailResult {
         object Loading : Task()
         data class Error(val error: ErrorVO) : Task()
     }
+}
+
+sealed interface DetailDrinkResult {
+    data class Init(val drink: DrinkBO?) : DetailDrinkResult
+    sealed class Task : DetailDrinkResult {
+        object Loading : Task()
+        data class Error(val error: ErrorVO) : Task()
+        data class Success(val task: DetailDrinkTask) : Task()
+    }
+}
+
+sealed class DetailDrinkTask {
+    data class DrinkGotten(val drink: DrinkBO) : DetailDrinkTask()
 }
