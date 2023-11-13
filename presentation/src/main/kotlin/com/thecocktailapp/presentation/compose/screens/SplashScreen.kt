@@ -1,10 +1,5 @@
 package com.thecocktailapp.presentation.compose.screens
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,9 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mzaragozaserrano.presentation.compose.components.texts.ExtraLargeBoldText
 import com.mzaragozaserrano.presentation.compose.components.texts.ExtraSmallMediumText
+import com.thecocktailapp.presentation.compose.alerts.ErrorAlert
 import com.thecocktailapp.presentation.compose.alerts.LottieProgressDialog
 import com.thecocktailapp.presentation.compose.buttons.AnimatedPushedButton
 import com.thecocktailapp.presentation.compose.images.UrlImage
@@ -43,7 +37,6 @@ import com.thecocktailapp.presentation.compose.texts.BlinkingText
 import com.thecocktailapp.presentation.compose.viewmodels.SplashViewModel
 import com.thecocktailapp.presentation.view.vo.DrinkVO
 import com.thecocktailapp.ui.R
-import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
@@ -56,14 +49,6 @@ fun SplashScreen(
     val state by viewModel.state.collectAsState()
     var name by remember { mutableStateOf("") }
     var urlImage by remember { mutableStateOf("") }
-    var showName by remember { mutableStateOf(false) }
-
-    LaunchedEffect(name) {
-        if (name.isNotEmpty()) {
-            delay(1000)
-            showName = true
-        }
-    }
 
     Column(modifier = modifier) {
         Column(
@@ -82,13 +67,15 @@ fun SplashScreen(
                     .fillMaxWidth()
                     .weight(weight = 1f)
                     .background(color = MaterialTheme.colorScheme.primary),
-                name = name,
-                showName = showName
+                name = name
             )
         }
         when (state) {
             is SplashViewModel.SplashUiState.Error -> {
-                Text(stringResource((state as SplashViewModel.SplashUiState.Error).error.idMessage))
+                val error = (state as SplashViewModel.SplashUiState.Error).error
+                ErrorAlert(error) {
+                    viewModel.onExecuteGetRandomDrink()
+                }
             }
 
             is SplashViewModel.SplashUiState.Idle -> {}
@@ -123,8 +110,8 @@ private fun HeaderContent(modifier: Modifier = Modifier, urlImage: String) {
     ) {
         UrlImage(
             modifier = Modifier
-                .aspectRatio(1f)
-                .padding(all = 24.dp),
+                .padding(all = 24.dp)
+                .aspectRatio(1f),
             cornerRadius = 8.dp,
             url = urlImage
         )
@@ -132,7 +119,7 @@ private fun HeaderContent(modifier: Modifier = Modifier, urlImage: String) {
 }
 
 @Composable
-private fun InfoContent(modifier: Modifier = Modifier, name: String, showName: Boolean) {
+private fun InfoContent(modifier: Modifier = Modifier, name: String) {
     Card(
         modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
@@ -147,28 +134,11 @@ private fun InfoContent(modifier: Modifier = Modifier, name: String, showName: B
             verticalArrangement = Arrangement.spacedBy(space = 6.dp)
         ) {
             if (name.isNotEmpty()) {
-                AnimatedContent(
-                    targetState = showName,
-                    transitionSpec = {
-                        (slideInHorizontally(
-                            initialOffsetX = { it },
-                            animationSpec = tween(600)
-                        ).togetherWith(
-                            slideOutHorizontally(
-                                targetOffsetX = { it },
-                                animationSpec = tween(600)
-                            )
-                        ))
-                    }, label = ""
-                ) { targetShowName ->
-                    if (targetShowName) {
-                        ExtraSmallMediumText(
-                            modifier = Modifier.fillMaxWidth(),
-                            color = colorResource(id = R.color.color_secondary_text_highlight),
-                            text = name
-                        )
-                    }
-                }
+                ExtraSmallMediumText(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = colorResource(id = R.color.color_secondary_text_highlight),
+                    text = name
+                )
                 ExtraLargeBoldText(
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.onBackground,

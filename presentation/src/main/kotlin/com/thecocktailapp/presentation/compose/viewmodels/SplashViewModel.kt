@@ -8,10 +8,6 @@ import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.GetRandomDrink
 import com.thecocktailapp.presentation.common.utils.transform
 import com.thecocktailapp.presentation.common.vo.ErrorVO
-import com.thecocktailapp.presentation.compose.viewmodels.SplashViewModel.SplashUiState.Error
-import com.thecocktailapp.presentation.compose.viewmodels.SplashViewModel.SplashUiState.Idle
-import com.thecocktailapp.presentation.compose.viewmodels.SplashViewModel.SplashUiState.Loading
-import com.thecocktailapp.presentation.compose.viewmodels.SplashViewModel.SplashUiState.Success
 import com.thecocktailapp.presentation.view.utils.transform
 import com.thecocktailapp.presentation.view.vo.DrinkVO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,10 +23,14 @@ class SplashViewModel @Inject constructor(
     val getRandomDrink: @JvmSuppressWildcards GetRandomDrink,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<SplashUiState>(Idle)
+    private val _state = MutableStateFlow<SplashUiState>(SplashUiState.Idle)
     val state = _state.asStateFlow()
 
     init {
+        onExecuteGetRandomDrink()
+    }
+
+    fun onExecuteGetRandomDrink() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 getRandomDrink().collect(::handleRandomDrinkResponse)
@@ -42,15 +42,15 @@ class SplashViewModel @Inject constructor(
         withContext(Dispatchers.Main) {
             when (result) {
                 is Result.Loading -> {
-                    _state.value = Loading
+                    _state.value = SplashUiState.Loading
                 }
 
                 is Result.Response.Error<*> -> {
-                    _state.value = Error((result.code as ErrorBO).transform())
+                    _state.value = SplashUiState.Error((result.code as ErrorBO).transform())
                 }
 
                 is Result.Response.Success -> {
-                    _state.value = Success(result.data.drinks.first().transform())
+                    _state.value = SplashUiState.Success(result.data.drinks.first().transform())
                 }
             }
         }

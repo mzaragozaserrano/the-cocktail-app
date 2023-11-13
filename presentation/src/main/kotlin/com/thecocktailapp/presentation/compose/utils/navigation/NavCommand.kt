@@ -5,20 +5,21 @@ import androidx.navigation.navArgument
 
 sealed class NavCommand(
     internal val feature: Feature,
-    internal val subRoute: String = "home",
+    internal val navRoute: String = "home",
     private val navArgs: List<NavArg> = emptyList(),
 ) {
 
-    class ContentType(feature: Feature) : NavCommand(feature)
-    class ContentDetail(feature: Feature) : NavCommand(feature, "detail", listOf(NavArg.DrinkId)) {
-        fun createRoute(drinkId: Int) = "${feature.route}/$subRoute/$drinkId"
+    class Content(feature: Feature) :
+        NavCommand(feature = feature, navArgs = listOf(NavArg.DrinkId)) {
+        fun createRoute(drinkId: Int) = "$navRoute/${feature.route}/$drinkId"
     }
+    class Home(feature: Feature) : NavCommand(feature)
 
     val route = run {
         val argKeys = navArgs.map {
             "{${it.key}}"
         }
-        listOf(feature.route, subRoute).plus(argKeys).joinToString("/")
+        listOf(navRoute, feature.route).plus(argKeys).joinToString("/")
     }
 
     val args = navArgs.map {

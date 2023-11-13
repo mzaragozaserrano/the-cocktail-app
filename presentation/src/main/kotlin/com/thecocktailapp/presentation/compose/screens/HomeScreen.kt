@@ -11,12 +11,13 @@ import com.thecocktailapp.presentation.compose.utils.navigation.Navigation
 import com.thecocktailapp.presentation.compose.viewmodels.ComposeViewModel
 
 @Composable
-fun ComposeScreen(modifier: Modifier = Modifier, viewModel: ComposeViewModel = hiltViewModel()) {
+fun HomeScreen(modifier: Modifier = Modifier, viewModel: ComposeViewModel = hiltViewModel()) {
 
     val navController = rememberNavController()
     val state by viewModel.state.collectAsState()
 
     Navigation(
+        modifier = modifier,
         navController = navController,
         startDestination = if (state.showRandomDrink) Feature.Splash.route else Feature.App.route
     )
