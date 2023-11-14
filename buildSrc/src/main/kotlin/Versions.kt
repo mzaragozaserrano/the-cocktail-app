@@ -17,6 +17,7 @@ object Versions {
     const val moshiVersion = "1.15.0"
     const val navigationVersion = "2.7.5"
     const val navigationComposeVersion = "2.7.5"
+    const val okHttp3Version = "4.12.0"
 
     //----- TESTING ----------/
     const val testingCoroutinesVersion = "1.7.3"
