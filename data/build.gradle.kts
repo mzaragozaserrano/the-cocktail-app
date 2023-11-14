@@ -8,6 +8,7 @@ plugins {
 }
 
 android {
+
     namespace = "com.mzaragozaserrano.data"
     compileSdk = 33
 
@@ -27,13 +28,16 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
+
 }
 
 dependencies {
@@ -57,6 +61,6 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:${Versions.moshiVersion}")
 
     //----- OKHTTP ----------/
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.okhttp3:okhttp:${Versions.okHttp3Version}")
 
 }

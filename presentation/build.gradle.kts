@@ -8,6 +8,7 @@ plugins {
 }
 
 android {
+
     namespace = "com.thecocktailapp.ui"
     compileSdk = 34
 
@@ -25,20 +26,37 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
+
     buildFeatures {
         compose = true
         viewBinding = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
+
+    flavorDimensions += "architecture"
+
+    productFlavors {
+        create("mvi") {
+            dimension = "architecture"
+        }
+
+        create("mvvm") {
+            dimension = "architecture"
+        }
+    }
+
 }
 
 dependencies {
