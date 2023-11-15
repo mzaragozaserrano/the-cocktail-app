@@ -76,8 +76,8 @@ Welcome to The Cocktail App, a versatile beverage and cocktail application that 
 1. Clone the repository: `git clone https://github.com/mzaragozaserrano/the-cocktail-app.git`
 2. Open the project in your preferred IDE.
 3. Choose the architecture flavor:
-   - For the MVI architecture combined with XML-based views, select the `mvi-xml` flavor.
-   - For the MVVM architecture with Jetpack Compose, select the `mvvm-compose` flavor.
+   - For the MVI architecture combined with XML-based views, select the `mvi` flavor.
+   - For the MVVM architecture with Jetpack Compose, select the `mvvm` flavor.
 4. Build and run the application.
 5. In the main view, you can select the desired version of The Cocktail App.
 
