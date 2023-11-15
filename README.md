@@ -58,18 +58,18 @@ Welcome to The Cocktail App, a versatile beverage and cocktail application that 
 
 - **Coil**
   - Utilizes Coil for efficient image loading and display within Jetpack Compose.
-- **Glide**
-  - Employs Glide for seamless image loading and handling in the XML-based version.
-- **Turbine**
-  - Incorporates Turbine for testing MutableStateFlow, following best practices outlined in the [Android Developer documentation](https://developer.android.com/kotlin/flow/test?hl=es-419).
 - **Coroutines**
   - Implements coroutines for asynchronous programming, enhancing the app's responsiveness.
+- **Glide**
+  - Employs Glide for seamless image loading and handling in the XML-based version.
 - **Lottie**
   - Integrates Lottie for high-quality animations, adding flair to The Cocktail App.
 - **Moshi**
   - Uses Moshi for transforming JSON into DTOs for seamless data handling.
 - **OkHTTP3**
   - Utilizes OkHTTP3 for creating efficient network operations and handling URL requests.
+- **Turbine**
+  - Incorporates Turbine for testing MutableStateFlow, following best practices outlined in the [Android Developer documentation](https://developer.android.com/kotlin/flow/test?hl=es-419).
 
 ## Getting Started
 
