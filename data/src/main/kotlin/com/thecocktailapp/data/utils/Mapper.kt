@@ -6,57 +6,60 @@ import com.thecocktailapp.data.dto.ErrorDTO
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
+import java.util.Locale
 
-fun CocktailDTO.transform(): CocktailBO = CocktailBO(drinks = drinks.map { it.transform() })
+fun CocktailDTO.transform(): CocktailBO =
+    CocktailBO(drinks = drinks?.map { it.transform() }.orEmpty())
 
 fun DrinkDTO.transform(): DrinkBO = DrinkBO(
-    dateModified = dateModified,
-    idDrink = idDrink,
-    strAlcoholic = strAlcoholic,
-    strCategory = strCategory,
-    strCreativeCommonsConfirmed = strCreativeCommonsConfirmed,
-    strDrink = strDrink,
-    strDrinkAlternate = strDrinkAlternate,
-    strDrinkThumb = strDrinkThumb,
-    strGlass = strGlass,
-    strIBA = strIBA,
-    strImageAttribution = strImageAttribution,
-    strImageSource = strImageSource,
-    strIngredient1 = strIngredient1,
-    strIngredient2 = strIngredient2,
-    strIngredient3 = strIngredient3,
-    strIngredient4 = strIngredient4,
-    strIngredient5 = strIngredient5,
-    strIngredient6 = strIngredient6,
-    strIngredient7 = strIngredient7,
-    strIngredient8 = strIngredient8,
-    strIngredient9 = strIngredient9,
-    strIngredient10 = strIngredient10,
-    strIngredient11 = strIngredient11,
-    strIngredient12 = strIngredient12,
-    strIngredient13 = strIngredient13,
-    strIngredient14 = strIngredient14,
-    strIngredient15 = strIngredient15,
-    strInstructions = strInstructions,
-    strInstructionsDE = strInstructionsDE,
-    strInstructionsES = strInstructionsES,
-    strInstructionsFR = strInstructionsFR,
-    strInstructionsIT = strInstructionsIT,
-    strMeasure1 = strMeasure1,
-    strMeasure2 = strMeasure2,
-    strMeasure3 = strMeasure3,
-    strMeasure4 = strMeasure4,
-    strMeasure5 = strMeasure5,
-    strMeasure6 = strMeasure6,
-    strMeasure7 = strMeasure7,
-    strMeasure8 = strMeasure8,
-    strMeasure9 = strMeasure9,
-    strMeasure10 = strMeasure10,
-    strMeasure11 = strMeasure11,
-    strMeasure12 = strMeasure12,
-    strMeasure13 = strMeasure13,
-    strMeasure14 = strMeasure14,
-    strMeasure15 = strMeasure15
+    category = strCategory.orEmpty(),
+    dateModified = dateModified.orEmpty(),
+    id = idDrink.orEmpty(),
+    instructions = when (Locale.getDefault().language) {
+        "es" -> strInstructionsES ?: strInstructions
+        "fr" -> strInstructionsFR ?: strInstructions
+        "de" -> strInstructionsDE ?: strInstructions
+        "it" -> strInstructionsIT
+        else -> strInstructions
+    }.orEmpty(),
+    isAlcoholic = strAlcoholic == "Alcoholic",
+    glass = strGlass.orEmpty(),
+    listIngredients = listOf(
+        strIngredient1.orEmpty(),
+        strIngredient2.orEmpty(),
+        strIngredient3.orEmpty(),
+        strIngredient4.orEmpty(),
+        strIngredient5.orEmpty(),
+        strIngredient6.orEmpty(),
+        strIngredient7.orEmpty(),
+        strIngredient8.orEmpty(),
+        strIngredient9.orEmpty(),
+        strIngredient10.orEmpty(),
+        strIngredient11.orEmpty(),
+        strIngredient12.orEmpty(),
+        strIngredient13.orEmpty(),
+        strIngredient14.orEmpty(),
+        strIngredient15.orEmpty()
+    ),
+    listMeasures = listOf(
+        strMeasure1.orEmpty(),
+        strMeasure2.orEmpty(),
+        strMeasure3.orEmpty(),
+        strMeasure4.orEmpty(),
+        strMeasure5.orEmpty(),
+        strMeasure6.orEmpty(),
+        strMeasure7.orEmpty(),
+        strMeasure8.orEmpty(),
+        strMeasure9.orEmpty(),
+        strMeasure10.orEmpty(),
+        strMeasure11.orEmpty(),
+        strMeasure12.orEmpty(),
+        strMeasure13.orEmpty(),
+        strMeasure14.orEmpty(),
+        strMeasure15.orEmpty()
+    ),
+    name = strDrink.orEmpty(),
+    urlImage = strDrinkThumb.orEmpty()
 )
 
 fun ErrorDTO.transform(): ErrorBO = when (this) {

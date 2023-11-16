@@ -4,7 +4,6 @@ import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO
-import java.util.Locale
 
 fun ErrorBO.transform(): ErrorVO = when (this) {
     is ErrorBO.Basic -> ErrorVO.Basic(id = id)
@@ -16,25 +15,28 @@ fun ErrorBO.transform(): ErrorVO = when (this) {
 }
 
 fun DrinkBO.transform(): DrinkVO = DrinkVO(
-    category = strCategory,
+    category = category,
     dateModified = dateModified,
-    glass = strGlass,
-    id = idDrink,
-    ingredients = (1..15).mapNotNull { i ->
-        if (!this[i]?.first.isNullOrBlank()) {
-            "${this[i]?.first} - ${this[i]?.second}"
-        } else {
-            null
-        }
-    },
-    isAlcoholic = strAlcoholic == "Alcoholic",
-    name = strDrink,
-    instructions = when (Locale.getDefault().language) {
-        "es" -> strInstructionsES ?: strInstructions
-        "fr" -> strInstructionsFR ?: strInstructions
-        "de" -> strInstructionsDE ?: strInstructions
-        "it" -> strInstructionsIT
-        else -> strInstructions
-    },
-    urlImage = strDrinkThumb
+    glass = glass,
+    id = id,
+    ingredients = createFormattedIngredients(
+        ingredients = listIngredients,
+        measures = listMeasures
+    ),
+    isAlcoholic = isAlcoholic,
+    name = name,
+    instructions = instructions,
+    urlImage = urlImage
 )
+
+fun createFormattedIngredients(ingredients: List<String>, measures: List<String>): List<String> {
+    val list = mutableListOf<String>()
+    (0..14).forEach { index ->
+        val ingredient = ingredients[index]
+        val measure = measures[index]
+        if (ingredient.isNotEmpty() && measure.isNotEmpty()) {
+            list.add("$ingredient - $measure")
+        }
+    }
+    return list
+}

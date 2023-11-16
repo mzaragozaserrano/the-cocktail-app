@@ -7,8 +7,6 @@ import com.mzaragozaserrano.presentation.view.base.MVIViewModel
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.GetRandomDrink
-import com.thecocktailapp.presentation.utils.transform
-import com.thecocktailapp.presentation.vo.ErrorVO
 import com.thecocktailapp.presentation.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.utils.mvi.CommonResult
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
@@ -21,6 +19,8 @@ import com.thecocktailapp.presentation.utils.mvi.SplashTask.NavigateToDrinkDetai
 import com.thecocktailapp.presentation.utils.mvi.SplashViewState
 import com.thecocktailapp.presentation.utils.mvi.mapToAction
 import com.thecocktailapp.presentation.utils.mvi.mapToState
+import com.thecocktailapp.presentation.utils.transform
+import com.thecocktailapp.presentation.vo.ErrorVO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -100,7 +100,7 @@ class SplashViewModel @Inject constructor(
 
     private fun onNavigate(action: SplashAction.TaskForNavigate) = when (action) {
         is SplashAction.TaskForNavigate.ToDrinkDetail -> {
-            val id = drink?.idDrink
+            val id = drink?.id
             if (id != null) {
                 SplashResult.Task.Success(NavigateToDrinkDetail(id.toInt())).toFlowResult()
             } else {

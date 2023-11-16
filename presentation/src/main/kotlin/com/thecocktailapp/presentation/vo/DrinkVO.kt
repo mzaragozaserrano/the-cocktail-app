@@ -7,9 +7,9 @@ data class DrinkVO(
     val dateModified: String?,
     val glass: String,
     val id: String,
-    val isAlcoholic: Boolean,
-    val name: String,
     val ingredients: List<String>,
     val instructions: String,
+    val isAlcoholic: Boolean,
+    val name: String,
     val urlImage: String,
 ) : Serializable
