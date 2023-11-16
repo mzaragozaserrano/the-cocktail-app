@@ -1,10 +1,8 @@
-import buildSrc.src.main.kotlin.Versions
-
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -69,35 +67,34 @@ dependencies {
     implementation(project(":domain"))
 
     //----- ANDROIDX ----------/
-    implementation("androidx.core:core-ktx:${Versions.androidxCoreVersion}")
-    implementation("androidx.appcompat:appcompat:${Versions.appCompatVersion}")
-    implementation("androidx.navigation:navigation-ui-ktx:${Versions.navigationVersion}")
-    implementation("androidx.navigation:navigation-fragment-ktx:${Versions.navigationVersion}")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.navigation.fragment.ktx)
+
+    //----- COIL ----------/
+    implementation(libs.coil.kt.compose)
 
     //----- COMPOSE ----------/
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("io.coil-kt:coil-compose:${Versions.coilCompose}")
-    implementation("com.airbnb.android:lottie-compose:${Versions.lottieComposeVersion}")
-    implementation("androidx.hilt:hilt-navigation-compose:${Versions.hiltComposeVersion}")
-    implementation("androidx.navigation:navigation-compose:${Versions.navigationComposeVersion}")
-    implementation("androidx.compose.runtime:runtime-livedata:${Versions.liveDataComposeVersion}")
-    implementation(platform("androidx.compose:compose-bom:${Versions.composeVersion}"))
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.androidx.compose.ui.util)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.navigation.compose)
 
     //----- DAGGER ----------/
-    implementation("com.google.dagger:hilt-android:${Versions.hiltVersion}")
-    kapt("com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}")
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     //----- GLIDE ----------/
-    implementation("com.github.bumptech.glide:glide:${Versions.glideVersion}")
+    implementation(libs.glide)
 
     //-----  LOTTIE ----------/
-    implementation("com.airbnb.android:lottie:${Versions.lottieVersion}")
+    implementation(libs.lottie)
+    implementation(libs.lottie.compose)
 
     //----- MATERIAL ----------/
-    implementation("com.google.android.material:material:${Versions.materialVersion}")
+    implementation(libs.material3)
 
 }

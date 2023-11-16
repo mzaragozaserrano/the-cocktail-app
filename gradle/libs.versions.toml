@@ -1,0 +1,101 @@
+[versions]
+androidGradlePlugin = "8.1.2"
+androidxActivity = "1.8.0"
+androidxCore = "1.12.0"
+androidxAppCompat = "1.6.1"
+androidxComposeBom = "2023.10.01"
+androidxHiltNavigationCompose = "1.1.0"
+androidxNavigationCompose = "2.7.5"
+androidxNavigationFragment = "2.7.5"
+androidXNavigation = "2.7.5"
+coil = "2.5.0"
+glide = "4.11.0"
+hilt = "2.48.1"
+hiltCompose = "1.1.0"
+kotlin = "1.8.10"
+kotlinxCoroutines = "1.7.3"
+ksp = "1.8.10-1.0.9"
+liveDataCompose = "1.5.4"
+lottie = "6.1.0"
+material = "1.10.0"
+moshi = "1.15.0"
+okhttp = "4.12.0"
+# TESTING
+testingMockito = "3.11.2"
+testingTurbine = "1.0.0"
+
+[libraries]
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigationCompose" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "androidxNavigationFragment" }
+coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
+material3 = { group = "com.google.android.material", name = "material", version.ref = "material" }
+moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "testingMockito" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "testingTurbine" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+
+#android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+#android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
+#androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
+#firebase-crashlytics-gradlePlugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
+#firebase-performance-gradlePlugin = { group = "com.google.firebase", name = "perf-plugin", version.ref = "firebasePerfPlugin" }
+#kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+#ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+#work-testing = { group = "androidx.work", name = "work-testing", version = "2.8.1" }
+#
+#android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+#android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+#android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
+#baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidxMacroBenchmark"}
+#firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
+#firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfPlugin" }
+#gms = { id = "com.google.gms.google-services", version.ref = "gmsPlugin" }
+#hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+#kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+#kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+#ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+#protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+#roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
+#secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
+#
+# Plugins defined by this project
+#nowinandroid-android-application = { id = "nowinandroid.android.application", version = "unspecified" }
+#nowinandroid-android-application-compose = { id = "nowinandroid.android.application.compose", version = "unspecified" }
+#nowinandroid-android-application-firebase = { id = "nowinandroid.android.application.firebase", version = "unspecified" }
+#nowinandroid-android-application-flavors = { id = "nowinandroid.android.application.flavors", version = "unspecified" }
+#nowinandroid-android-application-jacoco = { id = "nowinandroid.android.application.jacoco", version = "unspecified" }
+#nowinandroid-android-feature = { id = "nowinandroid.android.feature", version = "unspecified" }
+#nowinandroid-android-hilt = { id = "nowinandroid.android.hilt", version = "unspecified" }
+#nowinandroid-android-library = { id = "nowinandroid.android.library", version = "unspecified" }
+#nowinandroid-android-library-compose = { id = "nowinandroid.android.library.compose", version = "unspecified" }
+#nowinandroid-android-library-jacoco = { id = "nowinandroid.android.library.jacoco", version = "unspecified" }
+#nowinandroid-android-lint = { id = "nowinandroid.android.lint", version = "unspecified" }
+#nowinandroid-android-room = { id = "nowinandroid.android.room", version = "unspecified" }
+#nowinandroid-android-test = { id = "nowinandroid.android.test", version = "unspecified" }
+#nowinandroid-jvm-library = { id = "nowinandroid.jvm.library", version = "unspecified" }

@@ -1,10 +1,8 @@
-import buildSrc.src.main.kotlin.Versions
-
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -46,10 +44,10 @@ dependencies {
     implementation(files(project.rootDir.resolve("libs/mzs-domain.aar")))
 
     //----- COROUTINES ----------/
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesVersion}")
+    implementation(libs.kotlinx.coroutines.android)
 
     //----- DAGGER ----------/
-    implementation("com.google.dagger:hilt-android:${Versions.hiltVersion}")
-    kapt("com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}")
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
 }

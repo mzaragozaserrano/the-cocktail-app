@@ -1,10 +1,8 @@
-import buildSrc.src.main.kotlin.Versions
-
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -84,24 +82,21 @@ dependencies {
     implementation(project(":presentation"))
 
     //----- COMPOSE ----------/
-    implementation("androidx.activity:activity-compose:$Versions.activityComposeVersion")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.navigation:navigation-compose:${Versions.navigationComposeVersion}")
-    implementation(platform("androidx.compose:compose-bom:${Versions.composeVersion}"))
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.util)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.navigation.compose)
 
     //----- DAGGER ----------/
-    implementation("com.google.dagger:hilt-android:${Versions.hiltVersion}")
-    kapt("com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}")
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     //----- TESTING ----------/
-    testImplementation("app.cash.turbine:turbine:${Versions.testingTurbine}")
-    testImplementation("org.mockito:mockito-core:${Versions.testingMockitoVersion}")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.testingCoroutinesVersion}")
-    testImplementation("com.google.dagger:hilt-android-testing:${Versions.testingHiltVersion}")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:${Versions.testingHiltVersion}")
+    testImplementation(libs.turbine)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.hilt.android.testing)
 
 }

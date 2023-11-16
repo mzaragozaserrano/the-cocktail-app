@@ -1,10 +1,8 @@
-import buildSrc.src.main.kotlin.Versions
-
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -50,17 +48,16 @@ dependencies {
     implementation(project(":domain"))
 
     //----- COROUTINES ----------/
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutinesVersion}")
+    implementation(libs.kotlinx.coroutines.android)
 
     //----- DAGGER ----------/
-    implementation("com.google.dagger:hilt-android:${Versions.hiltVersion}")
-    kapt("com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}")
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     //-----  JSON PARSER ----------/
-    implementation("com.squareup.moshi:moshi:${Versions.moshiVersion}")
-    implementation("com.squareup.moshi:moshi-kotlin:${Versions.moshiVersion}")
+    implementation(libs.moshi.kotlin)
 
     //----- OKHTTP ----------/
-    implementation("com.squareup.okhttp3:okhttp:${Versions.okHttp3Version}")
+    implementation(libs.okhttp.logging)
 
 }

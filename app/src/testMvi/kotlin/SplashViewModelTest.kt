@@ -1,15 +1,14 @@
-package com.thecocktailapp.tests.mvvm
-
-import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
-import com.thecocktailapp.presentation.common.vo.ErrorVO
-import com.thecocktailapp.presentation.compose.utils.navigation.NavArg
-import com.thecocktailapp.presentation.compose.viewmodels.DetailDrinkViewModel
-import com.thecocktailapp.presentation.view.vo.DrinkVO
+import com.thecocktailapp.presentation.utils.mvi.CommonViewState
+import com.thecocktailapp.presentation.utils.mvi.SplashIntent
+import com.thecocktailapp.presentation.utils.mvi.SplashViewState
+import com.thecocktailapp.presentation.viewmodels.SplashViewModel
+import com.thecocktailapp.presentation.vo.DrinkVO
+import com.thecocktailapp.presentation.vo.ErrorVO
 import com.thecocktailapp.repositories.FakeCocktailRepositoryImpl
 import com.thecocktailapp.repositories.FakeNetworkRepositoryImpl
-import com.thecocktailapp.usecases.FakeGetDrinkByIdUseCaseImpl
+import com.thecocktailapp.usecases.FakeGetRandomDrinkUseCaseImpl
 import com.thecocktailapp.utils.MainDispatcherRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import junit.framework.TestCase.*
@@ -28,11 +27,10 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltAndroidTest
-class DetailDrinkViewModelTest {
+class SplashViewModelTest {
 
-    private lateinit var savedStateHandle: SavedStateHandle
     private lateinit var cocktailRepository: FakeCocktailRepositoryImpl
-    private lateinit var getDrinkByIdUseCaseImpl: FakeGetDrinkByIdUseCaseImpl
+    private lateinit var getRandomDrinkUseCase: FakeGetRandomDrinkUseCaseImpl
 
     @InjectMocks
     private lateinit var cocktailDataSource: FakeCocktailDataSourceImpl
@@ -41,7 +39,7 @@ class DetailDrinkViewModelTest {
     private lateinit var networkRepository: FakeNetworkRepositoryImpl
 
     @Inject
-    lateinit var viewModel: DetailDrinkViewModel
+    lateinit var viewModel: SplashViewModel
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
@@ -94,9 +92,12 @@ class DetailDrinkViewModelTest {
     @Test
     fun `when getRandomDrinkUseCase is invoked, loading result is emitted first, followed by a success result`() =
         runTest {
-            viewModel.state.test {
+            viewModel.mutableViewState.test {
+                assertEquals(CommonViewState.Initialized(), awaitItem())
+                viewModel.intentFlow.emit(SplashIntent.GetRandomDrink)
+                assertEquals(SplashViewState.ShowProgressDialog, awaitItem())
                 assertEquals(
-                    DetailDrinkViewModel.DetailDrinkUiState.Success(
+                    SplashViewState.SetDrink(
                         DrinkVO(
                             category = "Coffee / Tea",
                             dateModified = "2015-09-03 03:09:44",
@@ -111,8 +112,7 @@ class DetailDrinkViewModelTest {
                             instructions = "Pour Hot Damn 100 in bottom of a jar or regular glass.Fill the rest of the glass with sweet tea.Stir with spoon, straw, or better yet a cinnamon stick and leave it in .",
                             urlImage = "https://www.thecocktaildb.com/images/media/drink/rrstxv1441246184.jpg"
                         )
-                    ),
-                    awaitItem()
+                    ), awaitItem()
                 )
             }
         }
@@ -121,31 +121,28 @@ class DetailDrinkViewModelTest {
     @Test
     fun `when getRandomDrinkUseCase is invoked, loading result is emitted first, followed by a data not found error result`() =
         runTest {
-            viewModel.state.test {
-                assertEquals(
-                    DetailDrinkViewModel.DetailDrinkUiState.Error(ErrorVO.DataNotFound),
-                    awaitItem()
-                )
+            viewModel.mutableViewState.test {
+                assertEquals(CommonViewState.Initialized(), awaitItem())
+                viewModel.intentFlow.emit(SplashIntent.GetRandomDrink)
+                assertEquals(SplashViewState.ShowProgressDialog, awaitItem())
+                assertEquals(SplashViewState.ShowError(ErrorVO.DataNotFound.idMessage), awaitItem())
             }
         }
 
     @Test
     fun `when getRandomDrinkUseCase is invoked but a connectivity error result is emitted first`() =
         runTest {
-            viewModel.state.test {
-                assertEquals(
-                    DetailDrinkViewModel.DetailDrinkUiState.Error(ErrorVO.Connectivity),
-                    awaitItem()
-                )
+            viewModel.mutableViewState.test {
+                assertEquals(CommonViewState.Initialized(), awaitItem())
+                viewModel.intentFlow.emit(SplashIntent.GetRandomDrink)
+                assertEquals(SplashViewState.ShowError(ErrorVO.Connectivity.idMessage), awaitItem())
             }
         }
 
     private fun setUpViewModel(isConnected: Boolean) {
-        savedStateHandle = SavedStateHandle()
-        savedStateHandle[NavArg.DrinkId.key] = 15813
         networkRepository.setConnectionStatus(isConnected = isConnected)
-        getDrinkByIdUseCaseImpl = FakeGetDrinkByIdUseCaseImpl(cocktailRepository, networkRepository)
-        viewModel = DetailDrinkViewModel(getDrinkByIdUseCaseImpl, savedStateHandle)
+        getRandomDrinkUseCase = FakeGetRandomDrinkUseCaseImpl(cocktailRepository, networkRepository)
+        viewModel = SplashViewModel(getRandomDrinkUseCase)
     }
 
 }
