@@ -10,13 +10,4 @@ abstract class TheCocktailAppBaseActivity<S, I, VB : ViewBinding, VM : MVIViewMo
 
     override var loadingRaw: Int? = R.raw.loading
 
-/*    fun showErrorAlert(@StringRes idMessage: Int, onRetryButtonClicked: () -> Unit) {
-        val errorAlertFragment =
-            ErrorAlertFragment(idMessage = idMessage, onRetryButtonClicked = onRetryButtonClicked)
-        errorAlertFragment.isCancelable = false
-        supportFragmentManager.let { fragment ->
-            errorAlertFragment.show(fragment, ErrorAlertFragment.ERROR_ALERT_TAG)
-        }
-    }*/
-
 }

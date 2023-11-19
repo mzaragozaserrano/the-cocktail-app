@@ -3,7 +3,7 @@ package com.thecocktailapp.presentation.viewmodels
 import androidx.lifecycle.viewModelScope
 import com.mzaragozaserrano.domain.utils.extension.toFlowResult
 import com.mzaragozaserrano.presentation.view.base.MVIViewModel
-import com.thecocktailapp.domain.usecases.ShowRandomDrink
+import com.thecocktailapp.domain.usecases.splash.ShowRandomDrink
 import com.thecocktailapp.presentation.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.utils.mvi.CommonResult
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
@@ -73,7 +73,7 @@ class KotlinViewModel @Inject constructor(
             if (showRandomDrink()) {
                 KotlinTask.NavigateToSplashFragment
             } else {
-                KotlinTask.NavigateToCocktailFragment
+                KotlinTask.NavigateToHomeFragment
             }
         ).toFlowResult()
 

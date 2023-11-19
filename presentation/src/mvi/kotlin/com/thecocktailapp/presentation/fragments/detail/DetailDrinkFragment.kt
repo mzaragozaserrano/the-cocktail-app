@@ -1,13 +1,13 @@
-package com.thecocktailapp.presentation.fragments
+package com.thecocktailapp.presentation.fragments.detail
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.mzaragozaserrano.presentation.common.utils.extensions.serializable
 import com.mzaragozaserrano.presentation.view.base.BaseFragment
 import com.mzaragozaserrano.presentation.view.utils.extensions.hideProgressDialog
 import com.mzaragozaserrano.presentation.view.utils.extensions.loadImageFromUrl
 import com.mzaragozaserrano.presentation.view.utils.extensions.showProgressDialog
 import com.mzaragozaserrano.presentation.view.utils.viewBinding.viewBinding
-import com.thecocktailapp.presentation.utils.extensions.serializable
 import com.thecocktailapp.presentation.utils.mvi.CommonIntent
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
 import com.thecocktailapp.presentation.utils.mvi.DetailDrinkIntent
@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailDrinkFragment :
     BaseFragment<DetailDrinkViewState, DetailDrinkIntent, FragmentDetailDrinkBinding, DetailDrinkViewModel>(
-        layout = R.layout.fragment_detail_drink
+        R.layout.fragment_detail_drink
     ) {
 
     companion object {
@@ -43,7 +43,7 @@ class DetailDrinkFragment :
     }
 
     override fun onBackPressed() {
-        findNavController().navigate(R.id.action_DetailDrinkFragment_to_CocktailFragment)
+        findNavController().navigate(R.id.action_DetailDrinkFragment_to_HomeFragment)
     }
 
     override fun renderView(state: DetailDrinkViewState) {

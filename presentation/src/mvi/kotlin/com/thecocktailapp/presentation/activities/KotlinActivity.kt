@@ -34,13 +34,13 @@ class KotlinActivity :
             onBindItem = { binding, item ->
                 with(binding) {
                     icMenu.apply {
-                        setImageDrawable(ContextCompat.getDrawable(applicationContext, item.icon))
                         setColorFilter(
                             ContextCompat.getColor(
                                 applicationContext,
                                 R.color.color_primary
                             )
                         )
+                        setImageDrawable(ContextCompat.getDrawable(applicationContext, item.icon))
                     }
                     textViewMenu.apply {
                         text = getString(item.name)
@@ -60,8 +60,8 @@ class KotlinActivity :
     }
 
     override fun CoreDrawerLayoutBinding.setUpView() {
-        setUpNavHostFragment()
         setUpAdapter()
+        setUpNavHostFragment()
     }
 
     private fun CoreDrawerLayoutBinding.setUpNavHostFragment() {
@@ -83,8 +83,8 @@ class KotlinActivity :
                 showRandomDrink()
             }
 
-            is KotlinViewState.Navigate.ToCocktailFragment -> {
-                startNavigationFrom(R.id.CocktailFragment)
+            is KotlinViewState.Navigate.ToHomeFragment -> {
+                startNavigationFrom(R.id.HomeFragment)
             }
 
             is KotlinViewState.Navigate.ToSplashFragment -> {

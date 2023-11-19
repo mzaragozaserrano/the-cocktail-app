@@ -87,13 +87,6 @@ fun TheCocktailAppTheme(
     content: @Composable () -> Unit,
 ) {
 
-    /*class CustomFontProvider : FontProvider {
-        override val fontFamily: FontFamily =
-            FontFamily(Font(R.font.nosifer_regular, FontWeight.Normal))
-    }
-
-    CustomTextModule.fontConfiguration.font.value = CustomFontProvider().fontFamily*/
-
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
@@ -103,7 +96,9 @@ fun TheCocktailAppTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
     val view = LocalView.current
+
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
@@ -116,4 +111,5 @@ fun TheCocktailAppTheme(
         colorScheme = colorScheme,
         content = content
     )
+
 }

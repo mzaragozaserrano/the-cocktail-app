@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    //----- APP ----------/
     <string name="app_name">The Cocktail App</string>
 
     //----- BUTTONS ----------/
     <string name="cancel_button">Cancelar</string>
-    <string name="hello_compose_button">Hola, Compose!</string>
-    <string name="hello_kotlin_button">Hola, Kotlin!</string>
     <string name="retry_button">Reintentar</string>
     <string name="see_button">Ver</string>
 
@@ -18,15 +18,15 @@
     <string name="error_loading_url">Error cargando la URL</string>
     <string name="title_error">Error</string>
 
-    //----- MENU ----------/
-    <string name="menu_item_close_session">Cerrar sesión</string>
-
-    //----- SPLASH FRAGMENT ----------/
+    //----- FRAGMENT (SPLASH) ----------/
     <string name="first_title_splash_fragment">Nuestra</string>
     <string name="second_title_splash_fragment">Recomendación</string>
     <string name="third_title_splash_fragment">Diaria</string>
 
-    //----- DETAIL FRAGMENT ----------/
+    //----- FRAGMENT (DETAIL) ----------/
     <string name="title_ingredients">Ingredientes</string>
+
+    //----- MENU ----------/
+    <string name="menu_item_close_session">Cerrar sesión</string>
 
 </resources>

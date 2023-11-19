@@ -39,8 +39,8 @@ fun SplashResult.mapToState(): SplashViewState =
                     SplashViewState.Navigate.ToDrinkDetail(id = task.id)
                 }
 
-                is SplashTask.NavigateToCocktailFragment -> {
-                    SplashViewState.Navigate.ToCocktailFragment
+                is SplashTask.NavigateToHomeFragment -> {
+                    SplashViewState.Navigate.ToHomeFragment
                 }
 
                 is SplashTask.DrinkGotten -> {

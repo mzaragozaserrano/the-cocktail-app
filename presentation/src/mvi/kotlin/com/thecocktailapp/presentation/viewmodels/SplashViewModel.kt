@@ -6,7 +6,7 @@ import com.mzaragozaserrano.domain.utils.extension.toFlowResult
 import com.mzaragozaserrano.presentation.view.base.MVIViewModel
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.GetRandomDrink
+import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
 import com.thecocktailapp.presentation.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.utils.mvi.CommonResult
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
@@ -14,8 +14,8 @@ import com.thecocktailapp.presentation.utils.mvi.SplashAction
 import com.thecocktailapp.presentation.utils.mvi.SplashIntent
 import com.thecocktailapp.presentation.utils.mvi.SplashResult
 import com.thecocktailapp.presentation.utils.mvi.SplashTask
-import com.thecocktailapp.presentation.utils.mvi.SplashTask.NavigateToCocktailFragment
 import com.thecocktailapp.presentation.utils.mvi.SplashTask.NavigateToDrinkDetail
+import com.thecocktailapp.presentation.utils.mvi.SplashTask.NavigateToHomeFragment
 import com.thecocktailapp.presentation.utils.mvi.SplashViewState
 import com.thecocktailapp.presentation.utils.mvi.mapToAction
 import com.thecocktailapp.presentation.utils.mvi.mapToState
@@ -109,7 +109,7 @@ class SplashViewModel @Inject constructor(
         }
 
         is SplashAction.TaskForNavigate.ToMain -> {
-            SplashResult.Task.Success(NavigateToCocktailFragment).toFlowResult()
+            SplashResult.Task.Success(NavigateToHomeFragment).toFlowResult()
         }
     }
 

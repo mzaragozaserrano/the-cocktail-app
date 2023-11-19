@@ -1,26 +1,26 @@
 package com.thecocktailapp.presentation.utils.mvi
 
-fun CocktailIntent.mapToAction(): CocktailAction =
+fun HomeIntent.mapToAction(): HomeAction =
     when (this) {
         is CommonIntent.Idle -> CommonAction.Idle
         is CommonIntent.Init -> CommonAction.Init(refresh)
     }
 
-fun CocktailResult.mapToState(): CocktailViewState =
+fun HomeResult.mapToState(): HomeViewState =
     when (this) {
         is CommonResult.Idle -> {
             CommonViewState.Idle
         }
 
-        is CocktailResult.Task.Error -> {
-            CocktailViewState.ShowError(idMessage = error.idMessage)
+        is HomeResult.Task.Error -> {
+            HomeViewState.ShowError(idMessage = error.idMessage)
         }
 
-        is CocktailResult.Init -> {
+        is HomeResult.Init -> {
             CommonViewState.Initialized()
         }
 
-        is CocktailResult.Task.Loading -> {
-            CocktailViewState.ShowProgressDialog
+        is HomeResult.Task.Loading -> {
+            HomeViewState.ShowProgressDialog
         }
     }

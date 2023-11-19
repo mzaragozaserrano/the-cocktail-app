@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.screens
+package com.thecocktailapp.presentation.screens.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -8,10 +8,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.Navigation
-import com.thecocktailapp.presentation.viewmodels.ComposeViewModel
+import com.thecocktailapp.presentation.viewmodels.HomeViewModel
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, viewModel: ComposeViewModel = hiltViewModel()) {
+fun HomeScreen(modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel()) {
 
     val navController = rememberNavController()
     val state by viewModel.state.collectAsState()

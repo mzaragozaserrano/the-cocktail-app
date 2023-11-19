@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.fragments
+package com.thecocktailapp.presentation.fragments.home
 
 import androidx.fragment.app.viewModels
 import com.mzaragozaserrano.presentation.databinding.CoreToolbarMenuBinding
@@ -7,23 +7,23 @@ import com.mzaragozaserrano.presentation.view.utils.extensions.setUpMenuToolbar
 import com.mzaragozaserrano.presentation.view.utils.extensions.showProgressDialog
 import com.mzaragozaserrano.presentation.view.utils.viewBinding.viewBinding
 import com.thecocktailapp.presentation.activities.KotlinActivity
-import com.thecocktailapp.presentation.utils.mvi.CocktailIntent
-import com.thecocktailapp.presentation.utils.mvi.CocktailViewState
 import com.thecocktailapp.presentation.utils.mvi.CommonIntent
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
-import com.thecocktailapp.presentation.viewmodels.CocktailViewModel
+import com.thecocktailapp.presentation.utils.mvi.HomeIntent
+import com.thecocktailapp.presentation.utils.mvi.HomeViewState
+import com.thecocktailapp.presentation.viewmodels.HomeViewModel
 import com.thecocktailapp.ui.R
-import com.thecocktailapp.ui.databinding.FragmentCocktailBinding
+import com.thecocktailapp.ui.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CocktailFragment :
-    BaseFragment<CocktailViewState, CocktailIntent, FragmentCocktailBinding, CocktailViewModel>(
-        layout = R.layout.fragment_cocktail
+class HomeFragment :
+    BaseFragment<HomeViewState, HomeIntent, FragmentHomeBinding, HomeViewModel>(
+        R.layout.fragment_home
     ) {
 
-    override val viewModel: CocktailViewModel by viewModels()
-    override val binding by viewBinding(FragmentCocktailBinding::bind)
+    override val viewModel: HomeViewModel by viewModels()
+    override val binding by viewBinding(FragmentHomeBinding::bind)
 
     override fun onPause() {
         super.onPause()
@@ -35,18 +35,18 @@ class CocktailFragment :
         emitAction(CommonIntent.Init())
     }
 
-    override fun renderView(state: CocktailViewState) {
+    override fun renderView(state: HomeViewState) {
         when (state) {
             is CommonViewState.Idle -> {}
             is CommonViewState.Initialized -> {
                 initView()
             }
 
-            is CocktailViewState.ShowError -> {
+            is HomeViewState.ShowError -> {
 
             }
 
-            is CocktailViewState.ShowProgressDialog -> {
+            is HomeViewState.ShowProgressDialog -> {
                 showProgressDialog()
             }
         }

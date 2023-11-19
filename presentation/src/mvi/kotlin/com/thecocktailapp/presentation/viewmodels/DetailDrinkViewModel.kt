@@ -6,8 +6,8 @@ import com.mzaragozaserrano.domain.utils.extension.toFlowResult
 import com.mzaragozaserrano.presentation.view.base.MVIViewModel
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.GetDrinkById
-import com.thecocktailapp.domain.usecases.GetDrinkByIdUseCaseImpl
+import com.thecocktailapp.domain.usecases.main.detail.GetDrinkById
+import com.thecocktailapp.domain.usecases.main.detail.GetDrinkByIdUseCaseImpl
 import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.utils.mvi.CommonResult

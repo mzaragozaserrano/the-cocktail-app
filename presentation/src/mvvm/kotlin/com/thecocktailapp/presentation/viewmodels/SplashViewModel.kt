@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.mzaragozaserrano.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.GetRandomDrink
+import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
 import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO
@@ -22,7 +22,7 @@ class SplashViewModel @Inject constructor(
     val getRandomDrink: @JvmSuppressWildcards GetRandomDrink,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<SplashUiState>(SplashUiState.Idle)
+    private val _state = MutableStateFlow<SplashUiState>(value = SplashUiState.Idle)
     val state = _state.asStateFlow()
 
     init {
@@ -31,7 +31,7 @@ class SplashViewModel @Inject constructor(
 
     fun onExecuteGetRandomDrink() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
+            withContext(context = Dispatchers.IO) {
                 getRandomDrink().collect(::handleRandomDrinkResponse)
             }
         }
@@ -45,11 +45,11 @@ class SplashViewModel @Inject constructor(
                 }
 
                 is Result.Response.Error<*> -> {
-                    _state.value = SplashUiState.Error((result.code as ErrorBO).transform())
+                    _state.value = SplashUiState.Error(error = (result.code as ErrorBO).transform())
                 }
 
                 is Result.Response.Success -> {
-                    _state.value = SplashUiState.Success(result.data.drinks.first().transform())
+                    _state.value = SplashUiState.Success(drink = result.data.drinks.first().transform())
                 }
             }
         }

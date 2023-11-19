@@ -19,17 +19,17 @@ fun DrinkBO.transform(): DrinkVO = DrinkVO(
     dateModified = dateModified,
     glass = glass,
     id = id,
-    ingredients = createFormattedIngredients(
+    ingredients = createIngredientsFormatted(
         ingredients = listIngredients,
         measures = listMeasures
     ),
     isAlcoholic = isAlcoholic,
-    name = name,
     instructions = instructions,
+    name = name,
     urlImage = urlImage
 )
 
-fun createFormattedIngredients(ingredients: List<String>, measures: List<String>): List<String> {
+fun createIngredientsFormatted(ingredients: List<String>, measures: List<String>): List<String> {
     val list = mutableListOf<String>()
     (0..14).forEach { index ->
         val ingredient = ingredients[index]

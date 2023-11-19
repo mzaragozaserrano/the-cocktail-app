@@ -70,12 +70,11 @@ dependencies {
     //----- ANDROIDX ----------/
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.fragment.ktx)
 
-    //----- COIL ----------/
-    implementation(libs.coil.kt.compose)
-
     //----- COMPOSE ----------/
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.compose.ui.util)
@@ -93,7 +92,6 @@ dependencies {
 
     //-----  LOTTIE ----------/
     implementation(libs.lottie)
-    implementation(libs.lottie.compose)
 
     //----- MATERIAL ----------/
     implementation(libs.material3)

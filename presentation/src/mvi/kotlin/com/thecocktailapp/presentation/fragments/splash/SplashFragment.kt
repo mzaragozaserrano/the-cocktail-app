@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.fragments
+package com.thecocktailapp.presentation.fragments.splash
 
 import android.view.View
 import androidx.core.os.bundleOf
@@ -9,6 +9,7 @@ import com.mzaragozaserrano.presentation.view.utils.extensions.hideProgressDialo
 import com.mzaragozaserrano.presentation.view.utils.extensions.loadImageFromUrl
 import com.mzaragozaserrano.presentation.view.utils.extensions.showProgressDialog
 import com.mzaragozaserrano.presentation.view.utils.viewBinding.viewBinding
+import com.thecocktailapp.presentation.fragments.detail.DetailDrinkFragment
 import com.thecocktailapp.presentation.utils.mvi.CommonIntent
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
 import com.thecocktailapp.presentation.utils.mvi.SplashIntent
@@ -21,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SplashFragment :
-    BaseFragment<SplashViewState, SplashIntent, FragmentSplashBinding, SplashViewModel>(layout = R.layout.fragment_splash) {
+    BaseFragment<SplashViewState, SplashIntent, FragmentSplashBinding, SplashViewModel>(R.layout.fragment_splash) {
 
     override val viewModel: SplashViewModel by viewModels()
     override val binding by viewBinding(FragmentSplashBinding::bind)
@@ -57,8 +58,8 @@ class SplashFragment :
                 navigateToDetailDrinkFragment(state.id)
             }
 
-            is SplashViewState.Navigate.ToCocktailFragment -> {
-                navigateToCocktailFragment()
+            is SplashViewState.Navigate.ToHomeFragment -> {
+                navigateToHomeFragment()
             }
 
             is SplashViewState.SetDrink -> {
@@ -75,6 +76,10 @@ class SplashFragment :
         }
     }
 
+    private fun getRandomDrink() {
+        emitAction(SplashIntent.GetRandomDrink)
+    }
+
     private fun navigateToDetailDrinkFragment(id: Int) {
         hideProgressDialog()
         findNavController().navigate(
@@ -83,13 +88,9 @@ class SplashFragment :
         )
     }
 
-    private fun navigateToCocktailFragment() {
+    private fun navigateToHomeFragment() {
         hideProgressDialog()
-        findNavController().navigate(R.id.action_SplashFragment_to_CocktailFragment)
-    }
-
-    private fun getRandomDrink() {
-        emitAction(SplashIntent.GetRandomDrink)
+        findNavController().navigate(R.id.action_SplashFragment_to_HomeFragment)
     }
 
     private fun setUpDrink(drink: DrinkVO) {

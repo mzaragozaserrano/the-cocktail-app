@@ -3,10 +3,10 @@ package com.thecocktailapp.presentation.viewmodels
 import androidx.lifecycle.viewModelScope
 import com.mzaragozaserrano.domain.utils.extension.toFlowResult
 import com.mzaragozaserrano.presentation.view.base.MVIViewModel
-import com.thecocktailapp.presentation.utils.mvi.CocktailAction
-import com.thecocktailapp.presentation.utils.mvi.CocktailIntent
-import com.thecocktailapp.presentation.utils.mvi.CocktailResult
-import com.thecocktailapp.presentation.utils.mvi.CocktailViewState
+import com.thecocktailapp.presentation.utils.mvi.HomeAction
+import com.thecocktailapp.presentation.utils.mvi.HomeIntent
+import com.thecocktailapp.presentation.utils.mvi.HomeResult
+import com.thecocktailapp.presentation.utils.mvi.HomeViewState
 import com.thecocktailapp.presentation.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.utils.mvi.CommonResult
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
@@ -20,13 +20,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CocktailViewModel @Inject constructor() : MVIViewModel<CocktailViewState, CocktailIntent>() {
+class HomeViewModel @Inject constructor() : MVIViewModel<HomeViewState, HomeIntent>() {
 
     init {
         handleIntent()
     }
 
-    override fun createInitialState(): CocktailViewState = CommonViewState.Initialized()
+    override fun createInitialState(): HomeViewState = CommonViewState.Initialized()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun handleIntent() {
@@ -38,7 +38,7 @@ class CocktailViewModel @Inject constructor() : MVIViewModel<CocktailViewState, 
         }
     }
 
-    private fun processAction(action: CocktailAction) = when (action) {
+    private fun processAction(action: HomeAction) = when (action) {
         is CommonAction.Init -> {
             onInit()
         }
@@ -48,7 +48,7 @@ class CocktailViewModel @Inject constructor() : MVIViewModel<CocktailViewState, 
         }
     }
 
-    private fun onInit() = CocktailResult.Init.toFlowResult()
+    private fun onInit() = HomeResult.Init.toFlowResult()
 
     private fun onIdle() = CommonResult.Idle.toFlowResult()
 

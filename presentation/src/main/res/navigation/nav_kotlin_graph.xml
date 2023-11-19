@@ -6,12 +6,12 @@
 
     <fragment
         android:id="@+id/SplashFragment"
-        android:name="com.thecocktailapp.presentation.fragments.SplashFragment"
+        android:name="com.thecocktailapp.presentation.fragments.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/action_SplashFragment_to_CocktailFragment"
-            app:destination="@id/CocktailFragment" />
+            android:id="@+id/action_SplashFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
         <action
             android:id="@+id/action_SplashFragment_to_DetailDrinkFragment"
             app:destination="@id/DetailDrinkFragment" />
@@ -19,18 +19,18 @@
 
     <fragment
         android:id="@+id/DetailDrinkFragment"
-        android:name="com.thecocktailapp.presentation.fragments.DetailDrinkFragment"
+        android:name="com.thecocktailapp.presentation.fragments.detail.DetailDrinkFragment"
         android:label="fragment_detail_drink"
         tools:layout="@layout/fragment_detail_drink" >
         <action
-            android:id="@+id/action_DetailDrinkFragment_to_CocktailFragment"
-            app:destination="@id/CocktailFragment" />
+            android:id="@+id/action_DetailDrinkFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/CocktailFragment"
-        android:name="com.thecocktailapp.presentation.fragments.CocktailFragment"
-        android:label="fragment_cocktail"
-        tools:layout="@layout/fragment_cocktail" />
+        android:id="@+id/HomeFragment"
+        android:name="com.thecocktailapp.presentation.fragments.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 
 </navigation>

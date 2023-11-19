@@ -7,9 +7,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navigation
-import com.thecocktailapp.presentation.screens.CocktailScreen
-import com.thecocktailapp.presentation.screens.DetailDrinkScreen
-import com.thecocktailapp.presentation.screens.SplashScreen
+import com.thecocktailapp.presentation.screens.details.DetailScreen
+import com.thecocktailapp.presentation.screens.main.MainScreen
+import com.thecocktailapp.presentation.screens.splash.SplashScreen
 import com.thecocktailapp.presentation.utils.extensions.composable
 
 @Composable
@@ -32,14 +32,14 @@ private fun NavGraphBuilder.theCocktailAppNav(
     navController: NavController,
 ) {
     navigation(
-        startDestination = NavCommand.Home(Feature.App).route,
+        startDestination = NavCommand.Home(feature = Feature.App).route,
         route = Feature.App.route
     ) {
-        composable(navItem = NavCommand.Home(Feature.App)) {
-            CocktailScreen()
+        composable(navItem = NavCommand.Home(feature = Feature.App)) {
+            MainScreen()
         }
-        composable(navItem = NavCommand.Content(Feature.Detail)) {
-            DetailDrinkScreen(modifier = modifier, navController = navController)
+        composable(navItem = NavCommand.Content(feature = Feature.Detail)) {
+            DetailScreen(modifier = modifier, navController = navController)
         }
     }
 }
@@ -57,17 +57,18 @@ private fun NavGraphBuilder.splashNav(
                 modifier = modifier,
                 onSeeClicked = { id ->
                     navController.navigate(
-                        route = NavCommand.Content(Feature.Detail).createRoute(drinkId = id.toInt())
+                        route = NavCommand.Content(feature = Feature.Detail)
+                            .createRoute(drinkId = id.toInt())
                     )
                 },
                 onCancelClicked = {
                     navController.navigate(
-                        route = NavCommand.Home(Feature.App).route,
                         builder = {
-                            popUpTo(Feature.Splash.route) {
+                            popUpTo(route = Feature.Splash.route) {
                                 inclusive = false
                             }
-                        }
+                        },
+                        route = NavCommand.Home(feature = Feature.App).route
                     )
                 }
             )

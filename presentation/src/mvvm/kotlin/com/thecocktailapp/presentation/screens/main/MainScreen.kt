@@ -1,10 +1,10 @@
-package com.thecocktailapp.presentation.screens
+package com.thecocktailapp.presentation.screens.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun CocktailScreen(
+fun MainScreen(
     modifier: Modifier = Modifier,
 ) {
 

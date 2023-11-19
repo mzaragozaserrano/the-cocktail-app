@@ -16,8 +16,8 @@ fun KotlinResult.mapToState(): KotlinViewState =
 
         is KotlinResult.Task.Success -> {
             when (task) {
-                is KotlinTask.NavigateToCocktailFragment -> {
-                    KotlinViewState.Navigate.ToCocktailFragment
+                is KotlinTask.NavigateToHomeFragment -> {
+                    KotlinViewState.Navigate.ToHomeFragment
                 }
 
                 is KotlinTask.NavigateToSplashFragment -> {

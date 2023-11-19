@@ -13,7 +13,7 @@ sealed class NavCommand(
         NavCommand(feature = feature, navArgs = listOf(NavArg.DrinkId)) {
         fun createRoute(drinkId: Int) = "$navRoute/${feature.route}/$drinkId"
     }
-    class Home(feature: Feature) : NavCommand(feature)
+    class Home(feature: Feature) : NavCommand(feature = feature)
 
     val route = run {
         val argKeys = navArgs.map {
