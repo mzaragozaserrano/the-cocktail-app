@@ -1,9 +1,9 @@
 package com.thecocktailapp.data.di
 
-import com.thecocktailapp.data.datasources.CocktailDataSource
-import com.thecocktailapp.data.datasources.CocktailDataSourceImpl
-import com.thecocktailapp.data.datasources.PreferencesDataSource
-import com.thecocktailapp.data.datasources.PreferencesDataSourceImpl
+import com.thecocktailapp.data.datasources.services.CocktailDataSource
+import com.thecocktailapp.data.datasources.services.CocktailDataSourceImpl
+import com.thecocktailapp.data.datasources.local.PreferencesDataSource
+import com.thecocktailapp.data.datasources.local.PreferencesDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -1,11 +1,11 @@
 package com.thecocktailapp.data.di
 
-import com.thecocktailapp.domain.usecases.GetDrinkById
-import com.thecocktailapp.domain.usecases.GetDrinkByIdUseCaseImpl
-import com.thecocktailapp.domain.usecases.GetRandomDrink
-import com.thecocktailapp.domain.usecases.GetRandomDrinkUseCaseImpl
-import com.thecocktailapp.domain.usecases.ShowRandomDrink
-import com.thecocktailapp.domain.usecases.ShowRandomDrinkImpl
+import com.thecocktailapp.domain.usecases.main.detail.GetDrinkById
+import com.thecocktailapp.domain.usecases.main.detail.GetDrinkByIdUseCaseImpl
+import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
+import com.thecocktailapp.domain.usecases.splash.GetRandomDrinkUseCaseImpl
+import com.thecocktailapp.domain.usecases.splash.ShowRandomDrink
+import com.thecocktailapp.domain.usecases.splash.ShowRandomDrinkImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

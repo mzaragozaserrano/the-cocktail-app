@@ -1,4 +1,4 @@
-package com.thecocktailapp.domain.usecases
+package com.thecocktailapp.domain.usecases.main.detail
 
 import com.mzaragozaserrano.domain.repositories.NetworkRepository
 import com.mzaragozaserrano.domain.usecases.FlowUseCase

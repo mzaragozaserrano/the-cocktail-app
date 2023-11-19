@@ -3,7 +3,7 @@ package com.thecocktailapp.datasources
 import com.mzaragozaserrano.data.utils.ResultData
 import com.mzaragozaserrano.data.utils.onError
 import com.mzaragozaserrano.data.utils.onSuccess
-import com.thecocktailapp.data.datasources.CocktailDataSource
+import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.DrinkDTO
 import com.thecocktailapp.data.dto.ErrorDTO

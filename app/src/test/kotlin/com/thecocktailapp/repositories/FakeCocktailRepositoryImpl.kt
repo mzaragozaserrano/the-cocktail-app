@@ -2,7 +2,7 @@ package com.thecocktailapp.repositories
 
 import com.mzaragozaserrano.data.utils.ResultData
 import com.mzaragozaserrano.domain.utils.Result
-import com.thecocktailapp.data.datasources.CocktailDataSource
+import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.ErrorDTO
 import com.thecocktailapp.data.utils.transform
 import com.thecocktailapp.domain.bo.CocktailBO

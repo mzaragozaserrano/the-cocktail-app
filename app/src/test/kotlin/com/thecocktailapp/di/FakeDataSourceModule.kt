@@ -1,6 +1,6 @@
 package com.thecocktailapp.di
 
-import com.thecocktailapp.data.datasources.CocktailDataSource
+import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
 import dagger.Binds
 import dagger.Module

@@ -4,8 +4,8 @@ import com.mzaragozaserrano.data.utils.ResultData
 import com.mzaragozaserrano.domain.utils.Result
 import com.mzaragozaserrano.domain.utils.getCurrentDate
 import com.mzaragozaserrano.domain.utils.sdf
-import com.thecocktailapp.data.datasources.CocktailDataSource
-import com.thecocktailapp.data.datasources.PreferencesDataSource
+import com.thecocktailapp.data.datasources.services.CocktailDataSource
+import com.thecocktailapp.data.datasources.local.PreferencesDataSource
 import com.thecocktailapp.data.dto.ErrorDTO
 import com.thecocktailapp.data.utils.transform
 import com.thecocktailapp.domain.bo.CocktailBO
@@ -18,6 +18,7 @@ class CocktailRepositoryImpl @Inject constructor(
     private val cocktailDataSource: CocktailDataSource,
     private val preferencesDataSource: PreferencesDataSource,
 ) : CocktailRepository {
+
     override suspend fun getDrinkById(id: Int): Flow<Result<CocktailBO>> = flow {
         emit(Result.Loading)
         emit(
@@ -49,4 +50,11 @@ class CocktailRepositoryImpl @Inject constructor(
                 }
             )
         }
+
+    override fun showRandomCocktail(): Boolean {
+        val currentDate = getCurrentDate(sdf)
+        val accessDate = preferencesDataSource.getFirstAccessDate()
+        return accessDate == null || accessDate != currentDate
+    }
+
 }

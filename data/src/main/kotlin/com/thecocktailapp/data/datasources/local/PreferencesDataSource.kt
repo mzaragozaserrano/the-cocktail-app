@@ -1,5 +1,4 @@
-package com.thecocktailapp.data.datasources
-
+package com.thecocktailapp.data.datasources.local
 
 interface PreferencesDataSource {
     fun getFirstAccessDate(): String?

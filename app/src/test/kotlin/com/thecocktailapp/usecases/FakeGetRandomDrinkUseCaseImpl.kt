@@ -5,7 +5,7 @@ import com.mzaragozaserrano.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.repositories.CocktailRepository
-import com.thecocktailapp.domain.usecases.GetRandomDrink
+import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.thecocktailapp.domain.usecases
+package com.thecocktailapp.domain.usecases.splash
 
 import com.mzaragozaserrano.domain.repositories.NetworkRepository
 import com.mzaragozaserrano.domain.usecases.FlowUseCaseNoParams
@@ -15,5 +15,7 @@ class GetRandomDrinkUseCaseImpl @Inject constructor(
     private val cocktailRepository: CocktailRepository,
     networkRepository: NetworkRepository,
 ) : GetRandomDrink(networkRepository = networkRepository, networkError = ErrorBO.Connectivity) {
+
     override suspend fun run(): Flow<Result<CocktailBO>> = cocktailRepository.getRandomDrink()
+
 }

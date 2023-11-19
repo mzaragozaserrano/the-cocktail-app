@@ -1,4 +1,4 @@
-package com.thecocktailapp.data.datasources
+package com.thecocktailapp.data.datasources.services
 
 import com.mzaragozaserrano.data.utils.ResultData
 import com.mzaragozaserrano.data.utils.onError
