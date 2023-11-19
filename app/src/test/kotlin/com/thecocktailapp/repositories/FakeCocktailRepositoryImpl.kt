@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 class FakeCocktailRepositoryImpl @Inject constructor(private val cocktailDataSource: CocktailDataSource) :
     CocktailRepository {
+
     override suspend fun getDrinkById(id: Int): Flow<Result<CocktailBO>> =
         flow {
             emit(Result.Loading)
@@ -34,4 +35,5 @@ class FakeCocktailRepositoryImpl @Inject constructor(private val cocktailDataSou
                 }
             )
         }
+
 }

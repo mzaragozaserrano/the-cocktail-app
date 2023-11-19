@@ -14,5 +14,7 @@ class FakeGetDrinkByIdUseCaseImpl @Inject constructor(
     private val cocktailRepository: CocktailRepository,
     networkRepository: NetworkRepository,
 ) : GetDrinkById(networkRepository = networkRepository, networkError = ErrorBO.Connectivity) {
+
     override suspend fun run(params: GetDrinkByIdUseCaseImpl.Params): Flow<Result<CocktailBO>> = cocktailRepository.getDrinkById(15813)
+
 }

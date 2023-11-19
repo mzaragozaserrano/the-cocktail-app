@@ -28,14 +28,12 @@ class NetworkRepositoryImplTest {
     }
 
     @Test
-    fun `check connectivity returns true`() {
+    fun `when trying invoke a use case which needs internet and the connectivity returns true`() {
         `when`(context.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
             connectivityManager
         )
-
         val isConnected = networkRepository.isConnected()
         assertTrue(isConnected)
-
     }
 
 }

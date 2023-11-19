@@ -11,4 +11,5 @@ class FakeNetworkRepositoryImpl @Inject constructor() : NetworkRepository {
     fun setConnectionStatus(isConnected: Boolean) {
         this.isConnected = isConnected
     }
+
 }

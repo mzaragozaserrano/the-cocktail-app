@@ -3,10 +3,10 @@ package tests
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
-import com.thecocktailapp.presentation.common.vo.ErrorVO
-import com.thecocktailapp.presentation.compose.utils.navigation.NavArg
-import com.thecocktailapp.presentation.compose.viewmodels.DetailDrinkViewModel
-import com.thecocktailapp.presentation.view.vo.DrinkVO
+import com.thecocktailapp.presentation.utils.navigation.NavArg
+import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
+import com.thecocktailapp.presentation.vo.DrinkVO
+import com.thecocktailapp.presentation.vo.ErrorVO
 import com.thecocktailapp.repositories.FakeCocktailRepositoryImpl
 import com.thecocktailapp.repositories.FakeNetworkRepositoryImpl
 import com.thecocktailapp.usecases.FakeGetDrinkByIdUseCaseImpl
