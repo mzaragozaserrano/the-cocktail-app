@@ -73,6 +73,9 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.fragment.ktx)
 
+    //----- COIL ----------/
+    implementation(libs.coil.kt.compose)
+
     //----- COMPOSE ----------/
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material3)
@@ -92,6 +95,7 @@ dependencies {
 
     //-----  LOTTIE ----------/
     implementation(libs.lottie)
+    implementation(libs.lottie.compose)
 
     //----- MATERIAL ----------/
     implementation(libs.material3)

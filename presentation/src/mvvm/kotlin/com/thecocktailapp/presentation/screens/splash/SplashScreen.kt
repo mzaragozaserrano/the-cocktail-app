@@ -16,8 +16,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mzaragozaserrano.presentation.compose.components.alerts.ErrorAlert
-import com.mzaragozaserrano.presentation.compose.components.utils.LottieProgressDialog
 import com.thecocktailapp.presentation.components.DualActionButton
+import com.thecocktailapp.presentation.components.ProgressDialog
 import com.thecocktailapp.presentation.viewmodels.SplashViewModel
 import com.thecocktailapp.ui.R
 
@@ -72,7 +72,7 @@ fun SplashScreen(
 
             is SplashViewModel.SplashUiState.Idle -> {}
             is SplashViewModel.SplashUiState.Loading -> {
-                LottieProgressDialog(animation = R.raw.loading)
+                ProgressDialog()
             }
 
             is SplashViewModel.SplashUiState.Success -> {

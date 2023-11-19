@@ -21,7 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mzaragozaserrano.presentation.compose.components.alerts.ErrorAlert
 import com.mzaragozaserrano.presentation.compose.components.cards.RoundedCard
-import com.mzaragozaserrano.presentation.compose.components.utils.LottieProgressDialog
+import com.thecocktailapp.presentation.components.ProgressDialog
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
 import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
@@ -52,7 +52,7 @@ fun DetailScreen(
         }
     )
 
-    LaunchedEffect(ingredients) {
+    LaunchedEffect(key1 = ingredients) {
         if (ingredients.isNotEmpty()) {
             showInstructions = true
         }
@@ -82,7 +82,7 @@ fun DetailScreen(
 
             is DetailDrinkViewModel.DetailDrinkUiState.Idle -> {}
             is DetailDrinkViewModel.DetailDrinkUiState.Loading -> {
-                LottieProgressDialog(animation = R.raw.loading)
+                ProgressDialog()
             }
 
             is DetailDrinkViewModel.DetailDrinkUiState.Success -> {
