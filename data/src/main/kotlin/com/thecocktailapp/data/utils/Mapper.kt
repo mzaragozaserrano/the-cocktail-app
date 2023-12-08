@@ -1,5 +1,7 @@
 package com.thecocktailapp.data.utils
 
+import com.mzaragozaserrano.data.R
+import com.mzaragozaserrano.data.datasources.local.ResourcesDataSource
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.DrinkDTO
 import com.thecocktailapp.data.dto.ErrorDTO
@@ -8,23 +10,48 @@ import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import java.util.Locale
 
-fun CocktailDTO.transform(): CocktailBO =
-    CocktailBO(drinks = drinks?.map { it.transform() }.orEmpty())
+fun CocktailDTO.transform(resourcesDataSource: ResourcesDataSource): CocktailBO =
+    CocktailBO(drinks = drinks?.map { it.transform(resourcesDataSource) }.orEmpty())
 
-fun DrinkDTO.transform(): DrinkBO = DrinkBO(
-    category = strCategory.orEmpty(),
-    dateModified = dateModified.orEmpty(),
-    id = idDrink.orEmpty(),
-    instructions = when (Locale.getDefault().language) {
-        "es" -> strInstructionsES ?: strInstructions
-        "fr" -> strInstructionsFR ?: strInstructions
-        "de" -> strInstructionsDE ?: strInstructions
-        "it" -> strInstructionsIT
-        else -> strInstructions
-    }.orEmpty(),
-    isAlcoholic = strAlcoholic == "Alcoholic",
-    glass = strGlass.orEmpty(),
-    listIngredients = listOf(
+fun DrinkDTO.transform(resourcesDataSource: ResourcesDataSource): DrinkBO {
+    val listIngredients = createListIngredients(resourcesDataSource = resourcesDataSource)
+    return DrinkBO(
+        alcoholic = strAlcoholic.orEmpty(),
+        category = resourcesDataSource.getStringOrResource(
+            str = strCategory,
+            resId = R.string.category_drink_default
+        ),
+        dateModified = dateModified.orEmpty(),
+        id = idDrink.orEmpty(),
+        instructions = getInstructions(resourcesDataSource),
+        glass = strGlass.orEmpty(),
+        listIngredients = listIngredients,
+        listMeasures = createListMeasures(
+            listIngredients = listIngredients,
+            resourcesDataSource = resourcesDataSource
+        ),
+        name = resourcesDataSource.getStringOrResource(
+            str = strDrink,
+            resId = R.string.name_drink_default
+        ),
+        urlImage = strDrinkThumb.orEmpty()
+    )
+}
+
+private fun DrinkDTO.getInstructions(resourcesDataSource: ResourcesDataSource): String =
+    when (Locale.getDefault().language) {
+        "es" -> strInstructionsES.orDefault(resourcesDataSource = resourcesDataSource)
+        "fr" -> strInstructionsFR.orDefault(resourcesDataSource = resourcesDataSource)
+        "de" -> strInstructionsDE.orDefault(resourcesDataSource = resourcesDataSource)
+        "it" -> strInstructionsIT.orDefault(resourcesDataSource = resourcesDataSource)
+        else -> strInstructions.orDefault(resourcesDataSource = resourcesDataSource)
+    }
+
+private fun String?.orDefault(resourcesDataSource: ResourcesDataSource): String =
+    resourcesDataSource.getStringOrResource(str = this, resId = R.string.instructions_drink_default)
+
+private fun DrinkDTO.createListIngredients(resourcesDataSource: ResourcesDataSource): List<String> =
+    listOf(
         strIngredient1.orEmpty(),
         strIngredient2.orEmpty(),
         strIngredient3.orEmpty(),
@@ -40,33 +67,47 @@ fun DrinkDTO.transform(): DrinkBO = DrinkBO(
         strIngredient13.orEmpty(),
         strIngredient14.orEmpty(),
         strIngredient15.orEmpty()
-    ),
-    listMeasures = listOf(
-        strMeasure1.orEmpty(),
-        strMeasure2.orEmpty(),
-        strMeasure3.orEmpty(),
-        strMeasure4.orEmpty(),
-        strMeasure5.orEmpty(),
-        strMeasure6.orEmpty(),
-        strMeasure7.orEmpty(),
-        strMeasure8.orEmpty(),
-        strMeasure9.orEmpty(),
-        strMeasure10.orEmpty(),
-        strMeasure11.orEmpty(),
-        strMeasure12.orEmpty(),
-        strMeasure13.orEmpty(),
-        strMeasure14.orEmpty(),
-        strMeasure15.orEmpty()
-    ),
-    name = strDrink.orEmpty(),
-    urlImage = strDrinkThumb.orEmpty()
-)
+    ).run {
+        if (any { it.isNotEmpty() }) {
+            this
+        } else {
+            listOf(
+                resourcesDataSource.getStringFromResource(resId = R.string.ingredients_drink_default)
+            )
+        }
+    }
+
+private fun DrinkDTO.createListMeasures(
+    listIngredients: List<String>,
+    resourcesDataSource: ResourcesDataSource,
+): List<String> =
+    if (resourcesDataSource.getStringFromResource(resId = R.string.ingredients_drink_default) != listIngredients.first()) {
+        listOf(
+            strMeasure1.orEmpty(),
+            strMeasure2.orEmpty(),
+            strMeasure3.orEmpty(),
+            strMeasure4.orEmpty(),
+            strMeasure5.orEmpty(),
+            strMeasure6.orEmpty(),
+            strMeasure7.orEmpty(),
+            strMeasure8.orEmpty(),
+            strMeasure9.orEmpty(),
+            strMeasure10.orEmpty(),
+            strMeasure11.orEmpty(),
+            strMeasure12.orEmpty(),
+            strMeasure13.orEmpty(),
+            strMeasure14.orEmpty(),
+            strMeasure15.orEmpty()
+        )
+    } else {
+        listOf()
+    }
 
 fun ErrorDTO.transform(): ErrorBO = when (this) {
-    is ErrorDTO.Basic -> ErrorBO.Basic(id = id)
     is ErrorDTO.Connectivity -> ErrorBO.Connectivity
     is ErrorDTO.DataNotFound -> ErrorBO.DataNotFound
     is ErrorDTO.DeserializingJSON -> ErrorBO.DeserializingJSON
+    is ErrorDTO.Generic -> ErrorBO.Generic(id = id)
     is ErrorDTO.LoadingData -> ErrorBO.LoadingData
     is ErrorDTO.LoadingURL -> ErrorBO.LoadingURL
 }
