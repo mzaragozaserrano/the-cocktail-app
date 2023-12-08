@@ -7,7 +7,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.mzaragozaserrano.presentation.compose.components.utils.AppDrawerContent
+import com.mzaragozaserrano.presentation.compose.components.utils.MenuDrawerContent
 import com.thecocktailapp.presentation.screens.home.HomeScreen
 import com.thecocktailapp.presentation.vo.MenuItem
 import com.thecocktailapp.presentation.vo.createMenuList
@@ -19,7 +19,7 @@ fun MainScreen(modifier: Modifier = Modifier, navController: NavController) {
     ModalNavigationDrawer(
         modifier = modifier,
         drawerContent = {
-            AppDrawerContent(
+            MenuDrawerContent(
                 defaultPick = MenuItem.HomeScreen,
                 drawerState = drawerState,
                 greetingTextColor = MaterialTheme.colorScheme.secondary,
@@ -29,8 +29,8 @@ fun MainScreen(modifier: Modifier = Modifier, navController: NavController) {
                 textColor = MaterialTheme.colorScheme.primary,
                 timeTextColor = MaterialTheme.colorScheme.secondary,
                 timeTextId = R.string.menu_time
-            ) { onUserPickedOption ->
-                when (onUserPickedOption) {
+            ) { onMenuItemClicked ->
+                when (onMenuItemClicked) {
                     is MenuItem.CloseSession -> {
 
                     }
