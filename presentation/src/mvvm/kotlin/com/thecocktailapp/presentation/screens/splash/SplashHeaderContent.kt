@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mzaragozaserrano.presentation.compose.components.images.UrlImage
-import com.thecocktailapp.ui.R
 
 @Composable
 fun SplashHeaderContent(modifier: Modifier = Modifier, urlImage: String) {
@@ -25,7 +24,6 @@ fun SplashHeaderContent(modifier: Modifier = Modifier, urlImage: String) {
                 .padding(all = 24.dp)
                 .aspectRatio(1f),
             cornerRadius = 8.dp,
-            defaultImage = R.drawable.loading_img,
             url = urlImage
         )
     }
