@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import com.thecocktailapp.presentation.screens.home.HomeScreen
+import com.thecocktailapp.presentation.screens.app.AppScreen
 import com.thecocktailapp.presentation.theme.TheCocktailAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +16,7 @@ class ComposeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TheCocktailAppTheme {
-                HomeScreen(modifier = Modifier.fillMaxSize())
+                AppScreen(modifier = Modifier.fillMaxSize())
             }
         }
     }

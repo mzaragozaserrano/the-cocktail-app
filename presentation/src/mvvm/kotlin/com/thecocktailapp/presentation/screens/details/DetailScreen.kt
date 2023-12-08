@@ -47,7 +47,7 @@ fun DetailScreen(
                         inclusive = false
                     }
                 },
-                route = NavCommand.Home(feature = Feature.App).route
+                route = NavCommand.App(feature = Feature.Main).route
             )
         }
     )

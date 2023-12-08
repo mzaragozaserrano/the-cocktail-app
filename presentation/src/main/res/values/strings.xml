@@ -27,12 +27,16 @@
     //----- FRAGMENT (DETAIL) ----------/
     <string name="label_alcoholic">Poción adulta</string>
     <string name="label_free">Cero resaca</string>
-    <string name="title_ingredients">Ingredientes</string>
-    <string name="title_instructions">Preparación</string>
     <string name="label_optional">Tú decides</string>
     <string name="label_unknown">Sin </string>
+    <string name="title_ingredients">Ingredientes</string>
+    <string name="title_instructions">Preparación</string>
 
     //----- MENU ----------/
+    <string name="menu_greeting">Buenas tardes,</string>
     <string name="menu_item_close_session">Cerrar sesión</string>
+    <string name="menu_item_favorites">Favoritas</string>
+    <string name="menu_item_home">The Cocktail App</string>
+    <string name="menu_time">08/12/2023 19:58</string>
 
 </resources>

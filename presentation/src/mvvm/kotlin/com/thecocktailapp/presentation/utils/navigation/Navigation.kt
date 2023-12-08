@@ -8,7 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navigation
 import com.thecocktailapp.presentation.screens.details.DetailScreen
-import com.thecocktailapp.presentation.screens.main.HomeScreen
+import com.thecocktailapp.presentation.screens.main.MainScreen
 import com.thecocktailapp.presentation.screens.splash.SplashScreen
 import com.thecocktailapp.presentation.utils.extensions.composable
 
@@ -35,12 +35,12 @@ private fun NavGraphBuilder.theCocktailAppNav(
 ) {
 
     navigation(
-        startDestination = NavCommand.Home(feature = Feature.App).route,
-        route = Feature.App.route
+        startDestination = NavCommand.App(feature = Feature.Main).route,
+        route = Feature.Main.route
     ) {
 
-        composable(navItem = NavCommand.Home(feature = Feature.App)) {
-            HomeScreen()
+        composable(navItem = NavCommand.App(feature = Feature.Main)) {
+            MainScreen(modifier = modifier, navController = navController)
         }
 
         composable(navItem = NavCommand.Content(feature = Feature.Detail)) {
@@ -57,11 +57,11 @@ private fun NavGraphBuilder.splashNav(
 ) {
 
     navigation(
-        startDestination = NavCommand.Home(feature = Feature.Splash).route,
+        startDestination = NavCommand.App(feature = Feature.Splash).route,
         route = Feature.Splash.route
     ) {
 
-        composable(navItem = NavCommand.Home(feature = Feature.Splash)) {
+        composable(navItem = NavCommand.App(feature = Feature.Splash)) {
             SplashScreen(
                 modifier = modifier,
                 onSeeClicked = { id ->
@@ -77,7 +77,7 @@ private fun NavGraphBuilder.splashNav(
                                 inclusive = false
                             }
                         },
-                        route = NavCommand.Home(feature = Feature.App).route
+                        route = NavCommand.App(feature = Feature.Main).route
                     )
                 }
             )

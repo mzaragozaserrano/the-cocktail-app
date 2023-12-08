@@ -77,7 +77,7 @@ fun SplashScreen(
                     buttonBackgroundColor = MaterialTheme.colorScheme.primary,
                     buttonTextColor = MaterialTheme.colorScheme.onPrimary,
                     buttonTextId = R.string.see_button,
-                    textId = R.string.retry_button,
+                    textId = R.string.cancel_button,
                     onSeeClicked = {
                         onSeeClicked(drink.id)
                     },
