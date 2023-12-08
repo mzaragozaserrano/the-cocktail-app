@@ -3,8 +3,9 @@ package com.thecocktailapp.presentation.screens.details
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -15,12 +16,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.mzaragozaserrano.presentation.compose.components.alerts.ErrorAlert
 import com.mzaragozaserrano.presentation.compose.components.cards.RoundedCard
+import com.thecocktailapp.presentation.components.ErrorDialog
 import com.thecocktailapp.presentation.components.ProgressDialog
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
@@ -58,45 +58,50 @@ fun DetailScreen(
         }
     }
 
-    Column(
+    LazyColumn(
         modifier = modifier.background(color = MaterialTheme.colorScheme.primary),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        when (state) {
-            is DetailDrinkViewModel.DetailDrinkUiState.Error -> {
-                val error = (state as DetailDrinkViewModel.DetailDrinkUiState.Error).error
-                ErrorAlert(
-                    alertBackgroundColor = MaterialTheme.colorScheme.background,
-                    buttonBackgroundColor = MaterialTheme.colorScheme.errorContainer,
-                    buttonTextColor = MaterialTheme.colorScheme.background,
-                    buttonTextId = R.string.retry_button,
-                    messageTextColor = colorResource(id = R.color.color_on_background),
-                    messageTextId = error.idMessage,
-                    titleTextColor = colorResource(id = R.color.color_error_container),
-                    titleTextId = R.string.title_error
-                ) {
-                    viewModel.onExecuteGetDrinkById()
+        item {
+            when (state) {
+                is DetailDrinkViewModel.DetailDrinkUiState.Error -> {
+                    val error = (state as DetailDrinkViewModel.DetailDrinkUiState.Error).error
+                    ErrorDialog(
+                        buttonTextId = R.string.retry_button,
+                        messageTextId = error.messageId
+                    ) {
+                        viewModel.onExecuteGetDrinkById()
+                    }
                 }
-            }
 
-            is DetailDrinkViewModel.DetailDrinkUiState.Idle -> {}
-            is DetailDrinkViewModel.DetailDrinkUiState.Loading -> {
-                ProgressDialog()
-            }
+                is DetailDrinkViewModel.DetailDrinkUiState.Idle -> {}
+                is DetailDrinkViewModel.DetailDrinkUiState.Loading -> {
+                    ProgressDialog()
+                }
 
-            is DetailDrinkViewModel.DetailDrinkUiState.Success -> {
-                val drink = (state as DetailDrinkViewModel.DetailDrinkUiState.Success).drink
-                ingredients = drink.ingredients
-                RoundedCard(
-                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 48.dp),
-                    backgroundColor = MaterialTheme.colorScheme.background
-                ) {
-                    DetailHeaderContent(drink = drink)
-                    DetailIngredientsContent(
-                        ingredients = ingredients,
-                        showInstructions = showInstructions
-                    )
+                is DetailDrinkViewModel.DetailDrinkUiState.Success -> {
+                    val drink = (state as DetailDrinkViewModel.DetailDrinkUiState.Success).drink
+                    ingredients = drink.ingredients
+                    RoundedCard(
+                        modifier = Modifier.padding(horizontal = 24.dp, vertical = 48.dp),
+                        backgroundColor = MaterialTheme.colorScheme.background
+                    ) {
+                        DetailHeaderContent(
+                            drinkType = drink.drinkType,
+                            glass = drink.glass,
+                            name = drink.name.uppercase(),
+                            url = drink.urlImage
+                        )
+                        DetailIngredientsContent(
+                            ingredients = ingredients,
+                            showInstructions = showInstructions
+                        )
+                        DetailInstructionsContent(
+                            modifier = Modifier.fillMaxWidth(),
+                            instructions = drink.instructions
+                        )
+                    }
                 }
             }
         }

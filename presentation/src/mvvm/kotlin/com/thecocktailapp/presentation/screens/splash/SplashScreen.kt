@@ -12,11 +12,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mzaragozaserrano.presentation.compose.components.alerts.ErrorAlert
 import com.thecocktailapp.presentation.components.DualActionButton
+import com.thecocktailapp.presentation.components.ErrorDialog
 import com.thecocktailapp.presentation.components.ProgressDialog
 import com.thecocktailapp.presentation.viewmodels.SplashViewModel
 import com.thecocktailapp.ui.R
@@ -56,16 +55,7 @@ fun SplashScreen(
         when (state) {
             is SplashViewModel.SplashUiState.Error -> {
                 val error = (state as SplashViewModel.SplashUiState.Error).error
-                ErrorAlert(
-                    alertBackgroundColor = MaterialTheme.colorScheme.background,
-                    buttonBackgroundColor = MaterialTheme.colorScheme.errorContainer,
-                    buttonTextColor = MaterialTheme.colorScheme.background,
-                    buttonTextId = R.string.retry_button,
-                    messageTextColor = colorResource(id = R.color.color_on_background),
-                    messageTextId = error.idMessage,
-                    titleTextColor = colorResource(id = R.color.color_error_container),
-                    titleTextId = R.string.title_error
-                ) {
+                ErrorDialog(buttonTextId = R.string.retry_button, messageTextId = error.messageId) {
                     viewModel.onExecuteGetRandomDrink()
                 }
             }
