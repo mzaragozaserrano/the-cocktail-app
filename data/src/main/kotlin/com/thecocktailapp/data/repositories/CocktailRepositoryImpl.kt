@@ -1,11 +1,12 @@
 package com.thecocktailapp.data.repositories
 
+import com.mzaragozaserrano.data.datasources.local.ResourcesDataSource
 import com.mzaragozaserrano.data.utils.ResultData
 import com.mzaragozaserrano.domain.utils.Result
 import com.mzaragozaserrano.domain.utils.getCurrentDate
 import com.mzaragozaserrano.domain.utils.sdf
-import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.datasources.local.PreferencesDataSource
+import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.ErrorDTO
 import com.thecocktailapp.data.utils.transform
 import com.thecocktailapp.domain.bo.CocktailBO
@@ -17,6 +18,7 @@ import javax.inject.Inject
 class CocktailRepositoryImpl @Inject constructor(
     private val cocktailDataSource: CocktailDataSource,
     private val preferencesDataSource: PreferencesDataSource,
+    private val resourcesDataSource: ResourcesDataSource,
 ) : CocktailRepository {
 
     override suspend fun getDrinkById(id: Int): Flow<Result<CocktailBO>> = flow {
@@ -24,7 +26,7 @@ class CocktailRepositoryImpl @Inject constructor(
         emit(
             when (val result = cocktailDataSource.getDrinkById(id)) {
                 is ResultData.Response -> {
-                    Result.Response.Success(result.data.transform())
+                    Result.Response.Success(result.data.transform(resourcesDataSource))
                 }
 
                 is ResultData.Error<*> -> {
@@ -41,7 +43,7 @@ class CocktailRepositoryImpl @Inject constructor(
                 when (val result = cocktailDataSource.getRandomDrink()) {
                     is ResultData.Response -> {
                         preferencesDataSource.saveFirstAccessDate(getCurrentDate(sdf))
-                        Result.Response.Success(result.data.transform())
+                        Result.Response.Success(result.data.transform(resourcesDataSource))
                     }
 
                     is ResultData.Error<*> -> {

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="category_drink_default">Desconocida</string>
+    <string name="ingredients_drink_default">Sin información</string>
+    <string name="instructions_drink_default">Sin información</string>
+    <string name="name_drink_default">Desconocida</string>
+</resources>
