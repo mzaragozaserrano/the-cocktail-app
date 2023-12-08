@@ -8,6 +8,7 @@
     <string name="cancel_button">Cancelar</string>
     <string name="retry_button">Reintentar</string>
     <string name="see_button">Ver</string>
+    <string name="show_steps_button">Mostrar pasos</string>
 
     //----- ERRORS ----------/
     <string name="error_generic">Error: %s</string>
@@ -24,7 +25,12 @@
     <string name="third_title_splash_fragment">Diaria</string>
 
     //----- FRAGMENT (DETAIL) ----------/
+    <string name="label_alcoholic">Poción adulta</string>
+    <string name="label_free">Cero resaca</string>
     <string name="title_ingredients">Ingredientes</string>
+    <string name="title_instructions">Preparación</string>
+    <string name="label_optional">Tú decides</string>
+    <string name="label_unknown">Sin </string>
 
     //----- MENU ----------/
     <string name="menu_item_close_session">Cerrar sesión</string>
