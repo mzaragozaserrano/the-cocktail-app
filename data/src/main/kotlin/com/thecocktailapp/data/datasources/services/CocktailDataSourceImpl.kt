@@ -42,6 +42,22 @@ class CocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
             }
         }
 
+    private fun <T> CancellableContinuation<ResultData<T>>.doRequest(
+        url: String,
+        onSuccess: (Response) -> Unit,
+    ) {
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url(url)
+            .build()
+        val response = client.newCall(request).execute()
+        if (response.isSuccessful) {
+            onSuccess(response)
+        } else {
+            onError(this, ErrorDTO.Generic(response.code))
+        }
+    }
+
     private fun CancellableContinuation<ResultData<CocktailDTO>>.getCocktailDTO(response: Response) {
         val moshiBuilder = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val jsonResult = try {
@@ -65,22 +81,6 @@ class CocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
             is ResultData.Response -> {
                 onSuccess(this, jsonResult.data)
             }
-        }
-    }
-
-    private fun <T> CancellableContinuation<ResultData<T>>.doRequest(
-        url: String,
-        onSuccess: (Response) -> Unit,
-    ) {
-        val client = OkHttpClient()
-        val request = Request.Builder()
-            .url(url)
-            .build()
-        val response = client.newCall(request).execute()
-        if (response.isSuccessful) {
-            onSuccess(response)
-        } else {
-            onError(this, ErrorDTO.Basic(response.code))
         }
     }
 
