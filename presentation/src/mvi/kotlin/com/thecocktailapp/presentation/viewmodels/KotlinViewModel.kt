@@ -43,7 +43,7 @@ class KotlinViewModel @Inject constructor(
         }
     }
 
-    private fun processAction(action: KotlinAction) = when (action) {
+    private fun processAction(action: KotlinAction): Flow<KotlinResult> = when (action) {
         is CommonAction.Init -> {
             onInit()
         }
@@ -58,11 +58,11 @@ class KotlinViewModel @Inject constructor(
 
     }
 
-    private fun onInit() = KotlinResult.Init.toFlowResult()
+    private fun onInit(): Flow<KotlinResult> = KotlinResult.Init.toFlowResult()
 
-    private fun onIdle() = CommonResult.Idle.toFlowResult()
+    private fun onIdle(): Flow<KotlinResult> = CommonResult.Idle.toFlowResult()
 
-    private fun onExecuteTask(task: KotlinAction.Task) = when (task) {
+    private fun onExecuteTask(task: KotlinAction.Task): Flow<KotlinResult> = when (task) {
         is KotlinAction.Task.CheckPreferencesToShowRandomDrink -> {
             onExecuteShowRandomDrink()
         }

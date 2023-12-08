@@ -21,19 +21,18 @@ fun DetailIngredientsContent(
     ingredients: List<String>,
     showInstructions: Boolean,
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 24.dp)
+            .padding(top = 24.dp)
     ) {
         AnimatedVisibility(
             enter = slideInHorizontally(
                 animationSpec = tween(durationMillis = 2000 / (ingredients.size + 1)),
                 initialOffsetX = { it }
             ),
-            label = "",
-            visible = showInstructions
+            visible = showInstructions,
+            label = ""
         ) {
             LargeBoldText(
                 modifier = Modifier
@@ -49,8 +48,8 @@ fun DetailIngredientsContent(
                     animationSpec = tween(durationMillis = (2000 / (ingredients.size + 1) * (index + 1))),
                     initialOffsetX = { it }
                 ),
-                label = "",
-                visible = showInstructions
+                visible = showInstructions,
+                label = ""
             ) {
                 SmallMediumText(
                     modifier = Modifier
@@ -62,5 +61,4 @@ fun DetailIngredientsContent(
             }
         }
     }
-
 }

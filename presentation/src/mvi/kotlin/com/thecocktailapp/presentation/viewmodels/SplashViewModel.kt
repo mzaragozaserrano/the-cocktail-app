@@ -52,7 +52,7 @@ class SplashViewModel @Inject constructor(
         }
     }
 
-    private suspend fun processAction(action: SplashAction) = when (action) {
+    private suspend fun processAction(action: SplashAction): Flow<SplashResult> = when (action) {
         is CommonAction.Init -> {
             onInit()
         }
@@ -70,11 +70,11 @@ class SplashViewModel @Inject constructor(
         }
     }
 
-    private fun onInit() = SplashResult.Init(drink).toFlowResult()
+    private fun onInit(): Flow<SplashResult> = SplashResult.Init(drink).toFlowResult()
 
-    private fun onIdle() = CommonResult.Idle.toFlowResult()
+    private fun onIdle(): Flow<SplashResult> = CommonResult.Idle.toFlowResult()
 
-    private suspend fun onExecuteTask(task: SplashAction.Task) = when (task) {
+    private suspend fun onExecuteTask(task: SplashAction.Task): Flow<SplashResult> = when (task) {
         is SplashAction.Task.GetRandomDrink -> {
             onExecuteGetRandomDrink()
         }
@@ -98,19 +98,20 @@ class SplashViewModel @Inject constructor(
             }
         }
 
-    private fun onNavigate(action: SplashAction.TaskForNavigate) = when (action) {
-        is SplashAction.TaskForNavigate.ToDrinkDetail -> {
-            val id = drink?.id
-            if (id != null) {
-                SplashResult.Task.Success(NavigateToDrinkDetail(id.toInt())).toFlowResult()
-            } else {
-                SplashResult.Task.Error(ErrorVO.DataNotFound).toFlowResult()
+    private fun onNavigate(action: SplashAction.TaskForNavigate): Flow<SplashResult> =
+        when (action) {
+            is SplashAction.TaskForNavigate.ToDrinkDetail -> {
+                val id = drink?.id
+                if (id != null) {
+                    SplashResult.Task.Success(NavigateToDrinkDetail(id.toInt())).toFlowResult()
+                } else {
+                    SplashResult.Task.Error(ErrorVO.DataNotFound).toFlowResult()
+                }
+            }
+
+            is SplashAction.TaskForNavigate.ToMain -> {
+                SplashResult.Task.Success(NavigateToHomeFragment).toFlowResult()
             }
         }
-
-        is SplashAction.TaskForNavigate.ToMain -> {
-            SplashResult.Task.Success(NavigateToHomeFragment).toFlowResult()
-        }
-    }
 
 }

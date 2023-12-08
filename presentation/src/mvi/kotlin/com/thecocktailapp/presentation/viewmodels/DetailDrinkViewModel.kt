@@ -50,30 +50,32 @@ class DetailDrinkViewModel @Inject constructor(
         }
     }
 
-    private suspend fun processAction(action: DetailDrinkAction) = when (action) {
-        is CommonAction.Init -> {
-            onInit()
+    private suspend fun processAction(action: DetailDrinkAction): Flow<DetailDrinkResult> =
+        when (action) {
+            is CommonAction.Init -> {
+                onInit()
+            }
+
+            is CommonAction.Idle -> {
+                onIdle()
+            }
+
+            is DetailDrinkAction.Task -> {
+                onExecuteTask(action)
+            }
+
         }
 
-        is CommonAction.Idle -> {
-            onIdle()
+    private fun onInit(): Flow<DetailDrinkResult> = DetailDrinkResult.Init(drink).toFlowResult()
+
+    private fun onIdle(): Flow<DetailDrinkResult> = CommonResult.Idle.toFlowResult()
+
+    private suspend fun onExecuteTask(task: DetailDrinkAction.Task): Flow<DetailDrinkResult> =
+        when (task) {
+            is DetailDrinkAction.Task.GetDrinkById -> {
+                onExecuteGetRandomDrink(id = task.id)
+            }
         }
-
-        is DetailDrinkAction.Task -> {
-            onExecuteTask(action)
-        }
-
-    }
-
-    private fun onInit() = DetailDrinkResult.Init(drink).toFlowResult()
-
-    private fun onIdle() = CommonResult.Idle.toFlowResult()
-
-    private suspend fun onExecuteTask(task: DetailDrinkAction.Task) = when (task) {
-        is DetailDrinkAction.Task.GetDrinkById -> {
-            onExecuteGetRandomDrink(id = task.id)
-        }
-    }
 
     private suspend fun onExecuteGetRandomDrink(id: Int): Flow<DetailDrinkResult> =
         getDrinkById(GetDrinkByIdUseCaseImpl.Params(id = id)).map { result ->
