@@ -8,7 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navigation
 import com.thecocktailapp.presentation.screens.details.DetailScreen
-import com.thecocktailapp.presentation.screens.main.MainScreen
+import com.thecocktailapp.presentation.screens.main.HomeScreen
 import com.thecocktailapp.presentation.screens.splash.SplashScreen
 import com.thecocktailapp.presentation.utils.extensions.composable
 
@@ -40,7 +40,7 @@ private fun NavGraphBuilder.theCocktailAppNav(
     ) {
 
         composable(navItem = NavCommand.Home(feature = Feature.App)) {
-            MainScreen()
+            HomeScreen()
         }
 
         composable(navItem = NavCommand.Content(feature = Feature.Detail)) {
