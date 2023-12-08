@@ -18,6 +18,7 @@ fun Navigation(
     navController: NavHostController,
     startDestination: String,
 ) {
+
     NavHost(
         navController = navController,
         startDestination = startDestination
@@ -25,33 +26,41 @@ fun Navigation(
         splashNav(modifier = modifier, navController = navController)
         theCocktailAppNav(modifier = modifier, navController = navController)
     }
+
 }
 
 private fun NavGraphBuilder.theCocktailAppNav(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
+
     navigation(
         startDestination = NavCommand.Home(feature = Feature.App).route,
         route = Feature.App.route
     ) {
+
         composable(navItem = NavCommand.Home(feature = Feature.App)) {
             MainScreen()
         }
+
         composable(navItem = NavCommand.Content(feature = Feature.Detail)) {
             DetailScreen(modifier = modifier, navController = navController)
         }
+
     }
+
 }
 
 private fun NavGraphBuilder.splashNav(
     modifier: Modifier = Modifier,
     navController: NavHostController,
 ) {
+
     navigation(
         startDestination = NavCommand.Home(feature = Feature.Splash).route,
         route = Feature.Splash.route
     ) {
+
         composable(navItem = NavCommand.Home(feature = Feature.Splash)) {
             SplashScreen(
                 modifier = modifier,
@@ -73,5 +82,7 @@ private fun NavGraphBuilder.splashNav(
                 }
             )
         }
+
     }
+
 }
