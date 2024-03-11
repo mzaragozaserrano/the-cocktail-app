@@ -1,7 +1,9 @@
 package com.thecocktailapp.data.di
 
-import com.thecocktailapp.domain.usecases.main.detail.GetDrinkById
-import com.thecocktailapp.domain.usecases.main.detail.GetDrinkByIdUseCaseImpl
+import com.thecocktailapp.domain.usecases.detail.GetDrinkById
+import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
+import com.thecocktailapp.domain.usecases.home.GetDrinksByType
+import com.thecocktailapp.domain.usecases.home.GetDrinksByTypeUseCaseImpl
 import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
 import com.thecocktailapp.domain.usecases.splash.GetRandomDrinkUseCaseImpl
 import com.thecocktailapp.domain.usecases.splash.ShowRandomDrink
@@ -17,6 +19,9 @@ interface UseCaseModule {
 
     @Binds
     fun bindGetDrinkById(useCaseImpl: GetDrinkByIdUseCaseImpl): GetDrinkById
+
+    @Binds
+    fun bindGetDrinksByType(useCaseImpl: GetDrinksByTypeUseCaseImpl): GetDrinksByType
 
     @Binds
     fun bindGetRandomDrink(useCaseImpl: GetRandomDrinkUseCaseImpl): GetRandomDrink

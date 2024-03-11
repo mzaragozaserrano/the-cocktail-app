@@ -60,17 +60,13 @@ android {
 
 dependencies {
 
-    //----- AAR ----------/
-    implementation(files(project.rootDir.resolve("libs/mzs-domain.aar")))
-    implementation(files(project.rootDir.resolve("libs/mzs-presentation.aar")))
-
     //----- MODULES ----------/
+    implementation(project(":core"))
     implementation(project(":domain"))
 
     //----- ANDROIDX ----------/
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.fragment.ktx)
 
     //----- COIL ----------/
@@ -80,9 +76,9 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.runtime.livedata)
-    implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
 

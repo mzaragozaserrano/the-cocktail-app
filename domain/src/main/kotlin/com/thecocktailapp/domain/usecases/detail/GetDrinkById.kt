@@ -1,8 +1,8 @@
-package com.thecocktailapp.domain.usecases.main.detail
+package com.thecocktailapp.domain.usecases.detail
 
-import com.mzaragozaserrano.domain.repositories.NetworkRepository
-import com.mzaragozaserrano.domain.usecases.FlowUseCase
-import com.mzaragozaserrano.domain.utils.Result
+import com.mzs.core.domain.repositories.NetworkRepository
+import com.mzs.core.domain.usecases.FlowUseCase
+import com.mzs.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.repositories.CocktailRepository

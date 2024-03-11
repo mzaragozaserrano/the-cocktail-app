@@ -1,13 +1,13 @@
-package com.thecocktailapp.presentation.viewmodels
+package com.thecocktailapp.presentation.viewmodels.detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mzaragozaserrano.domain.utils.Result
+import com.mzs.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.main.detail.GetDrinkById
-import com.thecocktailapp.domain.usecases.main.detail.GetDrinkByIdUseCaseImpl
+import com.thecocktailapp.domain.usecases.detail.GetDrinkById
+import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
 import com.thecocktailapp.presentation.utils.navigation.NavArg
 import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.vo.DrinkVO
@@ -53,7 +53,8 @@ class DetailDrinkViewModel @Inject constructor(
                 }
 
                 is Result.Response.Error<*> -> {
-                    _state.value = DetailDrinkUiState.Error(error = (result.code as ErrorBO).transform())
+                    _state.value =
+                        DetailDrinkUiState.Error(error = (result.code as ErrorBO).transform())
                 }
 
                 is Result.Response.Success -> {

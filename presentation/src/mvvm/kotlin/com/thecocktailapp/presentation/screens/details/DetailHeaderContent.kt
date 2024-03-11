@@ -13,9 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.mzaragozaserrano.presentation.compose.components.images.UrlImage
-import com.mzaragozaserrano.presentation.compose.components.labels.WavyLabel
-import com.mzaragozaserrano.presentation.compose.components.texts.ExtraLargeBlackText
+import com.mzs.core.presentation.compose.components.images.UrlImage
+import com.mzs.core.presentation.compose.components.labels.WavyLabel
+import com.mzs.core.presentation.compose.components.texts.ExtraLargeBlackText
 import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.ui.R
 

@@ -33,7 +33,9 @@
     <string name="title_instructions">Preparación</string>
 
     //----- MENU ----------/
-    <string name="menu_greeting">Buenas tardes,</string>
+    <string name="menu_greeting_afternoon">Buenas tardes,</string>
+    <string name="menu_greeting_morning">Buenos días,</string>
+    <string name="menu_greeting_night">Buenas noches,</string>
     <string name="menu_item_close_session">Cerrar sesión</string>
     <string name="menu_item_favorites">Favoritas</string>
     <string name="menu_item_home">The Cocktail App</string>

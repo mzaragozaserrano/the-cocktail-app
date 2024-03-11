@@ -2,12 +2,12 @@ package com.thecocktailapp.presentation.fragments.detail
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.mzaragozaserrano.presentation.common.utils.extensions.serializable
-import com.mzaragozaserrano.presentation.view.base.BaseFragment
-import com.mzaragozaserrano.presentation.view.utils.extensions.hideProgressDialog
-import com.mzaragozaserrano.presentation.view.utils.extensions.loadImageFromUrl
-import com.mzaragozaserrano.presentation.view.utils.extensions.showProgressDialog
-import com.mzaragozaserrano.presentation.view.utils.viewBinding.viewBinding
+import com.mzs.core.presentation.common.utils.extensions.serializable
+import com.mzs.core.presentation.view.base.BaseFragment
+import com.mzs.core.presentation.view.utils.extensions.hideProgressDialog
+import com.mzs.core.presentation.view.utils.extensions.loadImageFromUrl
+import com.mzs.core.presentation.view.utils.extensions.showProgressDialog
+import com.mzs.core.presentation.view.utils.viewBinding.viewBinding
 import com.thecocktailapp.presentation.utils.mvi.CommonIntent
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
 import com.thecocktailapp.presentation.utils.mvi.DetailDrinkIntent

@@ -5,8 +5,8 @@ import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.mzaragozaserrano.presentation.databinding.CoreDrawerLayoutBinding
-import com.mzaragozaserrano.presentation.view.adapters.NavMenuAdapter
+import com.mzs.core.presentation.databinding.CoreDrawerLayoutBinding
+import com.mzs.core.presentation.view.adapters.NavMenuAdapter
 import com.thecocktailapp.presentation.base.TheCocktailAppBaseActivity
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
 import com.thecocktailapp.presentation.utils.mvi.KotlinIntent

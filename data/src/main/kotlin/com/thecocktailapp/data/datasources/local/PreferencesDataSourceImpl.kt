@@ -1,6 +1,6 @@
 package com.thecocktailapp.data.datasources.local
 
-import com.mzaragozaserrano.data.utils.encryption.EncryptedPreferences
+import com.mzs.core.data.utils.encryption.EncryptedPreferences
 import com.thecocktailapp.domain.utils.PreferencesKey
 import javax.inject.Inject
 

@@ -1,6 +1,6 @@
 package com.thecocktailapp.presentation.vo
 
-import com.mzaragozaserrano.presentation.vo.MenuDrawerItemVO
+import com.mzs.core.presentation.vo.MenuDrawerItemVO
 import com.thecocktailapp.ui.R
 
 sealed class MenuItem {

@@ -17,9 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.mzaragozaserrano.presentation.compose.components.buttons.FallButton
-import com.mzaragozaserrano.presentation.compose.components.texts.LargeBoldText
-import com.mzaragozaserrano.presentation.compose.components.texts.SmallMediumText
+import com.mzs.core.presentation.compose.components.buttons.FallButton
+import com.mzs.core.presentation.compose.components.texts.LargeBoldText
+import com.mzs.core.presentation.compose.components.texts.SmallMediumText
 import com.thecocktailapp.ui.R
 
 @Composable

@@ -15,6 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "The Cocktail App"
 include(":app")
-include(":presentation")
-include(":domain")
+include(":core")
 include(":data")
+include(":domain")
+include(":presentation")

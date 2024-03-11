@@ -1,7 +1,7 @@
 package com.thecocktailapp.data.utils
 
-import com.mzaragozaserrano.data.R
-import com.mzaragozaserrano.data.datasources.local.ResourcesDataSource
+import com.mzs.core.data.R
+import com.mzs.core.data.datasources.local.ResourcesDataSource
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.DrinkDTO
 import com.thecocktailapp.data.dto.ErrorDTO

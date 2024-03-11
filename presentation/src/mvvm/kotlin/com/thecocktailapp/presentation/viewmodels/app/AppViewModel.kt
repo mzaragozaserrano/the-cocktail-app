@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.viewmodels
+package com.thecocktailapp.presentation.viewmodels.app
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class AppViewModel @Inject constructor(
     private val showRandomDrink: @JvmSuppressWildcards ShowRandomDrink,
 ) : ViewModel() {
 

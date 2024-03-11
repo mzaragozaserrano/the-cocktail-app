@@ -6,6 +6,7 @@ import androidx.annotation.StringRes
 import com.thecocktailapp.ui.R
 
 sealed class DrinkType(
+    val alcoholic: String,
     @ColorRes val buttonBackgroundColorId: Int,
     @ColorRes val iconBackgroundColorId: Int,
     @DrawableRes val iconId: Int,
@@ -13,8 +14,9 @@ sealed class DrinkType(
     @StringRes val labelId: Int,
     @ColorRes val textColorId: Int,
 ) {
-    object Alcoholic :
+     object Alcoholic :
         DrinkType(
+            alcoholic = "Alcoholic",
             buttonBackgroundColorId = R.color.color_error,
             iconBackgroundColorId = R.color.color_error_container,
             iconId = R.drawable.ic_forbidden_age,
@@ -24,6 +26,7 @@ sealed class DrinkType(
         )
 
     object None : DrinkType(
+        alcoholic = "Non alcoholic",
         buttonBackgroundColorId = R.color.color_error,
         iconBackgroundColorId = R.color.color_error_container,
         iconId = R.drawable.ic_free,
@@ -34,6 +37,7 @@ sealed class DrinkType(
 
     object Optional :
         DrinkType(
+            alcoholic = "Optional alcohol",
             buttonBackgroundColorId = R.color.color_error,
             iconBackgroundColorId = R.color.color_error_container,
             iconId = R.drawable.ic_forbidden_age,

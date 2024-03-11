@@ -39,8 +39,8 @@ android {
 
 dependencies {
 
-    //----- AAR ----------/
-    implementation(files(project.rootDir.resolve("libs/mzs-domain.aar")))
+    //----- MODULES ----------/
+    implementation(project(":core"))
 
     //----- COROUTINES ----------/
     implementation(libs.kotlinx.coroutines.android)

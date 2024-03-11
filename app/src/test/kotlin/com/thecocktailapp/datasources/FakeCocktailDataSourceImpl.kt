@@ -1,8 +1,8 @@
 package com.thecocktailapp.datasources
 
-import com.mzaragozaserrano.data.utils.ResultData
-import com.mzaragozaserrano.data.utils.onError
-import com.mzaragozaserrano.data.utils.onSuccess
+import com.mzs.core.data.utils.ResultData
+import com.mzs.core.data.utils.onError
+import com.mzs.core.data.utils.onSuccess
 import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.DrinkDTO
@@ -24,6 +24,11 @@ class FakeCocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
             getCocktail(continuation)
         }
 
+    override suspend fun getDrinksByType(alcoholic: String): ResultData<CocktailDTO> =
+        suspendCancellableCoroutine { continuation ->
+            getCocktail(continuation)
+        }
+
     override suspend fun getRandomDrink(): ResultData<CocktailDTO> =
         suspendCancellableCoroutine { continuation ->
             getCocktail(continuation)
@@ -34,7 +39,8 @@ class FakeCocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
             onError(continuation, ErrorDTO.DataNotFound)
         } else {
             onSuccess(
-                continuation, CocktailDTO(
+                continuation = continuation,
+                data = CocktailDTO(
                     listOf(
                         DrinkDTO(
                             dateModified = "2015-09-03 03:09:44",

@@ -1,6 +1,6 @@
 package com.thecocktailapp.repositories
 
-import com.mzaragozaserrano.domain.repositories.NetworkRepository
+import com.mzs.core.domain.repositories.NetworkRepository
 import javax.inject.Inject
 
 class FakeNetworkRepositoryImpl @Inject constructor() : NetworkRepository {

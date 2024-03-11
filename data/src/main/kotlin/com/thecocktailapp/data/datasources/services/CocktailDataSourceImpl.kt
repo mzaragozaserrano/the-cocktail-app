@@ -1,8 +1,8 @@
 package com.thecocktailapp.data.datasources.services
 
-import com.mzaragozaserrano.data.utils.ResultData
-import com.mzaragozaserrano.data.utils.onError
-import com.mzaragozaserrano.data.utils.onSuccess
+import com.mzs.core.data.utils.ResultData
+import com.mzs.core.data.utils.onError
+import com.mzs.core.data.utils.onSuccess
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -22,7 +22,19 @@ class CocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
         suspendCancellableCoroutine { continuation ->
             with(continuation) {
                 doRequest(
-                    url = UrlConstants.GetDrinkById(id).url,
+                    url = UrlConstants.GetDrinkById(id = id).url,
+                    onSuccess = { response ->
+                        getCocktailDTO(response)
+                    }
+                )
+            }
+        }
+
+    override suspend fun getDrinksByType(alcoholic: String): ResultData<CocktailDTO> =
+        suspendCancellableCoroutine { continuation ->
+            with(continuation) {
+                doRequest(
+                    url = UrlConstants.GetDrinkByType(alcoholic = alcoholic).url,
                     onSuccess = { response ->
                         getCocktailDTO(response)
                     }

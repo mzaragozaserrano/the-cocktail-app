@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mzaragozaserrano.presentation.compose.components.utils.LottieProgressDialog
+import com.mzs.core.presentation.compose.components.utils.LottieProgressDialog
 import com.thecocktailapp.ui.R
 
 @Composable

@@ -1,8 +1,8 @@
-package com.thecocktailapp.presentation.viewmodels
+package com.thecocktailapp.presentation.viewmodels.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mzaragozaserrano.domain.utils.Result
+import com.mzs.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
@@ -49,7 +49,8 @@ class SplashViewModel @Inject constructor(
                 }
 
                 is Result.Response.Success -> {
-                    _state.value = SplashUiState.Success(drink = result.data.drinks.first().transform())
+                    _state.value =
+                        SplashUiState.Success(drink = result.data.drinks.first().transform())
                 }
             }
         }

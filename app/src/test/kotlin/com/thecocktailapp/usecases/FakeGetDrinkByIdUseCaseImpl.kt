@@ -1,12 +1,12 @@
 package com.thecocktailapp.usecases
 
-import com.mzaragozaserrano.domain.repositories.NetworkRepository
-import com.mzaragozaserrano.domain.utils.Result
+import com.mzs.core.domain.repositories.NetworkRepository
+import com.mzs.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.repositories.CocktailRepository
-import com.thecocktailapp.domain.usecases.main.detail.GetDrinkById
-import com.thecocktailapp.domain.usecases.main.detail.GetDrinkByIdUseCaseImpl
+import com.thecocktailapp.domain.usecases.detail.GetDrinkById
+import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

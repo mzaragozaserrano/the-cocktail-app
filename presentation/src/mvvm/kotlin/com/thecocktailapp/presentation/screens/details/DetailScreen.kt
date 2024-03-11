@@ -19,12 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.mzaragozaserrano.presentation.compose.components.cards.RoundedCard
+import com.mzs.core.presentation.compose.components.cards.RoundedCard
 import com.thecocktailapp.presentation.components.ErrorDialog
 import com.thecocktailapp.presentation.components.ProgressDialog
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
-import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
+import com.thecocktailapp.presentation.viewmodels.detail.DetailDrinkViewModel
 import com.thecocktailapp.ui.R
 
 @Composable

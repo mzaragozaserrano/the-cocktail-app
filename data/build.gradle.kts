@@ -7,7 +7,7 @@ plugins {
 
 android {
 
-    namespace = "com.mzaragozaserrano.data"
+    namespace = "com.mzs.core.data"
     compileSdk = 33
 
     defaultConfig {
@@ -39,11 +39,8 @@ android {
 
 dependencies {
 
-    //----- AAR ----------/
-    implementation(files(project.rootDir.resolve("libs/mzs-data.aar")))
-    implementation(files(project.rootDir.resolve("libs/mzs-domain.aar")))
-
     //----- MODULES ----------/
+    implementation(project(":core"))
     implementation(project(":domain"))
 
     //----- COROUTINES ----------/

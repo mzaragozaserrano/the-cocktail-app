@@ -1,8 +1,8 @@
 package com.thecocktailapp.presentation.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.mzaragozaserrano.domain.utils.extension.toFlowResult
-import com.mzaragozaserrano.presentation.view.base.MVIViewModel
+import com.mzs.core.domain.utils.extension.toFlowResult
+import com.mzs.core.presentation.view.base.MVIViewModel
 import com.thecocktailapp.domain.usecases.splash.ShowRandomDrink
 import com.thecocktailapp.presentation.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.utils.mvi.CommonResult

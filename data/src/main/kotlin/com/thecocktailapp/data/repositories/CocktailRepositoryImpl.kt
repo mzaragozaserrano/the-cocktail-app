@@ -1,10 +1,10 @@
 package com.thecocktailapp.data.repositories
 
-import com.mzaragozaserrano.data.datasources.local.ResourcesDataSource
-import com.mzaragozaserrano.data.utils.ResultData
-import com.mzaragozaserrano.domain.utils.Result
-import com.mzaragozaserrano.domain.utils.getCurrentDate
-import com.mzaragozaserrano.domain.utils.sdf
+import com.mzs.core.data.datasources.local.ResourcesDataSource
+import com.mzs.core.data.utils.ResultData
+import com.mzs.core.domain.utils.Result
+import com.mzs.core.domain.utils.getCurrentDate
+import com.mzs.core.domain.utils.sdf
 import com.thecocktailapp.data.datasources.local.PreferencesDataSource
 import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.ErrorDTO
@@ -25,6 +25,21 @@ class CocktailRepositoryImpl @Inject constructor(
         emit(Result.Loading)
         emit(
             when (val result = cocktailDataSource.getDrinkById(id)) {
+                is ResultData.Response -> {
+                    Result.Response.Success(result.data.transform(resourcesDataSource))
+                }
+
+                is ResultData.Error<*> -> {
+                    Result.Response.Error((result.code as ErrorDTO).transform())
+                }
+            }
+        )
+    }
+
+    override suspend fun getDrinksByType(alcoholic: String): Flow<Result<CocktailBO>> = flow {
+        emit(Result.Loading)
+        emit(
+            when (val result = cocktailDataSource.getDrinksByType(alcoholic = alcoholic)) {
                 is ResultData.Response -> {
                     Result.Response.Success(result.data.transform(resourcesDataSource))
                 }

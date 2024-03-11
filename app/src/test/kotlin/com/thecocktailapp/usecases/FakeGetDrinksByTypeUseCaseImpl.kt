@@ -5,15 +5,17 @@ import com.mzs.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.repositories.CocktailRepository
-import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
+import com.thecocktailapp.domain.usecases.home.GetDrinksByType
+import com.thecocktailapp.domain.usecases.home.GetDrinksByTypeUseCaseImpl
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class FakeGetRandomDrinkUseCaseImpl @Inject constructor(
+class FakeGetDrinksByTypeUseCaseImpl @Inject constructor(
     private val cocktailRepository: CocktailRepository,
     networkRepository: NetworkRepository,
-) : GetRandomDrink(networkRepository = networkRepository, networkError = ErrorBO.Connectivity) {
+) : GetDrinksByType(networkRepository = networkRepository, networkError = ErrorBO.Connectivity) {
 
-    override suspend fun run(): Flow<Result<CocktailBO>> = cocktailRepository.getRandomDrink()
+    override suspend fun run(params: GetDrinksByTypeUseCaseImpl.Params): Flow<Result<CocktailBO>> =
+        cocktailRepository.getDrinksByType("Alcoholic")
 
 }

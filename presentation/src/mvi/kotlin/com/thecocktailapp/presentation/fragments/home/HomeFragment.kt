@@ -1,11 +1,11 @@
 package com.thecocktailapp.presentation.fragments.home
 
 import androidx.fragment.app.viewModels
-import com.mzaragozaserrano.presentation.databinding.CoreToolbarMenuBinding
-import com.mzaragozaserrano.presentation.view.base.BaseFragment
-import com.mzaragozaserrano.presentation.view.utils.extensions.setUpMenuToolbar
-import com.mzaragozaserrano.presentation.view.utils.extensions.showProgressDialog
-import com.mzaragozaserrano.presentation.view.utils.viewBinding.viewBinding
+import com.mzs.core.presentation.databinding.CoreToolbarMenuBinding
+import com.mzs.core.presentation.view.base.BaseFragment
+import com.mzs.core.presentation.view.utils.extensions.setUpMenuToolbar
+import com.mzs.core.presentation.view.utils.extensions.showProgressDialog
+import com.mzs.core.presentation.view.utils.viewBinding.viewBinding
 import com.thecocktailapp.presentation.activities.KotlinActivity
 import com.thecocktailapp.presentation.utils.mvi.CommonIntent
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState

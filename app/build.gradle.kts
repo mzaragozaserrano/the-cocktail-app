@@ -71,12 +71,8 @@ android {
 
 dependencies {
 
-    //----- AAR ----------/
-    implementation(files(project.rootDir.resolve("libs/mzs-data.aar")))
-    implementation(files(project.rootDir.resolve("libs/mzs-domain.aar")))
-    implementation(files(project.rootDir.resolve("libs/mzs-presentation.aar")))
-
     //----- MODULES ----------/
+    implementation(project(":core"))
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":presentation"))
@@ -84,9 +80,9 @@ dependencies {
     //----- COMPOSE ----------/
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.navigation.compose)
 
     //----- DAGGER ----------/
