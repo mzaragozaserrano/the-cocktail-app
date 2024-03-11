@@ -1,20 +1,20 @@
 package com.thecocktailapp.presentation.fragments.home
 
 import androidx.fragment.app.viewModels
-import com.mzs.core.presentation.databinding.CoreToolbarMenuBinding
-import com.mzs.core.presentation.view.base.BaseFragment
-import com.mzs.core.presentation.view.utils.extensions.setUpMenuToolbar
-import com.mzs.core.presentation.view.utils.extensions.showProgressDialog
-import com.mzs.core.presentation.view.utils.viewBinding.viewBinding
+import com.thecocktailapp.core.databinding.CoreToolbarMenuBinding
+import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.activities.KotlinActivity
+import com.thecocktailapp.presentation.databinding.FragmentHomeBinding
 import com.thecocktailapp.presentation.utils.mvi.CommonIntent
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
 import com.thecocktailapp.presentation.utils.mvi.HomeIntent
 import com.thecocktailapp.presentation.utils.mvi.HomeViewState
 import com.thecocktailapp.presentation.viewmodels.HomeViewModel
-import com.thecocktailapp.ui.R
-import com.thecocktailapp.ui.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import presentation.base.BaseFragment
+import presentation.utils.extensions.setUpMenuToolbar
+import presentation.utils.extensions.showProgressDialog
+import presentation.utils.viewBinding.viewBinding
 
 @AndroidEntryPoint
 class HomeFragment :
@@ -57,7 +57,7 @@ class HomeFragment :
     }
 
     private fun setUpToolbar() {
-        CoreToolbarMenuBinding.bind(binding.toolbarMenu).run {
+        CoreToolbarMenuBinding.bind(binding.toolbarMenu.root).run {
             setUpMenuToolbar(
                 allowGoBack = false,
                 drawerLayout = (activity as KotlinActivity).drawerLayout,

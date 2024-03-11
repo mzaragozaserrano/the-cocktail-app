@@ -23,6 +23,9 @@ okhttp = "4.12.0"
 # TESTING
 testingMockito = "4.8.0"
 testingTurbine = "1.0.0"
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
@@ -44,6 +47,7 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
 lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
 material3 = { group = "com.google.android.material", name = "material", version.ref = "material" }

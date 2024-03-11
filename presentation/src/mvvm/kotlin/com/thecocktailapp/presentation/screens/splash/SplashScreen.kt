@@ -14,11 +14,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.DualActionButton
 import com.thecocktailapp.presentation.components.ErrorDialog
 import com.thecocktailapp.presentation.components.ProgressDialog
 import com.thecocktailapp.presentation.viewmodels.splash.SplashViewModel
-import com.thecocktailapp.ui.R
 
 @Composable
 fun SplashScreen(

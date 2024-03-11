@@ -2,7 +2,6 @@ package viewmodels
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.mzs.core.data.datasources.local.ResourcesDataSource
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
 import com.thecocktailapp.presentation.utils.navigation.NavArg
 import com.thecocktailapp.presentation.viewmodels.detail.DetailDrinkViewModel
@@ -43,7 +42,7 @@ class DetailDrinkViewModelTest {
     private lateinit var networkRepository: FakeNetworkRepositoryImpl
 
     @InjectMocks
-    private lateinit var resourcesDataSource: ResourcesDataSource
+    private lateinit var resourcesDataSource: com.thecocktailapp.core.data.datasources.local.ResourcesDataSource
 
     @Inject
     lateinit var viewModel: DetailDrinkViewModel

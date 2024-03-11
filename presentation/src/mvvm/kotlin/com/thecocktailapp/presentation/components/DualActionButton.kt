@@ -11,8 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.mzs.core.presentation.compose.components.buttons.PushedButton
-import com.mzs.core.presentation.compose.components.texts.ExtraSmallMediumText
+import presentation.components.buttons.PushedButton
+import presentation.components.texts.ExtraSmallMediumText
 
 @Composable
 fun DualActionButton(

@@ -3,7 +3,7 @@ package com.thecocktailapp.presentation.vo
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.thecocktailapp.ui.R
+import com.thecocktailapp.presentation.R
 
 sealed class DrinkType(
     val alcoholic: String,

@@ -7,7 +7,7 @@ plugins {
 
 android {
 
-    namespace = "com.thecocktailapp.ui"
+    namespace = "com.thecocktailapp.presentation"
     compileSdk = 34
 
     defaultConfig {

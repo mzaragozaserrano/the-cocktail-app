@@ -3,8 +3,7 @@ package viewmodels
 import android.content.Context
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.mzs.core.data.datasources.local.ResourcesDataSource
-import com.mzs.core.data.datasources.local.ResourcesDataSourceImpl
+import com.thecocktailapp.core.data.datasources.local.ResourcesDataSourceImpl
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
 import com.thecocktailapp.presentation.utils.navigation.NavArg
 import com.thecocktailapp.presentation.viewmodels.home.HomeViewModel
@@ -15,7 +14,6 @@ import com.thecocktailapp.repositories.FakeCocktailRepositoryImpl
 import com.thecocktailapp.repositories.FakeNetworkRepositoryImpl
 import com.thecocktailapp.usecases.FakeGetDrinksByTypeUseCaseImpl
 import com.thecocktailapp.utils.MainDispatcherRule
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.testing.HiltAndroidTest
 import junit.framework.TestCase.*
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +46,8 @@ class HomeViewModelTest {
     private lateinit var networkRepository: FakeNetworkRepositoryImpl
 
     @InjectMocks
-    private var resourcesDataSource: ResourcesDataSource = ResourcesDataSourceImpl(context = context)
+    private var resourcesDataSource: com.thecocktailapp.core.data.datasources.local.ResourcesDataSource =
+        ResourcesDataSourceImpl(context = context)
 
     @Inject
     lateinit var viewModel: HomeViewModel

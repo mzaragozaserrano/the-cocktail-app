@@ -1,8 +1,7 @@
 package com.thecocktailapp.repositories
 
-import com.mzs.core.data.datasources.local.ResourcesDataSource
-import com.mzs.core.data.utils.ResultData
-import com.mzs.core.domain.utils.Result
+import com.thecocktailapp.core.data.utils.ResultData
+import com.thecocktailapp.core.domain.utils.Result
 import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.ErrorDTO
 import com.thecocktailapp.data.utils.transform
@@ -14,7 +13,7 @@ import javax.inject.Inject
 
 class FakeCocktailRepositoryImpl @Inject constructor(
     private val cocktailDataSource: CocktailDataSource,
-    private val resourcesDataSource: ResourcesDataSource,
+    private val resourcesDataSource: com.thecocktailapp.core.data.datasources.local.ResourcesDataSource,
 ) : CocktailRepository {
 
     override suspend fun getDrinkById(id: Int): Flow<Result<CocktailBO>> =

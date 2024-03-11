@@ -13,7 +13,7 @@ fun HomeResult.mapToState(): HomeViewState =
         }
 
         is HomeResult.Task.Error -> {
-            HomeViewState.ShowError(idMessage = error.idMessage)
+            HomeViewState.ShowError(idMessage = error.messageId)
         }
 
         is HomeResult.Init -> {

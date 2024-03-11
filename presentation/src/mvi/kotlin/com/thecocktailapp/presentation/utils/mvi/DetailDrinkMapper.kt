@@ -22,7 +22,7 @@ fun DetailDrinkResult.mapToState(): DetailDrinkViewState =
             }
         }
         is DetailDrinkResult.Task.Error -> {
-            DetailDrinkViewState.ShowError(idMessage = error.idMessage)
+            DetailDrinkViewState.ShowError(idMessage = error.messageId)
         }
         is DetailDrinkResult.Task.Loading -> {
             DetailDrinkViewState.ShowProgressDialog

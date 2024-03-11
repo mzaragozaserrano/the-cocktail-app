@@ -1,6 +1,6 @@
 package com.thecocktailapp.data.datasources.services
 
-import com.mzs.core.data.utils.ResultData
+import com.thecocktailapp.core.data.utils.ResultData
 import com.thecocktailapp.data.dto.CocktailDTO
 
 interface CocktailDataSource {

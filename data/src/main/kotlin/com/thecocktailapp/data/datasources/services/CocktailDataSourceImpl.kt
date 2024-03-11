@@ -1,11 +1,11 @@
 package com.thecocktailapp.data.datasources.services
 
-import com.mzs.core.data.utils.ResultData
-import com.mzs.core.data.utils.onError
-import com.mzs.core.data.utils.onSuccess
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.thecocktailapp.core.data.utils.ResultData
+import com.thecocktailapp.core.data.utils.onError
+import com.thecocktailapp.core.data.utils.onSuccess
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.ErrorDTO
 import com.thecocktailapp.data.utils.UrlConstants

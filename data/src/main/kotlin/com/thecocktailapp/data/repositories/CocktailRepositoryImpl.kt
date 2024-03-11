@@ -1,10 +1,10 @@
 package com.thecocktailapp.data.repositories
 
-import com.mzs.core.data.datasources.local.ResourcesDataSource
-import com.mzs.core.data.utils.ResultData
-import com.mzs.core.domain.utils.Result
-import com.mzs.core.domain.utils.getCurrentDate
-import com.mzs.core.domain.utils.sdf
+import com.thecocktailapp.core.data.datasources.local.ResourcesDataSource
+import com.thecocktailapp.core.data.utils.ResultData
+import com.thecocktailapp.core.domain.utils.Result
+import com.thecocktailapp.core.domain.utils.getCurrentDate
+import com.thecocktailapp.core.domain.utils.sdf
 import com.thecocktailapp.data.datasources.local.PreferencesDataSource
 import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.ErrorDTO

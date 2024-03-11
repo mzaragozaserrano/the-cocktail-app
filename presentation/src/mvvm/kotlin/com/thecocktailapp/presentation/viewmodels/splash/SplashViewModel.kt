@@ -2,7 +2,7 @@ package com.thecocktailapp.presentation.viewmodels.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mzs.core.domain.utils.Result
+import com.thecocktailapp.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.splash.GetRandomDrink

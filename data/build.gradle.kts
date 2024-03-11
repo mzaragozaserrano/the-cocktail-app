@@ -7,7 +7,7 @@ plugins {
 
 android {
 
-    namespace = "com.mzs.core.data"
+    namespace = "com.thecocktailapp.data"
     compileSdk = 33
 
     defaultConfig {
@@ -35,12 +35,24 @@ android {
         jvmTarget = "17"
     }
 
+    flavorDimensions += "architecture"
+
+    productFlavors {
+        create("mvi") {
+            dimension = "architecture"
+        }
+
+        create("mvvm") {
+            dimension = "architecture"
+        }
+    }
+
 }
 
 dependencies {
 
-    //----- MODULES ----------/
     implementation(project(":core"))
+    //----- MODULES ----------/
     implementation(project(":domain"))
 
     //----- COROUTINES ----------/

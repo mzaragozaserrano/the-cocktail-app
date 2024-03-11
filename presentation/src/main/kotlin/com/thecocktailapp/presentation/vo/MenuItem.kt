@@ -1,7 +1,7 @@
 package com.thecocktailapp.presentation.vo
 
-import com.mzs.core.presentation.vo.MenuDrawerItemVO
-import com.thecocktailapp.ui.R
+import com.thecocktailapp.presentation.R
+import presentation.vo.MenuDrawerItemVO
 
 sealed class MenuItem {
     object CloseSession : MenuItem()

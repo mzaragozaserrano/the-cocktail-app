@@ -1,8 +1,8 @@
 package com.thecocktailapp.presentation.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.mzs.core.domain.utils.extension.toFlowResult
-import com.mzs.core.presentation.view.base.MVIViewModel
+import com.thecocktailapp.core.domain.utils.extension.toFlowResult
+import presentation.base.MVIViewModel
 import com.thecocktailapp.presentation.utils.mvi.HomeAction
 import com.thecocktailapp.presentation.utils.mvi.HomeIntent
 import com.thecocktailapp.presentation.utils.mvi.HomeResult

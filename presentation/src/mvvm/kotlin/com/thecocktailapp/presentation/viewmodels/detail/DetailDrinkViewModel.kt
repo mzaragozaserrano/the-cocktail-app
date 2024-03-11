@@ -3,7 +3,7 @@ package com.thecocktailapp.presentation.viewmodels.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mzs.core.domain.utils.Result
+import com.thecocktailapp.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.detail.GetDrinkById

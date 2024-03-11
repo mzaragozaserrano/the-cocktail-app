@@ -9,7 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mzs.core.presentation.compose.components.images.UrlImage
+import presentation.components.images.UrlImage
 
 @Composable
 fun SplashHeaderContent(modifier: Modifier = Modifier, urlImage: String) {

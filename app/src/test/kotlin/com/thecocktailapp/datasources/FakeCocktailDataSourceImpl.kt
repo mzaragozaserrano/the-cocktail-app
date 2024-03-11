@@ -1,8 +1,8 @@
 package com.thecocktailapp.datasources
 
-import com.mzs.core.data.utils.ResultData
-import com.mzs.core.data.utils.onError
-import com.mzs.core.data.utils.onSuccess
+import com.thecocktailapp.core.data.utils.ResultData
+import com.thecocktailapp.core.data.utils.onError
+import com.thecocktailapp.core.data.utils.onSuccess
 import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.DrinkDTO

@@ -4,11 +4,8 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.mzs.core.presentation.view.base.BaseFragment
-import com.mzs.core.presentation.view.utils.extensions.hideProgressDialog
-import com.mzs.core.presentation.view.utils.extensions.loadImageFromUrl
-import com.mzs.core.presentation.view.utils.extensions.showProgressDialog
-import com.mzs.core.presentation.view.utils.viewBinding.viewBinding
+import com.thecocktailapp.presentation.R
+import com.thecocktailapp.presentation.databinding.FragmentSplashBinding
 import com.thecocktailapp.presentation.fragments.detail.DetailDrinkFragment
 import com.thecocktailapp.presentation.utils.mvi.CommonIntent
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
@@ -16,9 +13,12 @@ import com.thecocktailapp.presentation.utils.mvi.SplashIntent
 import com.thecocktailapp.presentation.utils.mvi.SplashViewState
 import com.thecocktailapp.presentation.viewmodels.SplashViewModel
 import com.thecocktailapp.presentation.vo.DrinkVO
-import com.thecocktailapp.ui.R
-import com.thecocktailapp.ui.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
+import presentation.base.BaseFragment
+import presentation.utils.extensions.hideProgressDialog
+import presentation.utils.extensions.loadImageFromUrl
+import presentation.utils.extensions.showProgressDialog
+import presentation.utils.viewBinding.viewBinding
 
 @AndroidEntryPoint
 class SplashFragment :

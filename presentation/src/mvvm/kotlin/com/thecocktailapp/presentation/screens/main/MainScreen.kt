@@ -7,13 +7,13 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.mzs.core.domain.utils.getCurrentDate
-import com.mzs.core.domain.utils.sdfComplete
-import com.mzs.core.presentation.compose.components.utils.MenuDrawerContent
+import com.thecocktailapp.core.domain.utils.getCurrentDate
+import com.thecocktailapp.core.domain.utils.sdfComplete
 import com.thecocktailapp.presentation.screens.home.HomeScreen
 import com.thecocktailapp.presentation.utils.extensions.getGreetingText
 import com.thecocktailapp.presentation.vo.MenuItem
 import com.thecocktailapp.presentation.vo.createMenuList
+import presentation.components.utils.MenuDrawerContent
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier, navController: NavController) {

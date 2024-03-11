@@ -5,17 +5,17 @@ import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.mzs.core.presentation.databinding.CoreDrawerLayoutBinding
-import com.mzs.core.presentation.view.adapters.NavMenuAdapter
+import com.thecocktailapp.core.databinding.CoreDrawerLayoutBinding
+import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.base.TheCocktailAppBaseActivity
 import com.thecocktailapp.presentation.utils.mvi.CommonViewState
 import com.thecocktailapp.presentation.utils.mvi.KotlinIntent
 import com.thecocktailapp.presentation.utils.mvi.KotlinViewState
 import com.thecocktailapp.presentation.viewmodels.KotlinViewModel
-import com.thecocktailapp.presentation.vo.MenuItem
+import com.thecocktailapp.presentation.vo.MenuItemVO
 import com.thecocktailapp.presentation.vo.getMenuOptions
-import com.thecocktailapp.ui.R
 import dagger.hilt.android.AndroidEntryPoint
+import presentation.adapters.NavMenuAdapter
 
 
 @AndroidEntryPoint
@@ -29,7 +29,7 @@ class KotlinActivity :
 
     private lateinit var navController: NavController
 
-    private val adapter: NavMenuAdapter<MenuItem> by lazy {
+    private val adapter: NavMenuAdapter<MenuItemVO> by lazy {
         NavMenuAdapter(
             onBindItem = { binding, item ->
                 with(binding) {

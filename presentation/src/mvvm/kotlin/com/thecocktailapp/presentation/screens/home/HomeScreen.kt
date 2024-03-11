@@ -19,10 +19,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.ErrorDialog
 import com.thecocktailapp.presentation.components.ProgressDialog
 import com.thecocktailapp.presentation.viewmodels.home.HomeViewModel
-import com.thecocktailapp.ui.R
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

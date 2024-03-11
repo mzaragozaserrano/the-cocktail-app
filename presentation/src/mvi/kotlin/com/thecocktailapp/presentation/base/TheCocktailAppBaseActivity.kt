@@ -1,9 +1,9 @@
 package com.thecocktailapp.presentation.base
 
 import androidx.viewbinding.ViewBinding
-import com.mzs.core.presentation.view.base.BaseActivity
-import com.mzs.core.presentation.view.base.MVIViewModel
-import com.thecocktailapp.ui.R
+import presentation.base.BaseActivity
+import presentation.base.MVIViewModel
+import com.thecocktailapp.presentation.R
 
 abstract class TheCocktailAppBaseActivity<S, I, VB : ViewBinding, VM : MVIViewModel<S, I>> :
     BaseActivity<S, I, VB, VM>() {

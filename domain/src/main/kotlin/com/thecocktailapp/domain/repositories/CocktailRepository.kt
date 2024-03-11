@@ -1,6 +1,6 @@
 package com.thecocktailapp.domain.repositories
 
-import com.mzs.core.domain.utils.Result
+import com.thecocktailapp.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import kotlinx.coroutines.flow.Flow
 

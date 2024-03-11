@@ -35,6 +35,18 @@ android {
         jvmTarget = "17"
     }
 
+    flavorDimensions += "architecture"
+
+    productFlavors {
+        create("mvi") {
+            dimension = "architecture"
+        }
+
+        create("mvvm") {
+            dimension = "architecture"
+        }
+    }
+
 }
 
 dependencies {

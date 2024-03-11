@@ -26,7 +26,7 @@ fun SplashResult.mapToState(): SplashViewState =
         }
 
         is SplashResult.Task.Error -> {
-            SplashViewState.ShowError(idMessage = error.idMessage)
+            SplashViewState.ShowError(idMessage = error.messageId)
         }
 
         is SplashResult.Task.Loading -> {

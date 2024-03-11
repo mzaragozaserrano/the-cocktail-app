@@ -1,13 +1,13 @@
 package com.thecocktailapp.presentation.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.mzs.core.domain.utils.Result
-import com.mzs.core.domain.utils.extension.toFlowResult
-import com.mzs.core.presentation.view.base.MVIViewModel
+import com.thecocktailapp.core.domain.utils.Result
+import com.thecocktailapp.core.domain.utils.extension.toFlowResult
+import presentation.base.MVIViewModel
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.main.detail.GetDrinkById
-import com.thecocktailapp.domain.usecases.main.detail.GetDrinkByIdUseCaseImpl
+import com.thecocktailapp.domain.usecases.detail.GetDrinkById
+import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
 import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.utils.mvi.CommonAction
 import com.thecocktailapp.presentation.utils.mvi.CommonResult

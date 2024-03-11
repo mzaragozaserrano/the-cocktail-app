@@ -1,7 +1,7 @@
 package com.thecocktailapp.presentation.vo
 
 import androidx.annotation.StringRes
-import com.thecocktailapp.ui.R
+import com.thecocktailapp.presentation.R
 
 sealed class ErrorVO(@StringRes open val messageId: Int) {
     object Connectivity : ErrorVO(messageId = R.string.error_connectivity)
