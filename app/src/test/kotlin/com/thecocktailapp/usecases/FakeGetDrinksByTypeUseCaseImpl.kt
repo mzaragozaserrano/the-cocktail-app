@@ -15,7 +15,13 @@ class FakeGetDrinksByTypeUseCaseImpl @Inject constructor(
     networkRepository: NetworkRepository,
 ) : GetDrinksByType(networkRepository = networkRepository, networkError = ErrorBO.Connectivity) {
 
+    private var alcoholic: String = "Alcoholic"
+
+    fun setAlcoholicType(alcoholic: String) {
+        this.alcoholic = alcoholic
+    }
+
     override suspend fun run(params: GetDrinksByTypeUseCaseImpl.Params): Flow<Result<CocktailBO>> =
-        cocktailRepository.getDrinksByType("Alcoholic")
+        cocktailRepository.getDrinksByType(alcoholic = alcoholic)
 
 }

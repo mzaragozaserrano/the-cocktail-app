@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AppViewModel @Inject constructor(
+class ComposeViewModel @Inject constructor(
     private val showRandomDrink: @JvmSuppressWildcards ShowRandomDrink,
 ) : ViewModel() {
 

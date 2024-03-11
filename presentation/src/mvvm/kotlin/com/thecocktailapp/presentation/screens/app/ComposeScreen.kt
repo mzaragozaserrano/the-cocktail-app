@@ -8,10 +8,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.Navigation
-import com.thecocktailapp.presentation.viewmodels.app.AppViewModel
+import com.thecocktailapp.presentation.viewmodels.app.ComposeViewModel
 
 @Composable
-fun AppScreen(modifier: Modifier = Modifier, viewModel: AppViewModel = hiltViewModel()) {
+fun ComposeScreen(modifier: Modifier = Modifier, viewModel: ComposeViewModel = hiltViewModel()) {
 
     val navController = rememberNavController()
     val state by viewModel.state.collectAsState()
