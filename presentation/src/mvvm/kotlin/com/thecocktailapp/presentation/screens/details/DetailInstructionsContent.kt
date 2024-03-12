@@ -17,10 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.thecocktailapp.core.presentation.compose.components.buttons.FallButton
+import com.thecocktailapp.core.presentation.compose.components.texts.LargeBoldText
+import com.thecocktailapp.core.presentation.compose.components.texts.SmallMediumText
 import com.thecocktailapp.presentation.R
-import presentation.components.buttons.FallButton
-import presentation.components.texts.LargeBoldText
-import presentation.components.texts.SmallMediumText
 
 @Composable
 fun DetailInstructionsContent(modifier: Modifier = Modifier, instructions: String) {

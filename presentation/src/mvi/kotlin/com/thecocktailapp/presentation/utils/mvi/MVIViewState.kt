@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.utils.mvi
+package com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi
 
 import com.thecocktailapp.presentation.vo.DrinkVO
 

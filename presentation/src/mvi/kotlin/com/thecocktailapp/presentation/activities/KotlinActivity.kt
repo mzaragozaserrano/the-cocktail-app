@@ -8,9 +8,9 @@ import androidx.navigation.fragment.NavHostFragment
 import com.thecocktailapp.core.databinding.CoreDrawerLayoutBinding
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.base.TheCocktailAppBaseActivity
-import com.thecocktailapp.presentation.utils.mvi.CommonViewState
-import com.thecocktailapp.presentation.utils.mvi.KotlinIntent
-import com.thecocktailapp.presentation.utils.mvi.KotlinViewState
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinIntent
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinViewState
 import com.thecocktailapp.presentation.viewmodels.KotlinViewModel
 import com.thecocktailapp.presentation.vo.MenuItemVO
 import com.thecocktailapp.presentation.vo.getMenuOptions

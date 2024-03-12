@@ -9,11 +9,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import presentation.components.images.UrlImage
+import com.thecocktailapp.core.presentation.compose.components.images.UrlImage
 
 @Composable
 fun SplashHeaderContent(modifier: Modifier = Modifier, urlImage: String) {
-
     Card(
         modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
@@ -27,5 +26,4 @@ fun SplashHeaderContent(modifier: Modifier = Modifier, urlImage: String) {
             url = urlImage
         )
     }
-
 }

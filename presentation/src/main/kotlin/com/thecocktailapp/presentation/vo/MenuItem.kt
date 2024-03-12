@@ -1,10 +1,9 @@
 package com.thecocktailapp.presentation.vo
 
+import com.thecocktailapp.core.presentation.vo.MenuDrawerItemVO
 import com.thecocktailapp.presentation.R
-import presentation.vo.MenuDrawerItemVO
 
 sealed class MenuItem {
-    object CloseSession : MenuItem()
     object FavoriteScreen : MenuItem()
     object HomeScreen : MenuItem()
 }
@@ -19,10 +18,5 @@ fun createMenuList(): List<MenuDrawerItemVO<MenuItem>> = listOf(
         drawerOption = MenuItem.FavoriteScreen,
         iconId = R.drawable.ic_favorite,
         titleId = R.string.menu_item_favorites
-    ),
-    MenuDrawerItemVO(
-        drawerOption = MenuItem.CloseSession,
-        iconId = R.drawable.ic_close_session,
-        titleId = R.string.menu_item_close_session
     )
 )

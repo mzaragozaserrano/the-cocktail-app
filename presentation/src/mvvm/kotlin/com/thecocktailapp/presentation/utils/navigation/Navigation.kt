@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.utils.navigation
+package com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -7,10 +7,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navigation
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.extensions.composable
 import com.thecocktailapp.presentation.screens.details.DetailScreen
 import com.thecocktailapp.presentation.screens.main.MainScreen
 import com.thecocktailapp.presentation.screens.splash.SplashScreen
-import com.thecocktailapp.presentation.utils.extensions.composable
 
 @Composable
 fun Navigation(

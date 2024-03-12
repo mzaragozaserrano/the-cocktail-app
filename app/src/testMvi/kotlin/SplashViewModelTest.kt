@@ -1,8 +1,8 @@
 import app.cash.turbine.test
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
-import com.thecocktailapp.presentation.utils.mvi.CommonViewState
-import com.thecocktailapp.presentation.utils.mvi.SplashIntent
-import com.thecocktailapp.presentation.utils.mvi.SplashViewState
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.SplashIntent
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.SplashViewState
 import com.thecocktailapp.presentation.viewmodels.SplashViewModel
 import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO

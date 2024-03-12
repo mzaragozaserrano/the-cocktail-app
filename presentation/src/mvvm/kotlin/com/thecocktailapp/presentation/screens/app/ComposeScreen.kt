@@ -6,8 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
-import com.thecocktailapp.presentation.utils.navigation.Feature
-import com.thecocktailapp.presentation.utils.navigation.Navigation
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.Feature
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.Navigation
 import com.thecocktailapp.presentation.viewmodels.app.ComposeViewModel
 
 @Composable

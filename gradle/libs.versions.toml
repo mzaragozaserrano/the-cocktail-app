@@ -14,7 +14,7 @@ hilt = "2.48.1"
 hiltCompose = "1.1.0"
 kotlin = "1.8.10"
 kotlinxCoroutines = "1.7.3"
-ksp = "1.9.0-1.0.12"
+ksp = "1.8.10-1.0.9"
 liveDataCompose = "1.5.4"
 lottie = "6.1.0"
 material = "1.10.0"
@@ -23,9 +23,6 @@ okhttp = "4.12.0"
 # TESTING
 testingMockito = "4.8.0"
 testingTurbine = "1.0.0"
-junit = "4.13.2"
-androidx-test-ext-junit = "1.1.5"
-espresso-core = "3.5.1"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }

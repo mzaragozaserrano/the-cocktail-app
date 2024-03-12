@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.components
+package com.thecocktailapp.presentation.components.buttons
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
@@ -11,8 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import presentation.components.buttons.PushedButton
-import presentation.components.texts.ExtraSmallMediumText
+import com.thecocktailapp.core.presentation.compose.components.buttons.PushedButton
+import com.thecocktailapp.core.presentation.compose.components.texts.ExtraSmallMediumText
 
 @Composable
 fun DualActionButton(

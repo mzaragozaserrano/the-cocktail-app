@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.utils.navigation
+package com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument

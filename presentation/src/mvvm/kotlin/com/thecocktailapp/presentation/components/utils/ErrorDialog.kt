@@ -1,11 +1,11 @@
-package com.thecocktailapp.presentation.components
+package com.thecocktailapp.presentation.components.utils
 
 import androidx.annotation.StringRes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.colorResource
+import com.thecocktailapp.core.presentation.compose.components.alerts.CardAlert
 import com.thecocktailapp.presentation.R
-import presentation.components.alerts.CardAlert
 
 @Composable
 fun ErrorDialog(

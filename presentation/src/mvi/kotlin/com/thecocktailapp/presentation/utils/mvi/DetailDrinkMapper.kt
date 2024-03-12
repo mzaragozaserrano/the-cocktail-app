@@ -1,6 +1,6 @@
-package com.thecocktailapp.presentation.utils.mvi
+package com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi
 
-import com.thecocktailapp.presentation.utils.transform
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.transform
 
 fun DetailDrinkIntent.mapToAction(): DetailDrinkAction =
     when (this) {

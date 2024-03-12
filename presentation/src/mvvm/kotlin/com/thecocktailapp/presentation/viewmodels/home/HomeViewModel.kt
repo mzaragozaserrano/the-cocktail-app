@@ -66,9 +66,18 @@ class HomeViewModel @Inject constructor(
             }
         }
 
+    fun onIdle() {
+        _state.value = HomeUiState.Idle
+    }
+
+    fun onSeeClicked(item: DrinkVO) {
+        _state.value = HomeUiState.GoToDetail(item.id.toInt())
+    }
+
     sealed class HomeUiState {
         object Idle : HomeUiState()
         data class Error(val error: ErrorVO) : HomeUiState()
+        data class GoToDetail(val drinkId: Int) : HomeUiState()
         object Loading : HomeUiState()
         data class Success(val list: List<DrinkVO>) : HomeUiState()
     }

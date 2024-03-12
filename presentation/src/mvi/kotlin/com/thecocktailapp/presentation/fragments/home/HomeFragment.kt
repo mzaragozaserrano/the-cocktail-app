@@ -5,16 +5,16 @@ import com.thecocktailapp.core.databinding.CoreToolbarMenuBinding
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.activities.KotlinActivity
 import com.thecocktailapp.presentation.databinding.FragmentHomeBinding
-import com.thecocktailapp.presentation.utils.mvi.CommonIntent
-import com.thecocktailapp.presentation.utils.mvi.CommonViewState
-import com.thecocktailapp.presentation.utils.mvi.HomeIntent
-import com.thecocktailapp.presentation.utils.mvi.HomeViewState
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonIntent
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.HomeIntent
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.HomeViewState
 import com.thecocktailapp.presentation.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import presentation.base.BaseFragment
-import presentation.utils.extensions.setUpMenuToolbar
-import presentation.utils.extensions.showProgressDialog
-import presentation.utils.viewBinding.viewBinding
+import com.thecocktailapp.core.presentation.compose.utils.extensions.setUpMenuToolbar
+import com.thecocktailapp.core.presentation.compose.utils.extensions.showProgressDialog
+import com.thecocktailapp.core.presentation.compose.utils.viewBinding.viewBinding
 
 @AndroidEntryPoint
 class HomeFragment :

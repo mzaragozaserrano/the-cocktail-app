@@ -15,9 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.thecocktailapp.presentation.R
-import com.thecocktailapp.presentation.components.DualActionButton
-import com.thecocktailapp.presentation.components.ErrorDialog
-import com.thecocktailapp.presentation.components.ProgressDialog
+import com.thecocktailapp.presentation.components.buttons.DualActionButton
+import com.thecocktailapp.presentation.components.utils.ErrorDialog
+import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.viewmodels.splash.SplashViewModel
 
 @Composable

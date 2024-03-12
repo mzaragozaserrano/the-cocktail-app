@@ -19,13 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.Feature
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.NavCommand
+import com.thecocktailapp.core.presentation.compose.components.cards.RoundedCard
 import com.thecocktailapp.presentation.R
-import com.thecocktailapp.presentation.components.ErrorDialog
-import com.thecocktailapp.presentation.components.ProgressDialog
-import com.thecocktailapp.presentation.utils.navigation.Feature
-import com.thecocktailapp.presentation.utils.navigation.NavCommand
+import com.thecocktailapp.presentation.components.utils.ErrorDialog
+import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.viewmodels.detail.DetailDrinkViewModel
-import presentation.components.cards.RoundedCard
 
 @Composable
 fun DetailScreen(

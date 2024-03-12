@@ -7,13 +7,13 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.extensions.getGreetingText
 import com.thecocktailapp.core.domain.utils.getCurrentDate
 import com.thecocktailapp.core.domain.utils.sdfComplete
+import com.thecocktailapp.core.presentation.compose.components.utils.MenuDrawerContent
 import com.thecocktailapp.presentation.screens.home.HomeScreen
-import com.thecocktailapp.presentation.utils.extensions.getGreetingText
 import com.thecocktailapp.presentation.vo.MenuItem
 import com.thecocktailapp.presentation.vo.createMenuList
-import presentation.components.utils.MenuDrawerContent
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier, navController: NavController) {
@@ -34,10 +34,6 @@ fun MainScreen(modifier: Modifier = Modifier, navController: NavController) {
                 textColor = MaterialTheme.colorScheme.primary
             ) { onMenuItemClicked ->
                 when (onMenuItemClicked) {
-                    is MenuItem.CloseSession -> {
-
-                    }
-
                     is MenuItem.FavoriteScreen -> {
 
                     }

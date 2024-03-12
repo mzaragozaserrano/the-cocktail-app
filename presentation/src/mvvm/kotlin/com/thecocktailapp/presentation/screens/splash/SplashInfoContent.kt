@@ -17,14 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.thecocktailapp.core.presentation.compose.components.texts.BlinkingText
+import com.thecocktailapp.core.presentation.compose.components.texts.ExtraLargeBoldText
+import com.thecocktailapp.core.presentation.compose.components.texts.ExtraSmallMediumText
 import com.thecocktailapp.presentation.R
-import presentation.components.texts.BlinkingText
-import presentation.components.texts.ExtraLargeBoldText
-import presentation.components.texts.ExtraSmallMediumText
 
 @Composable
 fun SplashInfoContent(modifier: Modifier = Modifier, name: String) {
-
     Card(
         modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
@@ -62,5 +61,4 @@ fun SplashInfoContent(modifier: Modifier = Modifier, name: String) {
             }
         }
     }
-
 }

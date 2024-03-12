@@ -7,18 +7,18 @@ import androidx.navigation.fragment.findNavController
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.databinding.FragmentSplashBinding
 import com.thecocktailapp.presentation.fragments.detail.DetailDrinkFragment
-import com.thecocktailapp.presentation.utils.mvi.CommonIntent
-import com.thecocktailapp.presentation.utils.mvi.CommonViewState
-import com.thecocktailapp.presentation.utils.mvi.SplashIntent
-import com.thecocktailapp.presentation.utils.mvi.SplashViewState
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonIntent
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.SplashIntent
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.SplashViewState
 import com.thecocktailapp.presentation.viewmodels.SplashViewModel
 import com.thecocktailapp.presentation.vo.DrinkVO
 import dagger.hilt.android.AndroidEntryPoint
 import presentation.base.BaseFragment
-import presentation.utils.extensions.hideProgressDialog
-import presentation.utils.extensions.loadImageFromUrl
-import presentation.utils.extensions.showProgressDialog
-import presentation.utils.viewBinding.viewBinding
+import com.thecocktailapp.core.presentation.compose.utils.extensions.hideProgressDialog
+import com.thecocktailapp.core.presentation.compose.utils.extensions.loadImageFromUrl
+import com.thecocktailapp.core.presentation.compose.utils.extensions.showProgressDialog
+import com.thecocktailapp.core.presentation.compose.utils.viewBinding.viewBinding
 
 @AndroidEntryPoint
 class SplashFragment :

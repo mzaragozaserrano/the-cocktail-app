@@ -3,12 +3,12 @@ package com.thecocktailapp.presentation.viewmodels.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.NavArg
 import com.thecocktailapp.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.detail.GetDrinkById
 import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
-import com.thecocktailapp.presentation.utils.navigation.NavArg
 import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO
