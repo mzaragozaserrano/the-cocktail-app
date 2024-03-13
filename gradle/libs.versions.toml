@@ -17,7 +17,8 @@ kotlinxCoroutines = "1.7.3"
 ksp = "1.8.10-1.0.9"
 liveDataCompose = "1.5.4"
 lottie = "6.1.0"
-material = "1.10.0"
+material = "1.11.0"
+materialCompose = "1.2.1"
 moshi = "1.15.0"
 okhttp = "4.12.0"
 # TESTING
@@ -28,7 +29,7 @@ testingTurbine = "1.0.0"
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
-androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "materialCompose" }
 androidx-compose-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
