@@ -21,6 +21,7 @@ material = "1.11.0"
 materialCompose = "1.2.1"
 moshi = "1.15.0"
 okhttp = "4.12.0"
+room = "2.6.1"
 # TESTING
 testingMockito = "4.8.0"
 testingTurbine = "1.0.0"
@@ -52,6 +53,9 @@ material3 = { group = "com.google.android.material", name = "material", version.
 moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "testingMockito" }
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "testingTurbine" }
 
 [plugins]

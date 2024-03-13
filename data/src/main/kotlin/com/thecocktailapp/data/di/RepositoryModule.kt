@@ -1,7 +1,9 @@
 package com.thecocktailapp.data.di
 
-import com.thecocktailapp.data.repositories.CocktailRepositoryImpl
-import com.thecocktailapp.domain.repositories.CocktailRepository
+import com.thecocktailapp.data.repositories.local.FavoritesRepositoryImpl
+import com.thecocktailapp.data.repositories.services.CocktailRepositoryImpl
+import com.thecocktailapp.domain.repositories.local.FavoritesRepository
+import com.thecocktailapp.domain.repositories.services.CocktailRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,5 +15,8 @@ interface RepositoryModule {
 
     @Binds
     fun bindCocktailRepository(repositoryImpl: CocktailRepositoryImpl): CocktailRepository
+
+    @Binds
+    fun bindFavoritesRepository(repositoryImpl: FavoritesRepositoryImpl): FavoritesRepository
 
 }

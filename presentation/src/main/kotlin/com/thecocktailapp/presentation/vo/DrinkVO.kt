@@ -10,6 +10,7 @@ data class DrinkVO(
     val id: String,
     val ingredients: List<String>,
     val instructions: String,
+    var isFavorite: Boolean = false,
     val name: String,
     val urlImage: String,
 ) : Serializable

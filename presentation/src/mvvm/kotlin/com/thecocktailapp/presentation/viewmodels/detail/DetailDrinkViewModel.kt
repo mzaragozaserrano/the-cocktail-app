@@ -3,12 +3,18 @@ package com.thecocktailapp.presentation.viewmodels.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.NavArg
 import com.thecocktailapp.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
+import com.thecocktailapp.domain.usecases.detail.AddFavoriteDrink
+import com.thecocktailapp.domain.usecases.detail.AddFavoriteDrinkUseCaseImpl
 import com.thecocktailapp.domain.usecases.detail.GetDrinkById
 import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
+import com.thecocktailapp.domain.usecases.detail.IsFavoriteDrink
+import com.thecocktailapp.domain.usecases.detail.IsFavoriteDrinkUseCaseImpl
+import com.thecocktailapp.domain.usecases.detail.RemoveFavoriteDrink
+import com.thecocktailapp.domain.usecases.detail.RemoveFavoriteDrinkUseCaseImpl
+import com.thecocktailapp.presentation.utils.navigation.NavArg
 import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO
@@ -22,11 +28,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailDrinkViewModel @Inject constructor(
+    private val addFavoriteDrink: @JvmSuppressWildcards AddFavoriteDrink,
     private val getDrinkById: @JvmSuppressWildcards GetDrinkById,
+    private val isFavoriteDrink: @JvmSuppressWildcards IsFavoriteDrink,
+    private val removeFavoriteDrink: @JvmSuppressWildcards RemoveFavoriteDrink,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
+    private lateinit var drink: DrinkVO
     private val id = savedStateHandle.get<Int>(key = NavArg.DrinkId.key) ?: 0
+
+    private val _isFavorite = MutableStateFlow(value = false)
+    val isFavorite = _isFavorite.asStateFlow()
 
     private val _state = MutableStateFlow<DetailDrinkUiState>(value = DetailDrinkUiState.Idle)
     val state = _state.asStateFlow()
@@ -58,11 +71,39 @@ class DetailDrinkViewModel @Inject constructor(
                 }
 
                 is Result.Response.Success -> {
-                    _state.value =
-                        DetailDrinkUiState.Success(drink = result.data.drinks.first().transform())
+                    drink = result.data.drinks.first().transform()
+                    onExecuteIsFavoriteDrink()
                 }
             }
         }
+
+    private fun onExecuteIsFavoriteDrink() {
+        viewModelScope.launch {
+            withContext(context = Dispatchers.IO) {
+                _isFavorite.value =
+                    isFavoriteDrink.invoke(IsFavoriteDrinkUseCaseImpl.Params(drinkId = id))
+                _state.value = DetailDrinkUiState.Success(drink = drink)
+            }
+        }
+    }
+
+    fun addFavoriteDrink(id: String) {
+        viewModelScope.launch {
+            withContext(context = Dispatchers.IO) {
+                addFavoriteDrink.invoke(params = AddFavoriteDrinkUseCaseImpl.Params(drinkId = id.toInt()))
+                _isFavorite.value = true
+            }
+        }
+    }
+
+    fun removeFavoriteDrink(id: String) {
+        viewModelScope.launch {
+            withContext(context = Dispatchers.IO) {
+                removeFavoriteDrink.invoke(params = RemoveFavoriteDrinkUseCaseImpl.Params(drinkId = id.toInt()))
+                _isFavorite.value = false
+            }
+        }
+    }
 
     sealed class DetailDrinkUiState {
         object Idle : DetailDrinkUiState()

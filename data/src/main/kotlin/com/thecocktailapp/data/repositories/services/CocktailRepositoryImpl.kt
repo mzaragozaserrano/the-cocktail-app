@@ -1,4 +1,4 @@
-package com.thecocktailapp.data.repositories
+package com.thecocktailapp.data.repositories.services
 
 import androidx.annotation.StringRes
 import com.thecocktailapp.core.data.datasources.local.ResourcesDataSource
@@ -6,12 +6,12 @@ import com.thecocktailapp.core.data.utils.ResultData
 import com.thecocktailapp.core.domain.utils.Result
 import com.thecocktailapp.core.domain.utils.getCurrentDate
 import com.thecocktailapp.core.domain.utils.sdf
-import com.thecocktailapp.data.datasources.local.PreferencesDataSource
+import com.thecocktailapp.data.datasources.local.preferences.PreferencesDataSource
 import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.ErrorDTO
 import com.thecocktailapp.data.utils.transform
 import com.thecocktailapp.domain.bo.CocktailBO
-import com.thecocktailapp.domain.repositories.CocktailRepository
+import com.thecocktailapp.domain.repositories.services.CocktailRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

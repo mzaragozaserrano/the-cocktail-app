@@ -10,7 +10,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.thecocktailapp.core.presentation.compose.components.buttons.PushedButton
-import com.thecocktailapp.core.presentation.compose.components.cards.RoundedCard
+import com.thecocktailapp.core.presentation.compose.components.cards.RoundedEdgeCard
 import com.thecocktailapp.core.presentation.compose.components.images.UrlImage
 import com.thecocktailapp.core.presentation.compose.components.texts.NormalBoldText
 import com.thecocktailapp.presentation.R
@@ -23,7 +23,11 @@ fun DrinkItem(
     item: DrinkVO,
     onButtonClicked: () -> Unit,
 ) {
-    RoundedCard(modifier = modifier) {
+    RoundedEdgeCard(
+        modifier = modifier,
+        borderColor = if (item.isFavorite) MaterialTheme.colorScheme.onErrorContainer else MaterialTheme.colorScheme.surface,
+        strokeBorder = 2.dp
+    ) {
         Column(
             modifier = Modifier
                 .padding(all = 8.dp)
@@ -67,6 +71,7 @@ private fun DrinkItemPrev() {
         drinkType = DrinkType.Alcoholic,
         glass = "Mason jar",
         id = "15813",
+        isFavorite = true,
         name = "Herbal flame",
         ingredients = listOf(
             "Hot Damn - 5 shots",

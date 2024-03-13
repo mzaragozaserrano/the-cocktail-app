@@ -1,4 +1,4 @@
-package com.thecocktailapp.data.datasources.local
+package com.thecocktailapp.data.datasources.local.preferences
 
 import com.thecocktailapp.core.data.utils.encryption.EncryptedPreferences
 import com.thecocktailapp.domain.utils.PreferencesKey

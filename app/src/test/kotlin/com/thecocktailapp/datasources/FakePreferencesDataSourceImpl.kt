@@ -1,6 +1,6 @@
 package com.thecocktailapp.datasources
 
-import com.thecocktailapp.data.datasources.local.PreferencesDataSource
+import com.thecocktailapp.data.datasources.local.preferences.PreferencesDataSource
 import javax.inject.Inject
 
 class FakePreferencesDataSourceImpl @Inject constructor() : PreferencesDataSource {

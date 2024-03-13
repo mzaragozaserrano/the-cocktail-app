@@ -2,10 +2,10 @@ package viewmodels
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.NavArg
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
 import com.thecocktailapp.datasources.FakePreferencesDataSourceImpl
 import com.thecocktailapp.datasources.FakeResourcesDataSourceImpl
+import com.thecocktailapp.presentation.utils.navigation.NavArg
 import com.thecocktailapp.presentation.viewmodels.detail.DetailDrinkViewModel
 import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.DrinkVO

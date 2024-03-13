@@ -1,6 +1,6 @@
 package com.thecocktailapp.di
 
-import com.thecocktailapp.domain.repositories.CocktailRepository
+import com.thecocktailapp.domain.repositories.services.CocktailRepository
 import com.thecocktailapp.repositories.FakeCocktailRepositoryImpl
 import dagger.Binds
 import dagger.Module

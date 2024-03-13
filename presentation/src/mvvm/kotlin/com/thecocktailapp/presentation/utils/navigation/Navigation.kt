@@ -12,6 +12,7 @@ import com.thecocktailapp.presentation.screens.details.DetailScreen
 import com.thecocktailapp.presentation.screens.main.MainScreen
 import com.thecocktailapp.presentation.screens.splash.SplashScreen
 import com.thecocktailapp.presentation.utils.navigation.Feature
+import com.thecocktailapp.presentation.utils.navigation.NavCommand
 
 @Composable
 fun Navigation(

@@ -5,6 +5,7 @@ import com.thecocktailapp.data.R
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.DrinkDTO
 import com.thecocktailapp.data.dto.ErrorDTO
+import com.thecocktailapp.data.entity.Drink
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
@@ -111,3 +112,5 @@ fun ErrorDTO.transform(): ErrorBO = when (this) {
     is ErrorDTO.LoadingData -> ErrorBO.LoadingData
     is ErrorDTO.LoadingURL -> ErrorBO.LoadingURL
 }
+
+fun Int.createDrinkEntity(): Drink = Drink(drinkId = this)

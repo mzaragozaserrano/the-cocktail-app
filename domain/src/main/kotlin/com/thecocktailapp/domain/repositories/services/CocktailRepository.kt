@@ -1,4 +1,4 @@
-package com.thecocktailapp.domain.repositories
+package com.thecocktailapp.domain.repositories.services
 
 import androidx.annotation.StringRes
 import com.thecocktailapp.core.domain.utils.Result

@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.NavCommand
 import com.thecocktailapp.core.presentation.compose.components.texts.NormalMediumText
 import com.thecocktailapp.core.presentation.compose.components.utils.Recycler
 import com.thecocktailapp.presentation.R
@@ -28,6 +27,7 @@ import com.thecocktailapp.presentation.components.items.DrinkItem
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.utils.navigation.Feature
+import com.thecocktailapp.presentation.utils.navigation.NavCommand
 import com.thecocktailapp.presentation.viewmodels.home.HomeViewModel
 import kotlinx.coroutines.launch
 
@@ -83,9 +83,7 @@ fun HomeScreen(
                     is HomeViewModel.HomeUiState.GoToDetail -> {
                         navController.navigate(
                             route = NavCommand.Content(feature = Feature.Detail)
-                                .createRoute(
-                                    drinkId = (state as HomeViewModel.HomeUiState.GoToDetail).drinkId
-                                )
+                                .createRoute(drinkId = (state as HomeViewModel.HomeUiState.GoToDetail).drinkId)
                         )
                         viewModel.onIdle()
                     }

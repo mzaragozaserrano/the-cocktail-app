@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.thecocktailapp.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
+import com.thecocktailapp.domain.usecases.common.GetFavoriteDrinks
 import com.thecocktailapp.domain.usecases.home.GetDrinksByType
 import com.thecocktailapp.domain.usecases.home.GetDrinksByTypeUseCaseImpl
 import com.thecocktailapp.presentation.utils.transform
@@ -22,12 +23,15 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getDrinksByType: @JvmSuppressWildcards GetDrinksByType,
+    private val getFavoriteDrinks: @JvmSuppressWildcards GetFavoriteDrinks,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<HomeUiState>(value = HomeUiState.Idle)
     val state = _state.asStateFlow()
 
     private var drinkType: DrinkType = DrinkType.Alcoholic
+
+    private var list: MutableList<DrinkVO> = mutableListOf()
 
     init {
         onExecuteGetDrinksByType()
@@ -56,8 +60,44 @@ class HomeViewModel @Inject constructor(
                 }
 
                 is Result.Response.Success -> {
+                    list.addAll(result.data.drinks.map { it.transform() })
+                    onExecuteGetFavorites()
+                }
+            }
+        }
+
+    private fun onExecuteGetFavorites() {
+        viewModelScope.launch {
+            withContext(context = Dispatchers.IO) {
+                getFavoriteDrinks
+                    .invoke()
+                    .collect(::handleFavoriteDrinksResponse)
+            }
+        }
+    }
+
+    private suspend fun handleFavoriteDrinksResponse(result: Result<List<Int>>) =
+        withContext(Dispatchers.Main) {
+            when (result) {
+                is Result.Loading -> {
+                    _state.value = HomeUiState.Loading
+                }
+
+                is Result.Response.Error<*> -> {
                     _state.value =
-                        HomeUiState.Success(list = result.data.drinks.map { it.transform() })
+                        HomeUiState.Error(error = (result.code as ErrorBO).transform())
+                }
+
+                is Result.Response.Success -> {
+                    list.map { drink ->
+                        if (result.data.contains(drink.id.toInt())) {
+                            drink.isFavorite = true
+                        } else {
+                            drink
+                        }
+                    }
+                    _state.value =
+                        HomeUiState.Success(list = list)
                 }
             }
         }

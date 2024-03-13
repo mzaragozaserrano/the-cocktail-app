@@ -4,7 +4,7 @@ import com.thecocktailapp.core.domain.repositories.NetworkRepository
 import com.thecocktailapp.core.domain.utils.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.repositories.CocktailRepository
+import com.thecocktailapp.domain.repositories.services.CocktailRepository
 import com.thecocktailapp.domain.usecases.detail.GetDrinkById
 import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
 import kotlinx.coroutines.flow.Flow
