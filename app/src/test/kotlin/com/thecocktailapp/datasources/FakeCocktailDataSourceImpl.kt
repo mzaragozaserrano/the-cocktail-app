@@ -105,7 +105,7 @@ class FakeCocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
                     )
                 }
 
-                "Non alcoholic" -> {
+                "Non_Alcoholic" -> {
                     onSuccess(
                         continuation = continuation,
                         data = CocktailDTO(
@@ -168,7 +168,7 @@ class FakeCocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
                     )
                 }
 
-                "Optional alcohol" -> {
+                "Optional_Alcohol" -> {
                     onSuccess(
                         continuation = continuation,
                         data = CocktailDTO(

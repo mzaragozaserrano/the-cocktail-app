@@ -91,7 +91,7 @@ class HomeViewModelTest {
             preferencesDataSource,
             resourcesDataSource
         )
-        setUpViewModel(isConnected = true, alcoholic = "Non alcoholic")
+        setUpViewModel(isConnected = true, dbId = 1)
     }
 
     private fun setUpSuccessOptionalTest() {
@@ -103,7 +103,7 @@ class HomeViewModelTest {
             preferencesDataSource,
             resourcesDataSource
         )
-        setUpViewModel(isConnected = true, alcoholic = "Optional alcohol")
+        setUpViewModel(isConnected = true, dbId = 2)
     }
 
     private fun setUpDataSourceErrorTest() {
@@ -255,11 +255,11 @@ class HomeViewModelTest {
             }
         }
 
-    private fun setUpViewModel(isConnected: Boolean, alcoholic: String = "Alcoholic") {
+    private fun setUpViewModel(isConnected: Boolean, dbId: Int = 0) {
         networkRepository.setConnectionStatus(isConnected = isConnected)
         getDrinksByType =
             FakeGetDrinksByTypeUseCaseImpl(cocktailRepository, networkRepository)
-        getDrinksByType.setAlcoholicType(alcoholic = alcoholic)
+        getDrinksByType.setAlcoholicType(dbId = dbId)
         viewModel = HomeViewModel(getDrinksByType)
     }
 
