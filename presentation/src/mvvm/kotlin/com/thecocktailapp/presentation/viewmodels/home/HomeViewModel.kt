@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(
     private val _state = MutableStateFlow<HomeUiState>(value = HomeUiState.Idle)
     val state = _state.asStateFlow()
 
-    private var type: DrinkType = DrinkType.Alcoholic
+    private var drinkType: DrinkType = DrinkType.Alcoholic
 
     init {
         onExecuteGetDrinksByType()
@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
                 getDrinksByType
-                    .invoke(params = GetDrinksByTypeUseCaseImpl.Params(alcoholic = type.alcoholic))
+                    .invoke(params = GetDrinksByTypeUseCaseImpl.Params(dbId = drinkType.dbId))
                     .collect(::handleDrinkByTypeResponse)
             }
         }
@@ -56,12 +56,8 @@ class HomeViewModel @Inject constructor(
                 }
 
                 is Result.Response.Success -> {
-                    _state.value = HomeUiState.Success(result.data.drinks.map { it.transform() })
-                    type = when (type) {
-                        is DrinkType.Alcoholic -> DrinkType.None
-                        is DrinkType.None -> DrinkType.Optional
-                        is DrinkType.Optional -> DrinkType.Alcoholic
-                    }
+                    _state.value =
+                        HomeUiState.Success(list = result.data.drinks.map { it.transform() })
                 }
             }
         }
@@ -72,6 +68,11 @@ class HomeViewModel @Inject constructor(
 
     fun onSeeClicked(item: DrinkVO) {
         _state.value = HomeUiState.GoToDetail(item.id.toInt())
+    }
+
+    fun onTypeClicked(drinkType: DrinkType) {
+        this.drinkType = drinkType
+        onExecuteGetDrinksByType()
     }
 
     sealed class HomeUiState {

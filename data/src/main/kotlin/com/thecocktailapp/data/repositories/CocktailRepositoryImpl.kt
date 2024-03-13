@@ -1,5 +1,6 @@
 package com.thecocktailapp.data.repositories
 
+import androidx.annotation.StringRes
 import com.thecocktailapp.core.data.datasources.local.ResourcesDataSource
 import com.thecocktailapp.core.data.utils.ResultData
 import com.thecocktailapp.core.domain.utils.Result
@@ -36,10 +37,12 @@ class CocktailRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getDrinksByType(alcoholic: String): Flow<Result<CocktailBO>> = flow {
+    override suspend fun getDrinksByType(@StringRes dbId: Int): Flow<Result<CocktailBO>> = flow {
         emit(Result.Loading)
         emit(
-            when (val result = cocktailDataSource.getDrinksByType(alcoholic = alcoholic)) {
+            when (val result = cocktailDataSource.getDrinksByType(
+                alcoholic = resourcesDataSource.getStringFromResource(resId = dbId)
+            )) {
                 is ResultData.Response -> {
                     Result.Response.Success(result.data.transform(resourcesDataSource))
                 }

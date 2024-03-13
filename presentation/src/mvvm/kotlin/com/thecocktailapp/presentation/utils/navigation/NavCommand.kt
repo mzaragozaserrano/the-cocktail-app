@@ -2,6 +2,7 @@ package com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.na
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.thecocktailapp.presentation.utils.navigation.Feature
 
 sealed class NavCommand(
     internal val feature: Feature,

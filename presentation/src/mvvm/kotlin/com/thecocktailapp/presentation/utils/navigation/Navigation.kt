@@ -11,6 +11,7 @@ import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.ext
 import com.thecocktailapp.presentation.screens.details.DetailScreen
 import com.thecocktailapp.presentation.screens.main.MainScreen
 import com.thecocktailapp.presentation.screens.splash.SplashScreen
+import com.thecocktailapp.presentation.utils.navigation.Feature
 
 @Composable
 fun Navigation(
@@ -35,11 +36,11 @@ private fun NavGraphBuilder.theCocktailAppNav(
 ) {
 
     navigation(
-        startDestination = NavCommand.App(feature = Feature.Main).route,
-        route = Feature.Main.route
+        startDestination = NavCommand.App(feature = Feature.Home).route,
+        route = Feature.Home.route
     ) {
 
-        composable(navItem = NavCommand.App(feature = Feature.Main)) {
+        composable(navItem = NavCommand.App(feature = Feature.Home)) {
             MainScreen(modifier = modifier, navController = navController)
         }
 
@@ -77,7 +78,7 @@ private fun NavGraphBuilder.splashNav(
                                 inclusive = false
                             }
                         },
-                        route = NavCommand.App(feature = Feature.Main).route
+                        route = NavCommand.App(feature = Feature.Home).route
                     )
                 }
             )

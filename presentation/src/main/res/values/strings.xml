@@ -10,6 +10,14 @@
     <string name="see_button">Ver</string>
     <string name="show_steps_button">Mostrar pasos</string>
 
+    //----- DRINKS ----------/
+    <string name="db_alcoholic">Alcoholic</string>
+    <string name="db_non_alcoholic">Non_Alcoholic</string>
+    <string name="db_optional_alcohol">Optional_Alcohol</string>
+    <string name="type_alcoholic">Alcohol</string>
+    <string name="type_non_alcoholic">Sin alcohol</string>
+    <string name="type_optional_alcohol">Opcional</string>
+
     //----- ERRORS ----------/
     <string name="error_generic">Error: %s</string>
     <string name="error_connectivity">Compruebe su conexión a Internet</string>
@@ -40,5 +48,9 @@
     <string name="menu_item_favorites">Favoritas</string>
     <string name="menu_item_home">The Cocktail App</string>
     <string name="menu_time">08/12/2023 19:58</string>
+
+    //----- MENU ----------/
+    <string name="toolbar_title_home">The Cocktail App</string>
+    <string name="toolbar_title_details">Detalles</string>
 
 </resources>

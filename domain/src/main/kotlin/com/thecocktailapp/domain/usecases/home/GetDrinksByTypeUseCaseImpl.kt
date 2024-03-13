@@ -1,5 +1,6 @@
 package com.thecocktailapp.domain.usecases.home
 
+import androidx.annotation.StringRes
 import com.thecocktailapp.core.domain.repositories.NetworkRepository
 import com.thecocktailapp.core.domain.usecases.FlowUseCase
 import com.thecocktailapp.core.domain.utils.Result
@@ -16,9 +17,9 @@ class GetDrinksByTypeUseCaseImpl @Inject constructor(
     networkRepository: NetworkRepository,
 ) : GetDrinksByType(networkRepository = networkRepository, networkError = ErrorBO.Connectivity) {
 
-    data class Params(val alcoholic: String)
+    data class Params(@StringRes val dbId: Int)
 
     override suspend fun run(params: Params): Flow<Result<CocktailBO>> =
-        cocktailRepository.getDrinksByType(alcoholic = params.alcoholic)
+        cocktailRepository.getDrinksByType(dbId = params.dbId)
 
 }

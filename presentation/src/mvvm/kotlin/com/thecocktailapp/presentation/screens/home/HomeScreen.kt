@@ -8,6 +8,7 @@ import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBar
@@ -19,13 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.Feature
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.NavCommand
+import com.thecocktailapp.core.presentation.compose.components.texts.NormalMediumText
 import com.thecocktailapp.core.presentation.compose.components.utils.Recycler
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.items.DrinkItem
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
+import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.viewmodels.home.HomeViewModel
 import kotlinx.coroutines.launch
 
@@ -45,17 +47,16 @@ fun HomeScreen(
         topBar = {
             val coroutineScope = rememberCoroutineScope()
             TopAppBar(
-                title = {},
+                title = {
+                    NormalMediumText(
+                        color = MaterialTheme.colorScheme.onSurface,
+                        textId = R.string.toolbar_title_home
+                    )
+                },
                 navigationIcon = {
-                    IconButton(
-                        onClick = {
-                            coroutineScope.launch {
-                                drawerState.open()
-                            }
-                        }
-                    ) {
+                    IconButton(onClick = { coroutineScope.launch { drawerState.open() } }) {
                         Icon(
-                            Icons.Rounded.Menu,
+                            imageVector = Icons.Rounded.Menu,
                             contentDescription = "MenuButton"
                         )
                     }
@@ -65,6 +66,9 @@ fun HomeScreen(
     ) { paddingValues ->
         Surface {
             Column(modifier = Modifier.padding(paddingValues)) {
+                HeaderFilterType { drinkType ->
+                    viewModel.onTypeClicked(drinkType)
+                }
                 when (state) {
                     is HomeViewModel.HomeUiState.Error -> {
                         val error = (state as HomeViewModel.HomeUiState.Error).error
@@ -79,7 +83,9 @@ fun HomeScreen(
                     is HomeViewModel.HomeUiState.GoToDetail -> {
                         navController.navigate(
                             route = NavCommand.Content(feature = Feature.Detail)
-                                .createRoute(drinkId = (state as HomeViewModel.HomeUiState.GoToDetail).drinkId)
+                                .createRoute(
+                                    drinkId = (state as HomeViewModel.HomeUiState.GoToDetail).drinkId
+                                )
                         )
                         viewModel.onIdle()
                     }
