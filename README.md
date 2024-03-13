@@ -46,8 +46,8 @@ Welcome to The Cocktail App, a versatile beverage and cocktail application that 
 ## Core Framework
 
 - **Custom Core Framework**
-  - Developed by the owner, this framework includes essential modules: `mzs-data`, `mzs-domain`, and `mzs-presentation`. These modules serve as the foundation for various applications, providing base files, utilities, and Jetpack Compose components for efficient app development.
-  - The core framework is integrated into The Cocktail App through the inclusion of `.aar` files (e.g., `mzs-data.aar`, `mzs-domain.aar`, `mzs-presentation.aar`). These files are placed in the `libs` folder at the project's root, ensuring accessibility across multiple modules within the application. This approach streamlines the sharing of common functionalities and Jetpack Compose components, contributing to consistent and efficient development across different parts of the application.
+  - Developed by the owner, this framework includes essential modules: `data`, `domain`, and `presentation`. These modules serve as the foundation for various applications, providing base files, utilities, and Jetpack Compose components for efficient app development.
+  - The core framework is integrated into The Cocktail App through the inclusion of a repository named `mzs-core`. This repository is implemented in each development project. This approach streamlines the sharing of common functionalities and Jetpack Compose components, contributing to consistent and efficient development across different parts of the application.
 
 ## Dependency Injection
 
