@@ -6,8 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.navigation.Navigation
 import com.thecocktailapp.presentation.utils.navigation.Feature
+import com.thecocktailapp.presentation.utils.navigation.Navigation
 import com.thecocktailapp.presentation.viewmodels.app.ComposeViewModel
 
 @Composable
@@ -19,7 +19,7 @@ fun ComposeScreen(modifier: Modifier = Modifier, viewModel: ComposeViewModel = h
     Navigation(
         modifier = modifier,
         navController = navController,
-        startDestination = if (state.showRandomDrink) Feature.Splash.route else Feature.Home.route
+        startDestination = if (state.showRandomDrink) Feature.Splash.route else Feature.Main.route
     )
 
 }

@@ -1,6 +1,7 @@
 package com.thecocktailapp.domain.usecases.detail
 
 import com.thecocktailapp.core.domain.usecases.SyncUseCase
+import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.repositories.local.FavoritesRepository
 import javax.inject.Inject
 
@@ -10,9 +11,9 @@ class RemoveFavoriteDrinkUseCaseImpl @Inject constructor(
     private val favoritesRepository: FavoritesRepository,
 ) : RemoveFavoriteDrink() {
 
-    data class Params(val drinkId: Int)
+    data class Params(val drink: DrinkBO)
 
     override fun invoke(params: Params): Boolean =
-        favoritesRepository.removeDrink(drinkId = params.drinkId)
+        favoritesRepository.removeDrink(drink = params.drink)
 
 }

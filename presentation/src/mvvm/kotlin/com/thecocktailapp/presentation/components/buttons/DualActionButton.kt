@@ -33,7 +33,8 @@ fun DualActionButton(
             modifier = Modifier.fillMaxWidth(),
             buttonBackgroundColor = buttonBackgroundColor,
             textColor = buttonTextColor,
-            textId = buttonTextId
+            textId = buttonTextId,
+            textPaddingVertical = 12.dp
         ) {
             onSeeClicked()
         }

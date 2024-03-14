@@ -6,9 +6,14 @@
 
     //----- BUTTONS ----------/
     <string name="cancel_button">Cancelar</string>
+    <string name="ok_button">Aceptar</string>
     <string name="retry_button">Reintentar</string>
     <string name="see_button">Ver</string>
     <string name="show_steps_button">Mostrar pasos</string>
+
+    //----- DIALOG ----------/
+    <string name="title_error">Error</string>
+    <string name="title_warning">Atención</string>
 
     //----- DRINKS ----------/
     <string name="db_alcoholic">Alcoholic</string>
@@ -25,7 +30,6 @@
     <string name="error_deserializing_json">Error deserializando el fichero JSON</string>
     <string name="error_loading_data">Error cargando la información</string>
     <string name="error_loading_url">Error cargando la URL</string>
-    <string name="title_error">Error</string>
 
     //----- FRAGMENT (SPLASH) ----------/
     <string name="first_title_splash_fragment">Nuestra</string>
@@ -52,5 +56,9 @@
     //----- MENU ----------/
     <string name="toolbar_title_home">The Cocktail App</string>
     <string name="toolbar_title_details">Detalles</string>
+    <string name="toolbar_title_favorites">Favoritas</string>
+
+    //----- WARNINGS ----------/
+    <string name="warning_favorites_not_found">No se han guardado aún ninguna bebida en favoritos. Entra en los detalles de la bebida para guardar la primera :)</string>
 
 </resources>

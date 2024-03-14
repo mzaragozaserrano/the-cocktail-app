@@ -45,18 +45,55 @@ fun DrinkBO.createDrinkType(): DrinkType? = when (alcoholic) {
     }
 }
 
+fun DrinkType?.getAlcoholic(): String = when (this) {
+    DrinkType.Alcoholic -> {
+        "Alcoholic"
+    }
+
+    DrinkType.Optional -> {
+        "Optional alcohol"
+    }
+
+    DrinkType.None -> {
+        "Non alcoholic"
+    }
+
+    else -> {
+        ""
+    }
+}
+
 fun DrinkBO.createIngredientsFormatted(): List<String> {
     val list = mutableListOf<String>()
     if (listMeasures.isNotEmpty()) {
         (0..14).forEach { index ->
             val ingredient = listIngredients[index]
             val measure = listMeasures[index]
-            if (ingredient.isNotEmpty() && measure.isNotEmpty()) {
+            if (!ingredient.isNullOrEmpty() && !measure.isNullOrEmpty()) {
                 list.add("$ingredient - $measure")
             }
         }
-    } else {
-        list.add(listIngredients.first())
     }
     return list
+}
+
+fun DrinkVO.transform(): DrinkBO {
+    val listIngredients = mutableListOf<String>()
+    val listMeasures = mutableListOf<String>()
+    ingredients.forEach { ingredient ->
+        listIngredients.add(ingredient.split(" - ")[0])
+        listMeasures.add(ingredient.split(" - ")[1])
+    }
+    return DrinkBO(
+        alcoholic = drinkType.getAlcoholic(),
+        category = category,
+        dateModified = dateModified.orEmpty(),
+        glass = glass,
+        id = id,
+        instructions = instructions,
+        listIngredients = listIngredients,
+        listMeasures = listMeasures,
+        name = name,
+        urlImage = urlImage
+    )
 }

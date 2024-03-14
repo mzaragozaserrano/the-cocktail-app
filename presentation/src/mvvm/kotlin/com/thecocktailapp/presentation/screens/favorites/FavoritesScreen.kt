@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.screens.home
+package com.thecocktailapp.presentation.screens.favorites
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -25,23 +26,26 @@ import com.thecocktailapp.core.presentation.compose.components.texts.NormalMediu
 import com.thecocktailapp.core.presentation.compose.components.utils.Recycler
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.items.DrinkItem
-import com.thecocktailapp.presentation.components.utils.ErrorDialog
-import com.thecocktailapp.presentation.components.utils.ProgressDialog
+import com.thecocktailapp.presentation.components.utils.WarningDialog
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
-import com.thecocktailapp.presentation.viewmodels.home.HomeViewModel
+import com.thecocktailapp.presentation.viewmodels.favorites.FavoritesViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+fun FavoritesScreen(
     modifier: Modifier = Modifier,
     drawerState: DrawerState,
     navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel(),
+    viewModel: FavoritesViewModel = hiltViewModel(),
 ) {
 
     val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.onExecuteGetFavorites()
+    }
 
     Scaffold(
         modifier = modifier,
@@ -51,7 +55,7 @@ fun HomeScreen(
                 title = {
                     NormalMediumText(
                         color = MaterialTheme.colorScheme.onSurface,
-                        textId = R.string.toolbar_title_home
+                        textId = R.string.toolbar_title_favorites
                     )
                 },
                 navigationIcon = {
@@ -66,35 +70,27 @@ fun HomeScreen(
         }
     ) { paddingValues ->
         Surface {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
-                HeaderFilterType { drinkType ->
-                    viewModel.onTypeClicked(drinkType)
-                }
+            Column(modifier = Modifier.padding(paddingValues)) {
                 when (state) {
-                    is HomeViewModel.HomeUiState.Error -> {
-                        val error = (state as HomeViewModel.HomeUiState.Error).error
-                        ErrorDialog(
-                            buttonTextId = R.string.retry_button,
+                    is FavoritesViewModel.FavoritesUiState.Error -> {
+                        val error =
+                            (state as FavoritesViewModel.FavoritesUiState.Error).error
+                        WarningDialog(
+                            buttonTextId = R.string.ok_button,
                             messageTextId = error.messageId
                         ) {
-                            viewModel.onExecuteGetDrinksByType()
+
                         }
                     }
 
-                    is HomeViewModel.HomeUiState.Idle -> {}
+                    is FavoritesViewModel.FavoritesUiState.Idle -> {}
 
-                    is HomeViewModel.HomeUiState.Loading -> {
-                        ProgressDialog()
-                    }
-
-                    is HomeViewModel.HomeUiState.Success -> {
+                    is FavoritesViewModel.FavoritesUiState.Success -> {
                         Recycler(
-                            modifier = Modifier.padding(all = 8.dp),
-                            list = (state as HomeViewModel.HomeUiState.Success).list,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(all = 8.dp),
+                            list = (state as FavoritesViewModel.FavoritesUiState.Success).list,
                             numberCells = 2
                         ) { item ->
                             DrinkItem(

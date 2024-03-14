@@ -69,45 +69,19 @@ class HomeViewModel @Inject constructor(
     private fun onExecuteGetFavorites() {
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
-                getFavoriteDrinks
-                    .invoke()
-                    .collect(::handleFavoriteDrinksResponse)
-            }
-        }
-    }
-
-    private suspend fun handleFavoriteDrinksResponse(result: Result<List<Int>>) =
-        withContext(Dispatchers.Main) {
-            when (result) {
-                is Result.Loading -> {
-                    _state.value = HomeUiState.Loading
-                }
-
-                is Result.Response.Error<*> -> {
-                    _state.value =
-                        HomeUiState.Error(error = (result.code as ErrorBO).transform())
-                }
-
-                is Result.Response.Success -> {
+                val favoriteDrinks = getFavoriteDrinks().map { it.transform() }
+                favoriteDrinks.map { favorite ->
                     list.map { drink ->
-                        if (result.data.contains(drink.id.toInt())) {
+                        if (favorite.id.contains(drink.id)) {
                             drink.isFavorite = true
                         } else {
                             drink
                         }
                     }
-                    _state.value =
-                        HomeUiState.Success(list = list)
                 }
+                _state.value = HomeUiState.Success(list = list)
             }
         }
-
-    fun onIdle() {
-        _state.value = HomeUiState.Idle
-    }
-
-    fun onSeeClicked(item: DrinkVO) {
-        _state.value = HomeUiState.GoToDetail(item.id.toInt())
     }
 
     fun onTypeClicked(drinkType: DrinkType) {
@@ -118,7 +92,6 @@ class HomeViewModel @Inject constructor(
     sealed class HomeUiState {
         object Idle : HomeUiState()
         data class Error(val error: ErrorVO) : HomeUiState()
-        data class GoToDetail(val drinkId: Int) : HomeUiState()
         object Loading : HomeUiState()
         data class Success(val list: List<DrinkVO>) : HomeUiState()
     }

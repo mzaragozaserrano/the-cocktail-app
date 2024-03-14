@@ -7,8 +7,8 @@ data class DrinkBO(
     val glass: String,
     val id: String,
     val instructions: String,
-    val listIngredients: List<String>,
-    val listMeasures: List<String>,
+    val listIngredients: List<String?>,
+    val listMeasures: List<String?>,
     val name: String,
     val urlImage: String,
 )

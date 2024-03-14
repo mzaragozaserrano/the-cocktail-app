@@ -3,6 +3,7 @@ package com.thecocktailapp.presentation.screens.details
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -55,9 +56,7 @@ fun DetailScreen(
 
     BackHandler(
         enabled = true,
-        onBack = {
-            navController.navigate(route = NavCommand.App(feature = Feature.Home).route)
-        }
+        onBack = { onCheckBackHandler(navController = navController) }
     )
 
     LaunchedEffect(key1 = ingredients) {
@@ -83,11 +82,7 @@ fun DetailScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(
-                        onClick = {
-                            navController.navigate(route = NavCommand.App(feature = Feature.Home).route)
-                        }
-                    ) {
+                    IconButton(onClick = { onCheckBackHandler(navController = navController) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                             tint = MaterialTheme.colorScheme.onSurface,
@@ -128,41 +123,43 @@ fun DetailScreen(
                             val drink =
                                 (state as DetailDrinkViewModel.DetailDrinkUiState.Success).drink
                             ingredients = drink.ingredients
-                            RoundedCard(
+                            Column(
                                 modifier = Modifier.padding(all = 24.dp),
-                                backgroundColor = MaterialTheme.colorScheme.background
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(space = 12.dp)
                             ) {
-                                DetailHeaderContent(
-                                    drinkType = drink.drinkType,
-                                    glass = drink.glass,
-                                    name = drink.name.uppercase(),
-                                    url = drink.urlImage
-                                )
-                                DetailIngredientsContent(
-                                    ingredients = ingredients,
-                                    showInstructions = showInstructions
-                                )
-                                DetailInstructionsContent(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    instructions = drink.instructions
-                                )
-                            }
-                            SmallFloatingActionButton(
-                                modifier = Modifier.padding(bottom = 16.dp),
-                                onClick = {
-                                    if (isFavorite) {
-                                        viewModel.removeFavoriteDrink(id = drink.id)
-                                    } else {
-                                        viewModel.addFavoriteDrink(id = drink.id)
-                                    }
-                                },
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                contentColor = MaterialTheme.colorScheme.secondary
-                            ) {
-                                Icon(
-                                    imageVector = if (isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
-                                    contentDescription = "FavoriteButton"
-                                )
+                                RoundedCard(backgroundColor = MaterialTheme.colorScheme.background) {
+                                    DetailHeaderContent(
+                                        drinkType = drink.drinkType,
+                                        glass = drink.glass,
+                                        name = drink.name.uppercase(),
+                                        url = drink.urlImage
+                                    )
+                                    DetailIngredientsContent(
+                                        ingredients = ingredients,
+                                        showInstructions = showInstructions
+                                    )
+                                    DetailInstructionsContent(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        instructions = drink.instructions
+                                    )
+                                }
+                                SmallFloatingActionButton(
+                                    onClick = {
+                                        if (isFavorite) {
+                                            viewModel.removeFavoriteDrink(drink = drink)
+                                        } else {
+                                            viewModel.addFavoriteDrink(drink = drink)
+                                        }
+                                    },
+                                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                    contentColor = MaterialTheme.colorScheme.secondary
+                                ) {
+                                    Icon(
+                                        imageVector = if (isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
+                                        contentDescription = "FavoriteButton"
+                                    )
+                                }
                             }
                         }
                     }
@@ -171,4 +168,14 @@ fun DetailScreen(
         }
     }
 
+}
+
+private fun onCheckBackHandler(navController: NavController) {
+    val backStackEntry = navController.previousBackStackEntry
+    val previousDestination = backStackEntry?.destination?.route
+    if (previousDestination == NavCommand.App(Feature.Splash).route) {
+        navController.navigate(route = NavCommand.App(feature = Feature.Main).route)
+    } else {
+        navController.popBackStack()
+    }
 }

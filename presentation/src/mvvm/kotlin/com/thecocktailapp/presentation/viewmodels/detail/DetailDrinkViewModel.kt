@@ -36,7 +36,7 @@ class DetailDrinkViewModel @Inject constructor(
 ) : ViewModel() {
 
     private lateinit var drink: DrinkVO
-    private val id = savedStateHandle.get<Int>(key = NavArg.DrinkId.key) ?: 0
+    private val id = savedStateHandle.get<String>(key = NavArg.DrinkId.key) ?: "0"
 
     private val _isFavorite = MutableStateFlow(value = false)
     val isFavorite = _isFavorite.asStateFlow()
@@ -52,7 +52,7 @@ class DetailDrinkViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
                 getDrinkById
-                    .invoke(params = GetDrinkByIdUseCaseImpl.Params(id = id))
+                    .invoke(params = GetDrinkByIdUseCaseImpl.Params(id = id.toInt()))
                     .collect(::handleDrinkByIdResponse)
             }
         }
@@ -81,25 +81,25 @@ class DetailDrinkViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
                 _isFavorite.value =
-                    isFavoriteDrink.invoke(IsFavoriteDrinkUseCaseImpl.Params(drinkId = id))
+                    isFavoriteDrink.invoke(IsFavoriteDrinkUseCaseImpl.Params(drinkId = id.toInt()))
                 _state.value = DetailDrinkUiState.Success(drink = drink)
             }
         }
     }
 
-    fun addFavoriteDrink(id: String) {
+    fun addFavoriteDrink(drink: DrinkVO) {
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
-                addFavoriteDrink.invoke(params = AddFavoriteDrinkUseCaseImpl.Params(drinkId = id.toInt()))
+                addFavoriteDrink.invoke(params = AddFavoriteDrinkUseCaseImpl.Params(drink = drink.transform()))
                 _isFavorite.value = true
             }
         }
     }
 
-    fun removeFavoriteDrink(id: String) {
+    fun removeFavoriteDrink(drink: DrinkVO) {
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
-                removeFavoriteDrink.invoke(params = RemoveFavoriteDrinkUseCaseImpl.Params(drinkId = id.toInt()))
+                removeFavoriteDrink.invoke(params = RemoveFavoriteDrinkUseCaseImpl.Params(drink = drink.transform()))
                 _isFavorite.value = false
             }
         }

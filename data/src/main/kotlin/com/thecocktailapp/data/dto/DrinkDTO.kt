@@ -1,10 +1,13 @@
 package com.thecocktailapp.data.dto
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
+@Entity(tableName = "drink_table")
 data class DrinkDTO(
+    @PrimaryKey val idDrink: String,
     val dateModified: String? = null,
-    val idDrink: String? = null,
     val strAlcoholic: String? = null,
     val strCategory: String? = null,
     val strCreativeCommonsConfirmed: String? = null,
@@ -55,5 +58,5 @@ data class DrinkDTO(
     val strMeasure14: String? = null,
     val strMeasure15: String? = null,
     val strTags: String? = null,
-    val strVideo: String? = null
+    val strVideo: String? = null,
 )

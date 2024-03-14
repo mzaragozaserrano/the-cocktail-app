@@ -1,11 +1,10 @@
 package com.thecocktailapp.domain.repositories.local
 
-import com.thecocktailapp.core.domain.utils.Result
-import kotlinx.coroutines.flow.Flow
+import com.thecocktailapp.domain.bo.DrinkBO
 
 interface FavoritesRepository {
-    fun addDrink(drinkId: Int): Boolean
-    suspend fun getAllFavorites(): Flow<Result<List<Int>>>
+    fun addDrink(drink: DrinkBO): Boolean
+    fun getAllFavorites(): List<DrinkBO>
     fun isFavoriteDrink(drinkId: Int): Boolean
-    fun removeDrink(drinkId: Int): Boolean
+    fun removeDrink(drink: DrinkBO): Boolean
 }

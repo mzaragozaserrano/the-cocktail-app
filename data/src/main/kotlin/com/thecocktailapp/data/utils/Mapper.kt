@@ -5,7 +5,6 @@ import com.thecocktailapp.data.R
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.DrinkDTO
 import com.thecocktailapp.data.dto.ErrorDTO
-import com.thecocktailapp.data.entity.Drink
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
@@ -23,7 +22,7 @@ fun DrinkDTO.transform(resourcesDataSource: ResourcesDataSource): DrinkBO {
             resId = R.string.category_drink_default
         ),
         dateModified = dateModified.orEmpty(),
-        id = idDrink.orEmpty(),
+        id = idDrink,
         instructions = getInstructions(resourcesDataSource),
         glass = strGlass.orEmpty(),
         listIngredients = listIngredients,
@@ -113,4 +112,53 @@ fun ErrorDTO.transform(): ErrorBO = when (this) {
     is ErrorDTO.LoadingURL -> ErrorBO.LoadingURL
 }
 
-fun Int.createDrinkEntity(): Drink = Drink(drinkId = this)
+fun DrinkBO.transform(): DrinkDTO {
+    val ingredientsMap = listIngredients
+        .take(15)
+        .mapIndexed { index, ingredient -> "strIngredient${index + 1}" to ingredient }
+        .toMap()
+    val measuresMap = listMeasures
+        .take(15)
+        .mapIndexed { index, measure -> "strMeasure${index + 1}" to measure }
+        .toMap()
+    return DrinkDTO(
+        dateModified = dateModified,
+        idDrink = id,
+        strAlcoholic = alcoholic,
+        strCategory = category,
+        strDrink = name,
+        strDrinkThumb = urlImage,
+        strGlass = glass,
+        strIngredient1 = ingredientsMap["strIngredient1"],
+        strIngredient2 = ingredientsMap["strIngredient2"],
+        strIngredient3 = ingredientsMap["strIngredient3"],
+        strIngredient4 = ingredientsMap["strIngredient4"],
+        strIngredient5 = ingredientsMap["strIngredient5"],
+        strIngredient6 = ingredientsMap["strIngredient6"],
+        strIngredient7 = ingredientsMap["strIngredient7"],
+        strIngredient8 = ingredientsMap["strIngredient8"],
+        strIngredient9 = ingredientsMap["strIngredient9"],
+        strIngredient10 = ingredientsMap["strIngredient10"],
+        strIngredient11 = ingredientsMap["strIngredient11"],
+        strIngredient12 = ingredientsMap["strIngredient12"],
+        strIngredient13 = ingredientsMap["strIngredient13"],
+        strIngredient14 = ingredientsMap["strIngredient14"],
+        strIngredient15 = ingredientsMap["strIngredient15"],
+        strInstructions = instructions,
+        strMeasure1 = measuresMap["strMeasure1"],
+        strMeasure2 = measuresMap["strMeasure2"],
+        strMeasure3 = measuresMap["strMeasure3"],
+        strMeasure4 = measuresMap["strMeasure4"],
+        strMeasure5 = measuresMap["strMeasure5"],
+        strMeasure6 = measuresMap["strMeasure6"],
+        strMeasure7 = measuresMap["strMeasure7"],
+        strMeasure8 = measuresMap["strMeasure8"],
+        strMeasure9 = measuresMap["strMeasure9"],
+        strMeasure10 = measuresMap["strMeasure10"],
+        strMeasure11 = measuresMap["strMeasure11"],
+        strMeasure12 = measuresMap["strMeasure12"],
+        strMeasure13 = measuresMap["strMeasure13"],
+        strMeasure14 = measuresMap["strMeasure14"],
+        strMeasure15 = measuresMap["strMeasure15"],
+    )
+}
