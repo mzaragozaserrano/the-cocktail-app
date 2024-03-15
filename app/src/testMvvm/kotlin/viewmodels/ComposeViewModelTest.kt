@@ -65,9 +65,9 @@ class ComposeViewModelTest {
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = false)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isFirstAccess = true)
     }
@@ -77,9 +77,9 @@ class ComposeViewModelTest {
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = true)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isFirstAccess = false)
     }
@@ -88,9 +88,9 @@ class ComposeViewModelTest {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
     }
 
@@ -112,9 +112,9 @@ class ComposeViewModelTest {
 
     private fun setUpViewModel(isFirstAccess: Boolean) {
         showRandomDrink =
-            FakeShowRandomDrinkUseCaseImpl(cocktailRepository)
+            FakeShowRandomDrinkUseCaseImpl(cocktailRepository = cocktailRepository)
         preferencesDataSource.setIsFirstsAccess(isFirstAccess = isFirstAccess)
-        viewModel = ComposeViewModel(showRandomDrink)
+        viewModel = ComposeViewModel(showRandomDrink = showRandomDrink)
     }
 
 }

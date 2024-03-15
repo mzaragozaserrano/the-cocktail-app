@@ -1,13 +1,11 @@
-package com.thecocktailapp.domain.usecases.common
+package com.thecocktailapp.usecases
 
-import com.thecocktailapp.core.domain.usecases.SyncUseCaseNoParams
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.repositories.local.FavoritesRepository
+import com.thecocktailapp.domain.usecases.common.GetFavoriteDrinks
 import javax.inject.Inject
 
-typealias GetFavoriteDrinks = SyncUseCaseNoParams<@JvmSuppressWildcards List<DrinkBO>>
-
-class GetFavoriteDrinksUseCaseImpl @Inject constructor(
+class FakeGetFavoriteDrinksUseCaseImpl @Inject constructor(
     private val favoritesRepository: FavoritesRepository,
 ) : GetFavoriteDrinks() {
 

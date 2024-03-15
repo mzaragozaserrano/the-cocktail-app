@@ -3,6 +3,7 @@ package viewmodels
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
+import com.thecocktailapp.datasources.FakeFavoritesDataSourceImpl
 import com.thecocktailapp.datasources.FakePreferencesDataSourceImpl
 import com.thecocktailapp.datasources.FakeResourcesDataSourceImpl
 import com.thecocktailapp.presentation.utils.navigation.NavArg
@@ -11,8 +12,12 @@ import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO
 import com.thecocktailapp.repositories.FakeCocktailRepositoryImpl
+import com.thecocktailapp.repositories.FakeFavoritesRepositoryImpl
 import com.thecocktailapp.repositories.FakeNetworkRepositoryImpl
+import com.thecocktailapp.usecases.FakeAddFavoriteDrinkUseCaseImpl
 import com.thecocktailapp.usecases.FakeGetDrinkByIdUseCaseImpl
+import com.thecocktailapp.usecases.FakeIsFavoriteDrinkUseCaseImpl
+import com.thecocktailapp.usecases.FakeRemoveFavoriteDrinkUseCaseImpl
 import com.thecocktailapp.utils.MainDispatcherRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import junit.framework.TestCase.*
@@ -35,13 +40,21 @@ class DetailDrinkViewModelTest {
 
     private lateinit var savedStateHandle: SavedStateHandle
     private lateinit var cocktailRepository: FakeCocktailRepositoryImpl
+    private lateinit var favoritesRepository: FakeFavoritesRepositoryImpl
+
+    private lateinit var addFavoriteDrink: FakeAddFavoriteDrinkUseCaseImpl
     private lateinit var getDrinkById: FakeGetDrinkByIdUseCaseImpl
+    private lateinit var isFavoriteDrink: FakeIsFavoriteDrinkUseCaseImpl
+    private lateinit var removeFavoriteDrink: FakeRemoveFavoriteDrinkUseCaseImpl
 
     @InjectMocks
     private lateinit var networkRepository: FakeNetworkRepositoryImpl
 
     @InjectMocks
     private lateinit var cocktailDataSource: FakeCocktailDataSourceImpl
+
+    @InjectMocks
+    private lateinit var favoritesDataSource: FakeFavoritesDataSourceImpl
 
     @InjectMocks
     private lateinit var resourcesDataSource: FakeResourcesDataSourceImpl
@@ -76,9 +89,13 @@ class DetailDrinkViewModelTest {
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = false)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
+        favoritesRepository = FakeFavoritesRepositoryImpl(
+            favoritesDataSource = favoritesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = true)
     }
@@ -88,9 +105,13 @@ class DetailDrinkViewModelTest {
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = true)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
+        favoritesRepository = FakeFavoritesRepositoryImpl(
+            favoritesDataSource = favoritesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = true)
     }
@@ -99,9 +120,13 @@ class DetailDrinkViewModelTest {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
+        favoritesRepository = FakeFavoritesRepositoryImpl(
+            favoritesDataSource = favoritesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = false)
     }
@@ -110,9 +135,13 @@ class DetailDrinkViewModelTest {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
+        favoritesRepository = FakeFavoritesRepositoryImpl(
+            favoritesDataSource = favoritesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
     }
 
@@ -168,10 +197,25 @@ class DetailDrinkViewModelTest {
 
     private fun setUpViewModel(isConnected: Boolean) {
         savedStateHandle = SavedStateHandle()
-        savedStateHandle[NavArg.DrinkId.key] = 15813
+        savedStateHandle[NavArg.DrinkId.key] = "15813"
         networkRepository.setConnectionStatus(isConnected = isConnected)
-        getDrinkById = FakeGetDrinkByIdUseCaseImpl(cocktailRepository, networkRepository)
-        viewModel = DetailDrinkViewModel(getDrinkById, savedStateHandle)
+        addFavoriteDrink =
+            FakeAddFavoriteDrinkUseCaseImpl(favoritesRepository = favoritesRepository)
+        getDrinkById = FakeGetDrinkByIdUseCaseImpl(
+            cocktailRepository = cocktailRepository,
+            networkRepository = networkRepository
+        )
+        isFavoriteDrink =
+            FakeIsFavoriteDrinkUseCaseImpl(favoritesRepository = favoritesRepository)
+        removeFavoriteDrink =
+            FakeRemoveFavoriteDrinkUseCaseImpl(favoritesRepository = favoritesRepository)
+        viewModel = DetailDrinkViewModel(
+            addFavoriteDrink = addFavoriteDrink,
+            getDrinkById = getDrinkById,
+            isFavoriteDrink = isFavoriteDrink,
+            removeFavoriteDrink = removeFavoriteDrink,
+            savedStateHandle = savedStateHandle
+        )
     }
 
 }

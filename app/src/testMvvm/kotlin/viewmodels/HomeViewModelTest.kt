@@ -2,6 +2,7 @@ package viewmodels
 
 import app.cash.turbine.test
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
+import com.thecocktailapp.datasources.FakeFavoritesDataSourceImpl
 import com.thecocktailapp.datasources.FakePreferencesDataSourceImpl
 import com.thecocktailapp.datasources.FakeResourcesDataSourceImpl
 import com.thecocktailapp.presentation.viewmodels.home.HomeViewModel
@@ -9,8 +10,10 @@ import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO
 import com.thecocktailapp.repositories.FakeCocktailRepositoryImpl
+import com.thecocktailapp.repositories.FakeFavoritesRepositoryImpl
 import com.thecocktailapp.repositories.FakeNetworkRepositoryImpl
 import com.thecocktailapp.usecases.FakeGetDrinksByTypeUseCaseImpl
+import com.thecocktailapp.usecases.FakeGetFavoriteDrinksUseCaseImpl
 import com.thecocktailapp.utils.MainDispatcherRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import junit.framework.TestCase.*
@@ -32,13 +35,19 @@ import javax.inject.Inject
 class HomeViewModelTest {
 
     private lateinit var cocktailRepository: FakeCocktailRepositoryImpl
+    private lateinit var favoritesRepository: FakeFavoritesRepositoryImpl
+
     private lateinit var getDrinksByType: FakeGetDrinksByTypeUseCaseImpl
+    private lateinit var getFavoriteDrinks: FakeGetFavoriteDrinksUseCaseImpl
 
     @InjectMocks
     private lateinit var networkRepository: FakeNetworkRepositoryImpl
 
     @InjectMocks
     private lateinit var cocktailDataSource: FakeCocktailDataSourceImpl
+
+    @InjectMocks
+    private lateinit var favoritesDataSource: FakeFavoritesDataSourceImpl
 
     @InjectMocks
     private lateinit var resourcesDataSource: FakeResourcesDataSourceImpl
@@ -75,9 +84,13 @@ class HomeViewModelTest {
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = false)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
+        favoritesRepository = FakeFavoritesRepositoryImpl(
+            favoritesDataSource = favoritesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = true)
     }
@@ -87,9 +100,13 @@ class HomeViewModelTest {
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = false)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
+        favoritesRepository = FakeFavoritesRepositoryImpl(
+            favoritesDataSource = favoritesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = true, dbId = 1)
     }
@@ -99,9 +116,13 @@ class HomeViewModelTest {
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = false)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
+        favoritesRepository = FakeFavoritesRepositoryImpl(
+            favoritesDataSource = favoritesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = true, dbId = 2)
     }
@@ -111,9 +132,13 @@ class HomeViewModelTest {
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = true)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
+        favoritesRepository = FakeFavoritesRepositoryImpl(
+            favoritesDataSource = favoritesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = true)
     }
@@ -122,9 +147,13 @@ class HomeViewModelTest {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
+        favoritesRepository = FakeFavoritesRepositoryImpl(
+            favoritesDataSource = favoritesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = false)
     }
@@ -133,9 +162,13 @@ class HomeViewModelTest {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
+        favoritesRepository = FakeFavoritesRepositoryImpl(
+            favoritesDataSource = favoritesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
     }
 
@@ -160,6 +193,76 @@ class HomeViewModelTest {
                                 ),
                                 instructions = "Pour Hot Damn 100 in bottom of a jar or regular glass.Fill the rest of the glass with sweet tea.Stir with spoon, straw, or better yet a cinnamon stick and leave it in .",
                                 urlImage = "https://www.thecocktaildb.com/images/media/drink/rrstxv1441246184.jpg"
+                            ),
+                            DrinkVO(
+                                category = "Shake",
+                                dateModified = "2016-07-18 22:28:43",
+                                drinkType = DrinkType.Alcoholic,
+                                glass = "Beer mug",
+                                id = "14588",
+                                name = "151 Florida Bushwacker",
+                                ingredients = listOf(
+                                    "Malibu rum - 1/2 oz",
+                                    "Light rum - 1/2 oz",
+                                    "151 proof rum - 1/2 oz Bacardi",
+                                    "Dark Creme de Cacao - 1 oz",
+                                    "Cointreau - 1 oz",
+                                    "Milk - 3 oz",
+                                    "Coconut liqueur - 1 oz",
+                                    "Vanilla ice - cream - 1 cup",
+                                ),
+                                instructions = "Combine all ingredients . Blend until smooth . Garnish with chocolate shavings if desired.",
+                                urlImage = "https://www.thecocktaildb.com/images/media/drink/rvwrvv1468877323.jpg"
+                            )
+                        )
+                    ),
+                    awaitItem()
+                )
+            }
+        }
+
+    @Test
+    fun `when getDrinkByTypeUseCase (alcoholic) is invoked with favorites saved, loading result is emitted first, followed by a success result and a favorite shown`() =
+        runTest {
+            viewModel.state.test {
+                assertEquals(HomeViewModel.HomeUiState.Loading, awaitItem())
+                assertEquals(
+                    HomeViewModel.HomeUiState.Success(
+                        listOf(
+                            DrinkVO(
+                                category = "Coffee / Tea",
+                                dateModified = "2015-09-03 03:09:44",
+                                drinkType = DrinkType.Alcoholic,
+                                glass = "Mason jar",
+                                id = "15813",
+                                name = "Herbal flame",
+                                ingredients = listOf(
+                                    "Hot Damn - 5 shots",
+                                    "Tea - very sweet"
+                                ),
+                                instructions = "Pour Hot Damn 100 in bottom of a jar or regular glass.Fill the rest of the glass with sweet tea.Stir with spoon, straw, or better yet a cinnamon stick and leave it in .",
+                                isFavorite = true,
+                                urlImage = "https://www.thecocktaildb.com/images/media/drink/rrstxv1441246184.jpg"
+                            ),
+                            DrinkVO(
+                                category = "Shake",
+                                dateModified = "2016-07-18 22:28:43",
+                                drinkType = DrinkType.Alcoholic,
+                                glass = "Beer mug",
+                                id = "14588",
+                                name = "151 Florida Bushwacker",
+                                ingredients = listOf(
+                                    "Malibu rum - 1/2 oz",
+                                    "Light rum - 1/2 oz",
+                                    "151 proof rum - 1/2 oz Bacardi",
+                                    "Dark Creme de Cacao - 1 oz",
+                                    "Cointreau - 1 oz",
+                                    "Milk - 3 oz",
+                                    "Coconut liqueur - 1 oz",
+                                    "Vanilla ice - cream - 1 cup",
+                                ),
+                                instructions = "Combine all ingredients . Blend until smooth . Garnish with chocolate shavings if desired.",
+                                urlImage = "https://www.thecocktaildb.com/images/media/drink/rvwrvv1468877323.jpg"
                             )
                         )
                     ),
@@ -257,10 +360,15 @@ class HomeViewModelTest {
 
     private fun setUpViewModel(isConnected: Boolean, dbId: Int = 0) {
         networkRepository.setConnectionStatus(isConnected = isConnected)
-        getDrinksByType =
-            FakeGetDrinksByTypeUseCaseImpl(cocktailRepository, networkRepository)
+        getDrinksByType = FakeGetDrinksByTypeUseCaseImpl(
+            cocktailRepository = cocktailRepository,
+            networkRepository = networkRepository
+        )
+        getFavoriteDrinks =
+            FakeGetFavoriteDrinksUseCaseImpl(favoritesRepository = favoritesRepository)
         getDrinksByType.setAlcoholicType(dbId = dbId)
-        viewModel = HomeViewModel(getDrinksByType)
+        viewModel =
+            HomeViewModel(getDrinksByType = getDrinksByType, getFavoriteDrinks = getFavoriteDrinks)
     }
 
 }

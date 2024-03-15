@@ -73,9 +73,9 @@ class SplashViewModelTest {
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = false)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = true)
     }
@@ -85,9 +85,9 @@ class SplashViewModelTest {
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = true)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = true)
     }
@@ -96,9 +96,9 @@ class SplashViewModelTest {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
         setUpViewModel(isConnected = false)
     }
@@ -107,9 +107,9 @@ class SplashViewModelTest {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
         cocktailRepository = FakeCocktailRepositoryImpl(
-            cocktailDataSource,
-            preferencesDataSource,
-            resourcesDataSource
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
         )
     }
 
@@ -164,9 +164,11 @@ class SplashViewModelTest {
 
     private fun setUpViewModel(isConnected: Boolean) {
         networkRepository.setConnectionStatus(isConnected = isConnected)
-        getRandomDrink =
-            FakeGetRandomDrinkUseCaseImpl(cocktailRepository, networkRepository)
-        viewModel = SplashViewModel(getRandomDrink)
+        getRandomDrink = FakeGetRandomDrinkUseCaseImpl(
+            cocktailRepository = cocktailRepository,
+            networkRepository = networkRepository
+        )
+        viewModel = SplashViewModel(getRandomDrink = getRandomDrink)
     }
 
 }

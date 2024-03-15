@@ -26,11 +26,11 @@ class FakeCocktailRepositoryImpl @Inject constructor(
             emit(
                 when (val result = cocktailDataSource.getDrinkById(id = id)) {
                     is ResultData.Response -> {
-                        Result.Response.Success(result.data.transform(resourcesDataSource))
+                        Result.Response.Success(result.data.transform(resourcesDataSource = resourcesDataSource))
                     }
 
                     is ResultData.Error<*> -> {
-                        Result.Response.Error((result.code as ErrorDTO).transform())
+                        Result.Response.Error(code = (result.code as ErrorDTO).transform())
                     }
                 }
             )
@@ -56,11 +56,11 @@ class FakeCocktailRepositoryImpl @Inject constructor(
                     }
                 )) {
                     is ResultData.Response -> {
-                        Result.Response.Success(result.data.transform(resourcesDataSource))
+                        Result.Response.Success(result.data.transform(resourcesDataSource = resourcesDataSource))
                     }
 
                     is ResultData.Error<*> -> {
-                        Result.Response.Error((result.code as ErrorDTO).transform())
+                        Result.Response.Error(code = (result.code as ErrorDTO).transform())
                     }
                 }
             )
@@ -73,11 +73,11 @@ class FakeCocktailRepositoryImpl @Inject constructor(
                 when (val result = cocktailDataSource.getRandomDrink()) {
                     is ResultData.Response -> {
                         preferencesDataSource.saveFirstAccessDate("11/03/2024")
-                        Result.Response.Success(result.data.transform(resourcesDataSource))
+                        Result.Response.Success(result.data.transform(resourcesDataSource = resourcesDataSource))
                     }
 
                     is ResultData.Error<*> -> {
-                        Result.Response.Error((result.code as ErrorDTO).transform())
+                        Result.Response.Error(code = (result.code as ErrorDTO).transform())
                     }
                 }
             )

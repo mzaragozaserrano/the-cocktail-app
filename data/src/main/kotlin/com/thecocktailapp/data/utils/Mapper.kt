@@ -11,7 +11,8 @@ import com.thecocktailapp.domain.bo.ErrorBO
 import java.util.Locale
 
 fun CocktailDTO.transform(resourcesDataSource: ResourcesDataSource): CocktailBO =
-    CocktailBO(drinks = drinks?.map { it.transform(resourcesDataSource) }.orEmpty())
+    CocktailBO(drinks = drinks?.map { it.transform(resourcesDataSource = resourcesDataSource) }
+        .orEmpty())
 
 fun DrinkDTO.transform(resourcesDataSource: ResourcesDataSource): DrinkBO {
     val listIngredients = createListIngredients(resourcesDataSource = resourcesDataSource)
