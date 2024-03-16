@@ -1,9 +1,12 @@
 package com.thecocktailapp.presentation.utils.extensions
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
 
 fun NavGraphBuilder.composable(
@@ -12,7 +15,48 @@ fun NavGraphBuilder.composable(
 ) {
     composable(
         route = navItem.route,
-        arguments = navItem.args
+        arguments = navItem.args,
+        enterTransition = {
+            when {
+                navItem.route.contains(Feature.Home.route) -> {
+                    slideIntoContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Right,
+                        animationSpec = tween(700)
+                    )
+                }
+
+                else -> {
+                    slideIntoContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(700)
+                    )
+                }
+            }
+        },
+        exitTransition = {
+            when {
+                navItem.route.contains(Feature.Home.route) -> {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(700)
+                    )
+                }
+
+                navItem.route.contains(Feature.Splash.route) -> {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Down,
+                        animationSpec = tween(700)
+                    )
+                }
+
+                else -> {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Right,
+                        animationSpec = tween(700)
+                    )
+                }
+            }
+        }
     ) {
         content(it)
     }

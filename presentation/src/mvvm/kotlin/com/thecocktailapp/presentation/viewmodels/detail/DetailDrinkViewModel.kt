@@ -41,6 +41,9 @@ class DetailDrinkViewModel @Inject constructor(
     private val _isFavorite = MutableStateFlow(value = false)
     val isFavorite = _isFavorite.asStateFlow()
 
+    private val _initialFavoriteValue = MutableStateFlow(value = false)
+    val initialFavoriteValue = _initialFavoriteValue.asStateFlow()
+
     private val _state = MutableStateFlow<DetailDrinkUiState>(value = DetailDrinkUiState.Idle)
     val state = _state.asStateFlow()
 
@@ -80,8 +83,11 @@ class DetailDrinkViewModel @Inject constructor(
     private fun onExecuteIsFavoriteDrink() {
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
-                _isFavorite.value =
-                    isFavoriteDrink.invoke(IsFavoriteDrinkUseCaseImpl.Params(drinkId = id.toInt()))
+                isFavoriteDrink.invoke(IsFavoriteDrinkUseCaseImpl.Params(drinkId = id.toInt()))
+                    .apply {
+                        _isFavorite.value = this
+                        _initialFavoriteValue.value = this
+                    }
                 _state.value = DetailDrinkUiState.Success(drink = drink)
             }
         }

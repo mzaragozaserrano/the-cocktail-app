@@ -60,25 +60,18 @@ class HomeViewModel @Inject constructor(
                 }
 
                 is Result.Response.Success -> {
+                    list.clear()
                     list.addAll(result.data.drinks.map { it.transform() })
                     onExecuteGetFavorites()
                 }
             }
         }
 
-    private fun onExecuteGetFavorites() {
+    fun onExecuteGetFavorites() {
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
-                val favoriteDrinks = getFavoriteDrinks().map { it.transform() }
-                favoriteDrinks.map { favorite ->
-                    list.map { drink ->
-                        if (favorite.id.contains(drink.id)) {
-                            drink.isFavorite = true
-                        } else {
-                            drink
-                        }
-                    }
-                }
+                val listFavoriteIds = getFavoriteDrinks().map { it.transform() }.map { it.id }
+                list.map { drink -> drink.isFavorite = drink.id in listFavoriteIds }
                 _state.value = HomeUiState.Success(list = list)
             }
         }

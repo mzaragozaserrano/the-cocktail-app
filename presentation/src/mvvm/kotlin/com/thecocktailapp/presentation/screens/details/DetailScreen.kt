@@ -37,6 +37,7 @@ import com.thecocktailapp.core.presentation.compose.components.texts.NormalMediu
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
+import com.thecocktailapp.presentation.utils.ChangesPreviewScreen
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
 import com.thecocktailapp.presentation.viewmodels.detail.DetailDrinkViewModel
@@ -50,13 +51,19 @@ fun DetailScreen(
 ) {
 
     val state by viewModel.state.collectAsState()
-    val isFavorite by viewModel.isFavorite.collectAsState()
     var ingredients by remember { mutableStateOf(value = listOf<String>()) }
+    val isFavorite by viewModel.isFavorite.collectAsState()
+    val initialFavoriteValue by viewModel.initialFavoriteValue.collectAsState()
     var showInstructions by remember { mutableStateOf(value = false) }
 
     BackHandler(
         enabled = true,
-        onBack = { onCheckBackHandler(navController = navController) }
+        onBack = {
+            onCheckBackHandler(
+                hasChanged = initialFavoriteValue != isFavorite,
+                navController = navController
+            )
+        }
     )
 
     LaunchedEffect(key1 = ingredients) {
@@ -82,7 +89,12 @@ fun DetailScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { onCheckBackHandler(navController = navController) }) {
+                    IconButton(onClick = {
+                        onCheckBackHandler(
+                            hasChanged = initialFavoriteValue != isFavorite,
+                            navController = navController
+                        )
+                    }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                             tint = MaterialTheme.colorScheme.onSurface,
@@ -170,12 +182,13 @@ fun DetailScreen(
 
 }
 
-private fun onCheckBackHandler(navController: NavController) {
+private fun onCheckBackHandler(hasChanged: Boolean, navController: NavController) {
     val backStackEntry = navController.previousBackStackEntry
     val previousDestination = backStackEntry?.destination?.route
     if (previousDestination == NavCommand.App(Feature.Splash).route) {
-        navController.navigate(route = NavCommand.App(feature = Feature.Main).route)
+        navController.navigate(route = NavCommand.App(feature = Feature.Home).route)
     } else {
+        ChangesPreviewScreen.notifyChange(hasChanged = hasChanged)
         navController.popBackStack()
     }
 }
