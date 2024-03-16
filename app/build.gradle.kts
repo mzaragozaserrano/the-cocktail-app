@@ -97,11 +97,10 @@ dependencies {
     testImplementation(libs.mockito.core)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.hilt.android.testing)
-
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.core.testing)
+    androidTestImplementation(libs.truth)
 
 }
