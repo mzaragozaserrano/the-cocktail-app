@@ -1,4 +1,4 @@
-package com.thecocktailapp.tests.common
+package com.thecocktailapp.tests
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -11,7 +11,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
-class NetworkRepositoryImplTest {
+class NetworkRepositoryTest {
 
     @Mock
     private lateinit var context: Context
