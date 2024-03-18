@@ -14,11 +14,14 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInteropFilter
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.thecocktailapp.core.presentation.compose.components.buttons.PushedButton
 import com.thecocktailapp.core.presentation.compose.components.texts.ExtraSmallMediumText
+import com.thecocktailapp.presentation.utils.SPLASH_CANCEL_BUTTON
+import com.thecocktailapp.presentation.utils.SPLASH_SEE_BUTTON
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -41,7 +44,9 @@ fun DualActionButton(
         verticalArrangement = Arrangement.spacedBy(space = 8.dp)
     ) {
         PushedButton(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(tag = SPLASH_SEE_BUTTON),
             buttonBackgroundColor = buttonBackgroundColor,
             textColor = buttonTextColor,
             textId = buttonTextId,
@@ -68,7 +73,8 @@ fun DualActionButton(
                         }
                     }
                     true
-                },
+                }
+                .testTag(tag = SPLASH_CANCEL_BUTTON),
             color = buttonSecondaryTextColor,
             text = stringResource(id = textId),
             textAlign = TextAlign.Center

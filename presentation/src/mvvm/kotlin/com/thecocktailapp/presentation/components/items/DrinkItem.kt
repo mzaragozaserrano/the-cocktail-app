@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -13,13 +14,16 @@ import com.thecocktailapp.core.presentation.compose.components.buttons.PushedBut
 import com.thecocktailapp.core.presentation.compose.components.cards.RoundedEdgeCard
 import com.thecocktailapp.core.presentation.compose.components.images.UrlImage
 import com.thecocktailapp.core.presentation.compose.components.texts.NormalBoldText
+import com.thecocktailapp.core.presentation.utils.conditional
 import com.thecocktailapp.presentation.R
+import com.thecocktailapp.presentation.utils.HOME_BUTTON_SEE_DETAIL
 import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.DrinkVO
 
 @Composable
 fun DrinkItem(
     modifier: Modifier = Modifier,
+    isFirstItem: Boolean = false,
     item: DrinkVO,
     onButtonClicked: () -> Unit,
 ) {
@@ -50,7 +54,8 @@ fun DrinkItem(
             PushedButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp),
+                    .padding(top = 16.dp)
+                    .conditional(isFirstItem, { testTag(tag = HOME_BUTTON_SEE_DETAIL) }),
                 buttonBackgroundColor = MaterialTheme.colorScheme.primary,
                 textColor = MaterialTheme.colorScheme.onPrimary,
                 textId = R.string.see_button,

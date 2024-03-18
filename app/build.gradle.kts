@@ -93,14 +93,17 @@ dependencies {
     implementation(libs.room.ktx)
 
     //----- TESTING ----------/
-    testImplementation(libs.turbine)
-    testImplementation(libs.mockito.core)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.hilt.android.testing)
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
     androidTestImplementation(libs.core.testing)
     androidTestImplementation(libs.truth)
+    debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(libs.hilt.android.testing)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.turbine)
+    androidTestImplementation(libs.androidx.navigation.testing)
 
 }

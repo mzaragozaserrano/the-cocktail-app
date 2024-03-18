@@ -7,6 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -17,6 +18,7 @@ import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.screens.main.MenuNavigationScreen
 import com.thecocktailapp.presentation.utils.ChangesPreviewScreen
+import com.thecocktailapp.presentation.utils.HOME_RECYCLER_VIEW
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
 import com.thecocktailapp.presentation.viewmodels.home.HomeViewModel
@@ -66,13 +68,17 @@ fun HomeScreen(
             }
 
             is HomeViewModel.HomeUiState.Success -> {
+                val list = (state as HomeViewModel.HomeUiState.Success).list
                 Recycler(
-                    modifier = Modifier.padding(all = 8.dp),
-                    list = (state as HomeViewModel.HomeUiState.Success).list,
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .testTag(tag = HOME_RECYCLER_VIEW),
+                    list = list,
                     numberCells = 2
                 ) { item ->
                     DrinkItem(
                         modifier = Modifier.padding(all = 8.dp),
+                        isFirstItem = list.indexOf(item) == 0,
                         item = item
                     ) {
                         navController.navigate(

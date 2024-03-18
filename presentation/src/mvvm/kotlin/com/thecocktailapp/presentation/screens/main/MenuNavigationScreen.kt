@@ -17,6 +17,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavController
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.extensions.getGreetingText
 import com.thecocktailapp.core.domain.utils.getCurrentDate
@@ -24,6 +25,9 @@ import com.thecocktailapp.core.domain.utils.sdfComplete
 import com.thecocktailapp.core.presentation.compose.components.texts.NormalMediumText
 import com.thecocktailapp.core.presentation.compose.components.utils.MenuDrawerContent
 import com.thecocktailapp.presentation.R
+import com.thecocktailapp.presentation.utils.HOME_MENU_BUTTON
+import com.thecocktailapp.presentation.utils.HOME_TOOLBAR
+import com.thecocktailapp.presentation.utils.MENU_NAVIGATION_ITEM
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
 import com.thecocktailapp.presentation.vo.MenuItem
@@ -55,6 +59,7 @@ fun MenuNavigationScreen(
                 greetingTextId = date.getGreetingText(),
                 iconTint = MaterialTheme.colorScheme.primary,
                 menuItems = createMenuList(),
+                testTag = MENU_NAVIGATION_ITEM,
                 textColor = MaterialTheme.colorScheme.primary
             ) { onMenuItemClicked ->
                 when (onMenuItemClicked) {
@@ -75,6 +80,7 @@ fun MenuNavigationScreen(
             modifier = modifier,
             topBar = {
                 TopAppBar(
+                    modifier = Modifier.testTag(tag = HOME_TOOLBAR),
                     title = {
                         NormalMediumText(
                             color = MaterialTheme.colorScheme.onSurface,
@@ -82,7 +88,9 @@ fun MenuNavigationScreen(
                         )
                     },
                     navigationIcon = {
-                        IconButton(onClick = { coroutineScope.launch { drawerState.open() } }) {
+                        IconButton(
+                            modifier = Modifier.testTag(tag = HOME_MENU_BUTTON),
+                            onClick = { coroutineScope.launch { drawerState.open() } }) {
                             Icon(
                                 imageVector = Icons.Rounded.Menu,
                                 contentDescription = "MenuButton"

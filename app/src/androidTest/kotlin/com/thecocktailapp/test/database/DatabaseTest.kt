@@ -1,4 +1,4 @@
-package com.thecocktailapp.test
+package com.thecocktailapp.test.database
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider

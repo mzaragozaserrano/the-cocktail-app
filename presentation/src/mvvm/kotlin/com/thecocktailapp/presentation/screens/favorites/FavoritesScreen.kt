@@ -17,6 +17,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -25,6 +26,7 @@ import com.thecocktailapp.core.presentation.compose.components.utils.Recycler
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.items.DrinkItem
 import com.thecocktailapp.presentation.components.utils.WarningDialog
+import com.thecocktailapp.presentation.utils.FAVORITE_TOOLBAR
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
 import com.thecocktailapp.presentation.viewmodels.favorites.FavoritesViewModel
@@ -52,6 +54,7 @@ fun FavoritesScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
+                modifier = Modifier.testTag(tag = FAVORITE_TOOLBAR),
                 title = {
                     NormalMediumText(
                         color = MaterialTheme.colorScheme.onSurface,
@@ -74,10 +77,7 @@ fun FavoritesScreen(
             is FavoritesViewModel.FavoritesUiState.Error -> {
                 val error =
                     (state as FavoritesViewModel.FavoritesUiState.Error).error
-                WarningDialog(
-                    buttonTextId = R.string.ok_button,
-                    messageTextId = error.messageId
-                ) {
+                WarningDialog(buttonTextId = R.string.ok_button, messageTextId = error.messageId) {
 
                 }
             }
@@ -85,16 +85,18 @@ fun FavoritesScreen(
             is FavoritesViewModel.FavoritesUiState.Idle -> {}
 
             is FavoritesViewModel.FavoritesUiState.Success -> {
+                val list = (state as FavoritesViewModel.FavoritesUiState.Success).list
                 Box(modifier = Modifier.padding()) {
                     Recycler(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(paddingValues),
-                        list = (state as FavoritesViewModel.FavoritesUiState.Success).list,
+                        list = list,
                         numberCells = 2
                     ) { item ->
                         DrinkItem(
                             modifier = Modifier.padding(all = 8.dp),
+                            isFirstItem = list.indexOf(item) == 0,
                             item = item
                         ) {
                             navController.navigate(
