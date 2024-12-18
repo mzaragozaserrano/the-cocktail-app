@@ -1,4 +1,4 @@
-package com.thecocktailapp.test
+package com.thecocktailapp.test.utils
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertIsDisplayed

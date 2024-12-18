@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.screens.main
+package com.thecocktailapp.presentation.components.utils
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +19,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavController
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.extensions.getGreetingText
 import com.thecocktailapp.core.domain.utils.getCurrentDate
 import com.thecocktailapp.core.domain.utils.sdfComplete
 import com.thecocktailapp.core.presentation.compose.components.texts.NormalMediumText
@@ -28,6 +27,7 @@ import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.utils.HOME_MENU_BUTTON
 import com.thecocktailapp.presentation.utils.HOME_TOOLBAR
 import com.thecocktailapp.presentation.utils.MENU_NAVIGATION_ITEM
+import com.thecocktailapp.presentation.utils.extensions.getGreetingText
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
 import com.thecocktailapp.presentation.vo.MenuItem
@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuNavigationScreen(
+fun MenuNavigation(
     modifier: Modifier = Modifier,
     drawerState: DrawerState,
     navController: NavController,

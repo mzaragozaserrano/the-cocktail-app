@@ -2,9 +2,6 @@ package com.thecocktailapp.test.screens
 
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions.*
-import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.thecocktailapp.presentation.activities.ComposeActivity
@@ -16,9 +13,9 @@ import com.thecocktailapp.presentation.utils.HOME_TOOLBAR
 import com.thecocktailapp.presentation.utils.MENU_NAVIGATION_ITEM
 import com.thecocktailapp.presentation.utils.SPLASH_CANCEL_BUTTON
 import com.thecocktailapp.presentation.utils.SPLASH_SEE_BUTTON
-import com.thecocktailapp.test.isDisplay
-import com.thecocktailapp.test.onClick
-import com.thecocktailapp.test.testProgress
+import com.thecocktailapp.test.utils.isDisplay
+import com.thecocktailapp.test.utils.onClick
+import com.thecocktailapp.test.utils.testProgress
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
