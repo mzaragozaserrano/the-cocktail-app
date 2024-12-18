@@ -15,8 +15,8 @@ import com.thecocktailapp.core.presentation.compose.components.utils.Recycler
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.items.DrinkItem
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
+import com.thecocktailapp.presentation.components.utils.MenuNavigation
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
-import com.thecocktailapp.presentation.screens.main.MenuNavigationScreen
 import com.thecocktailapp.presentation.utils.ChangesPreviewScreen
 import com.thecocktailapp.presentation.utils.HOME_RECYCLER_VIEW
 import com.thecocktailapp.presentation.utils.navigation.Feature
@@ -41,7 +41,7 @@ fun HomeScreen(
         }
     }
 
-    MenuNavigationScreen(
+    MenuNavigation(
         modifier = modifier,
         drawerState = drawerState,
         navController = navController,

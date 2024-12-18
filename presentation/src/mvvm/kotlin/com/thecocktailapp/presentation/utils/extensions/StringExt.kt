@@ -1,4 +1,4 @@
-package com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.extensions
+package com.thecocktailapp.presentation.utils.extensions
 
 import com.thecocktailapp.presentation.R
 

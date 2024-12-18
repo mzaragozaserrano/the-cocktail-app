@@ -5,17 +5,17 @@ import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.thecocktailapp.core.databinding.CoreDrawerLayoutBinding
-import com.thecocktailapp.presentation.R
-import com.thecocktailapp.presentation.base.TheCocktailAppBaseActivity
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinIntent
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinViewState
+import com.thecocktailapp.core.databinding.CoreDrawerLayoutBinding
+import com.thecocktailapp.core.presentation.view.adapters.NavMenuAdapter
+import com.thecocktailapp.presentation.R
+import com.thecocktailapp.presentation.base.TheCocktailAppBaseActivity
 import com.thecocktailapp.presentation.viewmodels.KotlinViewModel
 import com.thecocktailapp.presentation.vo.MenuItemVO
 import com.thecocktailapp.presentation.vo.getMenuOptions
 import dagger.hilt.android.AndroidEntryPoint
-import presentation.adapters.NavMenuAdapter
 
 
 @AndroidEntryPoint
@@ -40,10 +40,10 @@ class KotlinActivity :
                                 R.color.color_primary
                             )
                         )
-                        setImageDrawable(ContextCompat.getDrawable(applicationContext, item.icon))
+                        setImageDrawable(ContextCompat.getDrawable(applicationContext, item.iconId))
                     }
                     textViewMenu.apply {
-                        text = getString(item.name)
+                        text = getString(item.nameId)
                         setTextColor(
                             ContextCompat.getColor(
                                 applicationContext,

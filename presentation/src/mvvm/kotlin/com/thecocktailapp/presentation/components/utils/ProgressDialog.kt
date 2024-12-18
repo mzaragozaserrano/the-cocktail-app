@@ -17,6 +17,6 @@ fun ProgressDialog() {
             .height(height = 260.dp)
             .width(width = 260.dp)
             .testTag(tag = PROGRESS_DIALOG_LOTTIE),
-        animation = R.raw.loading
+        animationId = R.raw.loading
     )
 }

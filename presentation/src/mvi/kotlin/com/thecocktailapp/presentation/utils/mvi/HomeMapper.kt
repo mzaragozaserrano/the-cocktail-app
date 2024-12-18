@@ -1,4 +1,13 @@
-package com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi
+package com.thecocktailapp.presentation.utils.mvi
+
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonAction
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonIntent
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonResult
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.HomeAction
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.HomeIntent
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.HomeResult
+import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.HomeViewState
 
 fun HomeIntent.mapToAction(): HomeAction =
     when (this) {

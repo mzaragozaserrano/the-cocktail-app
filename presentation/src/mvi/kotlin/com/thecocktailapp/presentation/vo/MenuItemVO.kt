@@ -4,10 +4,10 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.thecocktailapp.presentation.R
 
-sealed class MenuItemVO(@DrawableRes val icon: Int, @StringRes val name: Int) {
+sealed class MenuItemVO(@DrawableRes val iconId: Int, @StringRes val nameId: Int) {
     object CloseSession : MenuItemVO(
-        icon = R.drawable.ic_close_session,
-        name = R.string.menu_item_close_session
+        iconId = R.drawable.ic_close_session,
+        nameId = R.string.menu_item_close_session
     )
 }
 

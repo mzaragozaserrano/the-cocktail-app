@@ -1,14 +1,6 @@
 package com.thecocktailapp.presentation.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.thecocktailapp.core.domain.utils.Result
-import com.thecocktailapp.core.domain.utils.extension.toFlowResult
-import presentation.base.MVIViewModel
-import com.thecocktailapp.domain.bo.DrinkBO
-import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.detail.GetDrinkById
-import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.transform
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonAction
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonResult
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
@@ -17,8 +9,16 @@ import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.DetailDrinkResult
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.DetailDrinkTask
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.DetailDrinkViewState
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.mapToAction
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.mapToState
+import com.thecocktailapp.presentation.utils.mvi.mapToAction
+import com.thecocktailapp.presentation.utils.mvi.mapToState
+import com.thecocktailapp.core.domain.utils.Result
+import com.thecocktailapp.core.domain.utils.extension.toFlowResult
+import com.thecocktailapp.core.presentation.view.base.MVIViewModel
+import com.thecocktailapp.domain.bo.DrinkBO
+import com.thecocktailapp.domain.bo.ErrorBO
+import com.thecocktailapp.domain.usecases.detail.GetDrinkById
+import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
+import com.thecocktailapp.presentation.utils.transform
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow

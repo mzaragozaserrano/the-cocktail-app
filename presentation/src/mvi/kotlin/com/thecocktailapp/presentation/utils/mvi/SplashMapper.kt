@@ -1,6 +1,6 @@
 package com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi
 
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.transform
+import com.thecocktailapp.presentation.utils.transform
 
 fun SplashIntent.mapToAction(): SplashAction =
     when (this) {

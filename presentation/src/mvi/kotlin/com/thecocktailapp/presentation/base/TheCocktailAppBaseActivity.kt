@@ -1,8 +1,8 @@
 package com.thecocktailapp.presentation.base
 
 import androidx.viewbinding.ViewBinding
-import presentation.base.BaseActivity
-import presentation.base.MVIViewModel
+import com.thecocktailapp.core.presentation.view.base.BaseActivity
+import com.thecocktailapp.core.presentation.view.base.MVIViewModel
 import com.thecocktailapp.presentation.R
 
 abstract class TheCocktailAppBaseActivity<S, I, VB : ViewBinding, VM : MVIViewModel<S, I>> :

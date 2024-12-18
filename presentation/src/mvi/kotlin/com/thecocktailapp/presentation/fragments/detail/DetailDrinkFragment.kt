@@ -2,22 +2,22 @@ package com.thecocktailapp.presentation.fragments.detail
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.thecocktailapp.presentation.R
-import com.thecocktailapp.presentation.databinding.FragmentDetailDrinkBinding
-import com.thecocktailapp.presentation.databinding.ItemIngredientBinding
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonIntent
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.DetailDrinkIntent
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.DetailDrinkViewState
+import com.thecocktailapp.core.presentation.view.base.BaseFragment
+import com.thecocktailapp.core.presentation.view.utils.extensions.hideProgressDialog
+import com.thecocktailapp.core.presentation.view.utils.extensions.loadImageFromUrl
+import com.thecocktailapp.core.presentation.view.utils.extensions.showProgressDialog
+import com.thecocktailapp.core.presentation.view.utils.viewBinding.viewBinding
+import com.thecocktailapp.presentation.R
+import com.thecocktailapp.presentation.databinding.FragmentDetailDrinkBinding
+import com.thecocktailapp.presentation.databinding.ItemIngredientBinding
 import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
 import com.thecocktailapp.presentation.vo.DrinkVO
 import dagger.hilt.android.AndroidEntryPoint
-import presentation.base.BaseFragment
-import com.thecocktailapp.core.presentation.compose.utils.extensions.hideProgressDialog
-import com.thecocktailapp.core.presentation.compose.utils.extensions.loadImageFromUrl
-import com.thecocktailapp.core.presentation.compose.utils.extensions.showProgressDialog
-import com.thecocktailapp.core.presentation.compose.utils.serializable
-import com.thecocktailapp.core.presentation.compose.utils.viewBinding.viewBinding
+import presentation.utils.serializable
 
 @AndroidEntryPoint
 class DetailDrinkFragment :

@@ -1,12 +1,6 @@
 package com.thecocktailapp.presentation.viewmodels
 
 import androidx.lifecycle.viewModelScope
-import com.thecocktailapp.core.domain.utils.Result
-import com.thecocktailapp.core.domain.utils.extension.toFlowResult
-import presentation.base.MVIViewModel
-import com.thecocktailapp.domain.bo.DrinkBO
-import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonAction
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonResult
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
@@ -19,7 +13,13 @@ import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.SplashViewState
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.mapToAction
 import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.mapToState
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.transform
+import com.thecocktailapp.core.domain.utils.Result
+import com.thecocktailapp.core.domain.utils.extension.toFlowResult
+import com.thecocktailapp.core.presentation.view.base.MVIViewModel
+import com.thecocktailapp.domain.bo.DrinkBO
+import com.thecocktailapp.domain.bo.ErrorBO
+import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
+import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.vo.ErrorVO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
