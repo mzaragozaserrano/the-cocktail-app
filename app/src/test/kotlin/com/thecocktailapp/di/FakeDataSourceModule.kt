@@ -10,8 +10,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 interface FakeDataSourceModule {
-
     @Binds
     fun bindFakeCocktailDataSource(dataSourceImpl: FakeCocktailDataSourceImpl): CocktailDataSource
-
 }

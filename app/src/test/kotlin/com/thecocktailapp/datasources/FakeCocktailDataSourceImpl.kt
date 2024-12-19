@@ -39,12 +39,11 @@ class FakeCocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
         continuation: CancellableContinuation<ResultDTO<CocktailDTO>>,
     ) {
         if (hasError) {
-            onError(continuation, ErrorDTO.DataNotFound)
+            continuation.onError(ErrorDTO.DataNotFound)
         } else {
             when (alcoholic) {
                 "Alcoholic" -> {
-                    onSuccess(
-                        continuation = continuation,
+                    continuation.onSuccess(
                         data = CocktailDTO(
                             listOf(
                                 DrinkDTO(
@@ -159,8 +158,7 @@ class FakeCocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
                 }
 
                 "Non_Alcoholic" -> {
-                    onSuccess(
-                        continuation = continuation,
+                    continuation.onSuccess(
                         data = CocktailDTO(
                             listOf(
                                 DrinkDTO(
@@ -222,8 +220,7 @@ class FakeCocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
                 }
 
                 "Optional_Alcohol" -> {
-                    onSuccess(
-                        continuation = continuation,
+                    continuation.onSuccess(
                         data = CocktailDTO(
                             listOf(
                                 DrinkDTO(

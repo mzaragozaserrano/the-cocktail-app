@@ -13,7 +13,5 @@ class FakeGetRandomDrinkUseCaseImpl @Inject constructor(
     private val cocktailRepository: CocktailRepository,
     networkRepository: NetworkRepository,
 ) : GetRandomDrink(networkRepository = networkRepository, networkError = ErrorBO.Connectivity) {
-
     override suspend fun run(): Flow<Result<CocktailBO>> = cocktailRepository.getRandomDrink()
-
 }

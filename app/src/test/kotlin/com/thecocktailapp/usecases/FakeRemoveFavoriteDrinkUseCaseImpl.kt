@@ -10,5 +10,4 @@ class FakeRemoveFavoriteDrinkUseCaseImpl @Inject constructor(
 ) : RemoveFavoriteDrink() {
     override fun invoke(params: RemoveFavoriteDrinkUseCaseImpl.Params): Boolean =
         favoritesRepository.removeDrink(params.drink)
-
 }

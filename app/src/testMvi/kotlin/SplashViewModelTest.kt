@@ -1,9 +1,12 @@
 import app.cash.turbine.test
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
+import com.thecocktailapp.datasources.FakePreferencesDataSourceImpl
+import com.thecocktailapp.datasources.FakeResourcesDataSourceImpl
 import com.thecocktailapp.presentation.utils.CommonViewState
 import com.thecocktailapp.presentation.utils.SplashIntent
 import com.thecocktailapp.presentation.utils.SplashViewState
 import com.thecocktailapp.presentation.viewmodels.SplashViewModel
+import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO
 import com.thecocktailapp.repositories.FakeCocktailRepositoryImpl
@@ -11,7 +14,7 @@ import com.thecocktailapp.repositories.FakeNetworkRepositoryImpl
 import com.thecocktailapp.usecases.FakeGetRandomDrinkUseCaseImpl
 import com.thecocktailapp.utils.MainDispatcherRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import junit.framework.TestCase.*
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -21,7 +24,6 @@ import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runners.model.Statement
 import org.mockito.InjectMocks
-import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import javax.inject.Inject
 
@@ -34,6 +36,12 @@ class SplashViewModelTest {
 
     @InjectMocks
     private lateinit var cocktailDataSource: FakeCocktailDataSourceImpl
+
+    @InjectMocks
+    private lateinit var preferencesDataSource: FakePreferencesDataSourceImpl
+
+    @InjectMocks
+    private lateinit var resourcesDataSource: FakeResourcesDataSourceImpl
 
     @InjectMocks
     private lateinit var networkRepository: FakeNetworkRepositoryImpl
@@ -64,7 +72,11 @@ class SplashViewModelTest {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = false)
-        cocktailRepository = FakeCocktailRepositoryImpl(cocktailDataSource)
+        cocktailRepository = FakeCocktailRepositoryImpl(
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
         setUpViewModel(isConnected = true)
     }
 
@@ -72,21 +84,33 @@ class SplashViewModelTest {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
         cocktailDataSource.setResult(hasError = true)
-        cocktailRepository = FakeCocktailRepositoryImpl(cocktailDataSource)
+        cocktailRepository = FakeCocktailRepositoryImpl(
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
         setUpViewModel(isConnected = true)
     }
 
     private fun setUpUseCaseErrorTest() {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
-        cocktailRepository = FakeCocktailRepositoryImpl(cocktailDataSource)
+        cocktailRepository = FakeCocktailRepositoryImpl(
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
         setUpViewModel(isConnected = false)
     }
 
     fun setup() {
         Dispatchers.setMain(mainDispatcherRule.testDispatcher)
         MockitoAnnotations.openMocks(this)
-        cocktailRepository = FakeCocktailRepositoryImpl(cocktailDataSource)
+        cocktailRepository = FakeCocktailRepositoryImpl(
+            cocktailDataSource = cocktailDataSource,
+            preferencesDataSource = preferencesDataSource,
+            resourcesDataSource = resourcesDataSource
+        )
     }
 
     @Test
@@ -103,7 +127,7 @@ class SplashViewModelTest {
                             dateModified = "2015-09-03 03:09:44",
                             glass = "Mason jar",
                             id = "15813",
-                            isAlcoholic = true,
+                            drinkType = DrinkType.Alcoholic,
                             name = "Herbal flame",
                             ingredients = listOf(
                                 "Hot Damn - 5 shots",
@@ -125,7 +149,7 @@ class SplashViewModelTest {
                 assertEquals(CommonViewState.Initialized(), awaitItem())
                 viewModel.intentFlow.emit(SplashIntent.GetRandomDrink)
                 assertEquals(SplashViewState.ShowProgressDialog, awaitItem())
-                assertEquals(SplashViewState.ShowError(ErrorVO.DataNotFound.idMessage), awaitItem())
+                assertEquals(SplashViewState.ShowError(ErrorVO.DataNotFound.messageId), awaitItem())
             }
         }
 
@@ -135,7 +159,7 @@ class SplashViewModelTest {
             viewModel.mutableViewState.test {
                 assertEquals(CommonViewState.Initialized(), awaitItem())
                 viewModel.intentFlow.emit(SplashIntent.GetRandomDrink)
-                assertEquals(SplashViewState.ShowError(ErrorVO.Connectivity.idMessage), awaitItem())
+                assertEquals(SplashViewState.ShowError(ErrorVO.Connectivity.messageId), awaitItem())
             }
         }
 

@@ -8,7 +8,5 @@ import javax.inject.Inject
 class FakeGetFavoriteDrinksUseCaseImpl @Inject constructor(
     private val favoritesRepository: FavoritesRepository,
 ) : GetFavoriteDrinks() {
-
     override fun invoke(): List<DrinkBO> = favoritesRepository.getAllFavorites()
-
 }

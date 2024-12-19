@@ -7,7 +7,5 @@ import javax.inject.Inject
 class FakeShowRandomDrinkUseCaseImpl @Inject constructor(
     private val cocktailRepository: CocktailRepository,
 ) : ShowRandomDrink() {
-
     override fun invoke(): Boolean = cocktailRepository.showRandomCocktail()
-
 }

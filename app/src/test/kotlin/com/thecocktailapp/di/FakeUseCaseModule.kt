@@ -10,8 +10,6 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 @Module
 @InstallIn(ActivityRetainedComponent::class)
 interface FakeUseCaseModule {
-
     @Binds
     fun bindFakeGetRandomDrink(useCaseImpl: FakeGetRandomDrinkUseCaseImpl): GetRandomDrink
-
 }

@@ -10,8 +10,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 interface FakeRepositoryModule {
-
     @Binds
     fun bindFakeCocktailRepository(repositoryImpl: FakeCocktailRepositoryImpl): CocktailRepository
-
 }
