@@ -13,10 +13,8 @@ import com.thecocktailapp.presentation.viewmodels.app.ComposeViewModel
 
 @Composable
 fun ComposeScreen(modifier: Modifier = Modifier, viewModel: ComposeViewModel = hiltViewModel()) {
-
     val navController = rememberNavController()
     val state by viewModel.state.collectAsState()
-
     Navigation(
         modifier = modifier,
         navController = navController,
@@ -26,5 +24,4 @@ fun ComposeScreen(modifier: Modifier = Modifier, viewModel: ComposeViewModel = h
             NavCommand.App(feature = Feature.Home).route
         }
     )
-
 }

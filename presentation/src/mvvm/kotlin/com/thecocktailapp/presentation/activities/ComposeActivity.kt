@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ComposeActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -20,5 +19,4 @@ class ComposeActivity : ComponentActivity() {
             }
         }
     }
-
 }

@@ -1,44 +1,45 @@
 package com.thecocktailapp.presentation.viewmodels
 
-import androidx.lifecycle.viewModelScope
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonAction
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonResult
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.HomeAction
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.HomeIntent
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.HomeResult
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.HomeViewState
-import com.thecocktailapp.presentation.utils.mvi.mapToAction
-import com.thecocktailapp.presentation.utils.mvi.mapToState
-import com.thecocktailapp.core.domain.utils.extension.toFlowResult
-import com.thecocktailapp.core.presentation.view.base.MVIViewModel
+import com.mzs.core.domain.utils.extensions.toFlowResult
+import com.mzs.core.presentation.base.CoreMVIViewModel
+import com.thecocktailapp.presentation.utils.CommonAction
+import com.thecocktailapp.presentation.utils.CommonIntent
+import com.thecocktailapp.presentation.utils.CommonResult
+import com.thecocktailapp.presentation.utils.CommonViewState
+import com.thecocktailapp.presentation.utils.HomeAction
+import com.thecocktailapp.presentation.utils.HomeIntent
+import com.thecocktailapp.presentation.utils.HomeResult
+import com.thecocktailapp.presentation.utils.HomeViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : MVIViewModel<HomeViewState, HomeIntent>() {
-
-    init {
-        handleIntent()
-    }
+class HomeViewModel @Inject constructor() :
+    CoreMVIViewModel<HomeViewState, HomeIntent, HomeAction, HomeResult>() {
 
     override fun createInitialState(): HomeViewState = CommonViewState.Initialized()
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    override fun handleIntent() {
-        viewModelScope.launch {
-            intentFlow
-                .map { it.mapToAction() }
-                .flatMapLatest { processAction(it) }
-                .collect { collectState(it.mapToState()) }
-        }
-    }
+    override fun HomeResult.mapToState(): HomeViewState =
+        when (this) {
+            is CommonResult.Idle -> {
+                CommonViewState.Idle
+            }
 
-    private fun processAction(action: HomeAction) = when (action) {
+            is HomeResult.Task.Error -> {
+                HomeViewState.ShowError(idMessage = error.messageId)
+            }
+
+            is HomeResult.Init -> {
+                CommonViewState.Initialized()
+            }
+
+            is HomeResult.Task.Loading -> {
+                HomeViewState.ShowProgressDialog
+            }
+        }
+
+    override suspend fun processAction(action: HomeAction): Flow<HomeResult> = when (action) {
         is CommonAction.Init -> {
             onInit()
         }
@@ -48,8 +49,19 @@ class HomeViewModel @Inject constructor() : MVIViewModel<HomeViewState, HomeInte
         }
     }
 
-    private fun onInit() = HomeResult.Init.toFlowResult()
+    override fun HomeIntent.mapToAction(): HomeAction =
+        when (this) {
+            is CommonIntent.Idle -> {
+                CommonAction.Idle
+            }
 
-    private fun onIdle() = CommonResult.Idle.toFlowResult()
+            is CommonIntent.Init -> {
+                CommonAction.Init(refresh)
+            }
+        }
+
+    private fun onInit(): Flow<HomeResult> = HomeResult.Init.toFlowResult()
+
+    private fun onIdle(): Flow<HomeResult> = CommonResult.Idle.toFlowResult()
 
 }

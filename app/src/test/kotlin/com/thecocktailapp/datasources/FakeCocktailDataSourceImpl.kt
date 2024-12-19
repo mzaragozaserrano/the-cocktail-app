@@ -1,12 +1,12 @@
 package com.thecocktailapp.datasources
 
-import com.thecocktailapp.core.data.utils.ResultData
-import com.thecocktailapp.core.data.utils.onError
-import com.thecocktailapp.core.data.utils.onSuccess
 import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.DrinkDTO
 import com.thecocktailapp.data.dto.ErrorDTO
+import com.thecocktailapp.data.dto.ResultDTO
+import com.thecocktailapp.data.utils.onError
+import com.thecocktailapp.data.utils.onSuccess
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
@@ -19,24 +19,24 @@ class FakeCocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
         this.hasError = hasError
     }
 
-    override suspend fun getDrinkById(id: Int): ResultData<CocktailDTO> =
+    override suspend fun getDrinkById(id: Int): ResultDTO<CocktailDTO> =
         suspendCancellableCoroutine { continuation ->
             getCocktail(continuation = continuation)
         }
 
-    override suspend fun getDrinksByType(alcoholic: String): ResultData<CocktailDTO> =
+    override suspend fun getDrinksByType(alcoholic: String): ResultDTO<CocktailDTO> =
         suspendCancellableCoroutine { continuation ->
             getCocktail(alcoholic = alcoholic, continuation = continuation)
         }
 
-    override suspend fun getRandomDrink(): ResultData<CocktailDTO> =
+    override suspend fun getRandomDrink(): ResultDTO<CocktailDTO> =
         suspendCancellableCoroutine { continuation ->
             getCocktail(continuation = continuation)
         }
 
     private fun getCocktail(
         alcoholic: String = "Alcoholic",
-        continuation: CancellableContinuation<ResultData<CocktailDTO>>,
+        continuation: CancellableContinuation<ResultDTO<CocktailDTO>>,
     ) {
         if (hasError) {
             onError(continuation, ErrorDTO.DataNotFound)

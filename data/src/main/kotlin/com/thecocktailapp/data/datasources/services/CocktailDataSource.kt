@@ -1,10 +1,10 @@
 package com.thecocktailapp.data.datasources.services
 
-import com.thecocktailapp.core.data.utils.ResultData
 import com.thecocktailapp.data.dto.CocktailDTO
+import com.thecocktailapp.data.dto.ResultDTO
 
 interface CocktailDataSource {
-    suspend fun getDrinkById(id: Int): ResultData<CocktailDTO>
-    suspend fun getDrinksByType(alcoholic: String): ResultData<CocktailDTO>
-    suspend fun getRandomDrink(): ResultData<CocktailDTO>
+    suspend fun getDrinkById(id: Int): ResultDTO<CocktailDTO>
+    suspend fun getDrinksByType(alcoholic: String): ResultDTO<CocktailDTO>
+    suspend fun getRandomDrink(): ResultDTO<CocktailDTO>
 }

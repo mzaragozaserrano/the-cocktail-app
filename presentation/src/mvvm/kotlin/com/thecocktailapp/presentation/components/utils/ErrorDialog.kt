@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.colorResource
-import com.thecocktailapp.core.presentation.compose.components.alerts.CardAlert
+import com.mzs.core.presentation.compose.components.alerts.CardAlert
 import com.thecocktailapp.presentation.R
 
 @Composable

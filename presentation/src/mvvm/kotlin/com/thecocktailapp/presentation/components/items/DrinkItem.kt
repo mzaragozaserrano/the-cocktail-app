@@ -10,11 +10,11 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.thecocktailapp.core.presentation.compose.components.buttons.PushedButton
-import com.thecocktailapp.core.presentation.compose.components.cards.RoundedEdgeCard
-import com.thecocktailapp.core.presentation.compose.components.images.UrlImage
+import com.mzs.core.presentation.compose.components.buttons.PushedButton
+import com.mzs.core.presentation.compose.components.cards.RoundedEdgeCard
+import com.mzs.core.presentation.compose.components.images.UrlImage
 import com.thecocktailapp.core.presentation.compose.components.texts.NormalBoldText
-import com.thecocktailapp.core.presentation.utils.conditional
+import com.mzs.core.presentation.utils.extensions.conditional
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.utils.HOME_BUTTON_SEE_DETAIL
 import com.thecocktailapp.presentation.vo.DrinkType

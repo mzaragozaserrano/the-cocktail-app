@@ -1,12 +1,12 @@
 package com.thecocktailapp.repositories
 
 import androidx.annotation.StringRes
-import com.thecocktailapp.core.data.datasources.local.ResourcesDataSource
-import com.thecocktailapp.core.data.utils.ResultData
-import com.thecocktailapp.core.domain.utils.Result
+import com.mzs.core.data.datasources.local.ResourcesDataSource
+import com.mzs.core.domain.bo.Result
 import com.thecocktailapp.data.datasources.local.preferences.PreferencesDataSource
 import com.thecocktailapp.data.datasources.services.CocktailDataSource
 import com.thecocktailapp.data.dto.ErrorDTO
+import com.thecocktailapp.data.dto.ResultDTO
 import com.thecocktailapp.data.utils.transform
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.repositories.services.CocktailRepository
@@ -25,11 +25,11 @@ class FakeCocktailRepositoryImpl @Inject constructor(
             emit(Result.Loading)
             emit(
                 when (val result = cocktailDataSource.getDrinkById(id = id)) {
-                    is ResultData.Response -> {
+                    is ResultDTO.Response -> {
                         Result.Response.Success(result.data.transform(resourcesDataSource = resourcesDataSource))
                     }
 
-                    is ResultData.Error<*> -> {
+                    is ResultDTO.Error<*> -> {
                         Result.Response.Error(code = (result.code as ErrorDTO).transform())
                     }
                 }
@@ -55,11 +55,11 @@ class FakeCocktailRepositoryImpl @Inject constructor(
                         }
                     }
                 )) {
-                    is ResultData.Response -> {
+                    is ResultDTO.Response -> {
                         Result.Response.Success(result.data.transform(resourcesDataSource = resourcesDataSource))
                     }
 
-                    is ResultData.Error<*> -> {
+                    is ResultDTO.Error<*> -> {
                         Result.Response.Error(code = (result.code as ErrorDTO).transform())
                     }
                 }
@@ -71,12 +71,12 @@ class FakeCocktailRepositoryImpl @Inject constructor(
             emit(Result.Loading)
             emit(
                 when (val result = cocktailDataSource.getRandomDrink()) {
-                    is ResultData.Response -> {
+                    is ResultDTO.Response -> {
                         preferencesDataSource.saveFirstAccessDate("11/03/2024")
                         Result.Response.Success(result.data.transform(resourcesDataSource = resourcesDataSource))
                     }
 
-                    is ResultData.Error<*> -> {
+                    is ResultDTO.Error<*> -> {
                         Result.Response.Error(code = (result.code as ErrorDTO).transform())
                     }
                 }

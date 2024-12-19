@@ -5,13 +5,16 @@ import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinIntent
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinViewState
-import com.thecocktailapp.core.databinding.CoreDrawerLayoutBinding
-import com.thecocktailapp.core.presentation.view.adapters.NavMenuAdapter
+import com.mzs.core.databinding.CoreDrawerLayoutBinding
+import com.mzs.core.databinding.CoreItemMenuBinding
+import com.mzs.core.presentation.components.view.NavMenuAdapter
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.base.TheCocktailAppBaseActivity
+import com.thecocktailapp.presentation.utils.CommonViewState
+import com.thecocktailapp.presentation.utils.KotlinAction
+import com.thecocktailapp.presentation.utils.KotlinIntent
+import com.thecocktailapp.presentation.utils.KotlinResult
+import com.thecocktailapp.presentation.utils.KotlinViewState
 import com.thecocktailapp.presentation.viewmodels.KotlinViewModel
 import com.thecocktailapp.presentation.vo.MenuItemVO
 import com.thecocktailapp.presentation.vo.getMenuOptions
@@ -20,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class KotlinActivity :
-    TheCocktailAppBaseActivity<KotlinViewState, KotlinIntent, CoreDrawerLayoutBinding, KotlinViewModel>() {
+    TheCocktailAppBaseActivity<KotlinViewState, KotlinIntent, KotlinAction, KotlinResult, CoreDrawerLayoutBinding, KotlinViewModel>() {
 
     override val binding by lazy { CoreDrawerLayoutBinding.inflate(layoutInflater) }
     override val viewModel: KotlinViewModel by viewModels()
@@ -29,24 +32,30 @@ class KotlinActivity :
 
     private lateinit var navController: NavController
 
-    private val adapter: NavMenuAdapter<MenuItemVO> by lazy {
+    private val adapter: NavMenuAdapter<MenuItemVO, CoreItemMenuBinding> by lazy {
         NavMenuAdapter(
-            onBindItem = { binding, item ->
+            bindingInflater = CoreItemMenuBinding::inflate,
+            onBindItem = { item, binding ->
                 with(binding) {
                     icMenu.apply {
                         setColorFilter(
                             ContextCompat.getColor(
-                                applicationContext,
+                                this@KotlinActivity,
                                 R.color.color_primary
                             )
                         )
-                        setImageDrawable(ContextCompat.getDrawable(applicationContext, item.iconId))
+                        setImageDrawable(
+                            ContextCompat.getDrawable(
+                                this@KotlinActivity,
+                                item.iconId
+                            )
+                        )
                     }
                     textViewMenu.apply {
-                        text = getString(item.nameId)
+                        text = getString(item.titleId)
                         setTextColor(
                             ContextCompat.getColor(
-                                applicationContext,
+                                this@KotlinActivity,
                                 R.color.color_on_background
                             )
                         )

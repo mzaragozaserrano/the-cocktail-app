@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.thecocktailapp.core.presentation.compose.components.texts.NormalMediumText
+import com.mzs.core.presentation.compose.components.texts.NormalMediumText
 import com.thecocktailapp.core.presentation.compose.components.utils.Recycler
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.items.DrinkItem

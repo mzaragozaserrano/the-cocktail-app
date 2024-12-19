@@ -1,6 +1,6 @@
 package com.thecocktailapp.domain.usecases.splash
 
-import com.thecocktailapp.core.domain.usecases.SyncUseCaseNoParams
+import com.mzs.core.domain.usecases.SyncUseCaseNoParams
 import com.thecocktailapp.domain.repositories.services.CocktailRepository
 import javax.inject.Inject
 

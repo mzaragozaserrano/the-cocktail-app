@@ -18,7 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.thecocktailapp.core.presentation.compose.components.texts.BlinkingText
-import com.thecocktailapp.core.presentation.compose.components.texts.ExtraLargeBoldText
+import com.mzs.core.presentation.compose.components.texts.ExtraLargeBoldText
 import com.thecocktailapp.core.presentation.compose.components.texts.ExtraSmallMediumText
 import com.thecocktailapp.presentation.R
 

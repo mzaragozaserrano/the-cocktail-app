@@ -1,7 +1,7 @@
 package com.thecocktailapp.usecases
 
-import com.thecocktailapp.core.domain.repositories.NetworkRepository
-import com.thecocktailapp.core.domain.utils.Result
+import com.mzs.core.domain.bo.Result
+import com.mzs.core.domain.repositories.NetworkRepository
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.repositories.services.CocktailRepository

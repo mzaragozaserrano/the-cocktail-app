@@ -1,4 +1,4 @@
-package com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi
+package com.thecocktailapp.presentation.utils
 
 sealed class CommonAction : KotlinAction, SplashAction, HomeAction,
     DetailDrinkAction {

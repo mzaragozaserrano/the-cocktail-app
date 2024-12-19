@@ -33,8 +33,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.thecocktailapp.core.presentation.compose.components.cards.RoundedCard
-import com.thecocktailapp.core.presentation.compose.components.texts.NormalMediumText
+import com.mzs.core.presentation.compose.components.cards.RoundedCard
+import com.mzs.core.presentation.compose.components.texts.NormalMediumText
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog

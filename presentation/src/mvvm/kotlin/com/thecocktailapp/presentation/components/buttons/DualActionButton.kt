@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.thecocktailapp.core.presentation.compose.components.buttons.PushedButton
+import com.mzs.core.presentation.compose.components.buttons.PushedButton
 import com.thecocktailapp.core.presentation.compose.components.texts.ExtraSmallMediumText
 import com.thecocktailapp.presentation.utils.SPLASH_CANCEL_BUTTON
 import com.thecocktailapp.presentation.utils.SPLASH_SEE_BUTTON

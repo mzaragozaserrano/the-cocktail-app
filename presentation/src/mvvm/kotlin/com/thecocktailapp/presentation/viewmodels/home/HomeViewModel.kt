@@ -2,7 +2,7 @@ package com.thecocktailapp.presentation.viewmodels.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.thecocktailapp.core.domain.utils.Result
+import com.mzs.core.domain.bo.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.common.GetFavoriteDrinks
@@ -50,16 +50,16 @@ class HomeViewModel @Inject constructor(
     private suspend fun handleDrinkByTypeResponse(result: Result<CocktailBO>) =
         withContext(Dispatchers.Main) {
             when (result) {
-                is Result.Loading -> {
+                is com.mzs.core.domain.bo.ResultBO.Result.Loading -> {
                     _state.value = HomeUiState.Loading
                 }
 
-                is Result.Response.Error<*> -> {
+                is com.mzs.core.domain.bo.ResultBO.Response.Result.Response.Error<*> -> {
                     _state.value =
                         HomeUiState.Error(error = (result.code as ErrorBO).transform())
                 }
 
-                is Result.Response.Success -> {
+                is com.mzs.core.domain.bo.ResultBO.Response.Result.Response.Success -> {
                     list.clear()
                     list.addAll(result.data.drinks.map { it.transform() })
                     onExecuteGetFavorites()

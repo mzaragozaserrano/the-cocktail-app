@@ -1,4 +1,4 @@
-package com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi
+package com.thecocktailapp.presentation.utils
 
 sealed class CommonIntent : KotlinIntent, SplashIntent, HomeIntent,
     DetailDrinkIntent {
@@ -19,5 +19,5 @@ sealed interface SplashIntent  {
 sealed interface HomeIntent
 
 sealed interface DetailDrinkIntent {
-    data class GetDrinkById(val id: Int): DetailDrinkIntent
+    data class GetDrinkById(val id: Int?) : DetailDrinkIntent
 }

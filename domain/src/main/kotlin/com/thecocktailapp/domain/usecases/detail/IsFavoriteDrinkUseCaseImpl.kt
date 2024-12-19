@@ -1,6 +1,6 @@
 package com.thecocktailapp.domain.usecases.detail
 
-import com.thecocktailapp.core.domain.usecases.SyncUseCase
+import com.mzs.core.domain.usecases.SyncUseCase
 import com.thecocktailapp.domain.repositories.local.FavoritesRepository
 import javax.inject.Inject
 

@@ -1,6 +1,6 @@
 package com.thecocktailapp.datasources
 
-import com.thecocktailapp.core.data.datasources.local.ResourcesDataSource
+import com.mzs.core.data.datasources.local.ResourcesDataSource
 import javax.inject.Inject
 
 class FakeResourcesDataSourceImpl @Inject constructor() : ResourcesDataSource {

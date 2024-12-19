@@ -1,7 +1,7 @@
 package com.thecocktailapp.domain.repositories.services
 
 import androidx.annotation.StringRes
-import com.thecocktailapp.core.domain.utils.Result
+import com.mzs.core.domain.bo.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import kotlinx.coroutines.flow.Flow
 

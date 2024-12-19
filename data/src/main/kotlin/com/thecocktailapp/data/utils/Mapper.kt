@@ -1,6 +1,6 @@
 package com.thecocktailapp.data.utils
 
-import com.thecocktailapp.core.data.datasources.local.ResourcesDataSource
+import com.mzs.core.data.datasources.local.ResourcesDataSource
 import com.thecocktailapp.data.R
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.DrinkDTO

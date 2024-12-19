@@ -19,10 +19,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavController
-import com.thecocktailapp.core.domain.utils.getCurrentDate
-import com.thecocktailapp.core.domain.utils.sdfComplete
-import com.thecocktailapp.core.presentation.compose.components.texts.NormalMediumText
-import com.thecocktailapp.core.presentation.compose.components.utils.MenuDrawerContent
+import com.mzs.core.presentation.compose.components.texts.NormalMediumText
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.utils.HOME_MENU_BUTTON
 import com.thecocktailapp.presentation.utils.HOME_TOOLBAR
@@ -44,19 +41,19 @@ fun MenuNavigation(
     content: @Composable () -> Unit,
 ) {
 
-    val date = getCurrentDate(sdfComplete)
+//    val date = getCurrentDate(sdfComplete)
     val coroutineScope = rememberCoroutineScope()
 
     ModalNavigationDrawer(
         modifier = modifier,
         drawerContent = {
             MenuDrawerContent(
-                date = date,
+                date = "date",
                 dateTextColor = MaterialTheme.colorScheme.secondary,
                 defaultPick = MenuItem.HomeScreen,
                 drawerState = drawerState,
                 greetingTextColor = MaterialTheme.colorScheme.secondary,
-                greetingTextId = date.getGreetingText(),
+                greetingTextId = "date".getGreetingText(),
                 iconTint = MaterialTheme.colorScheme.primary,
                 menuItems = createMenuList(),
                 testTag = MENU_NAVIGATION_ITEM,

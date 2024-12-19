@@ -1,27 +1,29 @@
-package com.thecocktailapp.presentation.fragments.detail
+package com.thecocktailapp.presentation.fragments
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonIntent
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.DetailDrinkIntent
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.DetailDrinkViewState
-import com.thecocktailapp.core.presentation.view.base.BaseFragment
-import com.thecocktailapp.core.presentation.view.utils.extensions.hideProgressDialog
-import com.thecocktailapp.core.presentation.view.utils.extensions.loadImageFromUrl
-import com.thecocktailapp.core.presentation.view.utils.extensions.showProgressDialog
-import com.thecocktailapp.core.presentation.view.utils.viewBinding.viewBinding
+import com.mzs.core.presentation.base.CoreBaseFragment
+import com.mzs.core.presentation.utils.extensions.getSerializableExtra
+import com.mzs.core.presentation.utils.extensions.hideProgressDialog
+import com.mzs.core.presentation.utils.extensions.loadImageFromUrl
+import com.mzs.core.presentation.utils.extensions.showProgressDialog
+import com.mzs.core.presentation.utils.viewBinding.viewBinding
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.databinding.FragmentDetailDrinkBinding
 import com.thecocktailapp.presentation.databinding.ItemIngredientBinding
+import com.thecocktailapp.presentation.utils.CommonIntent
+import com.thecocktailapp.presentation.utils.CommonViewState
+import com.thecocktailapp.presentation.utils.DetailDrinkAction
+import com.thecocktailapp.presentation.utils.DetailDrinkIntent
+import com.thecocktailapp.presentation.utils.DetailDrinkResult
+import com.thecocktailapp.presentation.utils.DetailDrinkViewState
 import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
 import com.thecocktailapp.presentation.vo.DrinkVO
 import dagger.hilt.android.AndroidEntryPoint
-import presentation.utils.serializable
 
 @AndroidEntryPoint
 class DetailDrinkFragment :
-    BaseFragment<DetailDrinkViewState, DetailDrinkIntent, FragmentDetailDrinkBinding, DetailDrinkViewModel>(
+    CoreBaseFragment<DetailDrinkViewState, DetailDrinkIntent, DetailDrinkAction, DetailDrinkResult, FragmentDetailDrinkBinding, DetailDrinkViewModel>(
         R.layout.fragment_detail_drink
     ) {
 
@@ -69,7 +71,7 @@ class DetailDrinkFragment :
     }
 
     private fun getDrinkById() {
-        emitAction(DetailDrinkIntent.GetDrinkById(arguments?.serializable(DRINK_ID) ?: 0))
+        emitAction(DetailDrinkIntent.GetDrinkById(getSerializableExtra(DRINK_ID, Int::class.java)))
     }
 
     private fun setUpDrink(drink: DrinkVO) {

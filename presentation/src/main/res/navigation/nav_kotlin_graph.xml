@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/SplashFragment"
-        android:name="com.thecocktailapp.presentation.fragments.splash.SplashFragment"
+        android:name="com.thecocktailapp.presentation.fragments.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/DetailDrinkFragment"
-        android:name="com.thecocktailapp.presentation.fragments.detail.DetailDrinkFragment"
+        android:name="com.thecocktailapp.presentation.fragments.DetailDrinkFragment"
         android:label="fragment_detail_drink"
         tools:layout="@layout/fragment_detail_drink" >
         <action
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.thecocktailapp.presentation.fragments.home.HomeFragment"
+        android:name="com.thecocktailapp.presentation.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 

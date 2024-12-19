@@ -2,7 +2,7 @@ package com.thecocktailapp.presentation.viewmodels.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.thecocktailapp.core.domain.utils.Result
+import com.mzs.core.domain.bo.Result
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
@@ -40,15 +40,15 @@ class SplashViewModel @Inject constructor(
     private suspend fun handleRandomDrinkResponse(result: Result<CocktailBO>) =
         withContext(Dispatchers.Main) {
             when (result) {
-                is Result.Loading -> {
+                is com.mzs.core.domain.bo.ResultBO.Result.Loading -> {
                     _state.value = SplashUiState.Loading
                 }
 
-                is Result.Response.Error<*> -> {
+                is com.mzs.core.domain.bo.ResultBO.Response.Result.Response.Error<*> -> {
                     _state.value = SplashUiState.Error(error = (result.code as ErrorBO).transform())
                 }
 
-                is Result.Response.Success -> {
+                is com.mzs.core.domain.bo.ResultBO.Response.Result.Response.Success -> {
                     _state.value =
                         SplashUiState.Success(drink = result.data.drinks.first().transform())
                 }

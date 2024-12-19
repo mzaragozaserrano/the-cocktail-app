@@ -1,51 +1,52 @@
 package com.thecocktailapp.presentation.viewmodels
 
-import androidx.lifecycle.viewModelScope
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonAction
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonResult
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.CommonViewState
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinAction
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinIntent
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinResult
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinTask
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.KotlinViewState
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.mapToAction
-import com.thecocktailapp.com.thecocktailapp.core.presentation.compose.utils.mvi.mapToState
-import com.thecocktailapp.presentation.utils.mvi.mapToAction
-import com.thecocktailapp.presentation.utils.mvi.mapToState
-import com.thecocktailapp.core.domain.utils.extension.toFlowResult
-import com.thecocktailapp.core.presentation.view.base.MVIViewModel
+import com.mzs.core.domain.utils.extensions.toFlowResult
+import com.mzs.core.presentation.base.CoreMVIViewModel
 import com.thecocktailapp.domain.usecases.splash.ShowRandomDrink
+import com.thecocktailapp.presentation.utils.CommonAction
+import com.thecocktailapp.presentation.utils.CommonIntent
+import com.thecocktailapp.presentation.utils.CommonResult
+import com.thecocktailapp.presentation.utils.CommonViewState
+import com.thecocktailapp.presentation.utils.KotlinAction
+import com.thecocktailapp.presentation.utils.KotlinIntent
+import com.thecocktailapp.presentation.utils.KotlinResult
+import com.thecocktailapp.presentation.utils.KotlinTask
+import com.thecocktailapp.presentation.utils.KotlinViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class KotlinViewModel @Inject constructor(
     private val showRandomDrink: @JvmSuppressWildcards ShowRandomDrink,
-) : MVIViewModel<KotlinViewState, KotlinIntent>() {
-
-    init {
-        handleIntent()
-    }
+) : CoreMVIViewModel<KotlinViewState, KotlinIntent, KotlinAction, KotlinResult>() {
 
     override fun createInitialState(): KotlinViewState = CommonViewState.Initialized()
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    override fun handleIntent() {
-        viewModelScope.launch {
-            intentFlow
-                .map { it.mapToAction() }
-                .flatMapLatest { processAction(it) }
-                .collect { collectState(it.mapToState()) }
-        }
-    }
+    override fun KotlinResult.mapToState(): KotlinViewState =
+        when (this) {
+            is CommonResult.Idle -> {
+                CommonViewState.Idle
+            }
 
-    private fun processAction(action: KotlinAction): Flow<KotlinResult> = when (action) {
+            is KotlinResult.Init -> {
+                CommonViewState.Initialized()
+            }
+
+            is KotlinResult.Task.Success -> {
+                when (task) {
+                    is KotlinTask.NavigateToHomeFragment -> {
+                        KotlinViewState.Navigate.ToHomeFragment
+                    }
+
+                    is KotlinTask.NavigateToSplashFragment -> {
+                        KotlinViewState.Navigate.ToSplashFragment
+                    }
+                }
+            }
+        }
+
+    override suspend fun processAction(action: KotlinAction): Flow<KotlinResult> = when (action) {
         is CommonAction.Init -> {
             onInit()
         }
@@ -59,6 +60,13 @@ class KotlinViewModel @Inject constructor(
         }
 
     }
+
+    override fun KotlinIntent.mapToAction(): KotlinAction =
+        when (this) {
+            is CommonIntent.Idle -> CommonAction.Idle
+            is CommonIntent.Init -> CommonAction.Init(refresh)
+            is KotlinIntent.ShowRandomDrink -> KotlinAction.Task.CheckPreferencesToShowRandomDrink
+        }
 
     private fun onInit(): Flow<KotlinResult> = KotlinResult.Init.toFlowResult()
 
