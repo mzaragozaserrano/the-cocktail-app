@@ -49,12 +49,6 @@ android {
 
 }
 
-kapt {
-    arguments {
-        arg("room.schemaLocation", "$projectDir/schemas")
-    }
-}
-
 dependencies {
 
     implementation(project(":core"))
