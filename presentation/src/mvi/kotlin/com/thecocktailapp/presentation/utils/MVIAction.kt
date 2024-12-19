@@ -2,23 +2,23 @@ package com.thecocktailapp.presentation.utils
 
 sealed class CommonAction : KotlinAction, SplashAction, HomeAction,
     DetailDrinkAction {
-    object Idle : CommonAction()
+    data object Idle : CommonAction()
     data class Init(val refresh: Boolean) : CommonAction()
 }
 
 sealed interface KotlinAction {
     sealed class Task : KotlinAction {
-        object CheckPreferencesToShowRandomDrink : Task()
+        data object CheckPreferencesToShowRandomDrink : Task()
     }
 }
 
 sealed interface SplashAction {
     sealed class Task : SplashAction {
-        object GetRandomDrink : Task()
+        data object GetRandomDrink : Task()
     }
     sealed class TaskForNavigate : SplashAction {
-        object ToDrinkDetail : TaskForNavigate()
-        object ToMain : TaskForNavigate()
+        data object ToDrinkDetail : TaskForNavigate()
+        data object ToMain : TaskForNavigate()
     }
 }
 

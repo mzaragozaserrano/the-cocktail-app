@@ -2,18 +2,18 @@ package com.thecocktailapp.presentation.utils
 
 sealed class CommonIntent : KotlinIntent, SplashIntent, HomeIntent,
     DetailDrinkIntent {
-    object Idle : CommonIntent()
+    data object Idle : CommonIntent()
     data class Init(val refresh: Boolean = false) : CommonIntent()
 }
 
 sealed interface KotlinIntent {
-    object ShowRandomDrink: KotlinIntent
+    data object ShowRandomDrink : KotlinIntent
 }
 
 sealed interface SplashIntent  {
-    object GetRandomDrink: SplashIntent
-    object GoToDrinkDetail: SplashIntent
-    object GoToMain: SplashIntent
+    data object GetRandomDrink : SplashIntent
+    data object GoToDrinkDetail : SplashIntent
+    data object GoToMain : SplashIntent
 }
 
 sealed interface HomeIntent

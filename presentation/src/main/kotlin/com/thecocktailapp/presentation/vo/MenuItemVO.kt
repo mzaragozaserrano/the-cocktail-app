@@ -5,19 +5,19 @@ import androidx.annotation.StringRes
 import com.thecocktailapp.presentation.R
 
 sealed class MenuItemVO(@DrawableRes val iconId: Int, @StringRes val titleId: Int) {
-    object CloseSession : MenuItemVO(
+    data object CloseSession : MenuItemVO(
         iconId = R.drawable.ic_close_session,
         titleId = R.string.menu_item_close_session
     )
 
-    object FavoriteScreen : MenuItemVO(
+    data object FavoriteScreen : MenuItemVO(
         iconId = R.drawable.ic_favorite,
-        titleId = R.string.menu_item_home
+        titleId = R.string.menu_item_favorites
     )
 
-    object HomeScreen : MenuItemVO(
+    data object HomeScreen : MenuItemVO(
         iconId = R.drawable.ic_cocktail,
-        titleId = R.string.menu_item_favorites
+        titleId = R.string.menu_item_home
     )
 }
 
