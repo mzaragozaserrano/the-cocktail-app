@@ -8,7 +8,7 @@ plugins {
 android {
 
     namespace = "com.thecocktailapp.data"
-    compileSdk = 33
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -47,6 +47,12 @@ android {
         }
     }
 
+}
+
+kapt {
+    arguments {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
 }
 
 dependencies {
