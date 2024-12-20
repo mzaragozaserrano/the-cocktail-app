@@ -16,10 +16,8 @@ import com.thecocktailapp.presentation.utils.KotlinIntent
 import com.thecocktailapp.presentation.utils.KotlinResult
 import com.thecocktailapp.presentation.utils.KotlinViewState
 import com.thecocktailapp.presentation.viewmodels.KotlinViewModel
-import com.thecocktailapp.presentation.vo.MenuItemVO
 import com.thecocktailapp.presentation.vo.getMenuOptions
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class KotlinActivity :
@@ -32,7 +30,7 @@ class KotlinActivity :
 
     private lateinit var navController: NavController
 
-    private val adapter: NavMenuAdapter<MenuItemVO, CoreItemMenuBinding> by lazy {
+    private val adapter: NavMenuAdapter<CoreItemMenuBinding> by lazy {
         NavMenuAdapter(
             bindingInflater = CoreItemMenuBinding::inflate,
             onBindItem = { item, binding ->
@@ -47,12 +45,12 @@ class KotlinActivity :
                         setImageDrawable(
                             ContextCompat.getDrawable(
                                 this@KotlinActivity,
-                                item.iconId
+                                item.first
                             )
                         )
                     }
                     textViewMenu.apply {
-                        text = getString(item.titleId)
+                        text = getString(item.second)
                         setTextColor(
                             ContextCompat.getColor(
                                 this@KotlinActivity,
