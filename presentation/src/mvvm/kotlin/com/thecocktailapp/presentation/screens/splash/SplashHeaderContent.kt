@@ -8,8 +8,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.mzs.core.presentation.compose.components.images.UrlImage
+import com.mzs.core.presentation.components.compose.images.UrlImage
 
 @Composable
 fun SplashHeaderContent(modifier: Modifier = Modifier, urlImage: String) {
@@ -22,6 +23,7 @@ fun SplashHeaderContent(modifier: Modifier = Modifier, urlImage: String) {
             modifier = Modifier
                 .padding(all = 24.dp)
                 .aspectRatio(1f),
+            contentScale = ContentScale.Crop,
             cornerRadius = 8.dp,
             url = urlImage
         )

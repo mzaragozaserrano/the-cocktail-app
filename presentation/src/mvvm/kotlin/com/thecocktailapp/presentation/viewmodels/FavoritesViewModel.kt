@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.viewmodels.favorites
+package com.thecocktailapp.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -36,7 +36,7 @@ class FavoritesViewModel @Inject constructor(
     }
 
     sealed class FavoritesUiState {
-        object Idle : FavoritesUiState()
+        data object Idle : FavoritesUiState()
         data class Error(val error: ErrorVO) : FavoritesUiState()
         data class Success(val list: List<DrinkVO>) : FavoritesUiState()
     }

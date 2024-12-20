@@ -9,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
 import com.thecocktailapp.presentation.utils.navigation.Navigation
-import com.thecocktailapp.presentation.viewmodels.app.ComposeViewModel
+import com.thecocktailapp.presentation.viewmodels.ComposeViewModel
 
 @Composable
 fun ComposeScreen(modifier: Modifier = Modifier, viewModel: ComposeViewModel = hiltViewModel()) {

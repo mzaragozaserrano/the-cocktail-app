@@ -21,5 +21,11 @@ sealed class MenuItemVO(@DrawableRes val iconId: Int, @StringRes val titleId: In
     )
 }
 
-fun getMenuOptions(): List<MenuItemVO> =
-    listOf(MenuItemVO.HomeScreen, MenuItemVO.FavoriteScreen, MenuItemVO.CloseSession)
+fun getMenuOptions(): List<Pair<Int, Int>> =
+    listOf(
+        MenuItemVO.HomeScreen.toPair(),
+        MenuItemVO.FavoriteScreen.toPair(),
+        MenuItemVO.CloseSession.toPair()
+    )
+
+fun MenuItemVO.toPair(): Pair<Int, Int> = Pair(iconId, titleId)

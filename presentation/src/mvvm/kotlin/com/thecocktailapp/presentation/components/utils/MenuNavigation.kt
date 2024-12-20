@@ -13,22 +13,23 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
-import com.mzs.core.presentation.compose.components.texts.NormalMediumText
+import com.mzs.core.presentation.components.view.MenuDrawerContent
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.utils.HOME_MENU_BUTTON
 import com.thecocktailapp.presentation.utils.HOME_TOOLBAR
 import com.thecocktailapp.presentation.utils.MENU_NAVIGATION_ITEM
 import com.thecocktailapp.presentation.utils.extensions.getGreetingText
-import com.thecocktailapp.presentation.utils.navigation.Feature
-import com.thecocktailapp.presentation.utils.navigation.NavCommand
-import com.thecocktailapp.presentation.vo.MenuItem
-import com.thecocktailapp.presentation.vo.createMenuList
+import com.thecocktailapp.presentation.vo.MenuItemVO
+import com.thecocktailapp.presentation.vo.getMenuOptions
+import com.thecocktailapp.presentation.vo.toPair
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,26 +49,18 @@ fun MenuNavigation(
         modifier = modifier,
         drawerContent = {
             MenuDrawerContent(
-                date = "date",
+                date = "12/03/1995 12:30",
                 dateTextColor = MaterialTheme.colorScheme.secondary,
-                defaultPick = MenuItem.HomeScreen,
+                initScreen = MenuItemVO.HomeScreen.toPair(),
                 drawerState = drawerState,
                 greetingTextColor = MaterialTheme.colorScheme.secondary,
-                greetingTextId = "date".getGreetingText(),
+                greetingTextId = "12/03/1995 12:30".getGreetingText(),
                 iconTint = MaterialTheme.colorScheme.primary,
-                menuItems = createMenuList(),
+                screens = getMenuOptions(),
                 testTag = MENU_NAVIGATION_ITEM,
                 textColor = MaterialTheme.colorScheme.primary
             ) { onMenuItemClicked ->
-                when (onMenuItemClicked) {
-                    is MenuItem.FavoriteScreen -> {
-                        navController.navigate(route = NavCommand.App(feature = Feature.Favorites).route)
-                    }
 
-                    is MenuItem.HomeScreen -> {
-                        onHomeRefreshed()
-                    }
-                }
             }
         },
         drawerState = drawerState,
@@ -79,9 +72,9 @@ fun MenuNavigation(
                 TopAppBar(
                     modifier = Modifier.testTag(tag = HOME_TOOLBAR),
                     title = {
-                        NormalMediumText(
+                        Text(
                             color = MaterialTheme.colorScheme.onSurface,
-                            textId = R.string.toolbar_title_home
+                            text = stringResource(id = R.string.toolbar_title_home)
                         )
                     },
                     navigationIcon = {

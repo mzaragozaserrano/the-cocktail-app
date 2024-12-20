@@ -5,7 +5,7 @@ import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
 import com.thecocktailapp.datasources.FakeFavoritesDataSourceImpl
 import com.thecocktailapp.datasources.FakePreferencesDataSourceImpl
 import com.thecocktailapp.datasources.FakeResourcesDataSourceImpl
-import com.thecocktailapp.presentation.viewmodels.home.HomeViewModel
+import com.thecocktailapp.presentation.viewmodels.HomeViewModel
 import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO
@@ -16,7 +16,7 @@ import com.thecocktailapp.usecases.FakeGetDrinksByTypeUseCaseImpl
 import com.thecocktailapp.usecases.FakeGetFavoriteDrinksUseCaseImpl
 import com.thecocktailapp.utils.MainDispatcherRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import junit.framework.TestCase.*
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -26,7 +26,6 @@ import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runners.model.Statement
 import org.mockito.InjectMocks
-import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import javax.inject.Inject
 

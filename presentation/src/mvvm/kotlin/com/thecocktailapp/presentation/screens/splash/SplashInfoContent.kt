@@ -11,15 +11,13 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.thecocktailapp.core.presentation.compose.components.texts.BlinkingText
-import com.mzs.core.presentation.compose.components.texts.ExtraLargeBoldText
-import com.thecocktailapp.core.presentation.compose.components.texts.ExtraSmallMediumText
 import com.thecocktailapp.presentation.R
 
 @Composable
@@ -38,22 +36,22 @@ fun SplashInfoContent(modifier: Modifier = Modifier, name: String) {
             verticalArrangement = Arrangement.spacedBy(space = 6.dp)
         ) {
             if (name.isNotEmpty()) {
-                ExtraSmallMediumText(
+                Text(
                     modifier = Modifier.fillMaxWidth(),
                     color = colorResource(id = R.color.color_secondary_text_highlight),
                     text = name
                 )
-                ExtraLargeBoldText(
+                Text(
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.onBackground,
                     text = stringResource(id = R.string.first_title_splash_fragment).uppercase()
                 )
-                BlinkingText(
+                /*BlinkingText(
                     modifier = Modifier.fillMaxWidth(),
                     color = colorResource(id = R.color.color_text_highlight),
                     text = stringResource(id = R.string.second_title_splash_fragment).uppercase()
-                )
-                ExtraLargeBoldText(
+                )*/
+                Text(
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.onBackground,
                     text = stringResource(id = R.string.third_title_splash_fragment).uppercase()

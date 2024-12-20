@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.viewmodels.detail
+package com.thecocktailapp.presentation.viewmodels
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -64,16 +64,16 @@ class DetailDrinkViewModel @Inject constructor(
     private suspend fun handleDrinkByIdResponse(result: Result<CocktailBO>) =
         withContext(Dispatchers.Main) {
             when (result) {
-                is com.mzs.core.domain.bo.ResultBO.Result.Loading -> {
+                is Result.Loading -> {
                     _state.value = DetailDrinkUiState.Loading
                 }
 
-                is com.mzs.core.domain.bo.ResultBO.Response.Result.Response.Error<*> -> {
+                is Result.Response.Error<*> -> {
                     _state.value =
                         DetailDrinkUiState.Error(error = (result.code as ErrorBO).transform())
                 }
 
-                is com.mzs.core.domain.bo.ResultBO.Response.Result.Response.Success -> {
+                is Result.Response.Success -> {
                     drink = result.data.drinks.first().transform()
                     onExecuteIsFavoriteDrink()
                 }

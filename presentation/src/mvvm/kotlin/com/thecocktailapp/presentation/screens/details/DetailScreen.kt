@@ -18,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -30,11 +31,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.mzs.core.presentation.compose.components.cards.RoundedCard
-import com.mzs.core.presentation.compose.components.texts.NormalMediumText
+import com.mzs.core.presentation.components.compose.cards.RoundedCard
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
@@ -42,7 +43,7 @@ import com.thecocktailapp.presentation.utils.ChangesPreviewScreen
 import com.thecocktailapp.presentation.utils.DETAIL_TOOLBAR
 import com.thecocktailapp.presentation.utils.navigation.Feature
 import com.thecocktailapp.presentation.utils.navigation.NavCommand
-import com.thecocktailapp.presentation.viewmodels.detail.DetailDrinkViewModel
+import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -86,9 +87,9 @@ fun DetailScreen(
                     actionIconContentColor = MaterialTheme.colorScheme.onSecondary
                 ),
                 title = {
-                    NormalMediumText(
+                    Text(
                         color = MaterialTheme.colorScheme.onSurface,
-                        textId = R.string.toolbar_title_details
+                        text = stringResource(id = R.string.toolbar_title_details)
                     )
                 },
                 navigationIcon = {
@@ -143,7 +144,11 @@ fun DetailScreen(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.spacedBy(space = 12.dp)
                             ) {
-                                RoundedCard(backgroundColor = MaterialTheme.colorScheme.background) {
+                                RoundedCard(
+                                    backgroundColor = MaterialTheme.colorScheme.background,
+                                    cornerRadius = 16.dp,
+                                    shadowElevation = 0.dp
+                                ) {
                                     DetailHeaderContent(
                                         drinkType = drink.drinkType,
                                         glass = drink.glass,

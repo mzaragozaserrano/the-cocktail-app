@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,9 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.mzs.core.presentation.compose.components.buttons.FallButton
-import com.thecocktailapp.core.presentation.compose.components.texts.LargeBoldText
-import com.thecocktailapp.core.presentation.compose.components.texts.SmallMediumText
+import com.mzs.core.presentation.components.compose.buttons.FallButton
 import com.thecocktailapp.presentation.R
 
 @Composable
@@ -44,14 +43,14 @@ fun DetailInstructionsContent(modifier: Modifier = Modifier, instructions: Strin
                     .fillMaxWidth()
                     .padding(vertical = 24.dp)
             ) {
-                LargeBoldText(
+                Text(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 24.dp),
                     color = colorResource(id = R.color.color_secondary_text_highlight),
                     text = stringResource(id = R.string.title_instructions)
                 )
-                SmallMediumText(
+                Text(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 24.dp),
@@ -72,8 +71,9 @@ fun DetailInstructionsContent(modifier: Modifier = Modifier, instructions: Strin
             FallButton(
                 modifier = modifier,
                 iconColor = MaterialTheme.colorScheme.primary,
+                text = stringResource(id = R.string.show_steps_button),
                 textColor = MaterialTheme.colorScheme.primary,
-                textId = R.string.show_steps_button,
+                textStyle = MaterialTheme.typography.bodyMedium,
                 onButtonClicked = {
                     isVisible = true
                 },

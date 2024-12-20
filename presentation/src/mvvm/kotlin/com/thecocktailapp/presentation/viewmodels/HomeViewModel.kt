@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.viewmodels.home
+package com.thecocktailapp.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -50,16 +50,16 @@ class HomeViewModel @Inject constructor(
     private suspend fun handleDrinkByTypeResponse(result: Result<CocktailBO>) =
         withContext(Dispatchers.Main) {
             when (result) {
-                is com.mzs.core.domain.bo.ResultBO.Result.Loading -> {
+                is Result.Loading -> {
                     _state.value = HomeUiState.Loading
                 }
 
-                is com.mzs.core.domain.bo.ResultBO.Response.Result.Response.Error<*> -> {
+                is Result.Response.Error<*> -> {
                     _state.value =
                         HomeUiState.Error(error = (result.code as ErrorBO).transform())
                 }
 
-                is com.mzs.core.domain.bo.ResultBO.Response.Result.Response.Success -> {
+                is Result.Response.Success -> {
                     list.clear()
                     list.addAll(result.data.drinks.map { it.transform() })
                     onExecuteGetFavorites()
@@ -83,9 +83,9 @@ class HomeViewModel @Inject constructor(
     }
 
     sealed class HomeUiState {
-        object Idle : HomeUiState()
+        data object Idle : HomeUiState()
         data class Error(val error: ErrorVO) : HomeUiState()
-        object Loading : HomeUiState()
+        data object Loading : HomeUiState()
         data class Success(val list: List<DrinkVO>) : HomeUiState()
     }
 

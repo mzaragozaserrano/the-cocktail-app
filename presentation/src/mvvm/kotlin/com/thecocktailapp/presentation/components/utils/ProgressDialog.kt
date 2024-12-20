@@ -6,13 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.thecocktailapp.core.presentation.compose.components.utils.LottieProgressDialog
+import com.mzs.core.presentation.components.compose.images.LottieImage
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.utils.PROGRESS_DIALOG_LOTTIE
 
 @Composable
 fun ProgressDialog() {
-    LottieProgressDialog(
+    LottieImage(
         modifier = Modifier
             .height(height = 260.dp)
             .width(width = 260.dp)

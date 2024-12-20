@@ -1,10 +1,11 @@
 package com.thecocktailapp.presentation.components.buttons
 
 import android.view.MotionEvent
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,11 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.mzs.core.presentation.compose.components.buttons.PushedButton
-import com.thecocktailapp.core.presentation.compose.components.texts.ExtraSmallMediumText
+import com.mzs.core.presentation.components.compose.buttons.PushedButton
 import com.thecocktailapp.presentation.utils.SPLASH_CANCEL_BUTTON
 import com.thecocktailapp.presentation.utils.SPLASH_SEE_BUTTON
 
@@ -29,8 +28,8 @@ fun DualActionButton(
     modifier: Modifier = Modifier,
     buttonBackgroundColor: Color,
     buttonTextColor: Color,
-    @StringRes buttonTextId: Int,
-    @StringRes textId: Int,
+    buttonText: String,
+    text: String,
     onSeeClicked: () -> Unit,
     onCancelClicked: () -> Unit,
 ) {
@@ -48,13 +47,13 @@ fun DualActionButton(
                 .fillMaxWidth()
                 .testTag(tag = SPLASH_SEE_BUTTON),
             buttonBackgroundColor = buttonBackgroundColor,
+            text = buttonText,
             textColor = buttonTextColor,
-            textId = buttonTextId,
-            textPaddingVertical = 12.dp
+            textStyle = MaterialTheme.typography.titleSmall
         ) {
             onSeeClicked()
         }
-        ExtraSmallMediumText(
+        Text(
             modifier = Modifier
                 .fillMaxWidth()
                 .pointerInteropFilter {
@@ -76,7 +75,7 @@ fun DualActionButton(
                 }
                 .testTag(tag = SPLASH_CANCEL_BUTTON),
             color = buttonSecondaryTextColor,
-            text = stringResource(id = textId),
+            text = text,
             textAlign = TextAlign.Center
         )
     }

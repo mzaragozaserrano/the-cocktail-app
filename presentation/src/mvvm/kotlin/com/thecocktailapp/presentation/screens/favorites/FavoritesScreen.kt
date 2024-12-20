@@ -2,7 +2,6 @@ package com.thecocktailapp.presentation.screens.favorites
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
@@ -11,6 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,18 +18,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.mzs.core.presentation.compose.components.texts.NormalMediumText
-import com.thecocktailapp.core.presentation.compose.components.utils.Recycler
 import com.thecocktailapp.presentation.R
-import com.thecocktailapp.presentation.components.items.DrinkItem
 import com.thecocktailapp.presentation.components.utils.WarningDialog
 import com.thecocktailapp.presentation.utils.FAVORITE_TOOLBAR
-import com.thecocktailapp.presentation.utils.navigation.Feature
-import com.thecocktailapp.presentation.utils.navigation.NavCommand
-import com.thecocktailapp.presentation.viewmodels.favorites.FavoritesViewModel
+import com.thecocktailapp.presentation.viewmodels.FavoritesViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,9 +51,9 @@ fun FavoritesScreen(
             TopAppBar(
                 modifier = Modifier.testTag(tag = FAVORITE_TOOLBAR),
                 title = {
-                    NormalMediumText(
+                    Text(
                         color = MaterialTheme.colorScheme.onSurface,
-                        textId = R.string.toolbar_title_favorites
+                        text = stringResource(id = R.string.toolbar_title_favorites)
                     )
                 },
                 navigationIcon = {
@@ -86,8 +81,13 @@ fun FavoritesScreen(
 
             is FavoritesViewModel.FavoritesUiState.Success -> {
                 val list = (state as FavoritesViewModel.FavoritesUiState.Success).list
-                Box(modifier = Modifier.padding()) {
-                    Recycler(
+                Box(
+                    modifier = Modifier.padding(
+                        top = paddingValues.calculateTopPadding(),
+                        bottom = paddingValues.calculateBottomPadding()
+                    )
+                ) {
+                    /*Recycler(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(paddingValues),
@@ -104,7 +104,7 @@ fun FavoritesScreen(
                                     .createRoute(drinkId = item.id)
                             )
                         }
-                    }
+                    }*/
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.thecocktailapp.presentation.viewmodels.splash
+package com.thecocktailapp.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -40,15 +40,15 @@ class SplashViewModel @Inject constructor(
     private suspend fun handleRandomDrinkResponse(result: Result<CocktailBO>) =
         withContext(Dispatchers.Main) {
             when (result) {
-                is com.mzs.core.domain.bo.ResultBO.Result.Loading -> {
+                is Result.Loading -> {
                     _state.value = SplashUiState.Loading
                 }
 
-                is com.mzs.core.domain.bo.ResultBO.Response.Result.Response.Error<*> -> {
+                is Result.Response.Error<*> -> {
                     _state.value = SplashUiState.Error(error = (result.code as ErrorBO).transform())
                 }
 
-                is com.mzs.core.domain.bo.ResultBO.Response.Result.Response.Success -> {
+                is Result.Response.Success -> {
                     _state.value =
                         SplashUiState.Success(drink = result.data.drinks.first().transform())
                 }
@@ -56,9 +56,9 @@ class SplashViewModel @Inject constructor(
         }
 
     sealed class SplashUiState {
-        object Idle : SplashUiState()
+        data object Idle : SplashUiState()
         data class Error(val error: ErrorVO) : SplashUiState()
-        object Loading : SplashUiState()
+        data object Loading : SplashUiState()
         data class Success(val drink: DrinkVO) : SplashUiState()
     }
 

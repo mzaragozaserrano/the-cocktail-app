@@ -1,27 +1,19 @@
 package com.thecocktailapp.presentation.screens.home
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.thecocktailapp.core.presentation.compose.components.utils.Recycler
 import com.thecocktailapp.presentation.R
-import com.thecocktailapp.presentation.components.items.DrinkItem
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.MenuNavigation
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.utils.ChangesPreviewScreen
-import com.thecocktailapp.presentation.utils.HOME_RECYCLER_VIEW
-import com.thecocktailapp.presentation.utils.navigation.Feature
-import com.thecocktailapp.presentation.utils.navigation.NavCommand
-import com.thecocktailapp.presentation.viewmodels.home.HomeViewModel
+import com.thecocktailapp.presentation.viewmodels.HomeViewModel
 
 @Composable
 fun HomeScreen(
@@ -69,7 +61,7 @@ fun HomeScreen(
 
             is HomeViewModel.HomeUiState.Success -> {
                 val list = (state as HomeViewModel.HomeUiState.Success).list
-                Recycler(
+                /*Adapter(
                     modifier = Modifier
                         .padding(all = 8.dp)
                         .testTag(tag = HOME_RECYCLER_VIEW),
@@ -86,7 +78,7 @@ fun HomeScreen(
                                 .createRoute(drinkId = item.id)
                         )
                     }
-                }
+                }*/
             }
         }
     }

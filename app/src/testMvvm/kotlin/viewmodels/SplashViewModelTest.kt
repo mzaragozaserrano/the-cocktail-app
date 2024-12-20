@@ -4,7 +4,7 @@ import app.cash.turbine.test
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
 import com.thecocktailapp.datasources.FakePreferencesDataSourceImpl
 import com.thecocktailapp.datasources.FakeResourcesDataSourceImpl
-import com.thecocktailapp.presentation.viewmodels.splash.SplashViewModel
+import com.thecocktailapp.presentation.viewmodels.SplashViewModel
 import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO
@@ -13,7 +13,7 @@ import com.thecocktailapp.repositories.FakeNetworkRepositoryImpl
 import com.thecocktailapp.usecases.FakeGetRandomDrinkUseCaseImpl
 import com.thecocktailapp.utils.MainDispatcherRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import junit.framework.TestCase.*
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -23,7 +23,6 @@ import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runners.model.Statement
 import org.mockito.InjectMocks
-import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import javax.inject.Inject
 

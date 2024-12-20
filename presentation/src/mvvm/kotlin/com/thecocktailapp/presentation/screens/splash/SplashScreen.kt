@@ -12,13 +12,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.buttons.DualActionButton
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
-import com.thecocktailapp.presentation.viewmodels.splash.SplashViewModel
+import com.thecocktailapp.presentation.viewmodels.SplashViewModel
 
 @Composable
 fun SplashScreen(
@@ -76,8 +77,8 @@ fun SplashScreen(
                         .padding(bottom = 24.dp, end = 24.dp, start = 24.dp),
                     buttonBackgroundColor = MaterialTheme.colorScheme.primary,
                     buttonTextColor = MaterialTheme.colorScheme.onPrimary,
-                    buttonTextId = R.string.see_button,
-                    textId = R.string.cancel_button,
+                    buttonText = stringResource(R.string.see_button),
+                    text = stringResource(R.string.cancel_button),
                     onSeeClicked = {
                         onSeeClicked(drink.id)
                     },
