@@ -83,7 +83,6 @@ dependencies {
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.navigation.compose)
 
     //----- DAGGER ----------/
