@@ -6,6 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.thecocktailapp.presentation.R
@@ -46,8 +47,8 @@ fun HomeScreen(
             is HomeViewModel.HomeUiState.Error -> {
                 val error = (state as HomeViewModel.HomeUiState.Error).error
                 ErrorDialog(
-                    buttonTextId = R.string.retry_button,
-                    messageTextId = error.messageId
+                    buttonText = stringResource(id = R.string.retry_button),
+                    messageText = stringResource(id = error.messageId)
                 ) {
                     viewModel.onExecuteGetDrinksByType()
                 }

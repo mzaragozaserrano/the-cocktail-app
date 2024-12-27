@@ -1,18 +1,16 @@
 package com.thecocktailapp.presentation.viewmodels
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mzs.core.domain.bo.Result
+import com.mzs.core.presentation.base.CoreMVVMViewModel
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
 import com.thecocktailapp.presentation.utils.transform
-import com.thecocktailapp.presentation.vo.DrinkVO
-import com.thecocktailapp.presentation.vo.ErrorVO
+import com.thecocktailapp.presentation.vo.SplashSuccess
+import com.thecocktailapp.presentation.vo.SplashUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -20,16 +18,20 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     val getRandomDrink: @JvmSuppressWildcards GetRandomDrink,
-) : ViewModel() {
-
-    private val _state = MutableStateFlow<SplashUiState>(value = SplashUiState.Idle)
-    val state = _state.asStateFlow()
+) : CoreMVVMViewModel<SplashUiState>() {
 
     init {
         onExecuteGetRandomDrink()
     }
 
-    fun onExecuteGetRandomDrink() {
+    override fun createInitialState(): SplashUiState = SplashUiState()
+
+    fun onRetryExecuteGetRandomDrink() {
+        onUpdateUiState { copy(error = null) }
+        onExecuteGetRandomDrink()
+    }
+
+    private fun onExecuteGetRandomDrink() {
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
                 getRandomDrink().collect(::handleRandomDrinkResponse)
@@ -41,25 +43,29 @@ class SplashViewModel @Inject constructor(
         withContext(Dispatchers.Main) {
             when (result) {
                 is Result.Loading -> {
-                    _state.value = SplashUiState.Loading
+                    onUpdateUiState { copy(loading = true, error = null) }
                 }
 
                 is Result.Response.Error<*> -> {
-                    _state.value = SplashUiState.Error(error = (result.code as ErrorBO).transform())
+                    onUpdateUiState {
+                        copy(
+                            loading = false,
+                            error = (result.code as ErrorBO).transform()
+                        )
+                    }
                 }
 
                 is Result.Response.Success -> {
-                    _state.value =
-                        SplashUiState.Success(drink = result.data.drinks.first().transform())
+                    onUpdateUiState {
+                        copy(
+                            loading = false,
+                            error = null,
+                            success = SplashSuccess(drink = result.data.drinks.first().transform())
+                        )
+                    }
                 }
             }
         }
 
-    sealed class SplashUiState {
-        data object Idle : SplashUiState()
-        data class Error(val error: ErrorVO) : SplashUiState()
-        data object Loading : SplashUiState()
-        data class Success(val drink: DrinkVO) : SplashUiState()
-    }
 
 }

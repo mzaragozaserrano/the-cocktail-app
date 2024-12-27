@@ -1,22 +1,24 @@
 package com.thecocktailapp.presentation.screens.splash
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mzs.core.presentation.utils.extensions.conditional
 import com.thecocktailapp.presentation.R
-import com.thecocktailapp.presentation.components.buttons.DualActionButton
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.viewmodels.SplashViewModel
@@ -29,62 +31,57 @@ fun SplashScreen(
     onCancelClicked: () -> Unit,
 ) {
 
-    val state by viewModel.state.collectAsState()
-    var name by remember { mutableStateOf(value = "") }
-    var urlImage by remember { mutableStateOf(value = "") }
+    val uiState by viewModel.uiState.collectAsState()
 
-    Column(modifier = modifier) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(weight = 1f)
-        ) {
-            SplashHeaderContent(
+    BackHandler { onCancelClicked() }
+
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(color = MaterialTheme.colorScheme.background),
-                urlImage = urlImage
-            )
-            SplashInfoContent(
+                    .conditional(condition = uiState.success == null) {
+                        weight(weight = 1f)
+                    }
+                    .background(color = MaterialTheme.colorScheme.background)
+                    .clip(shape = RoundedCornerShape(bottomEnd = 48.dp))
+                    .background(color = MaterialTheme.colorScheme.primary)
+            ) {
+                uiState.success?.let { success ->
+                    SplashHeaderContent(urlImage = success.drink.urlImage)
+                }
+            }
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(weight = 1f)
-                    .background(color = MaterialTheme.colorScheme.primary),
-                name = name
-            )
-        }
-        when (state) {
-            is SplashViewModel.SplashUiState.Error -> {
-                val error = (state as SplashViewModel.SplashUiState.Error).error
-                ErrorDialog(buttonTextId = R.string.retry_button, messageTextId = error.messageId) {
-                    viewModel.onExecuteGetRandomDrink()
+                    .background(color = MaterialTheme.colorScheme.primary)
+                    .clip(shape = RoundedCornerShape(topStart = 48.dp))
+                    .background(color = MaterialTheme.colorScheme.background)
+            ) {
+                uiState.success?.let { success ->
+                    if (success.drink.name.isNotEmpty()) {
+                        SplashInfoContent(
+                            name = success.drink.name,
+                            onSeeClicked = {
+                                onSeeClicked(success.drink.id)
+                            },
+                            onCancelClicked = onCancelClicked
+                        )
+                    }
                 }
-            }
 
-            is SplashViewModel.SplashUiState.Idle -> {}
-            is SplashViewModel.SplashUiState.Loading -> {
-                ProgressDialog()
             }
-
-            is SplashViewModel.SplashUiState.Success -> {
-                val drink = (state as SplashViewModel.SplashUiState.Success).drink
-                name = drink.name
-                urlImage = (state as SplashViewModel.SplashUiState.Success).drink.urlImage
-                DualActionButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(color = MaterialTheme.colorScheme.background)
-                        .padding(bottom = 24.dp, end = 24.dp, start = 24.dp),
-                    buttonBackgroundColor = MaterialTheme.colorScheme.primary,
-                    buttonTextColor = MaterialTheme.colorScheme.onPrimary,
-                    buttonText = stringResource(R.string.see_button),
-                    text = stringResource(R.string.cancel_button),
-                    onSeeClicked = {
-                        onSeeClicked(drink.id)
-                    },
-                    onCancelClicked = onCancelClicked
-                )
-            }
+        }
+        if (uiState.loading) {
+            ProgressDialog()
+        }
+        uiState.error?.let { error ->
+            ErrorDialog(
+                buttonText = stringResource(id = R.string.retry_button),
+                messageText = stringResource(id = error.messageId),
+                onButtonClicked = { viewModel.onRetryExecuteGetRandomDrink() }
+            )
         }
     }
 

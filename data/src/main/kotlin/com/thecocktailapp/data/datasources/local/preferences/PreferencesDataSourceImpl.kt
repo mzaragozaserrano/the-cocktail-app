@@ -7,10 +7,11 @@ import javax.inject.Inject
 class PreferencesDataSourceImpl @Inject constructor(private val preferences: EncryptedPreferences) :
     PreferencesDataSource {
 
-    override fun getFirstAccessDate(): String? = preferences.getForm(PreferencesKey.AccessDate.key)
+    override fun getFirstAccessDate(): String? =
+        preferences.getForm(tag = PreferencesKey.AccessDate.key)
 
     override fun saveFirstAccessDate(accessDate: String) {
-        preferences.saveForm(PreferencesKey.AccessDate.key, accessDate)
+        preferences.saveForm(tag = PreferencesKey.AccessDate.key, stringValue = accessDate)
     }
 
 }

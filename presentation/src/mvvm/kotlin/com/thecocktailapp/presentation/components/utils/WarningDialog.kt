@@ -27,8 +27,7 @@ fun WarningDialog(
         messageText = stringResource(id = messageTextId),
         titleStyle = MaterialTheme.typography.titleMedium,
         titleTextColor = colorResource(id = R.color.color_primary),
-        titleText = stringResource(id = R.string.title_warning)
-    ) {
-        onButtonClicked()
-    }
+        titleText = stringResource(id = R.string.title_warning),
+        onButtonClicked = onButtonClicked
+    )
 }

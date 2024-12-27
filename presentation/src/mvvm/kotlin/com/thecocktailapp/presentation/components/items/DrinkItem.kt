@@ -14,8 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mzs.core.presentation.components.compose.backgrounds.RoundedEdgeBackground
 import com.mzs.core.presentation.components.compose.buttons.PushedButton
-import com.mzs.core.presentation.components.compose.cards.RoundedEdgeCard
 import com.mzs.core.presentation.components.compose.images.UrlImage
 import com.mzs.core.presentation.utils.extensions.conditional
 import com.thecocktailapp.presentation.R
@@ -30,7 +30,7 @@ fun DrinkItem(
     item: DrinkVO,
     onButtonClicked: () -> Unit,
 ) {
-    RoundedEdgeCard(
+    RoundedEdgeBackground(
         modifier = modifier,
         backgroundColor = Color.Blue,
         borderColor = if (item.isFavorite) {
@@ -39,8 +39,7 @@ fun DrinkItem(
             MaterialTheme.colorScheme.surface
         },
         cornerRadius = 16.dp,
-        shadowElevation = 0.dp,
-        strokeBorder = 2.dp
+        borderWidth = 2.dp
     ) {
         Column(
             modifier = Modifier
@@ -66,7 +65,7 @@ fun DrinkItem(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp)
-                    .conditional(isFirstItem) { testTag(tag = HOME_BUTTON_SEE_DETAIL) },
+                    .conditional(condition = isFirstItem) { testTag(tag = HOME_BUTTON_SEE_DETAIL) },
                 buttonBackgroundColor = MaterialTheme.colorScheme.primary,
                 text = stringResource(id = R.string.see_button),
                 textColor = MaterialTheme.colorScheme.onPrimary,
