@@ -9,6 +9,8 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/compiler.xml
 /.idea/misc.xml
 .DS_Store
 /build
@@ -20,5 +22,4 @@ vcs.xml
 gradle.xml
 runConfigurations.xml
 migrations.xml
-deploymentTargetSelector.xml
 Project_Default.xml
