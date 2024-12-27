@@ -14,7 +14,7 @@ android {
         applicationId = "com.thecocktailapp.app"
         minSdk = 24
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -80,9 +80,9 @@ dependencies {
     //----- COMPOSE ----------/
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.navigation.compose)
 
     //----- DAGGER ----------/
