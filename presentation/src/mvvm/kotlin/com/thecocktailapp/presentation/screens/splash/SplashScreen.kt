@@ -33,7 +33,7 @@ fun SplashScreen(
 
     val uiState by viewModel.uiState.collectAsState()
 
-    BackHandler { onCancelClicked() }
+    BackHandler(onBack = { onCancelClicked() })
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
         Column(modifier = Modifier.fillMaxSize()) {

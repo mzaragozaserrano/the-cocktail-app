@@ -1,3 +1,4 @@
+/*
 package com.thecocktailapp.presentation.screens.details
 
 import androidx.compose.animation.AnimatedContent
@@ -17,25 +18,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.mzs.core.presentation.components.compose.buttons.FallButton
 import com.thecocktailapp.presentation.R
 
 @Composable
-fun DetailInstructionsContent(modifier: Modifier = Modifier, instructions: String) {
-
-    var isPressed by remember { mutableStateOf(false) }
-    var isVisible by remember { mutableStateOf(false) }
+fun DetailInstructionsContent(
+    modifier: Modifier = Modifier,
+    instructions: String,
+    onButtonClicked: () -> Unit
+) {
 
     val offset by animateDpAsState(
         animationSpec = tween(durationMillis = 300),
         targetValue = if (isPressed) 25.dp else 0.dp,
-        label = ""
+        label = emptyText
     )
 
     AnimatedContent(
         targetState = isVisible,
-        label = ""
+        label = emptyText
     ) { show ->
         if (show) {
             Column(
@@ -61,27 +64,21 @@ fun DetailInstructionsContent(modifier: Modifier = Modifier, instructions: Strin
             }
         }
     }
-
     AnimatedContent(
-        modifier = modifier.offset(y = offset),
+        modifier = modifier.offset { IntOffset(0, offset.roundToPx()) },
         targetState = !isVisible,
-        label = ""
+        label = emptyText
     ) { show ->
         if (show) {
             FallButton(
-                modifier = modifier,
+                modifier = modifier.padding(horizontal = 16.dp),
                 iconColor = MaterialTheme.colorScheme.primary,
                 text = stringResource(id = R.string.show_steps_button),
                 textColor = MaterialTheme.colorScheme.primary,
                 textStyle = MaterialTheme.typography.bodyMedium,
-                onButtonClicked = {
-                    isVisible = true
-                },
-                onButtonPressed = {
-                    isPressed = true
-                }
+                onButtonClicked = onButtonClicked
             )
         }
     }
 
-}
+}*/

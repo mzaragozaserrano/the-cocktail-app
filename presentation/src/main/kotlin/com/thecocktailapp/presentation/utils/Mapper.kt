@@ -69,7 +69,7 @@ fun DrinkBO.createIngredientsFormatted(): List<String> {
         (0..14).forEach { index ->
             val ingredient = listIngredients[index]
             val measure = listMeasures[index]
-            if (!ingredient.isNullOrEmpty() && !measure.isNullOrEmpty()) {
+            if (ingredient.isNullOrEmpty().not() && measure.isNullOrEmpty().not()) {
                 list.add("$ingredient - $measure")
             }
         }

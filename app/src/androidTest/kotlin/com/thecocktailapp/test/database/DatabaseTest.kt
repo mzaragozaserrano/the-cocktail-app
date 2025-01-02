@@ -158,7 +158,7 @@ class DatabaseTest {
 
         val job = async(Dispatchers.IO) {
             val list = favoritesDataSource.getAllFavorites()
-            assert(!list.contains(drink))
+            assert(list.contains(drink).not())
         }
         job.cancelAndJoin()
     }
