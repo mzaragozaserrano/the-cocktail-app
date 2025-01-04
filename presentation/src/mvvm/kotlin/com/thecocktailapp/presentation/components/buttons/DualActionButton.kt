@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,6 +45,13 @@ fun DualActionButton(
     var isPressed by remember { mutableStateOf(value = false) }
     val buttonSecondaryTextColor =
         if (isPressed) buttonBackgroundColor.copy(alpha = 0.66f) else buttonBackgroundColor
+
+    LaunchedEffect(isLaunchingAction) {
+        if (isLaunchingAction) {
+            onNegativeButtonClicked()
+            isLaunchingAction = false
+        }
+    }
 
     Column(
         modifier = modifier,
