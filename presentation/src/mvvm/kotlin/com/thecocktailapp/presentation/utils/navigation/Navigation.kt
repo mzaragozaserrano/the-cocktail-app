@@ -10,10 +10,8 @@ import com.mzs.core.presentation.navigation.ParameterScreen
 import com.mzs.core.presentation.navigation.screenNavigation
 import com.mzs.core.presentation.navigation.screenNavigationWithParameters
 import com.thecocktailapp.presentation.screens.details.DetailScreen
-import com.thecocktailapp.presentation.screens.favorites.FavoritesScreen
 import com.thecocktailapp.presentation.screens.home.HomeScreen
 import com.thecocktailapp.presentation.screens.splash.SplashScreen
-import com.thecocktailapp.presentation.utils.extensions.composable
 import com.thecocktailapp.presentation.vo.DrinkVO
 import kotlinx.serialization.Serializable
 
@@ -21,7 +19,7 @@ import kotlinx.serialization.Serializable
 fun Navigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    startDestination: String,
+    startDestination: Any,
 ) {
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -30,28 +28,21 @@ fun Navigation(
         navController = navController,
         startDestination = startDestination
     ) {
-        screenNavigation<SplashScreen> {
+        screenNavigation<Splash> {
             SplashScreen(
                 modifier = modifier,
-                onSeeClicked = { id ->
-                    /*navController.navigate(
-                        route = NavCommand.Content(feature = Feature.Detail)
-                            .createRoute(drinkId = id)
-                    )*/
+                onSeeClicked = { drink ->
+                    navController.navigate(
+                        route = Detail(
+                            data = drink,
+                            isFromSplash = true
+                        )
+                    )
                 },
-                onCancelClicked = {
-                    /*navController.navigate(
-                        builder = {
-                            popUpTo(route = Feature.Splash.route) {
-                                inclusive = false
-                            }
-                        },
-                        route = NavCommand.App(feature = Feature.Home).route
-                    )*/
-                }
+                onCancelClicked = { navController.navigate(route = Home) }
             )
         }
-        composable(navItem = NavCommand.App(feature = Feature.Home)) {
+        screenNavigation<Home> {
             HomeScreen(
                 modifier = modifier,
                 drawerState = drawerState,
@@ -59,30 +50,32 @@ fun Navigation(
             )
         }
 
-        composable(navItem = NavCommand.App(feature = Feature.Favorites)) {
+        /*composable(navItem = NavCommand.App(feature = Feature.Favorites)) {
             FavoritesScreen(modifier = modifier, navController = navController)
-        }
+        }*/
         screenNavigationWithParameters<Detail, DrinkVO> { parameter ->
             DetailScreen(
                 modifier = modifier,
-                drink = parameter.drink.data,
+                drink = parameter.data,
                 onIconClicked = {
-
+                    if (parameter.isFromSplash) {
+                        navController.navigate(route = Home)
+                    } else {
+                        navController.popBackStack()
+                    }
                 }
             )
-        }
-        composable(navItem = NavCommand.Content(feature = Feature.Detail)) {
-
         }
     }
 
 }
 
 @Serializable
-data object SplashScreen
+data object Home
 
 @Serializable
-data class Detail(val drink: Drink)
+data object Splash
 
 @Serializable
-data class Drink(override val data: DrinkVO): ParameterScreen<DrinkVO>
+data class Detail(override val data: DrinkVO, val isFromSplash: Boolean) :
+    ParameterScreen<DrinkVO>

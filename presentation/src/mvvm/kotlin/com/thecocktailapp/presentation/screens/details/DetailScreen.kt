@@ -15,10 +15,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mzs.core.presentation.components.compose.backgrounds.RoundedBackground
 import com.thecocktailapp.presentation.components.utils.TheCocktailAppTopBar
 import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
@@ -31,6 +33,8 @@ fun DetailScreen(
     onIconClicked: () -> Unit,
     viewModel: DetailDrinkViewModel = hiltViewModel()
 ) {
+
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = Unit) {
         viewModel.setUpView(drink = drink)
@@ -63,14 +67,16 @@ fun DetailScreen(
                             url = drink.urlImage
                         )
                         DetailReceiptContent(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp, end = 16.dp, start = 16.dp),
                             instructions = drink.instructions
                         )
                     }
                     SmallFloatingActionButton(
                         modifier = Modifier.padding(vertical = 16.dp),
                         onClick = {
-                            if (drink.isFavorite) {
+                            if (uiState.isFavorite) {
                                 viewModel.removeFavoriteDrink(drink = drink)
                             } else {
                                 viewModel.addFavoriteDrink(drink = drink)
@@ -80,7 +86,7 @@ fun DetailScreen(
                         contentColor = MaterialTheme.colorScheme.secondary
                     ) {
                         Icon(
-                            imageVector = if (drink.isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
+                            imageVector = if (uiState.isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
                             contentDescription = "FavoriteButton"
                         )
                     }

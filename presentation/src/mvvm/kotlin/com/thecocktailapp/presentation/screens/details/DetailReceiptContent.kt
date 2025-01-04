@@ -16,12 +16,12 @@ import com.thecocktailapp.presentation.R
 @Composable
 fun DetailReceiptContent(modifier: Modifier = Modifier, instructions: String) {
     FallButton(
-        modifier = modifier.padding(bottom = 16.dp, end = 16.dp, start = 16.dp),
+        modifier = modifier,
         buttonContentColor = MaterialTheme.colorScheme.secondary,
         text = stringResource(id = R.string.show_steps_button),
         textStyle = MaterialTheme.typography.bodyMedium,
         invisibleContent = {
-            Column {
+            Column(modifier = Modifier.padding(bottom = 16.dp)) {
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()

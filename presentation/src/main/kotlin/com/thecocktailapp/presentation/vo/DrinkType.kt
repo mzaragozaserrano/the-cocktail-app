@@ -18,6 +18,7 @@ sealed class DrinkType(
     @StringRes val nameId: Int,
     @ColorRes val textColorId: Int,
 ) {
+    @Serializable
     data object Alcoholic :
         DrinkType(
             buttonBackgroundColorId = R.color.color_error,
@@ -30,6 +31,7 @@ sealed class DrinkType(
             textColorId = R.color.color_on_error
         )
 
+    @Serializable
     data object None : DrinkType(
         buttonBackgroundColorId = R.color.color_error,
         dbId = R.string.db_non_alcoholic,
@@ -41,6 +43,7 @@ sealed class DrinkType(
         textColorId = R.color.color_on_error
     )
 
+    @Serializable
     data object Optional :
         DrinkType(
             buttonBackgroundColorId = R.color.color_error,

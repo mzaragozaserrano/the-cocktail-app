@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,21 +16,23 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mzs.core.presentation.utils.extensions.conditional
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.viewmodels.SplashViewModel
+import com.thecocktailapp.presentation.vo.DrinkVO
 
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
     viewModel: SplashViewModel = hiltViewModel(),
-    onSeeClicked: (String) -> Unit,
+    onSeeClicked: (DrinkVO) -> Unit,
     onCancelClicked: () -> Unit,
 ) {
 
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     BackHandler(onBack = { onCancelClicked() })
 
@@ -64,7 +65,7 @@ fun SplashScreen(
                         SplashInfoContent(
                             name = success.drink.name,
                             onSeeClicked = {
-                                onSeeClicked(success.drink.id)
+                                onSeeClicked(success.drink)
                             },
                             onCancelClicked = onCancelClicked
                         )
