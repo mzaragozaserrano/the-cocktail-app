@@ -18,31 +18,35 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mzs.core.presentation.components.compose.backgrounds.RoundedBackground
-import com.thecocktailapp.presentation.components.utils.TheCocktailAppTopBar
+import com.mzs.core.presentation.utils.generic.emptyText
+import com.thecocktailapp.presentation.R
+import com.thecocktailapp.presentation.components.utils.ErrorDialog
+import com.thecocktailapp.presentation.components.utils.ProgressDialog
+import com.thecocktailapp.presentation.components.utils.TopBarTheCocktailApp
 import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
-import com.thecocktailapp.presentation.vo.DrinkVO
 
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
-    drink: DrinkVO,
-    onIconClicked: () -> Unit,
+    idDrink: Int,
+    onBackPressed: () -> Unit,
     viewModel: DetailDrinkViewModel = hiltViewModel()
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.setUpView(drink = drink)
+        viewModel.onExecuteGetDrinkById(idDrink = idDrink)
     }
 
     Scaffold(
         modifier = modifier,
-        topBar = { TheCocktailAppTopBar(onIconClicked = onIconClicked) },
+        topBar = { TopBarTheCocktailApp(onIconClicked = onBackPressed) },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -52,42 +56,56 @@ fun DetailScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 content = {
-                    RoundedBackground(
-                        modifier = Modifier
-                            .padding(horizontal = 16.dp)
-                            .weight(weight = 1f, fill = false),
-                        backgroundColor = MaterialTheme.colorScheme.background,
-                        cornerRadius = 16.dp
-                    ) {
-                        DetailHeaderContent(
-                            drinkType = drink.drinkType,
-                            glass = drink.glass,
-                            ingredients = drink.ingredients,
-                            name = drink.name.uppercase(),
-                            url = drink.urlImage
-                        )
-                        DetailReceiptContent(
+                    uiState.success?.let { success ->
+                        RoundedBackground(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(bottom = 16.dp, end = 16.dp, start = 16.dp),
-                            instructions = drink.instructions
+                                .padding(horizontal = 16.dp)
+                                .weight(weight = 1f, fill = false),
+                            backgroundColor = MaterialTheme.colorScheme.background,
+                            cornerRadius = 16.dp,
+                            content = {
+                                DetailHeaderContent(
+                                    drinkType = success.drink.drinkType,
+                                    glass = success.drink.glass,
+                                    ingredients = success.drink.ingredients,
+                                    name = success.drink.name.uppercase(),
+                                    url = success.drink.urlImage
+                                )
+                                DetailReceiptContent(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(bottom = 16.dp, end = 16.dp, start = 16.dp),
+                                    instructions = success.drink.instructions
+                                )
+                            }
+                        )
+                        SmallFloatingActionButton(
+                            modifier = Modifier.padding(vertical = 16.dp),
+                            onClick = {
+                                if (success.isFavorite) {
+                                    viewModel.removeFavoriteDrink(drink = success.drink)
+                                } else {
+                                    viewModel.addFavoriteDrink(drink = success.drink)
+                                }
+                            },
+                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                            contentColor = MaterialTheme.colorScheme.secondary,
+                            content = {
+                                Icon(
+                                    imageVector = if (success.isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
+                                    contentDescription = emptyText
+                                )
+                            }
                         )
                     }
-                    SmallFloatingActionButton(
-                        modifier = Modifier.padding(vertical = 16.dp),
-                        onClick = {
-                            if (uiState.isFavorite) {
-                                viewModel.removeFavoriteDrink(drink = drink)
-                            } else {
-                                viewModel.addFavoriteDrink(drink = drink)
-                            }
-                        },
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                        contentColor = MaterialTheme.colorScheme.secondary
-                    ) {
-                        Icon(
-                            imageVector = if (uiState.isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
-                            contentDescription = "FavoriteButton"
+                    if (uiState.loading) {
+                        ProgressDialog()
+                    }
+                    uiState.error?.let { error ->
+                        ErrorDialog(
+                            buttonText = stringResource(id = R.string.retry_button),
+                            messageText = stringResource(id = error.messageId),
+                            onButtonClicked = { viewModel.onExecuteGetDrinkById(idDrink = idDrink) }
                         )
                     }
                 }

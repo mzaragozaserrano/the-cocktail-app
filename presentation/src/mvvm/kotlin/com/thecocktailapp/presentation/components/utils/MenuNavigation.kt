@@ -1,6 +1,7 @@
 package com.thecocktailapp.presentation.components.utils
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -20,16 +21,16 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
 import com.mzs.core.presentation.components.view.MenuDrawerContent
+import com.mzs.core.presentation.utils.generic.emptyText
+import com.mzs.core.presentation.vo.MenuItemVO
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.utils.HOME_MENU_BUTTON
 import com.thecocktailapp.presentation.utils.HOME_TOOLBAR
 import com.thecocktailapp.presentation.utils.MENU_NAVIGATION_ITEM
 import com.thecocktailapp.presentation.utils.extensions.getGreetingText
-import com.thecocktailapp.presentation.vo.MenuItemVO
+import com.thecocktailapp.presentation.vo.MenuItemTheCocktailAppVO
 import com.thecocktailapp.presentation.vo.getMenuOptions
-import com.thecocktailapp.presentation.vo.toPair
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,9 +38,8 @@ import kotlinx.coroutines.launch
 fun MenuNavigation(
     modifier: Modifier = Modifier,
     drawerState: DrawerState,
-    navController: NavController,
-    onHomeRefreshed: () -> Unit,
-    content: @Composable () -> Unit,
+    onMenuItemClicked: (MenuItemVO) -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
 
 //    val date = getCurrentDate(sdfComplete)
@@ -51,17 +51,16 @@ fun MenuNavigation(
             MenuDrawerContent(
                 date = "12/03/1995 12:30",
                 dateTextColor = MaterialTheme.colorScheme.secondary,
-                initScreen = MenuItemVO.HomeScreen.toPair(),
+                initScreen = MenuItemTheCocktailAppVO.HomeScreen,
                 drawerState = drawerState,
                 greetingTextColor = MaterialTheme.colorScheme.secondary,
                 greetingTextId = "12/03/1995 12:30".getGreetingText(),
                 iconTint = MaterialTheme.colorScheme.primary,
                 screens = getMenuOptions(),
                 testTag = MENU_NAVIGATION_ITEM,
-                textColor = MaterialTheme.colorScheme.primary
-            ) { onMenuItemClicked ->
-
-            }
+                textColor = MaterialTheme.colorScheme.primary,
+                onMenuItemClicked = onMenuItemClicked
+            )
         },
         drawerState = drawerState,
         scrimColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.4F)
@@ -83,22 +82,22 @@ fun MenuNavigation(
                             onClick = { coroutineScope.launch { drawerState.open() } }) {
                             Icon(
                                 imageVector = Icons.Rounded.Menu,
-                                contentDescription = "MenuButton"
+                                contentDescription = emptyText
                             )
                         }
                     },
                 )
-            }
-        ) { paddingValues ->
-            Surface {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                ) {
-                    content()
+            },
+            content = { paddingValues ->
+                Surface {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues),
+                        content = content
+                    )
                 }
             }
-        }
+        )
     }
 }

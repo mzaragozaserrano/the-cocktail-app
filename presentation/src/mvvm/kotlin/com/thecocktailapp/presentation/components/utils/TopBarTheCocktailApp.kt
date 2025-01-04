@@ -19,7 +19,7 @@ import com.thecocktailapp.presentation.utils.DETAIL_TOOLBAR
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun TheCocktailAppTopBar(onIconClicked: () -> Unit) {
+fun TopBarTheCocktailApp(onIconClicked: () -> Unit) {
     TopAppBar(
         modifier = Modifier.testTag(tag = DETAIL_TOOLBAR),
         colors = TopAppBarDefaults.topAppBarColors(

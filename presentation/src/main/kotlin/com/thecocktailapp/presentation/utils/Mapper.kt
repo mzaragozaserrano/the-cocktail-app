@@ -20,9 +20,10 @@ fun DrinkBO.transform(): DrinkVO = DrinkVO(
     dateModified = dateModified,
     drinkType = createDrinkType(),
     glass = glass,
-    id = id,
+    id = id.toInt(),
     ingredients = createIngredientsFormatted(),
     instructions = instructions,
+    isFavorite = isFavorite,
     name = name,
     urlImage = urlImage
 )
@@ -89,7 +90,7 @@ fun DrinkVO.transform(): DrinkBO {
         category = category,
         dateModified = dateModified.orEmpty(),
         glass = glass,
-        id = id,
+        id = id.toString(),
         instructions = instructions,
         listIngredients = listIngredients,
         listMeasures = listMeasures,

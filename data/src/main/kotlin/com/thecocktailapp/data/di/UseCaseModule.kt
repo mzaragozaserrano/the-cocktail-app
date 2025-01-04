@@ -4,6 +4,8 @@ import com.thecocktailapp.domain.usecases.common.GetFavoriteDrinks
 import com.thecocktailapp.domain.usecases.common.GetFavoriteDrinksUseCaseImpl
 import com.thecocktailapp.domain.usecases.detail.AddFavoriteDrink
 import com.thecocktailapp.domain.usecases.detail.AddFavoriteDrinkUseCaseImpl
+import com.thecocktailapp.domain.usecases.detail.GetDrinkById
+import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
 import com.thecocktailapp.domain.usecases.detail.RemoveFavoriteDrink
 import com.thecocktailapp.domain.usecases.detail.RemoveFavoriteDrinkUseCaseImpl
 import com.thecocktailapp.domain.usecases.home.GetDrinksByType
@@ -23,6 +25,9 @@ interface UseCaseModule {
 
     @Binds
     fun bindAddFavoriteDrink(useCaseImpl: AddFavoriteDrinkUseCaseImpl): AddFavoriteDrink
+
+    @Binds
+    fun bindGetDrinkById(useCaseImpl: GetDrinkByIdUseCaseImpl): GetDrinkById
 
     @Binds
     fun bindGetDrinksByType(useCaseImpl: GetDrinksByTypeUseCaseImpl): GetDrinksByType

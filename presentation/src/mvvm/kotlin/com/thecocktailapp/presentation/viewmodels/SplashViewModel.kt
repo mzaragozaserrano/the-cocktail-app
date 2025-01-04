@@ -40,17 +40,17 @@ class SplashViewModel @Inject constructor(
     }
 
     private suspend fun handleRandomDrinkResponse(result: Result<CocktailBO>) =
-        withContext(Dispatchers.Main) {
+        withContext(context = Dispatchers.Main) {
             when (result) {
                 is Result.Loading -> {
-                    onUpdateUiState { copy(loading = true, error = null) }
+                    onUpdateUiState { copy(error = null, loading = true) }
                 }
 
                 is Result.Response.Error<*> -> {
                     onUpdateUiState {
                         copy(
-                            loading = false,
-                            error = (result.code as ErrorBO).transform()
+                            error = (result.code as ErrorBO).transform(),
+                            loading = false
                         )
                     }
                 }
@@ -58,8 +58,8 @@ class SplashViewModel @Inject constructor(
                 is Result.Response.Success -> {
                     onUpdateUiState {
                         copy(
-                            loading = false,
                             error = null,
+                            loading = false,
                             success = SplashSuccess(drink = result.data.drinks.first().transform())
                         )
                     }

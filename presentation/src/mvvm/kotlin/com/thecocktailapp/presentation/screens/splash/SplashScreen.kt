@@ -28,13 +28,13 @@ import com.thecocktailapp.presentation.vo.DrinkVO
 fun SplashScreen(
     modifier: Modifier = Modifier,
     viewModel: SplashViewModel = hiltViewModel(),
-    onSeeClicked: (DrinkVO) -> Unit,
-    onCancelClicked: () -> Unit,
+    onGoToDetail: (DrinkVO) -> Unit,
+    onGoToHome: () -> Unit,
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    BackHandler(onBack = { onCancelClicked() })
+    BackHandler(onBack = { onGoToHome() })
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
         Column(modifier = Modifier.fillMaxSize()) {
@@ -46,33 +46,35 @@ fun SplashScreen(
                     }
                     .background(color = MaterialTheme.colorScheme.background)
                     .clip(shape = RoundedCornerShape(bottomEnd = 48.dp))
-                    .background(color = MaterialTheme.colorScheme.primary)
-            ) {
-                uiState.success?.let { success ->
-                    SplashHeaderContent(urlImage = success.drink.urlImage)
+                    .background(color = MaterialTheme.colorScheme.primary),
+                content = {
+                    uiState.success?.let { success ->
+                        SplashHeaderContent(urlImage = success.drink.urlImage)
+                    }
                 }
-            }
+            )
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(weight = 1f)
                     .background(color = MaterialTheme.colorScheme.primary)
                     .clip(shape = RoundedCornerShape(topStart = 48.dp))
-                    .background(color = MaterialTheme.colorScheme.background)
-            ) {
-                uiState.success?.let { success ->
-                    if (success.drink.name.isNotEmpty()) {
-                        SplashInfoContent(
-                            name = success.drink.name,
-                            onSeeClicked = {
-                                onSeeClicked(success.drink)
-                            },
-                            onCancelClicked = onCancelClicked
-                        )
+                    .background(color = MaterialTheme.colorScheme.background),
+                content = {
+                    uiState.success?.let { success ->
+                        if (success.drink.name.isNotEmpty()) {
+                            SplashInfoContent(
+                                name = success.drink.name,
+                                onSeeClicked = {
+                                    onGoToDetail(success.drink)
+                                },
+                                onCancelClicked = onGoToHome
+                            )
+                        }
                     }
-                }
 
-            }
+                }
+            )
         }
         if (uiState.loading) {
             ProgressDialog()

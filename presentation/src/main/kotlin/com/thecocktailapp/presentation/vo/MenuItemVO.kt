@@ -2,30 +2,32 @@ package com.thecocktailapp.presentation.vo
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import com.mzs.core.presentation.vo.MenuItemVO
 import com.thecocktailapp.presentation.R
 
-sealed class MenuItemVO(@DrawableRes val iconId: Int, @StringRes val titleId: Int) {
-    data object CloseSession : MenuItemVO(
+sealed class MenuItemTheCocktailAppVO(
+    @DrawableRes override val iconId: Int,
+    @StringRes override val titleId: Int
+) : MenuItemVO {
+    data object CloseSession : MenuItemTheCocktailAppVO(
         iconId = R.drawable.ic_close_session,
         titleId = R.string.menu_item_close_session
     )
 
-    data object FavoriteScreen : MenuItemVO(
+    data object FavoriteScreen : MenuItemTheCocktailAppVO(
         iconId = R.drawable.ic_favorite,
         titleId = R.string.menu_item_favorites
     )
 
-    data object HomeScreen : MenuItemVO(
+    data object HomeScreen : MenuItemTheCocktailAppVO(
         iconId = R.drawable.ic_cocktail,
         titleId = R.string.menu_item_home
     )
 }
 
-fun getMenuOptions(): List<Pair<Int, Int>> =
+fun getMenuOptions(): List<MenuItemTheCocktailAppVO> =
     listOf(
-        MenuItemVO.HomeScreen.toPair(),
-        MenuItemVO.FavoriteScreen.toPair(),
-        MenuItemVO.CloseSession.toPair()
+        MenuItemTheCocktailAppVO.HomeScreen,
+        MenuItemTheCocktailAppVO.FavoriteScreen,
+        MenuItemTheCocktailAppVO.CloseSession
     )
-
-fun MenuItemVO.toPair(): Pair<Int, Int> = Pair(iconId, titleId)

@@ -1,8 +1,6 @@
 package com.thecocktailapp.presentation.screens.home
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
@@ -20,17 +18,12 @@ import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.getDrinkTypeList
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
-fun HeaderFilterType(onTypeClicked: (DrinkType) -> Unit) {
+fun HeaderFilterType(modifier: Modifier = Modifier, onTypeClicked: (DrinkType) -> Unit) {
 
     var selectedIndex by remember { mutableIntStateOf(0) }
     val list = getDrinkTypeList()
 
-    SingleChoiceSegmentedButtonRow(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-    ) {
+    SingleChoiceSegmentedButtonRow(modifier = modifier) {
         list.forEachIndexed { index, drinkType ->
             SegmentedButton(
                 selected = index == selectedIndex,

@@ -133,57 +133,60 @@ fun DetailHeaderContent(
                 .conditional(condition = isLoading.not()) {
                     background(color = MaterialTheme.colorScheme.secondaryContainer)
                 },
-            contentAlignment = Alignment.Center
-        ) {
-            when {
-                animatedRotation < 90f -> {
-                    UrlImage(
-                        modifier = Modifier.aspectRatio(ratio = 1f),
-                        animationId = R.raw.image_loading,
-                        contentScale = ContentScale.Crop,
-                        cornerRadius = 8.dp,
-                        onLoading = {
-                            isLoading = true
-                        },
-                        onSuccess = { state ->
-                            if (imageSize == DpSize.Zero) {
-                                isLoading = false
-                                imageSize = with(density) {
-                                    state.painter.intrinsicSize.toDpSize()
+            contentAlignment = Alignment.Center,
+            content = {
+                when {
+                    animatedRotation < 90f -> {
+                        UrlImage(
+                            modifier = Modifier.aspectRatio(ratio = 1f),
+                            animationId = R.raw.image_loading,
+                            contentScale = ContentScale.Crop,
+                            cornerRadius = 8.dp,
+                            onLoading = {
+                                isLoading = true
+                            },
+                            onSuccess = { state ->
+                                if (imageSize == DpSize.Zero) {
+                                    isLoading = false
+                                    imageSize = with(density) {
+                                        state.painter.intrinsicSize.toDpSize()
+                                    }
                                 }
-                            }
-                        },
-                        url = url
-                    )
-                }
-
-                else -> {
-                    Column {
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 24.dp),
-                            color = colorResource(id = R.color.color_secondary_text_highlight),
-                            text = stringResource(id = R.string.title_ingredients)
+                            },
+                            url = url
                         )
-                        Adapter(
-                            contentPadding = 0.dp,
-                            isScrollable = true,
-                            itemOrientation = ItemOrientation.Vertical,
-                            items = ingredients
-                        ) { _, ingredient ->
-                            Text(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 24.dp),
-                                color = MaterialTheme.colorScheme.onBackground,
-                                text = ingredient
-                            )
-                        }
+                    }
+
+                    else -> {
+                        Column(
+                            content = {
+                                Text(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 24.dp),
+                                    color = colorResource(id = R.color.color_secondary_text_highlight),
+                                    text = stringResource(id = R.string.title_ingredients)
+                                )
+                                Adapter(
+                                    contentPadding = 0.dp,
+                                    itemOrientation = ItemOrientation.Vertical,
+                                    item = { _, ingredient ->
+                                        Text(
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(horizontal = 24.dp),
+                                            color = MaterialTheme.colorScheme.onBackground,
+                                            text = ingredient
+                                        )
+                                    },
+                                    items = ingredients
+                                )
+                            }
+                        )
                     }
                 }
             }
-        }
+        )
     }
 
 }

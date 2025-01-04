@@ -41,9 +41,11 @@ class CocktailRepositoryImpl @Inject constructor(
     override suspend fun getDrinksByType(@StringRes dbId: Int): Flow<Result<CocktailBO>> = flow {
         emit(Result.Loading)
         emit(
-            when (val result = cocktailDataSource.getDrinksByType(
-                alcoholic = resourcesDataSource.getStringFromResource(resId = dbId)
-            )) {
+            when (
+                val result = cocktailDataSource.getDrinksByType(
+                    alcoholic = resourcesDataSource.getStringFromResource(resId = dbId)
+                )
+            ) {
                 is ResultDTO.Response -> {
                     Result.Response.Success(data = result.data.transform(resourcesDataSource = resourcesDataSource))
                 }

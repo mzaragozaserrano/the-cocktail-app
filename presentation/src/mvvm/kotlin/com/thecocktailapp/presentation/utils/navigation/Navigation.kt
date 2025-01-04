@@ -13,6 +13,7 @@ import com.thecocktailapp.presentation.screens.details.DetailScreen
 import com.thecocktailapp.presentation.screens.home.HomeScreen
 import com.thecocktailapp.presentation.screens.splash.SplashScreen
 import com.thecocktailapp.presentation.vo.DrinkVO
+import com.thecocktailapp.presentation.vo.MenuItemTheCocktailAppVO
 import kotlinx.serialization.Serializable
 
 @Composable
@@ -31,7 +32,7 @@ fun Navigation(
         screenNavigation<Splash> {
             SplashScreen(
                 modifier = modifier,
-                onSeeClicked = { drink ->
+                onGoToDetail = { drink ->
                     navController.navigate(
                         route = Detail(
                             data = drink,
@@ -39,14 +40,36 @@ fun Navigation(
                         )
                     )
                 },
-                onCancelClicked = { navController.navigate(route = Home) }
+                onGoToHome = { navController.navigate(route = Home) }
             )
         }
         screenNavigation<Home> {
             HomeScreen(
                 modifier = modifier,
                 drawerState = drawerState,
-                navController = navController
+                onGoToDetail = { drink ->
+                    navController.navigate(
+                        route = Detail(
+                            data = drink,
+                            isFromSplash = false
+                        )
+                    )
+                },
+                onMenuItemClicked = { item ->
+                    when (item as MenuItemTheCocktailAppVO) {
+                        is MenuItemTheCocktailAppVO.CloseSession -> {
+
+                        }
+
+                        is MenuItemTheCocktailAppVO.FavoriteScreen -> {
+
+                        }
+
+                        is MenuItemTheCocktailAppVO.HomeScreen -> {
+
+                        }
+                    }
+                }
             )
         }
 
@@ -56,8 +79,8 @@ fun Navigation(
         screenNavigationWithParameters<Detail, DrinkVO> { parameter ->
             DetailScreen(
                 modifier = modifier,
-                drink = parameter.data,
-                onIconClicked = {
+                idDrink = parameter.data.id,
+                onBackPressed = {
                     if (parameter.isFromSplash) {
                         navController.navigate(route = Home)
                     } else {

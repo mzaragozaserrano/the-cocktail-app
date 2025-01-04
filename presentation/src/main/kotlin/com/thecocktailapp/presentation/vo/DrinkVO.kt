@@ -8,7 +8,7 @@ data class DrinkVO(
     val dateModified: String?,
     val drinkType: DrinkType?,
     val glass: String,
-    val id: String,
+    val id: Int,
     val ingredients: List<String>,
     val instructions: String,
     var isFavorite: Boolean = false,

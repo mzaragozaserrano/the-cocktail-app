@@ -15,9 +15,8 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoritesViewModel @Inject constructor(
-    private val getFavoriteDrinks: @JvmSuppressWildcards GetFavoriteDrinks,
-) : ViewModel() {
+class FavoritesViewModel @Inject constructor(private val getFavoriteDrinks: @JvmSuppressWildcards GetFavoriteDrinks) :
+    ViewModel() {
 
     private val _state = MutableStateFlow<FavoritesUiState>(value = FavoritesUiState.Idle)
     val state = _state.asStateFlow()
