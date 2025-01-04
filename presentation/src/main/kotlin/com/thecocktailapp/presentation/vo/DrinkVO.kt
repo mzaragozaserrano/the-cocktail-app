@@ -1,7 +1,8 @@
 package com.thecocktailapp.presentation.vo
 
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class DrinkVO(
     val category: String,
     val dateModified: String?,
@@ -13,4 +14,4 @@ data class DrinkVO(
     var isFavorite: Boolean = false,
     val name: String,
     val urlImage: String,
-) : Serializable
+)

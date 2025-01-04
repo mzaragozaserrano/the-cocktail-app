@@ -5,6 +5,9 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.thecocktailapp.presentation.R
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 sealed class DrinkType(
     @ColorRes val buttonBackgroundColorId: Int,
     @StringRes val dbId: Int,
@@ -15,7 +18,7 @@ sealed class DrinkType(
     @StringRes val nameId: Int,
     @ColorRes val textColorId: Int,
 ) {
-    object Alcoholic :
+    data object Alcoholic :
         DrinkType(
             buttonBackgroundColorId = R.color.color_error,
             dbId = R.string.db_alcoholic,
@@ -27,7 +30,7 @@ sealed class DrinkType(
             textColorId = R.color.color_on_error
         )
 
-    object None : DrinkType(
+    data object None : DrinkType(
         buttonBackgroundColorId = R.color.color_error,
         dbId = R.string.db_non_alcoholic,
         iconBackgroundColorId = R.color.color_error_container,
@@ -38,7 +41,7 @@ sealed class DrinkType(
         textColorId = R.color.color_on_error
     )
 
-    object Optional :
+    data object Optional :
         DrinkType(
             buttonBackgroundColorId = R.color.color_error,
             dbId = R.string.db_optional_alcohol,

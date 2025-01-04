@@ -42,10 +42,10 @@ class SplashViewModelTest {
     private lateinit var cocktailDataSource: FakeCocktailDataSourceImpl
 
     @InjectMocks
-    private lateinit var resourcesDataSource: FakeResourcesDataSourceImpl
+    private lateinit var preferencesDataSource: FakePreferencesDataSourceImpl
 
     @InjectMocks
-    private lateinit var preferencesDataSource: FakePreferencesDataSourceImpl
+    private lateinit var resourcesDataSource: FakeResourcesDataSourceImpl
 
     @Inject
     lateinit var viewModel: SplashViewModel

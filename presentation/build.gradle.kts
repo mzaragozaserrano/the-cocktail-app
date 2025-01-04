@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -85,6 +86,9 @@ dependencies {
 
     //----- GLIDE ----------/
     implementation(libs.glide)
+
+    //----- KOTLIN ----------/
+    implementation(libs.kotlinx.serialization.json)
 
     //-----  LOTTIE ----------/
     implementation(libs.lottie)

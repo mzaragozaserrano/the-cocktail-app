@@ -5,9 +5,7 @@ import com.thecocktailapp.domain.usecases.common.GetFavoriteDrinksUseCaseImpl
 import com.thecocktailapp.domain.usecases.detail.AddFavoriteDrink
 import com.thecocktailapp.domain.usecases.detail.AddFavoriteDrinkUseCaseImpl
 import com.thecocktailapp.domain.usecases.detail.GetDrinkById
-import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
 import com.thecocktailapp.domain.usecases.detail.IsFavoriteDrink
-import com.thecocktailapp.domain.usecases.detail.IsFavoriteDrinkUseCaseImpl
 import com.thecocktailapp.domain.usecases.detail.RemoveFavoriteDrink
 import com.thecocktailapp.domain.usecases.detail.RemoveFavoriteDrinkUseCaseImpl
 import com.thecocktailapp.domain.usecases.home.GetDrinksByType
