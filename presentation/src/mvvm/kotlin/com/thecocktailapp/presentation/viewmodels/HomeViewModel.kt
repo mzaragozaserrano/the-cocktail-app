@@ -27,6 +27,22 @@ class HomeViewModel @Inject constructor(private val getDrinksByType: @JvmSuppres
         onExecuteGetDrinksByType()
     }
 
+    fun onRefreshList(drinkId: Int) {
+        onUpdateUiState {
+            copy(
+                success = success?.copy(
+                    drinks = success.drinks.map { drink ->
+                        if (drink.id == drinkId) {
+                            drink.copy(isFavorite = !drink.isFavorite)
+                        } else {
+                            drink
+                        }
+                    }
+                )
+            )
+        }
+    }
+
     fun onRetryExecuteGetDrinksByType() {
         onUpdateUiState { copy(error = null) }
         onExecuteGetDrinksByType()

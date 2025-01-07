@@ -5,8 +5,10 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -17,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mzs.core.presentation.components.compose.utils.Adapter
 import com.mzs.core.presentation.utils.generic.ItemOrientation
+import com.mzs.core.presentation.utils.generic.nullInt
 import com.mzs.core.presentation.vo.MenuItemVO
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.items.DrinkItem
@@ -30,11 +33,17 @@ import com.thecocktailapp.presentation.vo.DrinkVO
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    drawerState: DrawerState,
+    drinkId: Int,
     viewModel: HomeViewModel = hiltViewModel(),
     onGoToDetail: (DrinkVO) -> Unit,
-    onMenuItemClicked: (MenuItemVO) -> Unit
+    onMenuItemClicked: (MenuItemVO) -> Unit,
 ) {
+
+    LaunchedEffect(key1 = drinkId) {
+        if (drinkId != nullInt) {
+            viewModel.onRefreshList(drinkId = drinkId)
+        }
+    }
 
     val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
@@ -43,7 +52,7 @@ fun HomeScreen(
 
     MenuNavigation(
         modifier = modifier,
-        drawerState = drawerState,
+        drawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
         onMenuItemClicked = onMenuItemClicked,
         content = {
             HeaderFilterType(
@@ -66,7 +75,7 @@ fun HomeScreen(
                         DrinkItem(
                             modifier = Modifier.padding(all = 8.dp),
                             isFirstItem = index == 0,
-                            item = item,
+                            drink = item,
                             onDrinkClicked = { onGoToDetail(item) }
                         )
                     },

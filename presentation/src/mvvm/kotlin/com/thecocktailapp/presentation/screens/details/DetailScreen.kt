@@ -33,20 +33,33 @@ import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
-    idDrink: Int,
-    onBackPressed: () -> Unit,
-    viewModel: DetailDrinkViewModel = hiltViewModel()
+    drinkId: Int,
+    isFavorite: Boolean,
+    onBackPressed: (Int?) -> Unit,
+    viewModel: DetailDrinkViewModel = hiltViewModel(),
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.onExecuteGetDrinkById(idDrink = idDrink)
+        viewModel.onExecuteGetDrinkById(idDrink = drinkId, isFavorite = isFavorite)
     }
 
     Scaffold(
         modifier = modifier,
-        topBar = { TopBarTheCocktailApp(onIconClicked = onBackPressed) },
+        topBar = {
+            TopBarTheCocktailApp(
+                onIconClicked = {
+                    uiState.success?.let { success ->
+                        if (success.initIsFavorite != success.isFavorite) {
+                            onBackPressed(success.drink.id)
+                        } else {
+                            onBackPressed(null)
+                        }
+                    }
+                }
+            )
+        },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -105,7 +118,12 @@ fun DetailScreen(
                         ErrorDialog(
                             buttonText = stringResource(id = R.string.retry_button),
                             messageText = stringResource(id = error.messageId),
-                            onButtonClicked = { viewModel.onExecuteGetDrinkById(idDrink = idDrink) }
+                            onButtonClicked = {
+                                viewModel.onExecuteGetDrinkById(
+                                    idDrink = drinkId,
+                                    isFavorite = isFavorite
+                                )
+                            }
                         )
                     }
                 }

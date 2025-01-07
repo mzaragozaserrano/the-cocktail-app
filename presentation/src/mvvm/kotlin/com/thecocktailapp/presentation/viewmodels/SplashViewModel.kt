@@ -16,9 +16,8 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor(
-    val getRandomDrink: @JvmSuppressWildcards GetRandomDrink,
-) : CoreMVVMViewModel<SplashUiState>() {
+class SplashViewModel @Inject constructor(val getRandomDrink: @JvmSuppressWildcards GetRandomDrink) :
+    CoreMVVMViewModel<SplashUiState>() {
 
     init {
         onExecuteGetRandomDrink()

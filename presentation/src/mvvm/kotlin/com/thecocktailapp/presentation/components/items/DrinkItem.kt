@@ -13,8 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mzs.core.presentation.components.compose.backgrounds.RoundedEdgeBackground
 import com.mzs.core.presentation.components.compose.buttons.PushedButton
+import com.mzs.core.presentation.components.compose.cards.RoundedCard
 import com.mzs.core.presentation.components.compose.images.UrlImage
 import com.mzs.core.presentation.utils.extensions.conditional
 import com.thecocktailapp.presentation.R
@@ -26,19 +26,15 @@ import com.thecocktailapp.presentation.vo.DrinkVO
 fun DrinkItem(
     modifier: Modifier = Modifier,
     isFirstItem: Boolean = false,
-    item: DrinkVO,
+    drink: DrinkVO,
     onDrinkClicked: () -> Unit,
 ) {
-    RoundedEdgeBackground(
+    RoundedCard(
         modifier = modifier,
         backgroundColor = MaterialTheme.colorScheme.surface,
-        borderColor = if (item.isFavorite) {
-            MaterialTheme.colorScheme.onErrorContainer
-        } else {
-            MaterialTheme.colorScheme.primaryContainer
-        },
-        borderWidth = 2.dp,
         cornerRadius = 16.dp,
+        shadowElevation = 4.dp,
+        onCardClicked = onDrinkClicked,
         content = {
             Column(
                 modifier = Modifier
@@ -49,7 +45,7 @@ fun DrinkItem(
                         modifier = Modifier.padding(all = 8.dp),
                         contentScale = ContentScale.Crop,
                         cornerRadius = 8.dp,
-                        url = item.urlImage
+                        url = drink.urlImage
                     )
                     Text(
                         modifier = Modifier
@@ -57,7 +53,7 @@ fun DrinkItem(
                             .padding(top = 4.dp),
                         maxLines = 2,
                         minLines = 2,
-                        text = item.name,
+                        text = drink.name,
                         textAlign = TextAlign.Center
                     )
                     PushedButton(
@@ -65,7 +61,7 @@ fun DrinkItem(
                             .fillMaxWidth()
                             .padding(top = 16.dp)
                             .conditional(condition = isFirstItem) { testTag(tag = HOME_BUTTON_SEE_DETAIL) },
-                        buttonBackgroundColor = MaterialTheme.colorScheme.primary,
+                        buttonBackgroundColor = if (drink.isFavorite) MaterialTheme.colorScheme.surfaceContainerHigh else MaterialTheme.colorScheme.primary,
                         text = stringResource(id = R.string.see_button),
                         textColor = MaterialTheme.colorScheme.onPrimary,
                         textStyle = MaterialTheme.typography.titleSmall,
@@ -95,7 +91,7 @@ private fun DrinkItemPrev() {
         instructions = "Pour Hot Damn 100 in bottom of a jar or regular glass.Fill the rest of the glass with sweet tea.Stir with spoon, straw, or better yet a cinnamon stick and leave it in .",
         urlImage = "https://www.thecocktaildb.com/images/media/drink/rrstxv1441246184.jpg"
     )
-    DrinkItem(item = item) {
+    DrinkItem(drink = item) {
 
     }
 }

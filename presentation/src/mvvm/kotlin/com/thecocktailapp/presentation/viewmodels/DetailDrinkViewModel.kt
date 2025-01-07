@@ -25,17 +25,27 @@ import javax.inject.Inject
 class DetailDrinkViewModel @Inject constructor(
     private val addFavoriteDrink: @JvmSuppressWildcards AddFavoriteDrink,
     private val getDrinkById: @JvmSuppressWildcards GetDrinkById,
-    private val removeFavoriteDrink: @JvmSuppressWildcards RemoveFavoriteDrink
+    private val removeFavoriteDrink: @JvmSuppressWildcards RemoveFavoriteDrink,
 ) : CoreMVVMViewModel<DetailUiState>() {
 
     override fun createInitialState(): DetailUiState = DetailUiState()
 
-    fun onExecuteGetDrinkById(idDrink: Int) {
+    fun onExecuteGetDrinkById(idDrink: Int, isFavorite: Boolean) {
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
                 getDrinkById
                     .invoke(params = GetDrinkByIdUseCaseImpl.Params(id = idDrink))
                     .collect(::handleDrinkByIdResponse)
+                    .also {
+                        onUpdateUiState {
+                            copy(
+                                success = success?.copy(
+                                    isFavorite = isFavorite,
+                                    initIsFavorite = isFavorite
+                                )
+                            )
+                        }
+                    }
             }
         }
     }
@@ -57,12 +67,11 @@ class DetailDrinkViewModel @Inject constructor(
                 }
 
                 is Result.Response.Success -> {
-                    val drink = result.data.drinks.first().transform()
                     onUpdateUiState {
                         copy(
                             error = null,
                             loading = false,
-                            success = DetailSuccess(drink = drink, isFavorite = drink.isFavorite)
+                            success = DetailSuccess(drink = result.data.drinks.first().transform())
                         )
                     }
                 }
