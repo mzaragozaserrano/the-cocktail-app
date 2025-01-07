@@ -14,6 +14,7 @@ sealed class DrinkType(
     @ColorRes val iconBackgroundColorId: Int,
     @DrawableRes val iconId: Int,
     @ColorRes val iconTintId: Int,
+    val id: Int,
     @StringRes val labelId: Int,
     @StringRes val nameId: Int,
     @ColorRes val textColorId: Int,
@@ -26,6 +27,7 @@ sealed class DrinkType(
             iconBackgroundColorId = R.color.color_error_container,
             iconId = R.drawable.ic_forbidden_age,
             iconTintId = R.color.color_on_error_container,
+            id = 0,
             labelId = R.string.label_alcoholic,
             nameId = R.string.type_alcoholic,
             textColorId = R.color.color_on_error
@@ -38,6 +40,7 @@ sealed class DrinkType(
         iconBackgroundColorId = R.color.color_error_container,
         iconId = R.drawable.ic_free,
         iconTintId = R.color.color_on_error_container,
+        id = 1,
         labelId = R.string.label_free,
         nameId = R.string.type_non_alcoholic,
         textColorId = R.color.color_on_error
@@ -51,6 +54,7 @@ sealed class DrinkType(
             iconBackgroundColorId = R.color.color_error_container,
             iconId = R.drawable.ic_optional,
             iconTintId = R.color.color_on_error_container,
+            id = 2,
             labelId = R.string.label_optional,
             nameId = R.string.type_optional_alcohol,
             textColorId = R.color.color_on_error

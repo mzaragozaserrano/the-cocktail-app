@@ -23,7 +23,23 @@ class HomeViewModel @Inject constructor(private val getDrinksByType: @JvmSuppres
 
     override fun createInitialState(): HomeUiState = HomeUiState()
 
-    init {
+    fun onExecuteGetDrinksByType() {
+        with(getViewModelState()) {
+            viewModelScope.launch {
+                withContext(context = Dispatchers.IO) {
+                    getDrinksByType
+                        .invoke(
+                            params = GetDrinksByTypeUseCaseImpl.Params(
+                                dbId = success?.drinkType?.dbId ?: DrinkType.Alcoholic.dbId
+                            )
+                        )
+                        .collect(collector = ::handleDrinkByTypeResponse)
+                }
+            }
+        }
+    }
+
+    fun onForceRefresh() {
         onExecuteGetDrinksByType()
     }
 
@@ -54,22 +70,6 @@ class HomeViewModel @Inject constructor(private val getDrinksByType: @JvmSuppres
         onExecuteGetDrinksByType()
     }
 
-    private fun onExecuteGetDrinksByType() {
-        with(getViewModelState()) {
-            viewModelScope.launch {
-                withContext(context = Dispatchers.IO) {
-                    getDrinksByType
-                        .invoke(
-                            params = GetDrinksByTypeUseCaseImpl.Params(
-                                dbId = success?.drinkType?.dbId ?: DrinkType.Alcoholic.dbId
-                            )
-                        )
-                        .collect(collector = ::handleDrinkByTypeResponse)
-                }
-            }
-        }
-    }
-
     private suspend fun handleDrinkByTypeResponse(result: Result<List<DrinkBO>>) =
         withContext(context = Dispatchers.Main) {
             when (result) {
@@ -87,7 +87,12 @@ class HomeViewModel @Inject constructor(private val getDrinksByType: @JvmSuppres
                 }
 
                 is Result.Response.Success -> {
-                    onUpdateUiState { copy(success = HomeSuccess(drinks = result.data.map { it.transform() })) }
+                    onUpdateUiState {
+                        copy(
+                            success = success?.copy(drinks = result.data.map { it.transform() })
+                                ?: HomeSuccess(drinks = result.data.map { it.transform() })
+                        )
+                    }
                 }
             }
         }

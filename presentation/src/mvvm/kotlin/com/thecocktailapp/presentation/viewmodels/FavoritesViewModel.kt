@@ -1,43 +1,63 @@
 package com.thecocktailapp.presentation.viewmodels
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mzs.core.presentation.base.CoreMVVMViewModel
 import com.thecocktailapp.domain.usecases.common.GetFavoriteDrinks
 import com.thecocktailapp.presentation.utils.transform
-import com.thecocktailapp.presentation.vo.DrinkVO
 import com.thecocktailapp.presentation.vo.ErrorVO
+import com.thecocktailapp.presentation.vo.FavoritesSuccess
+import com.thecocktailapp.presentation.vo.FavoritesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(private val getFavoriteDrinks: @JvmSuppressWildcards GetFavoriteDrinks) :
-    ViewModel() {
+    CoreMVVMViewModel<FavoritesUiState>() {
 
-    private val _state = MutableStateFlow<FavoritesUiState>(value = FavoritesUiState.Idle)
-    val state = _state.asStateFlow()
+    override fun createInitialState(): FavoritesUiState = FavoritesUiState()
 
     fun onExecuteGetFavorites() {
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
-                val list = getFavoriteDrinks().map { it.transform() }
-                if (list.isEmpty()) {
-                    _state.value = FavoritesUiState.Error(error = ErrorVO.FavoritesNotFound)
+                val drinks = getFavoriteDrinks().map { it.transform(isFavorite = true) }
+                if (drinks.isEmpty()) {
+                    onUpdateUiState { copy(error = ErrorVO.FavoritesNotFound) }
                 } else {
-                    _state.value = FavoritesUiState.Success(list = list)
+                    onUpdateUiState {
+                        copy(
+                            error = null,
+                            success = FavoritesSuccess(drinks = drinks, initDrinks = drinks)
+                        )
+                    }
                 }
             }
         }
     }
 
-    sealed class FavoritesUiState {
-        data object Idle : FavoritesUiState()
-        data class Error(val error: ErrorVO) : FavoritesUiState()
-        data class Success(val list: List<DrinkVO>) : FavoritesUiState()
+    fun onRefreshList(drinkId: Int) {
+        with(getViewModelState()) {
+            val drinks = success?.drinks?.toMutableList()
+            drinks?.removeIf { drink -> drink.id == drinkId }
+            if (drinks != null && drinks.isEmpty()) {
+                onUpdateUiState {
+                    copy(
+                        error = null,
+                        success = success?.copy(drinks = drinks)
+                    )
+                }
+            } else {
+                onUpdateUiState { copy(error = ErrorVO.FavoritesNotFound) }
+            }
+        }
+    }
+
+    fun onGoBack() {
+        with(getViewModelState()) {
+            onEmitNavigation(element = success?.drinks?.containsAll(success.initDrinks)?.not())
+        }
     }
 
 }

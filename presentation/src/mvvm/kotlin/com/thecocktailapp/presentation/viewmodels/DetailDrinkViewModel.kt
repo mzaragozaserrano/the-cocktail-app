@@ -50,6 +50,16 @@ class DetailDrinkViewModel @Inject constructor(
         }
     }
 
+    fun onGoBack(drinkId: Int) {
+        with(getViewModelState()) {
+            if (success?.initIsFavorite != success?.isFavorite) {
+                onEmitNavigation(element = drinkId)
+            } else {
+                onEmitNavigation(element = null)
+            }
+        }
+    }
+
     private suspend fun handleDrinkByIdResponse(result: Result<CocktailBO>) =
         withContext(context = Dispatchers.Main) {
             when (result) {

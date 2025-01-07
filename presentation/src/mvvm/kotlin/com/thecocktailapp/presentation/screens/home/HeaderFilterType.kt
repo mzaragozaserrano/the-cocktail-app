@@ -18,37 +18,45 @@ import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.getDrinkTypeList
 
 @Composable
-fun HeaderFilterType(modifier: Modifier = Modifier, onTypeClicked: (DrinkType) -> Unit) {
+fun HeaderFilterType(
+    modifier: Modifier = Modifier,
+    value: Int,
+    onTypeClicked: (DrinkType) -> Unit,
+) {
 
-    var selectedIndex by remember { mutableIntStateOf(0) }
+    var selectedIndex by remember { mutableIntStateOf(value = value) }
     val list = getDrinkTypeList()
 
-    SingleChoiceSegmentedButtonRow(modifier = modifier) {
-        list.forEachIndexed { index, drinkType ->
-            SegmentedButton(
-                selected = index == selectedIndex,
-                onClick = {
-                    if (selectedIndex != index) {
-                        onTypeClicked(drinkType)
-                        selectedIndex = index
+    SingleChoiceSegmentedButtonRow(
+        modifier = modifier,
+        content = {
+            list.forEachIndexed { index, drinkType ->
+                SegmentedButton(
+                    selected = index == selectedIndex,
+                    onClick = {
+                        if (selectedIndex != index) {
+                            onTypeClicked(drinkType)
+                            selectedIndex = index
+                        }
+                    },
+                    shape = SegmentedButtonDefaults.itemShape(index = index, count = list.size),
+                    label = {
+                        Text(
+                            modifier = Modifier.padding(all = 4.dp),
+                            text = stringResource(id = drinkType.nameId)
+                        )
                     }
-                },
-                shape = SegmentedButtonDefaults.itemShape(index = index, count = list.size)
-            ) {
-                Text(
-                    modifier = Modifier.padding(all = 4.dp),
-                    text = stringResource(id = drinkType.nameId)
                 )
             }
         }
-    }
-
+    )
 }
 
 @Preview
 @Composable
 private fun HeaderFilterTypePrev() {
-    HeaderFilterType {
-        //Here will go the action when clicking one option
-    }
+    HeaderFilterType(
+        value = 0,
+        onTypeClicked = { /*Here will go the action when clicking one option */ }
+    )
 }

@@ -1,117 +1,113 @@
 package com.thecocktailapp.presentation.screens.favorites
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import com.mzs.core.presentation.utils.generic.emptyText
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mzs.core.presentation.components.compose.utils.Adapter
+import com.mzs.core.presentation.utils.functions.SingleEventEffect
+import com.mzs.core.presentation.utils.generic.ItemOrientation
+import com.mzs.core.presentation.utils.generic.nullInt
 import com.thecocktailapp.presentation.R
-import com.thecocktailapp.presentation.components.utils.WarningDialog
+import com.thecocktailapp.presentation.components.items.DrinkItem
+import com.thecocktailapp.presentation.components.utils.ErrorDialog
+import com.thecocktailapp.presentation.components.utils.TopBarTheCocktailApp
 import com.thecocktailapp.presentation.utils.FAVORITE_TOOLBAR
+import com.thecocktailapp.presentation.utils.HOME_RECYCLER_VIEW
 import com.thecocktailapp.presentation.viewmodels.FavoritesViewModel
+import com.thecocktailapp.presentation.vo.DrinkVO
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoritesScreen(
     modifier: Modifier = Modifier,
-    navController: NavController,
+    drinkId: Int,
+    onGoBack: (Boolean) -> Unit,
+    onGoToDetail: (DrinkVO) -> Unit,
     viewModel: FavoritesViewModel = hiltViewModel(),
 ) {
 
-    val state by viewModel.state.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    BackHandler(
-        enabled = true,
-        onBack = { navController.popBackStack() }
-    )
+    BackHandler(onBack = { viewModel.onGoBack() })
 
     LaunchedEffect(key1 = Unit) {
         viewModel.onExecuteGetFavorites()
     }
 
+    LaunchedEffect(key1 = drinkId) {
+        if (drinkId != nullInt) {
+            viewModel.onRefreshList(drinkId = drinkId)
+        }
+    }
+
+    SingleEventEffect(sideEffectFlow = viewModel.navigationCompose) { element ->
+        onGoBack(element as Boolean)
+    }
+
     Scaffold(
         modifier = modifier,
         topBar = {
-            TopAppBar(
-                modifier = Modifier.testTag(tag = FAVORITE_TOOLBAR),
-                title = {
-                    Text(
-                        color = MaterialTheme.colorScheme.onSurface,
-                        text = stringResource(id = R.string.toolbar_title_favorites)
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            tint = MaterialTheme.colorScheme.onSurface,
-                            contentDescription = emptyText
-                        )
-                    }
-                },
+            TopBarTheCocktailApp(
+                tag = FAVORITE_TOOLBAR,
+                title = stringResource(id = R.string.toolbar_title_favorites),
+                onIconClicked = { viewModel.onGoBack() }
             )
         },
         content = { paddingValues ->
-            when (state) {
-                is FavoritesViewModel.FavoritesUiState.Error -> {
-                    val error =
-                        (state as FavoritesViewModel.FavoritesUiState.Error).error
-                    WarningDialog(
-                        buttonTextId = R.string.ok_button,
-                        messageTextId = error.messageId
-                    ) {
-
-                    }
-                }
-
-                is FavoritesViewModel.FavoritesUiState.Idle -> {}
-
-                is FavoritesViewModel.FavoritesUiState.Success -> {
-                    val list = (state as FavoritesViewModel.FavoritesUiState.Success).list
-                    Box(
-                        modifier = Modifier.padding(
-                            top = paddingValues.calculateTopPadding(),
-                            bottom = paddingValues.calculateBottomPadding()
-                        )
-                    ) {
-                        /*Recycler(
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = MaterialTheme.colorScheme.primary)
+                    .padding(paddingValues = paddingValues),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top,
+                content = {
+                    uiState.success?.let { success ->
+                        Adapter(
                             modifier = Modifier
-                                .fillMaxSize()
-                                .padding(paddingValues),
-                            list = list,
-                            numberCells = 2
-                        ) { item ->
-                            DrinkItem(
-                                modifier = Modifier.padding(all = 8.dp),
-                                isFirstItem = list.indexOf(item) == 0,
-                                item = item
-                            ) {
-                                navController.navigate(
-                                    route = NavCommand.Content(feature = Feature.Detail)
-                                        .createRoute(drinkId = item.id)
+                                .padding(end = 8.dp, start = 8.dp, top = 16.dp)
+                                .testTag(tag = HOME_RECYCLER_VIEW),
+                            contentPadding = 16.dp,
+                            gridCells = GridCells.Fixed(count = 2),
+                            itemOrientation = ItemOrientation.Vertical,
+                            item = { index, item ->
+                                DrinkItem(
+                                    modifier = Modifier.padding(all = 8.dp),
+                                    isFirstItem = index == 0,
+                                    drink = item,
+                                    onDrinkClicked = { onGoToDetail(item) }
                                 )
+                            },
+                            items = success.drinks,
+                            key = { _, drink -> drink.id }
+                        )
+                    }
+                    uiState.error?.let { error ->
+                        ErrorDialog(
+                            buttonText = stringResource(id = R.string.retry_button),
+                            messageText = stringResource(id = error.messageId),
+                            onButtonClicked = {
+                                viewModel.onExecuteGetFavorites()
                             }
-                        }*/
+                        )
                     }
                 }
-            }
+            )
         }
     )
 }

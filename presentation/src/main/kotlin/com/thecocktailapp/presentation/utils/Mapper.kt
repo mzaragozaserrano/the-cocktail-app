@@ -15,7 +15,7 @@ fun ErrorBO.transform(): ErrorVO = when (this) {
     is ErrorBO.LoadingURL -> ErrorVO.LoadingURL
 }
 
-fun DrinkBO.transform(): DrinkVO = DrinkVO(
+fun DrinkBO.transform(isFavorite: Boolean? = null): DrinkVO = DrinkVO(
     category = category,
     dateModified = dateModified,
     drinkType = createDrinkType(),
@@ -23,7 +23,7 @@ fun DrinkBO.transform(): DrinkVO = DrinkVO(
     id = id.toInt(),
     ingredients = createIngredientsFormatted(),
     instructions = instructions,
-    isFavorite = isFavorite,
+    isFavorite = isFavorite ?: this.isFavorite,
     name = name,
     urlImage = urlImage
 )

@@ -34,10 +34,20 @@ import com.thecocktailapp.presentation.vo.DrinkVO
 fun HomeScreen(
     modifier: Modifier = Modifier,
     drinkId: Int,
+    forceRefresh: Boolean,
     viewModel: HomeViewModel = hiltViewModel(),
     onGoToDetail: (DrinkVO) -> Unit,
     onMenuItemClicked: (MenuItemVO) -> Unit,
 ) {
+
+    val context = LocalContext.current
+    val uiState by viewModel.uiState.collectAsState()
+
+    BackHandler(onBack = { (context as? ComponentActivity)?.finish() })
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onExecuteGetDrinksByType()
+    }
 
     LaunchedEffect(key1 = drinkId) {
         if (drinkId != nullInt) {
@@ -45,25 +55,27 @@ fun HomeScreen(
         }
     }
 
-    val context = LocalContext.current
-    val uiState by viewModel.uiState.collectAsState()
-
-    BackHandler(onBack = { (context as? ComponentActivity)?.finish() })
+    LaunchedEffect(key1 = forceRefresh) {
+        if (forceRefresh) {
+            viewModel.onForceRefresh()
+        }
+    }
 
     MenuNavigation(
         modifier = modifier,
         drawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
         onMenuItemClicked = onMenuItemClicked,
         content = {
-            HeaderFilterType(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                onTypeClicked = { drinkType ->
-                    viewModel.onTypeClicked(drinkType = drinkType)
-                }
-            )
             uiState.success?.let { success ->
+                HeaderFilterType(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    value = success.drinkType.id,
+                    onTypeClicked = { drinkType ->
+                        viewModel.onTypeClicked(drinkType = drinkType)
+                    }
+                )
                 Adapter(
                     modifier = Modifier
                         .padding(end = 8.dp, start = 8.dp, top = 16.dp)
@@ -79,7 +91,8 @@ fun HomeScreen(
                             onDrinkClicked = { onGoToDetail(item) }
                         )
                     },
-                    items = success.drinks
+                    items = success.drinks,
+                    key = { _, drink -> drink.id }
                 )
             }
             if (uiState.loading) {

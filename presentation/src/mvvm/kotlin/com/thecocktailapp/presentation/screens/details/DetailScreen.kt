@@ -1,5 +1,6 @@
 package com.thecocktailapp.presentation.screens.details
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,11 +24,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mzs.core.presentation.components.compose.backgrounds.RoundedBackground
+import com.mzs.core.presentation.utils.functions.SingleEventEffect
 import com.mzs.core.presentation.utils.generic.emptyText
 import com.thecocktailapp.presentation.R
 import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.components.utils.TopBarTheCocktailApp
+import com.thecocktailapp.presentation.utils.DETAIL_TOOLBAR
 import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
 
 @Composable
@@ -35,11 +38,17 @@ fun DetailScreen(
     modifier: Modifier = Modifier,
     drinkId: Int,
     isFavorite: Boolean,
-    onBackPressed: (Int?) -> Unit,
+    onGoBack: (Int?) -> Unit,
     viewModel: DetailDrinkViewModel = hiltViewModel(),
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    BackHandler(onBack = { viewModel.onGoBack(drinkId = drinkId) })
+
+    SingleEventEffect(sideEffectFlow = viewModel.navigationCompose) { element ->
+        onGoBack(element as Int?)
+    }
 
     LaunchedEffect(key1 = Unit) {
         viewModel.onExecuteGetDrinkById(idDrink = drinkId, isFavorite = isFavorite)
@@ -49,15 +58,9 @@ fun DetailScreen(
         modifier = modifier,
         topBar = {
             TopBarTheCocktailApp(
-                onIconClicked = {
-                    uiState.success?.let { success ->
-                        if (success.initIsFavorite != success.isFavorite) {
-                            onBackPressed(success.drink.id)
-                        } else {
-                            onBackPressed(null)
-                        }
-                    }
-                }
+                tag = DETAIL_TOOLBAR,
+                title = stringResource(id = R.string.toolbar_title_details),
+                onIconClicked = { viewModel.onGoBack(drinkId = drinkId) }
             )
         },
         content = { paddingValues ->
