@@ -12,16 +12,13 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import com.mzs.core.presentation.utils.generic.emptyText
-import com.thecocktailapp.presentation.R
-import com.thecocktailapp.presentation.utils.DETAIL_TOOLBAR
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun TopBarTheCocktailApp(onIconClicked: () -> Unit) {
+fun TopBarTheCocktailApp(tag: String, title: String, onIconClicked: () -> Unit) {
     TopAppBar(
-        modifier = Modifier.testTag(tag = DETAIL_TOOLBAR),
+        modifier = Modifier.testTag(tag = tag),
         colors = TopAppBarDefaults.topAppBarColors(
             actionIconContentColor = MaterialTheme.colorScheme.onSecondary,
             containerColor = MaterialTheme.colorScheme.primary,
@@ -31,7 +28,7 @@ fun TopBarTheCocktailApp(onIconClicked: () -> Unit) {
         title = {
             Text(
                 color = MaterialTheme.colorScheme.onSurface,
-                text = stringResource(id = R.string.toolbar_title_details)
+                text = title
             )
         },
         navigationIcon = {
