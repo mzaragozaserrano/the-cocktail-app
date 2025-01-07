@@ -19,7 +19,9 @@
 .cxx
 local.properties
 vcs.xml
+compiler.xml
 gradle.xml
 runConfigurations.xml
 migrations.xml
 Project_Default.xml
+deploymentTargetSelector.xml
