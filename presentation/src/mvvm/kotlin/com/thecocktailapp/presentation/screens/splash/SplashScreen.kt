@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +36,8 @@ fun SplashScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     BackHandler(onBack = { onGoToHome() })
+
+    LaunchedEffect(key1 = Unit) { viewModel.onExecuteGetRandomDrink() }
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
         Column(modifier = Modifier.fillMaxSize()) {

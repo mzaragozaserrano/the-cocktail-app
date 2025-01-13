@@ -19,23 +19,19 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(val getRandomDrink: @JvmSuppressWildcards GetRandomDrink) :
     CoreMVVMViewModel<SplashUiState>() {
 
-    init {
-        onExecuteGetRandomDrink()
-    }
-
     override fun createInitialState(): SplashUiState = SplashUiState()
 
-    fun onRetryExecuteGetRandomDrink() {
-        onUpdateUiState { copy(error = null) }
-        onExecuteGetRandomDrink()
-    }
-
-    private fun onExecuteGetRandomDrink() {
+    fun onExecuteGetRandomDrink() {
         viewModelScope.launch {
             withContext(context = Dispatchers.IO) {
                 getRandomDrink().collect(::handleRandomDrinkResponse)
             }
         }
+    }
+
+    fun onRetryExecuteGetRandomDrink() {
+        onUpdateUiState { copy(error = null) }
+        onExecuteGetRandomDrink()
     }
 
     private suspend fun handleRandomDrinkResponse(result: Result<CocktailBO>) =
