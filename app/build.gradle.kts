@@ -59,10 +59,14 @@ android {
     productFlavors {
         create("mvi") {
             dimension = "architecture"
+            applicationIdSuffix = ".mvi"
+            versionNameSuffix = "-mvi"
         }
 
         create("mvvm") {
             dimension = "architecture"
+            applicationIdSuffix = ".mvvm"
+            versionNameSuffix = "-mvvm"
         }
     }
 
