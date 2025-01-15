@@ -39,10 +39,12 @@ android {
     productFlavors {
         create("mvi") {
             dimension = "architecture"
+            resourcePrefix = "mvi"
         }
 
         create("mvvm") {
             dimension = "architecture"
+            resourcePrefix = "mvvm"
         }
     }
 
