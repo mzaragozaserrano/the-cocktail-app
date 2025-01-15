@@ -21,6 +21,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import com.mzs.core.domain.utils.generic.DateUtils
+import com.mzs.core.domain.utils.generic.ddMMyyyy_HHmm
 import com.mzs.core.presentation.components.view.MenuDrawerContent
 import com.mzs.core.presentation.utils.generic.emptyText
 import com.mzs.core.presentation.vo.MenuItemVO
@@ -32,29 +34,31 @@ import com.thecocktailapp.presentation.utils.extensions.getGreetingText
 import com.thecocktailapp.presentation.vo.MenuItemTheCocktailAppVO
 import com.thecocktailapp.presentation.vo.getMenuOptions
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuNavigation(
     modifier: Modifier = Modifier,
+    dateUtils: DateUtils = koinInject(),
     drawerState: DrawerState,
     onMenuItemClicked: (MenuItemVO) -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
 
-//    val date = getCurrentDate(sdfComplete)
     val coroutineScope = rememberCoroutineScope()
+    val date = dateUtils.getCurrentDate(formatOut = ddMMyyyy_HHmm)
 
     ModalNavigationDrawer(
         modifier = modifier,
         drawerContent = {
             MenuDrawerContent(
-                date = "12/03/1995 12:30",
+                date = date,
                 dateTextColor = MaterialTheme.colorScheme.secondary,
                 initScreen = MenuItemTheCocktailAppVO.HomeScreen,
                 drawerState = drawerState,
                 greetingTextColor = MaterialTheme.colorScheme.secondary,
-                greetingTextId = "12/03/1995 12:30".getGreetingText(),
+                greetingTextId = date.getGreetingText(),
                 iconTint = MaterialTheme.colorScheme.primary,
                 screens = getMenuOptions(),
                 testTag = MENU_NAVIGATION_ITEM,
