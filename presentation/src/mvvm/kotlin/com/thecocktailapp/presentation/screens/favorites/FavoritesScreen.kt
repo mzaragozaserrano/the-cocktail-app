@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mzs.core.presentation.components.compose.utils.Adapter
 import com.mzs.core.presentation.utils.functions.SingleEventEffect
@@ -31,14 +30,16 @@ import com.thecocktailapp.presentation.utils.FAVORITE_TOOLBAR
 import com.thecocktailapp.presentation.utils.HOME_RECYCLER_VIEW
 import com.thecocktailapp.presentation.viewmodels.FavoritesViewModel
 import com.thecocktailapp.presentation.vo.DrinkVO
+import com.thecocktailapp.presentation.vo.ErrorVO
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun FavoritesScreen(
     modifier: Modifier = Modifier,
     drinkId: Int,
-    onGoBack: (Boolean) -> Unit,
+    onGoBack: (Boolean?) -> Unit,
     onGoToDetail: (DrinkVO) -> Unit,
-    viewModel: FavoritesViewModel = hiltViewModel(),
+    viewModel: FavoritesViewModel = koinViewModel(),
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -99,10 +100,23 @@ fun FavoritesScreen(
                     }
                     uiState.error?.let { error ->
                         ErrorDialog(
-                            buttonText = stringResource(id = R.string.retry_button),
+                            buttonText = if (error is ErrorVO.FavoritesNotFound) {
+                                stringResource(id = R.string.back_button)
+                            } else {
+                                stringResource(id = R.string.retry_button)
+                            },
+                            durationMillisBlockingButton = if (error is ErrorVO.FavoritesNotFound) {
+                                null
+                            } else {
+                                3000
+                            },
                             messageText = stringResource(id = error.messageId),
                             onButtonClicked = {
-                                viewModel.onExecuteGetFavorites()
+                                if (error is ErrorVO.FavoritesNotFound) {
+                                    viewModel.onGoBack()
+                                } else {
+                                    viewModel.onExecuteGetFavorites()
+                                }
                             }
                         )
                     }

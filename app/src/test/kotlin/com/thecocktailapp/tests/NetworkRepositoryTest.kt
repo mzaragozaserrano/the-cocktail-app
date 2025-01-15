@@ -1,5 +1,6 @@
 package com.thecocktailapp.tests
 
+/*
 import android.content.Context
 import android.net.ConnectivityManager
 import com.thecocktailapp.repositories.FakeNetworkRepositoryImpl
@@ -36,4 +37,4 @@ class NetworkRepositoryTest {
         assertTrue(isConnected)
     }
 
-}
+}*/

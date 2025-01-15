@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
@@ -79,13 +78,12 @@ dependencies {
     //----- COIL ----------/
     implementation(libs.coil.kt.compose)
 
-    //----- DAGGER ----------/
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
-
     //----- GLIDE ----------/
     implementation(libs.glide)
+
+    //----- KOIN ----------/
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
     //----- KOTLIN ----------/
     implementation(libs.kotlinx.serialization.json)

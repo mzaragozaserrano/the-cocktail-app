@@ -1,6 +1,7 @@
 package com.thecocktailapp.datasources
+/*
 
-import com.thecocktailapp.data.datasources.services.CocktailDataSource
+import com.thecocktailapp.data.datasources.remote.CocktailDataSource
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.DrinkDTO
 import com.thecocktailapp.data.dto.ErrorDTO
@@ -284,4 +285,4 @@ class FakeCocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
         }
     }
 
-}
+}*/

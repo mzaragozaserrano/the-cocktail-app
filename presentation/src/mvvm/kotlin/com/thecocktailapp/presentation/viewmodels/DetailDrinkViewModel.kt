@@ -5,27 +5,21 @@ import com.mzs.core.domain.bo.Result
 import com.mzs.core.presentation.base.CoreMVVMViewModel
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.detail.AddFavoriteDrink
 import com.thecocktailapp.domain.usecases.detail.AddFavoriteDrinkUseCaseImpl
-import com.thecocktailapp.domain.usecases.detail.GetDrinkById
 import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
-import com.thecocktailapp.domain.usecases.detail.RemoveFavoriteDrink
 import com.thecocktailapp.domain.usecases.detail.RemoveFavoriteDrinkUseCaseImpl
 import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.vo.DetailSuccess
 import com.thecocktailapp.presentation.vo.DetailUiState
 import com.thecocktailapp.presentation.vo.DrinkVO
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-@HiltViewModel
-class DetailDrinkViewModel @Inject constructor(
-    private val addFavoriteDrink: @JvmSuppressWildcards AddFavoriteDrink,
-    private val getDrinkById: @JvmSuppressWildcards GetDrinkById,
-    private val removeFavoriteDrink: @JvmSuppressWildcards RemoveFavoriteDrink,
+class DetailDrinkViewModel(
+    private val addFavoriteDrink: AddFavoriteDrinkUseCaseImpl,
+    private val getDrinkById: GetDrinkByIdUseCaseImpl,
+    private val removeFavoriteDrink: RemoveFavoriteDrinkUseCaseImpl,
 ) : CoreMVVMViewModel<DetailUiState>() {
 
     override fun createInitialState(): DetailUiState = DetailUiState()

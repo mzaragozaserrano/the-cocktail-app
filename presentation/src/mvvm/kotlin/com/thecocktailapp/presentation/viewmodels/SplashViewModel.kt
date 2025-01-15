@@ -5,18 +5,15 @@ import com.mzs.core.domain.bo.Result
 import com.mzs.core.presentation.base.CoreMVVMViewModel
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
+import com.thecocktailapp.domain.usecases.splash.GetRandomDrinkUseCaseImpl
 import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.vo.SplashSuccess
 import com.thecocktailapp.presentation.vo.SplashUiState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-@HiltViewModel
-class SplashViewModel @Inject constructor(val getRandomDrink: @JvmSuppressWildcards GetRandomDrink) :
+class SplashViewModel(val getRandomDrink: GetRandomDrinkUseCaseImpl) :
     CoreMVVMViewModel<SplashUiState>() {
 
     override fun createInitialState(): SplashUiState = SplashUiState()

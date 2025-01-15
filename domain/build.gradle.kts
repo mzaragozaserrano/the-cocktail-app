@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
 }
@@ -57,8 +56,7 @@ dependencies {
     //----- COROUTINES ----------/
     implementation(libs.kotlinx.coroutines.android)
 
-    //----- DAGGER ----------/
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    //----- KOIN ----------/
+    implementation(libs.koin.android)
 
 }

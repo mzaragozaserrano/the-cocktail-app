@@ -15,7 +15,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mzs.core.presentation.components.compose.utils.Adapter
 import com.mzs.core.presentation.utils.generic.ItemOrientation
@@ -29,13 +28,14 @@ import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.utils.HOME_RECYCLER_VIEW
 import com.thecocktailapp.presentation.viewmodels.HomeViewModel
 import com.thecocktailapp.presentation.vo.DrinkVO
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
     drinkId: Int,
     forceRefresh: Boolean,
-    viewModel: HomeViewModel = hiltViewModel(),
+    viewModel: HomeViewModel = koinViewModel(),
     onGoToDetail: (DrinkVO) -> Unit,
     onMenuItemClicked: (MenuItemVO) -> Unit,
 ) {
@@ -45,8 +45,10 @@ fun HomeScreen(
 
     BackHandler(onBack = { (context as? ComponentActivity)?.finish() })
 
-    LaunchedEffect(key1 = Unit) {
-        viewModel.onExecuteGetDrinksByType()
+    LaunchedEffect(key1 = uiState.success, key2 = forceRefresh) {
+        if (uiState.success == null || forceRefresh) {
+            viewModel.onExecuteGetDrinksByType()
+        }
     }
 
     LaunchedEffect(key1 = drinkId) {
@@ -55,27 +57,24 @@ fun HomeScreen(
         }
     }
 
-    LaunchedEffect(key1 = forceRefresh) {
-        if (forceRefresh) {
-            viewModel.onForceRefresh()
-        }
-    }
-
     MenuNavigation(
         modifier = modifier,
         drawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
         onMenuItemClicked = onMenuItemClicked,
         content = {
+            HeaderFilterType(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                value = uiState.drinkType.id,
+                onTypeClicked = { drinkType ->
+                    viewModel.onTypeClicked(drinkType = drinkType)
+                }
+            )
+            if (uiState.loading) {
+                ProgressDialog()
+            }
             uiState.success?.let { success ->
-                HeaderFilterType(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    value = success.drinkType.id,
-                    onTypeClicked = { drinkType ->
-                        viewModel.onTypeClicked(drinkType = drinkType)
-                    }
-                )
                 Adapter(
                     modifier = Modifier
                         .padding(end = 8.dp, start = 8.dp, top = 16.dp)
@@ -94,9 +93,6 @@ fun HomeScreen(
                     items = success.drinks,
                     key = { _, drink -> drink.id }
                 )
-            }
-            if (uiState.loading) {
-                ProgressDialog()
             }
             uiState.error?.let { error ->
                 ErrorDialog(

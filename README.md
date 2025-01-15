@@ -51,8 +51,11 @@ Welcome to The Cocktail App, a versatile beverage and cocktail application that 
 
 ## Dependency Injection
 
-- **Dagger/Hilt**
-  - Utilizes Dagger/Hilt across all modules for comprehensive dependency injection. This includes the creation of ViewModels, Activities/Fragments, UseCases, Repositories, DataSources, and even extends to the Tests. This approach promotes modularity and ensures the codebase remains testable and maintainable by efficiently managing dependencies throughout the project.
+- **Koin**
+    - Utilizes Koin across all modules for comprehensive dependency injection. This includes the
+      creation of ViewModels, Activities/Fragments, UseCases, Repositories, DataSources, and even
+      extends to the Tests. This approach promotes modularity and ensures the codebase remains
+      testable and maintainable by efficiently managing dependencies throughout the project.
  
 ## Third-Party Integrations
 

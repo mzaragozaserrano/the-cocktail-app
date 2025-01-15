@@ -1,5 +1,6 @@
 package com.thecocktailapp.datasources
 
+/*
 import com.mzs.core.data.datasources.local.ResourcesDataSource
 import javax.inject.Inject
 
@@ -10,4 +11,4 @@ class FakeResourcesDataSourceImpl @Inject constructor() : ResourcesDataSource {
 
     override fun getStringOrResource(resId: Int, str: String?, ): String = str ?: "Coffee / Tea"
 
-}
+}*/

@@ -1,5 +1,6 @@
 package com.thecocktailapp.usecases
 
+/*
 import com.thecocktailapp.domain.repositories.local.FavoritesRepository
 import com.thecocktailapp.domain.usecases.detail.AddFavoriteDrink
 import com.thecocktailapp.domain.usecases.detail.AddFavoriteDrinkUseCaseImpl
@@ -11,4 +12,4 @@ class FakeAddFavoriteDrinkUseCaseImpl @Inject constructor(
     override fun invoke(params: AddFavoriteDrinkUseCaseImpl.Params): Boolean =
         favoritesRepository.addDrink(params.drink)
 
-}
+}*/

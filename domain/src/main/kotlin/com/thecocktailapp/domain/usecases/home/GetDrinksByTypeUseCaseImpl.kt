@@ -9,19 +9,19 @@ import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
 import com.thecocktailapp.domain.repositories.local.FavoritesRepository
-import com.thecocktailapp.domain.repositories.services.CocktailRepository
+import com.thecocktailapp.domain.repositories.remote.CocktailRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapMerge
-import javax.inject.Inject
 
-typealias GetDrinksByType = FlowUseCase<GetDrinksByTypeUseCaseImpl.Params, @JvmSuppressWildcards Result<List<DrinkBO>>, ErrorBO>
-
-class GetDrinksByTypeUseCaseImpl @Inject constructor(
+class GetDrinksByTypeUseCaseImpl(
     private val cocktailRepository: CocktailRepository,
     private val favoritesRepository: FavoritesRepository,
-    networkRepository: NetworkRepository
-) : GetDrinksByType(networkRepository = networkRepository, networkError = ErrorBO.Connectivity) {
+    networkRepository: NetworkRepository,
+) : FlowUseCase<GetDrinksByTypeUseCaseImpl.Params, Result<List<DrinkBO>>, ErrorBO>(
+    networkRepository = networkRepository,
+    networkError = ErrorBO.Connectivity
+) {
 
     data class Params(@StringRes val dbId: Int)
 

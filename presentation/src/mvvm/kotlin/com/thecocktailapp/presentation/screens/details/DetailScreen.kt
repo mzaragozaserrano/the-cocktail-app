@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mzs.core.presentation.components.compose.backgrounds.RoundedBackground
 import com.mzs.core.presentation.utils.functions.SingleEventEffect
@@ -32,6 +31,7 @@ import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.components.utils.TopBarTheCocktailApp
 import com.thecocktailapp.presentation.utils.DETAIL_TOOLBAR
 import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DetailScreen(
@@ -39,7 +39,7 @@ fun DetailScreen(
     drinkId: Int,
     isFavorite: Boolean,
     onGoBack: (Int?) -> Unit,
-    viewModel: DetailDrinkViewModel = hiltViewModel(),
+    viewModel: DetailDrinkViewModel = koinViewModel(),
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()

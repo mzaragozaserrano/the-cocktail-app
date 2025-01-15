@@ -5,6 +5,7 @@
     <string name="app_name">The Cocktail App</string>
 
     //----- BUTTONS ----------/
+    <string name="back_button">Volver</string>
     <string name="cancel_button">Cancelar</string>
     <string name="ok_button">Aceptar</string>
     <string name="retry_button">Reintentar</string>

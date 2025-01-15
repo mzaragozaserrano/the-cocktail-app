@@ -2,19 +2,16 @@ package com.thecocktailapp.presentation.viewmodels
 
 import androidx.lifecycle.viewModelScope
 import com.mzs.core.presentation.base.CoreMVVMViewModel
-import com.thecocktailapp.domain.usecases.common.GetFavoriteDrinks
+import com.thecocktailapp.domain.usecases.common.GetFavoriteDrinksUseCaseImpl
 import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.vo.ErrorVO
 import com.thecocktailapp.presentation.vo.FavoritesSuccess
 import com.thecocktailapp.presentation.vo.FavoritesUiState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-@HiltViewModel
-class FavoritesViewModel @Inject constructor(private val getFavoriteDrinks: @JvmSuppressWildcards GetFavoriteDrinks) :
+class FavoritesViewModel(private val getFavoriteDrinks: GetFavoriteDrinksUseCaseImpl) :
     CoreMVVMViewModel<FavoritesUiState>() {
 
     override fun createInitialState(): FavoritesUiState = FavoritesUiState()
@@ -56,7 +53,10 @@ class FavoritesViewModel @Inject constructor(private val getFavoriteDrinks: @Jvm
 
     fun onGoBack() {
         with(getViewModelState()) {
-            onEmitNavigation(element = success?.drinks?.containsAll(success.initDrinks)?.not())
+            onUpdateUiState { copy(error = null, loading = true) }
+            onEmitNavigation(
+                element = success?.drinks?.containsAll(success.initDrinks)?.not() ?: false
+            )
         }
     }
 

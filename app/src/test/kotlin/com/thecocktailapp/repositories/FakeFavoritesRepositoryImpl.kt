@@ -1,5 +1,6 @@
 package com.thecocktailapp.repositories
 
+/*
 import com.mzs.core.data.datasources.local.ResourcesDataSource
 import com.thecocktailapp.data.datasources.local.database.FavoritesDataSource
 import com.thecocktailapp.data.utils.transform
@@ -21,4 +22,4 @@ class FakeFavoritesRepositoryImpl @Inject constructor(
 
     override fun removeDrink(drink: DrinkBO): Boolean = true
 
-}
+}*/

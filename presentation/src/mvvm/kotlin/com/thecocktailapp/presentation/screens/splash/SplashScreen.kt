@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mzs.core.presentation.utils.extensions.conditional
 import com.thecocktailapp.presentation.R
@@ -24,11 +23,12 @@ import com.thecocktailapp.presentation.components.utils.ErrorDialog
 import com.thecocktailapp.presentation.components.utils.ProgressDialog
 import com.thecocktailapp.presentation.viewmodels.SplashViewModel
 import com.thecocktailapp.presentation.vo.DrinkVO
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    viewModel: SplashViewModel = hiltViewModel(),
+    viewModel: SplashViewModel = koinViewModel(),
     onGoToDetail: (DrinkVO) -> Unit,
     onGoToHome: () -> Unit,
 ) {

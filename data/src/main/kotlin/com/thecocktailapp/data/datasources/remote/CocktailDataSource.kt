@@ -1,4 +1,4 @@
-package com.thecocktailapp.data.datasources.services
+package com.thecocktailapp.data.datasources.remote
 
 import com.thecocktailapp.data.dto.CocktailDTO
 import com.thecocktailapp.data.dto.ResultDTO

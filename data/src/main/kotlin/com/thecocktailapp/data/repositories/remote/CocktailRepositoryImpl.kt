@@ -1,4 +1,4 @@
-package com.thecocktailapp.data.repositories.services
+package com.thecocktailapp.data.repositories.remote
 
 import androidx.annotation.StringRes
 import com.mzs.core.data.datasources.local.ResourcesDataSource
@@ -6,17 +6,16 @@ import com.mzs.core.domain.bo.Result
 import com.mzs.core.domain.utils.generic.DateUtils
 import com.mzs.core.domain.utils.generic.ddMMyyyy
 import com.thecocktailapp.data.datasources.local.preferences.PreferencesDataSource
-import com.thecocktailapp.data.datasources.services.CocktailDataSource
+import com.thecocktailapp.data.datasources.remote.CocktailDataSource
 import com.thecocktailapp.data.dto.ErrorDTO
 import com.thecocktailapp.data.dto.ResultDTO
 import com.thecocktailapp.data.utils.transform
 import com.thecocktailapp.domain.bo.CocktailBO
-import com.thecocktailapp.domain.repositories.services.CocktailRepository
+import com.thecocktailapp.domain.repositories.remote.CocktailRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
-class CocktailRepositoryImpl @Inject constructor(
+class CocktailRepositoryImpl(
     private val cocktailDataSource: CocktailDataSource,
     private val preferencesDataSource: PreferencesDataSource,
     private val resourcesDataSource: ResourcesDataSource,

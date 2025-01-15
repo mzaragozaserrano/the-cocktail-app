@@ -1,6 +1,7 @@
 package com.thecocktailapp.di
 
-import com.thecocktailapp.data.datasources.services.CocktailDataSource
+/*
+import com.thecocktailapp.data.datasources.remote.CocktailDataSource
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
 import dagger.Binds
 import dagger.Module
@@ -12,4 +13,4 @@ import dagger.hilt.components.SingletonComponent
 interface FakeDataSourceModule {
     @Binds
     fun bindFakeCocktailDataSource(dataSourceImpl: FakeCocktailDataSourceImpl): CocktailDataSource
-}
+}*/

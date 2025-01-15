@@ -1,4 +1,5 @@
 package com.thecocktailapp.datasources
+/*
 
 import com.thecocktailapp.data.datasources.local.database.FavoritesDataSource
 import com.thecocktailapp.data.dto.DrinkDTO
@@ -70,4 +71,4 @@ class FakeFavoritesDataSourceImpl @Inject constructor() : FavoritesDataSource {
 
     override fun removeDrink(drink: DrinkDTO) {}
 
-}
+}*/

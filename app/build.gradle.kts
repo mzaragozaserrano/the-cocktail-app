@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
 }
@@ -85,9 +84,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.navigation.compose)
 
-    //----- DAGGER ----------/
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    //----- KOIN ----------/
+    implementation(libs.koin.android)
 
     //----- ROOM ----------/
     implementation(libs.room.ktx)
@@ -99,7 +97,6 @@ dependencies {
     androidTestImplementation(libs.core.testing)
     androidTestImplementation(libs.truth)
     debugImplementation(libs.androidx.ui.test.manifest)
-    testImplementation(libs.hilt.android.testing)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockito.core)

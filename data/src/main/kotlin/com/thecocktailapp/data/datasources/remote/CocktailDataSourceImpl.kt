@@ -1,4 +1,4 @@
-package com.thecocktailapp.data.datasources.services
+package com.thecocktailapp.data.datasources.remote
 
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi
@@ -14,9 +14,8 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
-import javax.inject.Inject
 
-class CocktailDataSourceImpl @Inject constructor() : CocktailDataSource {
+class CocktailDataSourceImpl : CocktailDataSource {
 
     override suspend fun getDrinkById(id: Int): ResultDTO<CocktailDTO> =
         suspendCancellableCoroutine { continuation ->

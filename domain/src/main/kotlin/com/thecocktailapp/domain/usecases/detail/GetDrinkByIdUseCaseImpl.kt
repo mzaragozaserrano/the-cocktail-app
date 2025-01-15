@@ -5,16 +5,16 @@ import com.mzs.core.domain.repositories.NetworkRepository
 import com.mzs.core.domain.usecases.FlowUseCase
 import com.thecocktailapp.domain.bo.CocktailBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.repositories.services.CocktailRepository
+import com.thecocktailapp.domain.repositories.remote.CocktailRepository
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-typealias GetDrinkById = FlowUseCase<GetDrinkByIdUseCaseImpl.Params, @JvmSuppressWildcards Result<CocktailBO>, ErrorBO>
-
-class GetDrinkByIdUseCaseImpl @Inject constructor(
+class GetDrinkByIdUseCaseImpl(
     private val cocktailRepository: CocktailRepository,
     networkRepository: NetworkRepository,
-) : GetDrinkById(networkRepository = networkRepository, networkError = ErrorBO.Connectivity) {
+) : FlowUseCase<GetDrinkByIdUseCaseImpl.Params, Result<CocktailBO>, ErrorBO>(
+    networkRepository = networkRepository,
+    networkError = ErrorBO.Connectivity
+) {
 
     data class Params(val id: Int)
 

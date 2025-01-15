@@ -1,14 +1,10 @@
 package com.thecocktailapp.domain.usecases.splash
 
 import com.mzs.core.domain.usecases.SyncUseCaseNoParams
-import com.thecocktailapp.domain.repositories.services.CocktailRepository
-import javax.inject.Inject
+import com.thecocktailapp.domain.repositories.remote.CocktailRepository
 
-typealias ShowRandomDrink = SyncUseCaseNoParams<@JvmSuppressWildcards Boolean>
-
-class ShowRandomDrinkImpl @Inject constructor(
-    private val cocktailRepository: CocktailRepository,
-) : ShowRandomDrink() {
+class ShowRandomDrinkUseCaseImpl(private val cocktailRepository: CocktailRepository) :
+    SyncUseCaseNoParams<Boolean>() {
 
     override fun invoke(): Boolean = cocktailRepository.showRandomCocktail()
 

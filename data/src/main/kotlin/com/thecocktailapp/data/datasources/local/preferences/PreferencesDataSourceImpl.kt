@@ -2,9 +2,8 @@ package com.thecocktailapp.data.datasources.local.preferences
 
 import com.mzs.core.data.utils.encryption.EncryptedPreferences
 import com.thecocktailapp.domain.utils.PreferencesKey
-import javax.inject.Inject
 
-class PreferencesDataSourceImpl @Inject constructor(private val preferences: EncryptedPreferences) :
+class PreferencesDataSourceImpl(private val preferences: EncryptedPreferences) :
     PreferencesDataSource {
 
     override fun getFirstAccessDate(): String? =

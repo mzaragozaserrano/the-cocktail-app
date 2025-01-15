@@ -1,4 +1,4 @@
-package com.thecocktailapp.domain.repositories.services
+package com.thecocktailapp.domain.repositories.remote
 
 import androidx.annotation.StringRes
 import com.mzs.core.domain.bo.Result
