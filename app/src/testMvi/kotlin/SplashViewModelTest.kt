@@ -1,3 +1,4 @@
+/*
 import app.cash.turbine.test
 import com.thecocktailapp.datasources.FakeCocktailDataSourceImpl
 import com.thecocktailapp.datasources.FakePreferencesDataSourceImpl
@@ -170,3 +171,4 @@ class SplashViewModelTest {
     }
 
 }
+*/

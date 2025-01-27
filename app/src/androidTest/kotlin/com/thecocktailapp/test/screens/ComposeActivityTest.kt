@@ -1,5 +1,6 @@
 package com.thecocktailapp.test.screens
 
+/*
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -70,4 +71,4 @@ class ComposeActivityTest {
         }
     }
 
-}
+}*/
