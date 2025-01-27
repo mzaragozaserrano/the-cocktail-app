@@ -10,31 +10,31 @@ sealed class CommonViewState : KotlinViewState, SplashViewState, HomeViewState,
 
 sealed interface KotlinViewState {
     sealed class Navigate : KotlinViewState {
-        object ToHomeFragment : Navigate()
-        object ToSplashFragment : Navigate()
+        data object ToHomeFragment : Navigate()
+        data object ToSplashFragment : Navigate()
 
     }
 }
 
 sealed interface HomeViewState {
     data class ShowError(val idMessage: Int) : HomeViewState
-    object ShowProgressDialog : HomeViewState
+    data object ShowProgressDialog : HomeViewState
 }
 
 sealed interface SplashViewState {
     sealed class Navigate : SplashViewState {
         data class ToDrinkDetail(val id: Int) : Navigate()
-        object ToHomeFragment : Navigate()
+        data object ToHomeFragment : Navigate()
     }
 
-    data class SetDrink(val drink: DrinkVO) : SplashViewState
+    data class ShowView(val drink: DrinkVO) : SplashViewState
     data class ShowError(val idMessage: Int) : SplashViewState
-    object ShowProgressDialog : SplashViewState
+    data object ShowProgressDialog : SplashViewState
 }
 
 sealed interface DetailDrinkViewState {
-    data class SetDrink(val drink: DrinkVO) : DetailDrinkViewState
+    data class ShowView(val drink: DrinkVO) : DetailDrinkViewState
 
     data class ShowError(val idMessage: Int) : DetailDrinkViewState
-    object ShowProgressDialog : DetailDrinkViewState
+    data object ShowProgressDialog : DetailDrinkViewState
 }

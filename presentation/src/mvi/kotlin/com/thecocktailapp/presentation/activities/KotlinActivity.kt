@@ -1,6 +1,5 @@
 package com.thecocktailapp.presentation.activities
 
-import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -17,14 +16,13 @@ import com.thecocktailapp.presentation.utils.KotlinResult
 import com.thecocktailapp.presentation.utils.KotlinViewState
 import com.thecocktailapp.presentation.viewmodels.KotlinViewModel
 import com.thecocktailapp.presentation.vo.getMenuOptions
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class KotlinActivity :
     TheCocktailAppBaseActivity<KotlinViewState, KotlinIntent, KotlinAction, KotlinResult, CoreDrawerLayoutBinding, KotlinViewModel>() {
 
     override val binding by lazy { CoreDrawerLayoutBinding.inflate(layoutInflater) }
-    override val viewModel: KotlinViewModel by viewModels()
+    override val viewModel: KotlinViewModel by viewModel()
 
     val drawerLayout: DrawerLayout by lazy { binding.drawerLayout }
 
@@ -45,12 +43,12 @@ class KotlinActivity :
                         setImageDrawable(
                             ContextCompat.getDrawable(
                                 this@KotlinActivity,
-                                item.first
+                                item.iconId
                             )
                         )
                     }
                     textViewMenu.apply {
-                        text = getString(item.second)
+                        text = ContextCompat.getString(this@KotlinActivity, item.titleId)
                         setTextColor(
                             ContextCompat.getColor(
                                 this@KotlinActivity,
@@ -91,17 +89,17 @@ class KotlinActivity :
             }
 
             is KotlinViewState.Navigate.ToHomeFragment -> {
-                startNavigationFrom(R.id.HomeFragment)
+                startNavigationFrom(destination = R.id.HomeFragment)
             }
 
             is KotlinViewState.Navigate.ToSplashFragment -> {
-                startNavigationFrom(R.id.SplashFragment)
+                startNavigationFrom(destination = R.id.SplashFragment)
             }
         }
     }
 
     private fun showRandomDrink() {
-        emitAction(KotlinIntent.ShowRandomDrink)
+        emitAction(intent = KotlinIntent.ShowRandomDrink)
     }
 
     private fun startNavigationFrom(destination: Int) {

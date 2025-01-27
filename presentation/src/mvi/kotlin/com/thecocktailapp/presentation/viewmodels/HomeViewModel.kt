@@ -10,13 +10,9 @@ import com.thecocktailapp.presentation.utils.HomeAction
 import com.thecocktailapp.presentation.utils.HomeIntent
 import com.thecocktailapp.presentation.utils.HomeResult
 import com.thecocktailapp.presentation.utils.HomeViewState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-@HiltViewModel
-class HomeViewModel @Inject constructor() :
-    CoreMVIViewModel<HomeViewState, HomeIntent, HomeAction, HomeResult>() {
+class HomeViewModel : CoreMVIViewModel<HomeViewState, HomeIntent, HomeAction, HomeResult>() {
 
     override fun createInitialState(): HomeViewState = CommonViewState.Initialized()
 

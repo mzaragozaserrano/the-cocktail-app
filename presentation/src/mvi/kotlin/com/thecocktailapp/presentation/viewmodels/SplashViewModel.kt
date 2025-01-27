@@ -5,7 +5,7 @@ import com.mzs.core.domain.utils.extensions.toFlowResult
 import com.mzs.core.presentation.base.CoreMVIViewModel
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.splash.GetRandomDrink
+import com.thecocktailapp.domain.usecases.splash.GetRandomDrinkUseCaseImpl
 import com.thecocktailapp.presentation.utils.CommonAction
 import com.thecocktailapp.presentation.utils.CommonIntent
 import com.thecocktailapp.presentation.utils.CommonResult
@@ -17,15 +17,11 @@ import com.thecocktailapp.presentation.utils.SplashTask
 import com.thecocktailapp.presentation.utils.SplashViewState
 import com.thecocktailapp.presentation.utils.transform
 import com.thecocktailapp.presentation.vo.ErrorVO
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-@HiltViewModel
-class SplashViewModel @Inject constructor(
-    private val getRandomDrink: @JvmSuppressWildcards GetRandomDrink,
-) : CoreMVIViewModel<SplashViewState, SplashIntent, SplashAction, SplashResult>() {
+class SplashViewModel(private val getRandomDrink: GetRandomDrinkUseCaseImpl) :
+    CoreMVIViewModel<SplashViewState, SplashIntent, SplashAction, SplashResult>() {
 
     private var drink: DrinkBO? = null
 
@@ -64,7 +60,7 @@ class SplashViewModel @Inject constructor(
                     }
 
                     is SplashTask.DrinkGotten -> {
-                        SplashViewState.SetDrink(drink = task.drink.transform())
+                        SplashViewState.ShowView(drink = task.drink.transform())
                     }
                 }
             }

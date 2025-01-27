@@ -5,7 +5,6 @@ import com.mzs.core.domain.utils.extensions.toFlowResult
 import com.mzs.core.presentation.base.CoreMVIViewModel
 import com.thecocktailapp.domain.bo.DrinkBO
 import com.thecocktailapp.domain.bo.ErrorBO
-import com.thecocktailapp.domain.usecases.detail.GetDrinkById
 import com.thecocktailapp.domain.usecases.detail.GetDrinkByIdUseCaseImpl
 import com.thecocktailapp.presentation.utils.CommonAction
 import com.thecocktailapp.presentation.utils.CommonIntent
@@ -17,15 +16,11 @@ import com.thecocktailapp.presentation.utils.DetailDrinkResult
 import com.thecocktailapp.presentation.utils.DetailDrinkTask
 import com.thecocktailapp.presentation.utils.DetailDrinkViewState
 import com.thecocktailapp.presentation.utils.transform
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-@HiltViewModel
-class DetailDrinkViewModel @Inject constructor(
-    private val getDrinkById: @JvmSuppressWildcards GetDrinkById,
-) : CoreMVIViewModel<DetailDrinkViewState, DetailDrinkIntent, DetailDrinkAction, DetailDrinkResult>() {
+class DetailDrinkViewModel(private val getDrinkById: GetDrinkByIdUseCaseImpl) :
+    CoreMVIViewModel<DetailDrinkViewState, DetailDrinkIntent, DetailDrinkAction, DetailDrinkResult>() {
 
     private var drink: DrinkBO? = null
 
@@ -56,7 +51,7 @@ class DetailDrinkViewModel @Inject constructor(
             is DetailDrinkResult.Task.Success -> {
                 when (task) {
                     is DetailDrinkTask.DrinkGotten -> {
-                        DetailDrinkViewState.SetDrink(drink = task.drink.transform())
+                        DetailDrinkViewState.ShowView(drink = task.drink.transform())
                     }
                 }
             }

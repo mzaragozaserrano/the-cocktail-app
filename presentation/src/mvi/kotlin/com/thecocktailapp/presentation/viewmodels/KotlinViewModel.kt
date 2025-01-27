@@ -2,7 +2,7 @@ package com.thecocktailapp.presentation.viewmodels
 
 import com.mzs.core.domain.utils.extensions.toFlowResult
 import com.mzs.core.presentation.base.CoreMVIViewModel
-import com.thecocktailapp.domain.usecases.splash.ShowRandomDrink
+import com.thecocktailapp.domain.usecases.splash.ShowRandomDrinkUseCaseImpl
 import com.thecocktailapp.presentation.utils.CommonAction
 import com.thecocktailapp.presentation.utils.CommonIntent
 import com.thecocktailapp.presentation.utils.CommonResult
@@ -12,14 +12,10 @@ import com.thecocktailapp.presentation.utils.KotlinIntent
 import com.thecocktailapp.presentation.utils.KotlinResult
 import com.thecocktailapp.presentation.utils.KotlinTask
 import com.thecocktailapp.presentation.utils.KotlinViewState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-@HiltViewModel
-class KotlinViewModel @Inject constructor(
-    private val showRandomDrink: @JvmSuppressWildcards ShowRandomDrink,
-) : CoreMVIViewModel<KotlinViewState, KotlinIntent, KotlinAction, KotlinResult>() {
+class KotlinViewModel(private val showRandomDrink: ShowRandomDrinkUseCaseImpl) :
+    CoreMVIViewModel<KotlinViewState, KotlinIntent, KotlinAction, KotlinResult>() {
 
     override fun createInitialState(): KotlinViewState = CommonViewState.Initialized()
 

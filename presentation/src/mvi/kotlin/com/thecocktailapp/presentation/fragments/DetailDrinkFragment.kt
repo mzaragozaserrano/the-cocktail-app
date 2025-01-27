@@ -1,9 +1,10 @@
 package com.thecocktailapp.presentation.fragments
 
-import androidx.fragment.app.viewModels
+import android.graphics.drawable.GradientDrawable
+import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.mzs.core.presentation.base.CoreBaseFragment
-import com.mzs.core.presentation.utils.extensions.getSerializableExtra
 import com.mzs.core.presentation.utils.extensions.hideProgressDialog
 import com.mzs.core.presentation.utils.extensions.loadImageFromUrl
 import com.mzs.core.presentation.utils.extensions.showProgressDialog
@@ -19,9 +20,8 @@ import com.thecocktailapp.presentation.utils.DetailDrinkResult
 import com.thecocktailapp.presentation.utils.DetailDrinkViewState
 import com.thecocktailapp.presentation.viewmodels.DetailDrinkViewModel
 import com.thecocktailapp.presentation.vo.DrinkVO
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class DetailDrinkFragment :
     CoreBaseFragment<DetailDrinkViewState, DetailDrinkIntent, DetailDrinkAction, DetailDrinkResult, FragmentDetailDrinkBinding, DetailDrinkViewModel>(
         R.layout.fragment_detail_drink
@@ -31,21 +31,21 @@ class DetailDrinkFragment :
         const val DRINK_ID = "DetailDrinkFragment.DRINK_ID"
     }
 
-    override val viewModel: DetailDrinkViewModel by viewModels()
+    override val viewModel: DetailDrinkViewModel by viewModel()
     override val binding by viewBinding(FragmentDetailDrinkBinding::bind)
+
+    override fun onBackPressed() {
+        findNavController().navigate(R.id.action_DetailDrinkFragment_to_HomeFragment)
+    }
 
     override fun onPause() {
         super.onPause()
-        emitAction(CommonIntent.Idle)
+        emitAction(intent = CommonIntent.Idle)
     }
 
     override fun onStart() {
         super.onStart()
-        emitAction(CommonIntent.Init())
-    }
-
-    override fun onBackPressed() {
-        findNavController().navigate(R.id.action_DetailDrinkFragment_to_HomeFragment)
+        emitAction(intent = CommonIntent.Init())
     }
 
     override fun renderView(state: DetailDrinkViewState) {
@@ -56,11 +56,11 @@ class DetailDrinkFragment :
             }
 
             is DetailDrinkViewState.ShowError -> {
-                emitAction(CommonIntent.Idle)
+                emitAction(intent = CommonIntent.Idle)
             }
 
-            is DetailDrinkViewState.SetDrink -> {
-                setUpDrink(state.drink)
+            is DetailDrinkViewState.ShowView -> {
+                setUpView(drink = state.drink)
             }
 
             is DetailDrinkViewState.ShowProgressDialog -> {
@@ -71,22 +71,70 @@ class DetailDrinkFragment :
     }
 
     private fun getDrinkById() {
-        emitAction(DetailDrinkIntent.GetDrinkById(getSerializableExtra(DRINK_ID, Int::class.java)))
+        emitAction(intent = DetailDrinkIntent.GetDrinkById(id = arguments?.getInt(DRINK_ID)))
     }
 
-    private fun setUpDrink(drink: DrinkVO) {
+    private fun setUpView(drink: DrinkVO) {
         hideProgressDialog()
-        binding.bind(drink)
-        emitAction(CommonIntent.Idle)
+        binding.bind(drink = drink)
+        emitAction(intent = CommonIntent.Idle)
     }
 
     private fun FragmentDetailDrinkBinding.bind(drink: DrinkVO) {
         apply {
-            drinkName.text = drink.name
             drinkImage.loadImageFromUrl(
                 placeHolderId = R.drawable.loading_img,
                 url = drink.urlImage
             )
+            if (drink.glass.isNotEmpty()) {
+                glassLabel.apply {
+                    val buttonBackground = buttonBackground.background as GradientDrawable
+                    buttonBackground.setColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.color_secondary_container
+                        )
+                    )
+                    val iconBackground = iconBackground.background as GradientDrawable
+                    iconBackground.setColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.color_secondary
+                        )
+                    )
+                    labelIcon.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_cocktail
+                        )
+                    )
+                    labelName.text = drink.glass
+                    root.visibility = View.VISIBLE
+                }
+            }
+            /*drinkType?.let { type ->
+                WavyLabel(
+                    buttonBackgroundColor = colorResource(id = type.buttonBackgroundColorId),
+                    iconBackgroundColor = colorResource(id = type.iconBackgroundColorId),
+                    iconId = type.iconId,
+                    iconTint = colorResource(id = type.iconTintId),
+                    textColor = colorResource(id = type.textColorId),
+                    text = stringResource(id = type.labelId),
+                    textStyle = MaterialTheme.typography.labelLarge
+                )
+            }
+            if (glass.isNotEmpty()) {
+                WavyLabel(
+                    buttonBackgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+                    iconBackgroundColor = MaterialTheme.colorScheme.secondary,
+                    iconId = R.drawable.ic_cocktail,
+                    iconTint = MaterialTheme.colorScheme.onSecondary,
+                    textColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    text = glass,
+                    textStyle = MaterialTheme.typography.labelLarge
+                )
+            }*/
+            drinkName.text = drink.name
             drink.ingredients.forEach { ingredient ->
                 ItemIngredientBinding.inflate(layoutInflater).also { binding ->
                     binding.ingredient.text = ingredient

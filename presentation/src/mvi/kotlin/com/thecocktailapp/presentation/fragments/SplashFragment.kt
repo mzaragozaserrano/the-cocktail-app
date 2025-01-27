@@ -2,7 +2,6 @@ package com.thecocktailapp.presentation.fragments
 
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mzs.core.presentation.base.CoreBaseFragment
 import com.mzs.core.presentation.utils.extensions.hideProgressDialog
@@ -19,35 +18,34 @@ import com.thecocktailapp.presentation.utils.SplashResult
 import com.thecocktailapp.presentation.utils.SplashViewState
 import com.thecocktailapp.presentation.viewmodels.SplashViewModel
 import com.thecocktailapp.presentation.vo.DrinkVO
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class SplashFragment :
     CoreBaseFragment<SplashViewState, SplashIntent, SplashAction, SplashResult, FragmentSplashBinding, SplashViewModel>(
         R.layout.fragment_splash
     ) {
 
-    override val viewModel: SplashViewModel by viewModels()
+    override val viewModel: SplashViewModel by viewModel()
     override val binding by viewBinding(FragmentSplashBinding::bind)
-
-    override fun onPause() {
-        super.onPause()
-        emitAction(CommonIntent.Idle)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        emitAction(CommonIntent.Init())
-    }
 
     override fun onBackPressed() {
         super.onBackPressed()
         TODO("Cerrar app")
     }
 
+    override fun onPause() {
+        super.onPause()
+        emitAction(intent = CommonIntent.Idle)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        emitAction(intent = CommonIntent.Init())
+    }
+
     override fun FragmentSplashBinding.setUpListeners() {
-        seeButton.apply { setOnClickListener { emitAction(SplashIntent.GoToDrinkDetail) } }
-        cancelButton.apply { setOnClickListener { emitAction(SplashIntent.GoToMain) } }
+        cancelButton.apply { setOnClickListener { emitAction(intent = SplashIntent.GoToMain) } }
+        seeButton.apply { setOnClickListener { emitAction(intent = SplashIntent.GoToDrinkDetail) } }
     }
 
     override fun renderView(state: SplashViewState) {
@@ -58,19 +56,19 @@ class SplashFragment :
             }
 
             is SplashViewState.Navigate.ToDrinkDetail -> {
-                navigateToDetailDrinkFragment(state.id)
+                navigateToDetailDrinkFragment(id = state.id)
             }
 
             is SplashViewState.Navigate.ToHomeFragment -> {
                 navigateToHomeFragment()
             }
 
-            is SplashViewState.SetDrink -> {
-                setUpDrink(state.drink)
+            is SplashViewState.ShowView -> {
+                setUpView(drink = state.drink)
             }
 
             is SplashViewState.ShowError -> {
-                emitAction(CommonIntent.Idle)
+                emitAction(intent = CommonIntent.Idle)
             }
 
             is SplashViewState.ShowProgressDialog -> {
@@ -80,7 +78,7 @@ class SplashFragment :
     }
 
     private fun getRandomDrink() {
-        emitAction(SplashIntent.GetRandomDrink)
+        emitAction(intent = SplashIntent.GetRandomDrink)
     }
 
     private fun navigateToDetailDrinkFragment(id: Int) {
@@ -96,10 +94,10 @@ class SplashFragment :
         findNavController().navigate(R.id.action_SplashFragment_to_HomeFragment)
     }
 
-    private fun setUpDrink(drink: DrinkVO) {
+    private fun setUpView(drink: DrinkVO) {
         hideProgressDialog()
-        binding.bind(drink)
-        emitAction(CommonIntent.Idle)
+        binding.bind(drink = drink)
+        emitAction(intent = CommonIntent.Idle)
     }
 
     private fun FragmentSplashBinding.bind(drink: DrinkVO) {
@@ -109,8 +107,8 @@ class SplashFragment :
                 url = drink.urlImage
             )
             drinkName.text = drink.name
-            groupTexts.visibility = View.VISIBLE
             groupButtons.visibility = View.VISIBLE
+            groupTexts.visibility = View.VISIBLE
         }
     }
 
