@@ -1,6 +1,5 @@
 package com.thecocktailapp.presentation.fragments
 
-import androidx.fragment.app.viewModels
 import com.mzs.core.databinding.CoreToolbarMenuBinding
 import com.mzs.core.presentation.base.CoreBaseFragment
 import com.mzs.core.presentation.utils.extensions.showProgressDialog
@@ -16,25 +15,24 @@ import com.thecocktailapp.presentation.utils.HomeResult
 import com.thecocktailapp.presentation.utils.HomeViewState
 import com.thecocktailapp.presentation.utils.setUpMenuToolbar
 import com.thecocktailapp.presentation.viewmodels.HomeViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class HomeFragment :
     CoreBaseFragment<HomeViewState, HomeIntent, HomeAction, HomeResult, FragmentHomeBinding, HomeViewModel>(
         R.layout.fragment_home
     ) {
 
-    override val viewModel: HomeViewModel by viewModels()
+    override val viewModel: HomeViewModel by viewModel()
     override val binding by viewBinding(FragmentHomeBinding::bind)
 
     override fun onPause() {
         super.onPause()
-        emitAction(CommonIntent.Idle)
+        emitAction(intent = CommonIntent.Idle)
     }
 
     override fun onStart() {
         super.onStart()
-        emitAction(CommonIntent.Init())
+        emitAction(intent = CommonIntent.Init())
     }
 
     override fun renderView(state: HomeViewState) {
