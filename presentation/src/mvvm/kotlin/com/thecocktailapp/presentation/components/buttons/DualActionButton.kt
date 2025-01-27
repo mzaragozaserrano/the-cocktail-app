@@ -20,7 +20,7 @@ import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.mzs.core.presentation.components.compose.buttons.PushedButton
@@ -75,6 +75,7 @@ fun DualActionButton(
                         MotionEvent.ACTION_CANCEL -> {
                             isPressed = false
                         }
+
                         MotionEvent.ACTION_DOWN -> {
                             isPressed = true
                         }
@@ -110,7 +111,7 @@ fun DualActionButton(
 
 }
 
-@Preview
+@PreviewLightDark
 @Composable
 private fun DualActionButtonPrev() {
     DualActionButton(

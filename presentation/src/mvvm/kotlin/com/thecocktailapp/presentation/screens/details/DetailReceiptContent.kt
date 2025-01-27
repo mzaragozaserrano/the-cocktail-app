@@ -9,14 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.mzs.core.presentation.components.compose.buttons.FallButton
+import com.mzs.core.presentation.components.compose.buttons.DroppedButton
 import com.thecocktailapp.presentation.R
 
 @Composable
 fun DetailReceiptContent(modifier: Modifier = Modifier, instructions: String) {
-    FallButton(
+    DroppedButton(
         modifier = modifier,
         buttonContentColor = MaterialTheme.colorScheme.secondary,
         text = stringResource(id = R.string.show_steps_button),
@@ -47,7 +47,7 @@ fun DetailReceiptContent(modifier: Modifier = Modifier, instructions: String) {
     )
 }
 
-@Preview
+@PreviewLightDark
 @Composable
 private fun DetailReceiptContentPrev() {
     DetailReceiptContent(instructions = "This are the receipt steps")
