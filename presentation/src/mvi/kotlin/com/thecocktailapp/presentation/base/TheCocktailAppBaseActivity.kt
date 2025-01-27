@@ -52,7 +52,7 @@ abstract class TheCocktailAppBaseActivity<State, Intent, Action, Result, VB : Vi
 
         titleTextId?.let { titleId ->
             toolbarTitle?.apply {
-                text = getString(titleId)
+                text = ContextCompat.getString(this@TheCocktailAppBaseActivity, titleId)
                 setTextColor(titleColor)
                 setBackgroundColor(toolbarBackgroundColor)
             }
@@ -94,9 +94,11 @@ abstract class TheCocktailAppBaseActivity<State, Intent, Action, Result, VB : Vi
     ) {
 
         val dialog = MaterialAlertDialogBuilder(this@TheCocktailAppBaseActivity)
-            .setTitle(getString(titleId))
-            .setMessage(getString(messageId))
-            .setPositiveButton(getString(positiveButtonId)) { dialog, _ ->
+            .setTitle(ContextCompat.getString(this@TheCocktailAppBaseActivity, titleId))
+            .setMessage(ContextCompat.getString(this@TheCocktailAppBaseActivity, messageId))
+            .setPositiveButton(
+                ContextCompat.getString(this@TheCocktailAppBaseActivity, positiveButtonId)
+            ) { dialog, _ ->
                 onPositiveButtonClicked()
                 dialog.dismiss()
             }.create()
