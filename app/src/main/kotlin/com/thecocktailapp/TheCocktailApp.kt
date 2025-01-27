@@ -9,12 +9,12 @@ import com.thecocktailapp.presentation.di.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class TheCocktailAppMVVM : Application() {
+class TheCocktailApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidContext(this@TheCocktailAppMVVM)
+            androidContext(this@TheCocktailApp)
             modules(coreDataModule, coreDomainModule, dataModule, domainModule, presentationModule)
         }
     }
