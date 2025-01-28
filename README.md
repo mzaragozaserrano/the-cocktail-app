@@ -82,6 +82,5 @@ Welcome to The Cocktail App, a versatile beverage and cocktail application that 
    - For the MVI architecture combined with XML-based views, select the `mvi` flavor.
    - For the MVVM architecture with Jetpack Compose, select the `mvvm` flavor.
 4. Build and run the application.
-5. In the main view, you can select the desired version of The Cocktail App.
 
 Feel free to explore, contribute, and mix up your favorite drinks with The Cocktail App! Cheers! 🍹🍸🥂
