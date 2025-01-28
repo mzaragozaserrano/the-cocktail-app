@@ -58,16 +58,17 @@ fun DetailScreen(
         modifier = modifier,
         topBar = {
             TopBarTheCocktailApp(
+                loading = uiState.loading,
+                onIconClicked = { viewModel.onGoBack(drinkId = drinkId) },
                 tag = DETAIL_TOOLBAR,
-                title = stringResource(id = R.string.toolbar_title_details),
-                onIconClicked = { viewModel.onGoBack(drinkId = drinkId) }
+                title = stringResource(id = R.string.toolbar_title_details)
             )
         },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = MaterialTheme.colorScheme.primary)
+                    .background(color = MaterialTheme.colorScheme.background)
                     .padding(paddingValues = paddingValues),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
@@ -77,7 +78,7 @@ fun DetailScreen(
                             modifier = Modifier
                                 .padding(horizontal = 16.dp)
                                 .weight(weight = 1f, fill = false),
-                            backgroundColor = MaterialTheme.colorScheme.background,
+                            backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                             cornerRadius = 16.dp,
                             content = {
                                 DetailHeaderContent(
@@ -105,10 +106,14 @@ fun DetailScreen(
                                 }
                             },
                             containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                            contentColor = MaterialTheme.colorScheme.secondary,
+                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
                             content = {
                                 Icon(
-                                    imageVector = if (success.isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
+                                    imageVector = if (success.isFavorite) {
+                                        Icons.Outlined.Favorite
+                                    } else {
+                                        Icons.Outlined.FavoriteBorder
+                                    },
                                     contentDescription = emptyText
                                 )
                             }

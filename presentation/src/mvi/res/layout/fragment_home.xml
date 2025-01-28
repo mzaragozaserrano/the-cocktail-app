@@ -14,7 +14,7 @@
         android:id="@+id/prueba"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/color_background"
+        android:background="@color/background"
         tools:text="TUTUTUTUU" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

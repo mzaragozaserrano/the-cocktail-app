@@ -64,6 +64,7 @@ fun FavoritesScreen(
         modifier = modifier,
         topBar = {
             TopBarTheCocktailApp(
+                loading = uiState.loading,
                 tag = FAVORITE_TOOLBAR,
                 title = stringResource(id = R.string.toolbar_title_favorites),
                 onIconClicked = { viewModel.onGoBack() }
@@ -73,7 +74,7 @@ fun FavoritesScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = MaterialTheme.colorScheme.primary)
+                    .background(color = MaterialTheme.colorScheme.background)
                     .padding(paddingValues = paddingValues),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top,

@@ -60,12 +60,14 @@ fun HomeScreen(
     MenuNavigation(
         modifier = modifier,
         drawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
+        loading = uiState.loading,
         onMenuItemClicked = onMenuItemClicked,
         content = {
             HeaderFilterType(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
+                loading = uiState.loading,
                 value = uiState.drinkType.id,
                 onTypeClicked = { drinkType ->
                     viewModel.onTypeClicked(drinkType = drinkType)

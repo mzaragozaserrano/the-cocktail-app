@@ -7,7 +7,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -18,9 +17,9 @@ import com.thecocktailapp.presentation.R
 fun DetailReceiptContent(modifier: Modifier = Modifier, instructions: String) {
     DroppedButton(
         modifier = modifier,
-        buttonContentColor = MaterialTheme.colorScheme.secondary,
+        buttonContentColor = MaterialTheme.colorScheme.primary,
         text = stringResource(id = R.string.show_steps_button),
-        textStyle = MaterialTheme.typography.bodyMedium,
+        textStyle = MaterialTheme.typography.labelMedium,
         invisibleContent = {
             Column(
                 modifier = Modifier.padding(bottom = 16.dp),
@@ -29,7 +28,8 @@ fun DetailReceiptContent(modifier: Modifier = Modifier, instructions: String) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 24.dp),
-                        color = colorResource(id = R.color.color_secondary_text_highlight),
+                        color = MaterialTheme.colorScheme.onBackground,
+                        style = MaterialTheme.typography.headlineSmall,
                         text = stringResource(id = R.string.title_instructions)
                     )
                     Text(
@@ -38,6 +38,7 @@ fun DetailReceiptContent(modifier: Modifier = Modifier, instructions: String) {
                             .padding(horizontal = 24.dp),
                         color = MaterialTheme.colorScheme.onBackground,
                         maxLines = 20,
+                        style = MaterialTheme.typography.bodyLarge,
                         text = instructions
                     )
 

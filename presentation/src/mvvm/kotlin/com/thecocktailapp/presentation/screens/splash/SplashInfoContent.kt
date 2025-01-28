@@ -13,9 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.mzs.core.presentation.components.compose.texts.BlinkingText
@@ -27,7 +25,7 @@ fun SplashInfoContent(name: String, onSeeClicked: () -> Unit, onCancelClicked: (
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background)
+            .background(color = MaterialTheme.colorScheme.secondaryContainer)
             .padding(horizontal = 24.dp, vertical = 48.dp)
             .verticalScroll(state = rememberScrollState()),
         content = {
@@ -38,41 +36,38 @@ fun SplashInfoContent(name: String, onSeeClicked: () -> Unit, onCancelClicked: (
                 content = {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
-                        color = colorResource(id = R.color.color_secondary_text_highlight),
-                        text = name,
-                        style = MaterialTheme.typography.headlineSmall
+                        color = MaterialTheme.colorScheme.onSurface,
+                        style = MaterialTheme.typography.headlineLarge,
+                        text = name
                     )
                     Text(
                         modifier = Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colorScheme.onBackground,
-                        fontWeight = FontWeight.Bold,
-                        text = stringResource(id = R.string.first_title_splash_fragment).uppercase(),
-                        style = MaterialTheme.typography.titleLarge
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        style = MaterialTheme.typography.titleLarge,
+                        text = stringResource(id = R.string.first_title_splash_fragment).uppercase()
                     )
                     BlinkingText(
                         modifier = Modifier.fillMaxWidth(),
-                        color = colorResource(id = R.color.color_text_highlight),
-                        fontWeight = FontWeight.Black,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
                         text = stringResource(id = R.string.second_title_splash_fragment).uppercase(),
                         textStyle = MaterialTheme.typography.titleLarge
                     )
                     Text(
                         modifier = Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colorScheme.onBackground,
-                        fontWeight = FontWeight.Bold,
-                        text = stringResource(id = R.string.third_title_splash_fragment).uppercase(),
-                        style = MaterialTheme.typography.titleLarge
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        style = MaterialTheme.typography.titleLarge,
+                        text = stringResource(id = R.string.third_title_splash_fragment).uppercase()
                     )
                 }
             )
             DualActionButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(color = MaterialTheme.colorScheme.background)
+                    .background(color = MaterialTheme.colorScheme.secondaryContainer)
                     .padding(bottom = 24.dp),
-                buttonBackgroundColor = MaterialTheme.colorScheme.primary,
+                buttonBackgroundColor = MaterialTheme.colorScheme.secondary,
                 buttonText = stringResource(R.string.see_button),
-                buttonTextColor = MaterialTheme.colorScheme.onPrimary,
+                buttonTextColor = MaterialTheme.colorScheme.onSecondary,
                 text = stringResource(R.string.cancel_button),
                 onPositiveButtonClicked = onSeeClicked,
                 onNegativeButtonClicked = onCancelClicked

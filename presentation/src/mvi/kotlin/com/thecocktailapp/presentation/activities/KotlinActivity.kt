@@ -37,7 +37,7 @@ class KotlinActivity :
                         setColorFilter(
                             ContextCompat.getColor(
                                 this@KotlinActivity,
-                                R.color.color_primary
+                                R.color.primary
                             )
                         )
                         setImageDrawable(
@@ -52,7 +52,7 @@ class KotlinActivity :
                         setTextColor(
                             ContextCompat.getColor(
                                 this@KotlinActivity,
-                                R.color.color_on_background
+                                R.color.on_background
                             )
                         )
                     }

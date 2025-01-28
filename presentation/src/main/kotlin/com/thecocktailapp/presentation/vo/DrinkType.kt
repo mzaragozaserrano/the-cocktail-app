@@ -22,42 +22,42 @@ sealed class DrinkType(
     @Serializable
     data object Alcoholic :
         DrinkType(
-            buttonBackgroundColorId = R.color.color_error,
+            buttonBackgroundColorId = R.color.inverse_surface,
             dbId = R.string.db_alcoholic,
-            iconBackgroundColorId = R.color.color_error_container,
+            iconBackgroundColorId = R.color.error,
             iconId = R.drawable.ic_forbidden_age,
-            iconTintId = R.color.color_on_error_container,
+            iconTintId = R.color.on_error,
             id = 0,
             labelId = R.string.label_alcoholic,
             nameId = R.string.type_alcoholic,
-            textColorId = R.color.color_on_error
+            textColorId = R.color.inverse_on_surface
         )
 
     @Serializable
     data object None : DrinkType(
-        buttonBackgroundColorId = R.color.color_error,
+        buttonBackgroundColorId = R.color.inverse_surface,
         dbId = R.string.db_non_alcoholic,
-        iconBackgroundColorId = R.color.color_error_container,
+        iconBackgroundColorId = R.color.surface_container,
         iconId = R.drawable.ic_free,
-        iconTintId = R.color.color_on_error_container,
+        iconTintId = R.color.on_surface,
         id = 1,
         labelId = R.string.label_free,
         nameId = R.string.type_non_alcoholic,
-        textColorId = R.color.color_on_error
+        textColorId = R.color.inverse_on_surface
     )
 
     @Serializable
     data object Optional :
         DrinkType(
-            buttonBackgroundColorId = R.color.color_error,
+            buttonBackgroundColorId = R.color.inverse_surface,
             dbId = R.string.db_optional_alcohol,
-            iconBackgroundColorId = R.color.color_error_container,
+            iconBackgroundColorId = R.color.surface_container_highest,
             iconId = R.drawable.ic_optional,
-            iconTintId = R.color.color_on_error_container,
+            iconTintId = R.color.on_surface,
             id = 2,
             labelId = R.string.label_optional,
             nameId = R.string.type_optional_alcohol,
-            textColorId = R.color.color_on_error
+            textColorId = R.color.inverse_on_surface
         )
 }
 

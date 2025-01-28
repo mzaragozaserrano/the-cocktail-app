@@ -1,5 +1,6 @@
 package com.thecocktailapp.presentation.components.items
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,11 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.mzs.core.presentation.components.compose.backgrounds.RoundedBackground
 import com.mzs.core.presentation.components.compose.buttons.PushedButton
-import com.mzs.core.presentation.components.compose.cards.RoundedCard
 import com.mzs.core.presentation.components.compose.images.UrlImage
 import com.mzs.core.presentation.utils.extensions.conditional
 import com.thecocktailapp.presentation.R
@@ -25,46 +27,49 @@ import com.thecocktailapp.presentation.vo.DrinkVO
 @Composable
 fun DrinkItem(
     modifier: Modifier = Modifier,
-    isFirstItem: Boolean = false,
     drink: DrinkVO,
+    isFirstItem: Boolean = false,
     onDrinkClicked: () -> Unit,
 ) {
-    RoundedCard(
+    RoundedBackground(
         modifier = modifier,
-        backgroundColor = MaterialTheme.colorScheme.surface,
+        backgroundColor = MaterialTheme.colorScheme.primaryContainer,
         cornerRadius = 16.dp,
-        shadowElevation = 4.dp,
-        onCardClicked = onDrinkClicked,
         content = {
             Column(
                 modifier = Modifier
-                    .padding(all = 8.dp)
+                    .padding(all = 16.dp)
                     .fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(space = 8.dp),
                 content = {
                     UrlImage(
-                        modifier = Modifier.padding(all = 8.dp),
                         contentScale = ContentScale.Crop,
                         cornerRadius = 8.dp,
                         url = drink.urlImage
                     )
                     Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 4.dp),
+                        modifier = Modifier.fillMaxWidth(),
+                        color = if (drink.isFavorite) {
+                            MaterialTheme.colorScheme.error
+                        } else {
+                            MaterialTheme.colorScheme.onPrimaryContainer
+                        },
+                        fontWeight = if (drink.isFavorite) FontWeight.Bold else null,
                         maxLines = 2,
                         minLines = 2,
+                        style = MaterialTheme.typography.titleLarge,
                         text = drink.name,
                         textAlign = TextAlign.Center
                     )
                     PushedButton(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 16.dp)
+                            .padding(top = 8.dp)
                             .conditional(condition = isFirstItem) { testTag(tag = HOME_BUTTON_SEE_DETAIL) },
-                        buttonBackgroundColor = if (drink.isFavorite) MaterialTheme.colorScheme.surfaceContainerHigh else MaterialTheme.colorScheme.primary,
+                        buttonBackgroundColor = MaterialTheme.colorScheme.primary,
                         text = stringResource(id = R.string.see_button),
                         textColor = MaterialTheme.colorScheme.onPrimary,
-                        textStyle = MaterialTheme.typography.titleSmall,
+                        textStyle = MaterialTheme.typography.labelMedium,
                         onButtonClicked = onDrinkClicked
                     )
                 }

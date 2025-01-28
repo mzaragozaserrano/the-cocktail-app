@@ -65,7 +65,7 @@ fun DualActionButton(
             buttonBackgroundColor = buttonBackgroundColor,
             text = buttonText,
             textColor = buttonTextColor,
-            textStyle = MaterialTheme.typography.titleSmall,
+            textStyle = MaterialTheme.typography.labelMedium,
             onButtonClicked = onPositiveButtonClicked
         )
         Text(
@@ -104,6 +104,7 @@ fun DualActionButton(
                 }
                 .testTag(tag = SPLASH_CANCEL_BUTTON),
             color = buttonSecondaryTextColor,
+            style = MaterialTheme.typography.bodyLarge,
             text = text,
             textAlign = TextAlign.Center
         )

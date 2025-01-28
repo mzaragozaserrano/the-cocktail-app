@@ -3,17 +3,13 @@ package com.thecocktailapp.presentation.screens.details
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
@@ -34,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import com.mzs.core.presentation.components.compose.cards.RoundedCard
 import com.mzs.core.presentation.components.compose.images.UrlImage
 import com.mzs.core.presentation.components.compose.labels.WavyLabel
 import com.mzs.core.presentation.components.compose.utils.Adapter
@@ -49,7 +45,7 @@ fun DetailHeaderContent(
     glass: String,
     ingredients: List<String>,
     name: String,
-    url: String
+    url: String,
 ) {
 
     val density = LocalDensity.current
@@ -81,11 +77,11 @@ fun DetailHeaderContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(end = 24.dp, start = 24.dp, top = 24.dp),
-            color = colorResource(id = R.color.color_text_highlight),
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             maxLines = 2,
+            style = MaterialTheme.typography.headlineLarge,
             text = name,
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.headlineSmall
+            textAlign = TextAlign.Center
         )
         Row(
             modifier = Modifier.padding(end = 16.dp, start = 16.dp, top = 12.dp),
@@ -99,23 +95,23 @@ fun DetailHeaderContent(
                     iconTint = colorResource(id = type.iconTintId),
                     textColor = colorResource(id = type.textColorId),
                     text = stringResource(id = type.labelId),
-                    textStyle = MaterialTheme.typography.labelLarge
+                    textStyle = MaterialTheme.typography.labelMedium
                 )
             }
             if (glass.isNotEmpty()) {
                 WavyLabel(
-                    buttonBackgroundColor = MaterialTheme.colorScheme.secondaryContainer,
-                    iconBackgroundColor = MaterialTheme.colorScheme.secondary,
+                    buttonBackgroundColor = MaterialTheme.colorScheme.inverseSurface,
+                    iconBackgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
                     iconId = R.drawable.ic_cocktail,
-                    iconTint = MaterialTheme.colorScheme.onSecondary,
-                    textColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    iconTint = MaterialTheme.colorScheme.onTertiaryContainer,
+                    textColor = MaterialTheme.colorScheme.inverseOnSurface,
                     text = glass,
-                    textStyle = MaterialTheme.typography.labelLarge
+                    textStyle = MaterialTheme.typography.labelMedium
                 )
             }
         }
 
-        Box(
+        RoundedCard(
             modifier = Modifier
                 .conditional(condition = imageSize != DpSize.Zero) {
                     size(width = imageSize.width, height = imageSize.height)
@@ -125,15 +121,10 @@ fun DetailHeaderContent(
                     cameraDistance = 16 * this.density
                     rotationY = animatedRotation
                     scaleX = if (animatedRotation > 90f) -1f else 1f
-                }
-                .clickable {
-                    isFlipped = isFlipped.not()
-                }
-                .clip(shape = RoundedCornerShape(size = 8.dp))
-                .conditional(condition = isLoading.not()) {
-                    background(color = MaterialTheme.colorScheme.secondaryContainer)
                 },
-            contentAlignment = Alignment.Center,
+            backgroundColor = MaterialTheme.colorScheme.inverseSurface,
+            cornerRadius = 16.dp,
+            shadowElevation = 2.dp,
             content = {
                 when {
                     animatedRotation < 90f -> {
@@ -163,8 +154,9 @@ fun DetailHeaderContent(
                                 Text(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(horizontal = 24.dp),
-                                    color = colorResource(id = R.color.color_secondary_text_highlight),
+                                        .padding(horizontal = 24.dp, vertical = 12.dp),
+                                    color = MaterialTheme.colorScheme.inverseOnSurface,
+                                    style = MaterialTheme.typography.headlineSmall,
                                     text = stringResource(id = R.string.title_ingredients)
                                 )
                                 Adapter(
@@ -175,7 +167,8 @@ fun DetailHeaderContent(
                                             modifier = Modifier
                                                 .fillMaxWidth()
                                                 .padding(horizontal = 24.dp),
-                                            color = MaterialTheme.colorScheme.onBackground,
+                                            color = MaterialTheme.colorScheme.inverseOnSurface,
+                                            style = MaterialTheme.typography.bodyLarge,
                                             text = ingredient
                                         )
                                     },
@@ -185,6 +178,9 @@ fun DetailHeaderContent(
                         )
                     }
                 }
+            },
+            onCardClicked = {
+                isFlipped = isFlipped.not()
             }
         )
     }

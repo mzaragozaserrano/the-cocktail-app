@@ -1,6 +1,7 @@
 package com.thecocktailapp.presentation.screens.home
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
@@ -12,39 +13,61 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.getDrinkTypeList
 
 @Composable
 fun HeaderFilterType(
     modifier: Modifier = Modifier,
+    loading: Boolean,
     value: Int,
     onTypeClicked: (DrinkType) -> Unit,
 ) {
 
-    var selectedIndex by remember { mutableIntStateOf(value = value) }
     val list = getDrinkTypeList()
+    var selectedIndex by remember { mutableIntStateOf(value = value) }
 
     SingleChoiceSegmentedButtonRow(
         modifier = modifier,
         content = {
             list.forEachIndexed { index, drinkType ->
                 SegmentedButton(
+                    colors = SegmentedButtonDefaults.colors(
+                        activeBorderColor = MaterialTheme.colorScheme.primaryContainer,
+                        activeContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        activeContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        disabledActiveBorderColor = MaterialTheme.colorScheme.primaryContainer,
+                        disabledActiveContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        disabledActiveContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        disabledInactiveBorderColor = MaterialTheme.colorScheme.surfaceVariant,
+                        disabledInactiveContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        disabledInactiveContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        inactiveBorderColor = MaterialTheme.colorScheme.surfaceVariant,
+                        inactiveContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        inactiveContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    ),
+                    enabled = loading.not(),
+                    label = {
+                        Text(
+                            modifier = Modifier.padding(all = 4.dp),
+                            fontSize = 14.sp,
+                            maxLines = 1,
+                            overflow = TextOverflow.Clip,
+                            style = MaterialTheme.typography.labelLarge,
+                            text = stringResource(id = drinkType.nameId)
+                        )
+                    },
                     selected = index == selectedIndex,
+                    shape = SegmentedButtonDefaults.itemShape(index = index, count = list.size),
                     onClick = {
                         if (selectedIndex != index) {
                             onTypeClicked(drinkType)
                             selectedIndex = index
                         }
-                    },
-                    shape = SegmentedButtonDefaults.itemShape(index = index, count = list.size),
-                    label = {
-                        Text(
-                            modifier = Modifier.padding(all = 4.dp),
-                            text = stringResource(id = drinkType.nameId)
-                        )
                     }
                 )
             }
@@ -56,6 +79,7 @@ fun HeaderFilterType(
 @Composable
 private fun HeaderFilterTypePrev() {
     HeaderFilterType(
+        loading = false,
         value = 0,
         onTypeClicked = { /*Here will go the action when clicking one option */ }
     )

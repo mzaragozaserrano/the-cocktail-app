@@ -92,14 +92,14 @@ class DetailDrinkFragment :
                     buttonBackground.setColor(
                         ContextCompat.getColor(
                             requireContext(),
-                            R.color.color_secondary_container
+                            R.color.secondary_container
                         )
                     )
                     val iconBackground = iconBackground.background as GradientDrawable
                     iconBackground.setColor(
                         ContextCompat.getColor(
                             requireContext(),
-                            R.color.color_secondary
+                            R.color.secondary
                         )
                     )
                     labelIcon.setImageDrawable(

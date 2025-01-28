@@ -20,13 +20,14 @@ fun WarningDialog(
         modifier = modifier,
         alertBackgroundColor = MaterialTheme.colorScheme.background,
         buttonBackgroundColor = MaterialTheme.colorScheme.primary,
+        buttonStyle = MaterialTheme.typography.labelMedium,
         buttonTextColor = MaterialTheme.colorScheme.background,
         buttonText = stringResource(id = buttonTextId),
         messageStyle = MaterialTheme.typography.bodyMedium,
-        messageTextColor = colorResource(id = R.color.color_on_primary),
+        messageTextColor = colorResource(id = R.color.on_primary),
         messageText = stringResource(id = messageTextId),
         titleStyle = MaterialTheme.typography.titleMedium,
-        titleTextColor = colorResource(id = R.color.color_primary),
+        titleTextColor = colorResource(id = R.color.primary),
         titleText = stringResource(id = R.string.title_warning),
         onButtonClicked = onButtonClicked
     )

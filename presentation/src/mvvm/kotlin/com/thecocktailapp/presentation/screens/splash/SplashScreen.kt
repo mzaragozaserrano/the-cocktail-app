@@ -47,9 +47,9 @@ fun SplashScreen(
                     .conditional(condition = uiState.success == null) {
                         weight(weight = 1f)
                     }
-                    .background(color = MaterialTheme.colorScheme.background)
+                    .background(color = MaterialTheme.colorScheme.secondaryContainer)
                     .clip(shape = RoundedCornerShape(bottomEnd = 48.dp))
-                    .background(color = MaterialTheme.colorScheme.primary),
+                    .background(color = MaterialTheme.colorScheme.background),
                 content = {
                     uiState.success?.let { success ->
                         SplashHeaderContent(urlImage = success.drink.urlImage)
@@ -60,17 +60,15 @@ fun SplashScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(weight = 1f)
-                    .background(color = MaterialTheme.colorScheme.primary)
+                    .background(color = MaterialTheme.colorScheme.background)
                     .clip(shape = RoundedCornerShape(topStart = 48.dp))
-                    .background(color = MaterialTheme.colorScheme.background),
+                    .background(color = MaterialTheme.colorScheme.secondaryContainer),
                 content = {
                     uiState.success?.let { success ->
                         if (success.drink.name.isNotEmpty()) {
                             SplashInfoContent(
                                 name = success.drink.name,
-                                onSeeClicked = {
-                                    onGoToDetail(success.drink)
-                                },
+                                onSeeClicked = { onGoToDetail(success.drink) },
                                 onCancelClicked = onGoToHome
                             )
                         }

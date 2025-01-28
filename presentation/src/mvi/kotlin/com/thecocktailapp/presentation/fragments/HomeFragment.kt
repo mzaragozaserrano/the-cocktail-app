@@ -61,11 +61,11 @@ class HomeFragment :
             setUpMenuToolbar(
                 allowGoBack = false,
                 drawerLayout = (activity as KotlinActivity).drawerLayout,
-                scrimColorId = R.color.color_scrim,
-                titleColorId = R.color.color_on_primary,
+                scrimColorId = R.color.scrim,
+                titleColorId = R.color.on_primary,
                 titleTextId = R.string.app_name,
                 toolbar = toolbar,
-                toolbarBackgroundColorId = R.color.color_primary,
+                toolbarBackgroundColorId = R.color.primary,
                 toolbarTitle = toolbarTitle
             )
         }

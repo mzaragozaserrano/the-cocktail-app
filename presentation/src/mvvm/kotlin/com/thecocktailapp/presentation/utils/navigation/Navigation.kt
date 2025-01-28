@@ -65,6 +65,7 @@ fun Navigation(
                     navController.popBackStack()
                 }
             )
+            entry.savedStateHandle.remove<Int>(RESULT_FROM_DETAIL)
         }
         screenNavigation<Home> { entry ->
             HomeScreen(
@@ -95,6 +96,8 @@ fun Navigation(
                     }
                 }
             )
+            entry.savedStateHandle.remove<Int>(RESULT_FROM_DETAIL)
+            entry.savedStateHandle.remove<Boolean>(RESULT_FROM_FAVORITES)
         }
         screenNavigation<Splash> {
             SplashScreen(
