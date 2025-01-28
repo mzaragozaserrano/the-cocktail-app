@@ -60,15 +60,19 @@ fun MenuNavigation(
         drawerContent = {
             MenuDrawerContent(
                 date = date,
+                dateStyle = MaterialTheme.typography.titleMedium,
                 dateTextColor = MaterialTheme.colorScheme.primary,
                 initScreen = MenuItemTheCocktailAppVO.HomeScreen,
                 drawerState = drawerState,
+                greetingStyle = MaterialTheme.typography.headlineSmall,
                 greetingTextColor = MaterialTheme.colorScheme.primary,
                 greetingTextId = date.getGreetingText(),
+                iconSize = 18.dp,
                 iconTint = MaterialTheme.colorScheme.onBackground,
                 screens = getMenuOptions(),
                 testTag = MENU_NAVIGATION_ITEM,
                 textColor = MaterialTheme.colorScheme.onBackground,
+                titleStyle = MaterialTheme.typography.titleMedium,
                 onMenuItemClicked = onMenuItemClicked
             )
         },
