@@ -51,7 +51,9 @@ fun DetailScreen(
     }
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.onExecuteGetDrinkById(idDrink = drinkId, isFavorite = isFavorite)
+        if (uiState.success == null) {
+            viewModel.onExecuteGetDrinkById(idDrink = drinkId, isFavorite = isFavorite)
+        }
     }
 
     Scaffold(
