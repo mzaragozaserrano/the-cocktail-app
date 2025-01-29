@@ -105,8 +105,8 @@ fun DetailScreen(
                                     viewModel.addFavoriteDrink(drink = success.drink)
                                 }
                             },
-                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                            containerColor = MaterialTheme.colorScheme.inversePrimary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary,
                             content = {
                                 Icon(
                                     imageVector = if (success.isFavorite) {

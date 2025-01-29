@@ -122,7 +122,7 @@ fun DetailHeaderContent(
                     rotationY = animatedRotation
                     scaleX = if (animatedRotation > 90f) -1f else 1f
                 },
-            backgroundColor = MaterialTheme.colorScheme.inverseSurface,
+            backgroundColor = MaterialTheme.colorScheme.primary,
             cornerRadius = 16.dp,
             shadowElevation = 2.dp,
             content = {
@@ -155,7 +155,7 @@ fun DetailHeaderContent(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(horizontal = 24.dp, vertical = 12.dp),
-                                    color = MaterialTheme.colorScheme.inverseOnSurface,
+                                    color = MaterialTheme.colorScheme.onPrimary,
                                     style = MaterialTheme.typography.headlineSmall,
                                     text = stringResource(id = R.string.title_ingredients)
                                 )
@@ -167,7 +167,7 @@ fun DetailHeaderContent(
                                             modifier = Modifier
                                                 .fillMaxWidth()
                                                 .padding(horizontal = 24.dp),
-                                            color = MaterialTheme.colorScheme.inverseOnSurface,
+                                            color = MaterialTheme.colorScheme.onPrimary,
                                             style = MaterialTheme.typography.bodyLarge,
                                             text = ingredient
                                         )

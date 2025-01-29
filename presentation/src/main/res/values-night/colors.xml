@@ -1,49 +1,40 @@
 <resources>
-    <!-- Primary Color -->
-    <color name="primary">#F5D3A4</color> <!-- Light warm brown -->
-    <color name="on_primary">#5F3B22</color> <!-- Darker brown for contrast -->
-    <color name="primary_container">#7A5535</color> <!-- Rich brown -->
-    <color name="on_primary_container">#EDD2B0</color> <!-- Light beige -->
-    <color name="inverse_primary">#8C5E3C</color> <!-- Warm brown for inverse primary -->
+    <color name="primary">#F5D3A4</color>
+    <color name="on_primary">#5F3B22</color>
+    <color name="primary_container">#7A5535</color>
+    <color name="on_primary_container">#EDD2B0</color>
+    <color name="inverse_primary">#8C5E3C</color>
 
-    <!-- Secondary Color -->
-    <color name="secondary">#B1C4A0</color> <!-- Lighter olive green -->
-    <color name="on_secondary">#3D4C37</color> <!-- Darker green -->
-    <color name="secondary_container">#5A6A4D</color> <!-- Softer green -->
-    <color name="on_secondary_container">#B1C4A0</color> <!-- Lighter green -->
+    <color name="secondary">#B1C4A0</color>
+    <color name="on_secondary">#3D4C37</color>
+    <color name="secondary_container">#5A6A4D</color>
+    <color name="on_secondary_container">#B1C4A0</color>
 
-    <!-- Tertiary Color -->
-    <color name="tertiary">#4B5C3A</color> <!-- Muted green -->
-    <color name="on_tertiary">#CDD7A2</color> <!-- Light beige for contrast -->
-    <color name="tertiary_container">#2A3C27</color> <!-- Darker green container -->
-    <color name="on_tertiary_container">#D9D9D9
-    </color> <!-- Light gray text on tertiary container -->
+    <color name="tertiary">#4B5C3A</color>
+    <color name="on_tertiary">#CDD7A2</color>
+    <color name="tertiary_container">#2A3C27</color>
+    <color name="on_tertiary_container">#D9D9D9</color>
 
-    <!-- Background & Surface -->
-    <color name="background">#2B2B2B</color> <!-- Dark gray -->
-    <color name="on_background">#D5D5D5</color> <!-- Light gray -->
-    <color name="surface">#2B2B2B</color> <!-- Dark gray for surfaces -->
-    <color name="on_surface">#D5D5D5</color> <!-- Light gray for surface text -->
-    <color name="surface_variant">#3E3D2D</color> <!-- Dark olive brown -->
-    <color name="on_surface_variant">#D1C0A1</color> <!-- Soft beige -->
-    <color name="inverse_surface">#4A4A4A</color> <!-- Dark gray -->
-    <color name="inverse_on_surface">#F5F1E1</color> <!-- Light beige -->
+    <color name="background">#2B2B2B</color>
+    <color name="on_background">#D5D5D5</color>
+    <color name="surface">#2B2B2B</color>
+    <color name="on_surface">#D5D5D5</color>
+    <color name="surface_variant">#3E3D2D</color>
+    <color name="on_surface_variant">#D1C0A1</color>
+    <color name="inverse_surface">#4A4A4A</color>
+    <color name="inverse_on_surface">#F5F1E1</color>
 
-    <!-- Surface Brightness -->
-    <color name="surface_bright">#7A5535</color> <!-- Rich brown for bright surfaces -->
-    <color name="surface_container">#3E3D2D</color> <!-- Dark olive brown for containers -->
-    <color name="surface_container_high">#7A5535</color> <!-- Rich brown for high containers -->
-    <color name="surface_container_highest">#6C4E3B
-    </color> <!-- Deeper brown for highest containers -->
+    <color name="surface_bright">#7A5535</color>
+    <color name="surface_container">#3E3D2D</color>
+    <color name="surface_container_high">#7A5535</color>
+    <color name="surface_container_highest">#6C4E3B</color>
 
-    <!-- Error -->
-    <color name="error">#F0A15D</color> <!-- Muted burnt orange -->
-    <color name="on_error">#5A2E11</color> <!-- Dark brown for error text -->
-    <color name="error_container">#9C4C1A</color> <!-- Darker background for error -->
-    <color name="on_error_container">#F8CFC3</color> <!-- Soft error text background -->
+    <color name="error">#F0A15D</color>
+    <color name="on_error">#5A2E11</color>
+    <color name="error_container">#9C4C1A</color>
+    <color name="on_error_container">#F8CFC3</color>
 
-    <!-- Outline -->
-    <color name="outline">#7D6A55</color> <!-- Darker brown for outline -->
-    <color name="outline_variant">#4A3F32</color> <!-- Deeper olive brown -->
-    <color name="scrim">#80000000</color> <!-- Semi-transparent black -->
+    <color name="outline">#7D6A55</color>
+    <color name="outline_variant">#4A3F32</color>
+    <color name="scrim">#80000000</color>
 </resources>
