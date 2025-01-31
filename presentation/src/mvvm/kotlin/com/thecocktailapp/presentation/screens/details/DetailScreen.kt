@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -44,7 +44,7 @@ fun DetailScreen(
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    BackHandler(onBack = { viewModel.onGoBack(drinkId = drinkId) })
+    BackHandler(onBack = { if (uiState.loading.not()) viewModel.onGoBack(drinkId = drinkId) })
 
     SingleEventEffect(sideEffectFlow = viewModel.navigationCompose) { element ->
         onGoBack(element as Int?)
@@ -112,9 +112,9 @@ fun DetailScreen(
                             content = {
                                 Icon(
                                     imageVector = if (success.isFavorite) {
-                                        Icons.Outlined.Favorite
+                                        Icons.Rounded.Favorite
                                     } else {
-                                        Icons.Outlined.FavoriteBorder
+                                        Icons.Rounded.FavoriteBorder
                                     },
                                     contentDescription = emptyText
                                 )

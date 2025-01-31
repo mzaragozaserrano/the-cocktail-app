@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.mzs.core.presentation.navigation.ParameterScreen
 import com.mzs.core.presentation.navigation.screenNavigation
 import com.mzs.core.presentation.navigation.screenNavigationWithParameters
@@ -21,9 +22,10 @@ import kotlinx.serialization.Serializable
 @Composable
 fun Navigation(
     modifier: Modifier = Modifier,
-    navController: NavHostController,
     startDestination: Any,
 ) {
+
+    val navController = rememberNavController()
 
     NavHost(
         navController = navController,

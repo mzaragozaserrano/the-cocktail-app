@@ -1,10 +1,10 @@
 package com.thecocktailapp.domain.bo
 
 sealed class ErrorBO {
-    object Connectivity: ErrorBO()
-    object DataNotFound : ErrorBO()
-    object DeserializingJSON : ErrorBO()
+    data object Connectivity : ErrorBO()
+    data object DataNotFound : ErrorBO()
+    data object DeserializingJSON : ErrorBO()
     data class Generic(val id: Int) : ErrorBO()
-    object LoadingData : ErrorBO()
-    object LoadingURL : ErrorBO()
+    data object LoadingData : ErrorBO()
+    data object LoadingURL : ErrorBO()
 }

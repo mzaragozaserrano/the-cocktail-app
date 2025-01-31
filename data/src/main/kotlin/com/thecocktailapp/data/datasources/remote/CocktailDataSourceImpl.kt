@@ -73,7 +73,7 @@ class CocktailDataSourceImpl : CocktailDataSource {
         val moshiBuilder = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val jsonResult = try {
             val dto: CocktailDTO? = moshiBuilder.adapter(CocktailDTO::class.java)
-                .fromJson(response.body?.string() ?: "")
+                .fromJson(response.body?.string().orEmpty())
             if (dto != null) {
                 ResultDTO.Response(dto)
             } else {

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +27,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -79,6 +81,7 @@ fun DetailHeaderContent(
                 .padding(end = 24.dp, start = 24.dp, top = 24.dp),
             color = MaterialTheme.colorScheme.onPrimaryContainer,
             maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.headlineLarge,
             text = name,
             textAlign = TextAlign.Center
@@ -89,6 +92,9 @@ fun DetailHeaderContent(
         ) {
             drinkType?.let { type ->
                 WavyLabel(
+                    modifier = Modifier
+                        .weight(weight = 1f)
+                        .wrapContentWidth(),
                     buttonBackgroundColor = colorResource(id = type.buttonBackgroundColorId),
                     iconBackgroundColor = colorResource(id = type.iconBackgroundColorId),
                     iconId = type.iconId,
@@ -100,6 +106,9 @@ fun DetailHeaderContent(
             }
             if (glass.isNotEmpty()) {
                 WavyLabel(
+                    modifier = Modifier
+                        .weight(weight = 1f)
+                        .wrapContentWidth(),
                     buttonBackgroundColor = MaterialTheme.colorScheme.inverseSurface,
                     iconBackgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
                     iconId = R.drawable.ic_cocktail,
@@ -150,12 +159,14 @@ fun DetailHeaderContent(
 
                     else -> {
                         Column(
+                            modifier = Modifier.padding(all = 16.dp),
+                            verticalArrangement = Arrangement.spacedBy(space = 12.dp),
                             content = {
                                 Text(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(horizontal = 24.dp, vertical = 12.dp),
+                                    modifier = Modifier.fillMaxWidth(),
                                     color = MaterialTheme.colorScheme.onPrimary,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
                                     style = MaterialTheme.typography.headlineSmall,
                                     text = stringResource(id = R.string.title_ingredients)
                                 )
@@ -164,9 +175,7 @@ fun DetailHeaderContent(
                                     itemOrientation = ItemOrientation.Vertical,
                                     item = { _, ingredient ->
                                         Text(
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .padding(horizontal = 24.dp),
+                                            modifier = Modifier.fillMaxWidth(),
                                             color = MaterialTheme.colorScheme.onPrimary,
                                             style = MaterialTheme.typography.bodyLarge,
                                             text = ingredient

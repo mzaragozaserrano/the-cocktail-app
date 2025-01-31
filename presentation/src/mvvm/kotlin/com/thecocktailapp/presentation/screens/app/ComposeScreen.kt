@@ -15,7 +15,6 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ComposeScreen(modifier: Modifier = Modifier, viewModel: ComposeViewModel = koinViewModel()) {
 
-    val navController = rememberNavController()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = Unit) { viewModel.onExecuteShowRandomDrink() }
@@ -23,7 +22,6 @@ fun ComposeScreen(modifier: Modifier = Modifier, viewModel: ComposeViewModel = k
     uiState.success?.let { success ->
         Navigation(
             modifier = modifier,
-            navController = navController,
             startDestination = if (success.showRandomDrink) {
                 Splash
             } else {

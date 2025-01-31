@@ -50,8 +50,8 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
     //----- MODULES ----------/
+    implementation(project(":core"))
     implementation(project(":domain"))
 
     //----- COROUTINES ----------/

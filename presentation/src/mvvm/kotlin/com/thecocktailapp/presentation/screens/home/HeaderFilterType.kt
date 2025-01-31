@@ -1,6 +1,9 @@
 package com.thecocktailapp.presentation.screens.home
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -17,6 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mzs.core.presentation.utils.generic.emptyText
 import com.thecocktailapp.presentation.vo.DrinkType
 import com.thecocktailapp.presentation.vo.getDrinkTypeList
 
@@ -51,12 +55,21 @@ fun HeaderFilterType(
                         inactiveContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                     ),
                     enabled = loading.not(),
+                    icon = {
+                        if (selectedIndex == index) {
+                            Icon(
+                                modifier = Modifier.padding(start = 16.dp),
+                                imageVector = Icons.Rounded.Check,
+                                contentDescription = emptyText
+                            )
+                        }
+                    },
                     label = {
                         Text(
-                            modifier = Modifier.padding(all = 4.dp),
+                            modifier = Modifier.padding(end = 4.dp, start = 16.dp),
                             fontSize = 14.sp,
                             maxLines = 1,
-                            overflow = TextOverflow.Clip,
+                            overflow = TextOverflow.Ellipsis,
                             style = MaterialTheme.typography.labelLarge,
                             text = stringResource(id = drinkType.nameId)
                         )

@@ -21,14 +21,14 @@ fun NavGraphBuilder.composable(
                 navItem.route.contains(Feature.Home.route) -> {
                     slideIntoContainer(
                         AnimatedContentTransitionScope.SlideDirection.Right,
-                        animationSpec = tween(700)
+                        animationSpec = tween(durationMillis = 700)
                     )
                 }
 
                 else -> {
                     slideIntoContainer(
                         AnimatedContentTransitionScope.SlideDirection.Left,
-                        animationSpec = tween(700)
+                        animationSpec = tween(durationMillis = 700)
                     )
                 }
             }
@@ -38,21 +38,21 @@ fun NavGraphBuilder.composable(
                 navItem.route.contains(Feature.Home.route) -> {
                     slideOutOfContainer(
                         AnimatedContentTransitionScope.SlideDirection.Left,
-                        animationSpec = tween(700)
+                        animationSpec = tween(durationMillis = 700)
                     )
                 }
 
                 navItem.route.contains(Feature.Splash.route) -> {
                     slideOutOfContainer(
                         AnimatedContentTransitionScope.SlideDirection.Down,
-                        animationSpec = tween(700)
+                        animationSpec = tween(durationMillis = 700)
                     )
                 }
 
                 else -> {
                     slideOutOfContainer(
                         AnimatedContentTransitionScope.SlideDirection.Right,
-                        animationSpec = tween(700)
+                        animationSpec = tween(durationMillis = 700)
                     )
                 }
             }

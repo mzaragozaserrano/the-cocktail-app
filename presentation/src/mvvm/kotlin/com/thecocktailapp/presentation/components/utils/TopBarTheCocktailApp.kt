@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.mzs.core.presentation.utils.extensions.conditional
 import com.mzs.core.presentation.utils.generic.emptyText
@@ -33,6 +34,8 @@ fun TopBarTheCocktailApp(loading: Boolean, tag: String, title: String, onIconCli
         title = {
             Text(
                 color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.headlineSmall,
                 text = title
             )
